@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pelamar;
+use App\Models\Province;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,7 +15,15 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'verified']);
+    }
+
+    public function dataPelamar(){
+        $provinces = Province::all();
+
+        return view('pelamar.input-data', [
+            'provinces' => $provinces
+        ]);
     }
 
     /**
@@ -23,6 +33,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $data = Pelamar::where('user_id', auth()->user()->id)->first();
+        if($data === null){
+            return redirect('/input-data-pelamar');
+        }else{
+            return view('home');
+        }
+        
     }
 }
