@@ -56,20 +56,16 @@
     <nav class="sidebar bg-black py-5 bg-opacity-80" id="sidebar">
         @if (Auth::user())
             <a class="text-light m-3" href="">
-                <i data-feather="home">1</i>
-                <span>Home</span>
+                <i data-feather="search">1</i>
+                <span>Search</span>
             </a>
             <a class="text-light m-3" href="">
                 <i data-feather="home">1</i>
                 <span>Home</span>
             </a>
             <a class="text-light m-3" href="">
-                <i data-feather="home">1</i>
-                <span>Home</span>
-            </a>
-            <a class="text-light m-3" href="">
-                <i data-feather="home">1</i>
-                <span>Home</span>
+                <i data-feather="mail">1</i>
+                <span>Mail</span>
             </a>
         @endif
         @guest

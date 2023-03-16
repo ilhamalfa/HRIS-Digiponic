@@ -68,7 +68,14 @@ nav.topbar {
 nav.topbar a {
     color: white;
     text-decoration: none;
+    display: none;
 }
+
+nav.topbar a:nth-child(1), nav.topbar a:nth-child(2) {
+    display: inline;
+}
+
+
 /* Nav Topbar End */
 
 /* Nav Sidebar Start */
@@ -136,6 +143,7 @@ nav.sidebar a:hover {
 
     nav.topbar a {
         position: relative;
+        display: inline;
     }
 
     nav.topbar a span {
