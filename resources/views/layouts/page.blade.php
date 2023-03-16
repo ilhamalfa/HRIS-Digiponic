@@ -29,15 +29,25 @@
     {{-- Nav Topbar Start --}}
     <nav class="topbar">
         <a href="#">
-            <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24"
+            {{-- <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24"
                 class="d-inline-block align-text-top">
-            Bootstrap
+            Bootstrap --}}
+            <i data-feather="activity">1</i>
         </a>
         <a href="#" id="hamburger-menu">
             <i data-feather="menu">1</i>
         </a>
         <a href="">
+            <i data-feather="search">1</i>
+            <span>Search</span>
+        </a>
+        <a href="">
+            <i data-feather="home">1</i>
+            <span>Home</span>
+        </a>
+        <a href="">
             <i data-feather="mail">1</i>
+            <span>Mail</span>
         </a>
     </nav>
     {{-- Nav Topbar End --}}
