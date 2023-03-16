@@ -49,6 +49,27 @@
             <i data-feather="mail">1</i>
             <span>Mail</span>
         </a>
+        @guest
+            @if (Route::has('login') && Route::has('register'))
+                <a class="text-light m-3" href="{{ route('login') }}">
+                    <i data-feather="log-in">1</i>
+                    <span>Login</span>
+                </a>
+                <a class="text-light m-3" href="{{ route('register') }}">
+                    <i data-feather="file-text">1</i>
+                    <span>Register</span>
+                </a>
+            @endif
+        @else
+            <a class="text-light m-3" href="{{ route('logout') }}"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i data-feather="log-out">1</i>
+                <span>Logout</span>
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+        @endguest
     </nav>
     {{-- Nav Topbar End --}}
 
