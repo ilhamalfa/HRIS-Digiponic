@@ -1,0 +1,164 @@
+/* CSS Reset Start */
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* CSS Reset End */
+
+/* Nav Topbar Start */
+nav.topbar {
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    padding: .8em;
+    z-index: 1;
+}
+
+nav.topbar a {
+    color: white;
+    text-decoration: none;
+}
+
+nav.topbar a:nth-child(3) {
+    display: none;
+}
+/* Nav Topbar End */
+
+/* Nav Sidebar Start */
+nav.sidebar {
+    position: absolute;
+    right: -100%;
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    overflow: scroll;
+    transition: .5s;
+}
+
+nav.slide {
+    right: 0;
+}
+
+nav.sidebar a {
+    font-size: 1rem;
+    text-decoration: none;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    transition: .5s;
+    padding: 10%;
+    width: 40vw;
+}
+
+nav.sidebar a:hover {
+    background-color: #3e3e3e;
+}
+/* Nav Sidebar End */
+
+
+@media (min-width: 992px) {
+    body {
+        overflow: hidden;
+    }
+
+    nav.topbar {
+        flex-direction: column;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 95%;
+    }
+
+    nav.topbar div {
+        flex-direction: column;
+        position: fixed;
+    }
+
+    nav.topbar div a {
+        color: white;
+    }
+
+    nav.sidebar {
+        padding: 6em;
+        justify-content: center;
+        align-items: flex-start;
+        overflow: hidden;
+    }
+
+    nav.sidebar a {
+        font-size: 1.5rem;
+        padding: 0;
+        width: auto;
+        position: relative;
+    }
+
+    nav.sidebar a:hover {
+        background-color: red;
+    }
+
+    nav.sidebar a:hover::after {
+        content: '';
+        background-color: white;
+        width: 200px;
+        height: 3px;
+        position: absolute;
+        top: 100%;
+    }
+
+    nav.topbar a:nth-child(3) {
+        display: block;
+    }
+}
