@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IndoRegionController;
+use App\Http\Controllers\PelamarController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +25,9 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/input-data-pelamar', [HomeController::class, 'dataPelamar']);
+Route::get('/input-data-pelamar', [PelamarController::class, 'inputPelamar']);
+
+Route::post('/store/data-pelamar', [PelamarController::class, 'storePelamar']);
 
 Route::post('/get-kabupaten', [IndoRegionController::class, 'getKabupaten']);
 

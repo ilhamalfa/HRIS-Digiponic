@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('foto');
             $table->enum('jenis kelamin', ['Laki-laki', 'Perempuan']);
             $table->string('nomor_hp');
+            $table->string('cv_file');
             $table->char('province_id', 2);
             $table->foreign('province_id')
                 ->references('id')

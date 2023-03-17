@@ -17,15 +17,7 @@ class HomeController extends Controller
     {
         $this->middleware(['auth', 'verified']);
     }
-
-    public function dataPelamar(){
-        $provinces = Province::all();
-
-        return view('pelamar.input-data', [
-            'provinces' => $provinces
-        ]);
-    }
-
+    
     /**
      * Show the application dashboard.
      *
