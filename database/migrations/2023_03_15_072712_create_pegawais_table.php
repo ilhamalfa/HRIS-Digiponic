@@ -19,9 +19,9 @@ return new class extends Migration
             $table->integer('umur');
             $table->string('email');
             $table->string('foto');
-            $table->enum('jenis kelamin', ['Laki-laki', 'Perempuan']);
+            $table->string('jenis kelamin');
             $table->string('nomor_hp');
-            $table->enum('status_pernikahan', ['Lajang', 'Menikah', 'Cerai']);
+            $table->string('status_pernikahan');
             $table->integer('jumlah_anak');
             $table->string('department');
             $table->string('golongan');

@@ -12,10 +12,10 @@
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                            <label for="nik" class="col-md-4 col-form-label text-md-end">{{ __('Nomor Induk Karyawan') }}</label>
 
                             <div class="col-md-6">
-                                <input id="login" type="email"
+                                <input id="login" type="number"
                                 class="form-control{{ $errors->has('nik') || $errors->has('email') ? ' is-invalid' : '' }}"
                                 name="login" value="{{ old('nik') ?: old('email') }}" required autofocus>
 

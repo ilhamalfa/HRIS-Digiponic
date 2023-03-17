@@ -22,6 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'email',
         'password',
+        'role'
     ];
 
     /**
@@ -42,4 +43,8 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function pegawai(){
+        return $this->hasOne(Pegawai::class);
+    }
 }

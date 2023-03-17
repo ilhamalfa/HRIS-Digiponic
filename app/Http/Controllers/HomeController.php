@@ -17,7 +17,7 @@ class HomeController extends Controller
     {
         $this->middleware(['auth', 'verified']);
     }
-    
+
     /**
      * Show the application dashboard.
      *
@@ -26,7 +26,8 @@ class HomeController extends Controller
     public function index()
     {
         $data = Pelamar::where('user_id', auth()->user()->id)->first();
-        if($data === null){
+
+        if(auth()->user()->role == 'Pelamar' && $data === null){
             return redirect('/input-data-pelamar');
         }else{
             return view('home');
