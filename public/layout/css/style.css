@@ -111,6 +111,21 @@ nav.sidebar a:hover {
 }
 /* Nav Sidebar End */
 
+/* Main Jumbo Tron Start */
+main section:nth-child(1) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main section:nth-child(1) img {
+    width: 1000px;
+    height: 100vh;
+    filter: brightness(50%);
+    z-index: -9999;
+}
+/* Main Jumbo Tron End */
+
 
 @media (min-width: 992px) {
     body {

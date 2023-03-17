@@ -4,6 +4,7 @@ let sidebar = document.getElementById('sidebar')
 hamburgerMenu.addEventListener('click', function(e) {
     e.preventDefault()
     sidebar.classList.toggle('slide')
+    console.log('kdafudw');
 })
 
 document.addEventListener('click', function (e) {

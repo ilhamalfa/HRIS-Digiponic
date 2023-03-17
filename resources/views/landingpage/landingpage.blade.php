@@ -3,5 +3,7 @@
 @section('title', 'Landing Page')
 
 @section('content')
-    <p>V</p>
+    <section class="container-fluid p-0">
+        <img src="{{ asset('background/background-jumbo-tron.jpg') }}" alt="">
+    </section>
 @endsection

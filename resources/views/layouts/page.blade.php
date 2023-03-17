@@ -23,6 +23,8 @@
 
     <link rel="stylesheet" href="{{ asset('layout/css/style.css') }}">
 
+    <link href="{{ asset('background/basmalah.png') }}">
+
     {{-- Font Awesome --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -57,27 +59,27 @@
         @guest
             @if (Route::has('login') && Route::has('register'))
                 <a class="text-light" href="{{ route('login') }}">
-                    <i class="fa-solid fa-house"></i>
+                    <i class="fa-solid fa-house m-2"></i>
                     <span>Login</span>
                 </a>
                 <a class="text-light" href="{{ route('register') }}">
-                    <i class="fa-regular fa-house"></i>
+                    <i class="fa-regular fa-file-lines m-2"></i>
                     <span>Register</span>
                 </a>
                 <a href="">
-                    <i data-feather="mail">1</i>
-                    <span>Carrier</span>
+                    <i class="fa-solid fa-user-tie m-2"></i>
+                    <span>Career</span>
                 </a>
                 <a href="">
-                    <i data-feather="mail">1</i>
+                    <i class="fa-solid fa-circle-info m-2"></i>
                     <span>About</span>
                 </a>
                 <a href="">
-                    <i data-feather="mail">1</i>
+                    <i class="fa-solid fa-people-group m-2"></i>
                     <span>Structure</span>
                 </a>
                 <a href="">
-                    <i data-feather="mail">1</i>
+                    <i class="fa-solid fa-envelope m-2"></i>
                     <span>Mail</span>
                 </a>
             @endif
@@ -112,13 +114,25 @@
         @endif
         @guest
             @if (Route::has('login') && Route::has('register'))
-                <a class="text-light m-3" href="{{ route('login') }}">
-                    <i class="fa-solid fa-house m-2"></i>
+                <a class="text-light m-2" href="{{ route('login') }}">
+                    <i class="fa-solid fa-right-to-bracket m-2"></i>
                     <span>Login</span>
                 </a>
-                <a class="text-light m-3" href="{{ route('register') }}">
-                    <i data-feather="file-text">1</i>
+                <a class="text-light m-2" href="{{ route('register') }}">
+                    <i class="fa-regular fa-file-lines m-2"></i>
                     <span>Register</span>
+                </a>
+                <a class="text-light m-2" href="">
+                    <i class="fa-solid fa-circle-info m-2"></i>
+                    <span>About</span>
+                </a>
+                <a class="text-light m-2" href="">
+                    <i class="fa-solid fa-people-group m-2"></i>
+                    <span>Structure</span>
+                </a>
+                <a class="text-light m-2" href="">
+                    <i class="fa-solid fa-envelope m-2"></i>
+                    <span>Mail</span>
                 </a>
             @endif
         @else
@@ -147,6 +161,7 @@
 
     {{-- sweetAlert --}}
     @include('sweetalert::alert')
+
     {{-- JS --}}
     <script src="{{ asset('layout/js/script.js') }}"></script>
 
