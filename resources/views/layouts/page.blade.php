@@ -99,34 +99,43 @@
     {{-- Nav Sidebar Start --}}
     <nav class="sidebar bg-black py-5 bg-opacity-80" id="sidebar">
         @if (Auth::user())
-            <a class="text-light m-3" href="">
-                <i data-feather="search">1</i>
+            <a class="text-light" href="">
+                <i class="fa-solid fa-magnifying-glass m-2"></i>
                 <span>Search</span>
             </a>
-            <a class="text-light m-3" href="">
-                <i data-feather="home">1</i>
+            <a class="text-light" href="">
+                <i class="fa-solid fa-house m-2"></i>
                 <span>Home</span>
             </a>
-            <a class="text-light m-3" href="">
-                <i data-feather="mail">1</i>
-                <span>Mail</span>
-            </a>
+            
         @endif
         @guest
             @if (Route::has('login') && Route::has('register'))
-                <a class="text-light m-3" href="{{ route('login') }}">
-                    <i class="fa-solid fa-house m-2"></i>
+                <a class="text-light" href="{{ route('login') }}">
+                    <i class="fa-solid fa-right-to-bracket m-2"></i>
                     <span>Login</span>
                 </a>
-                <a class="text-light m-3" href="{{ route('register') }}">
-                    <i data-feather="file-text">1</i>
+                <a class="text-light" href="{{ route('register') }}">
+                    <i class="fa-solid fa-file-pen m-2"></i>
                     <span>Register</span>
+                </a>
+                <a class="text-light" href="">
+                    <i class="fa-solid fa-circle-info m-2"></i>
+                    <span>About</span>
+                </a>
+                <a class="text-light" href="">
+                    <i class="fa-solid fa-people-group m-2"></i>
+                    <span>Structure</span>
+                </a>
+                <a class="text-light" href="">
+                    <i class="fa-solid fa-envelope m-2"></i>
+                    <span>Mail</span>
                 </a>
             @endif
         @else
-            <a class="text-light m-3" href="{{ route('logout') }}"
+            <a class="text-light" href="{{ route('logout') }}"
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                <i data-feather="log-out">1</i>
+                <i class="fa-solid fa-right-from-bracket m-2"></i>
                 <span>Logout</span>
             </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

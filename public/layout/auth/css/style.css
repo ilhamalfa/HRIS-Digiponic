@@ -103,9 +103,15 @@ main .auth form .extra {
 }
 
 main .auth form .extra div {
-    background-color: red;
+    display: flex;
+    align-items: center;
+}
+
+main .auth form .extra a {
+    color: grey;
+    text-decoration: none;
 }
 
 /* main .auth form .extra div input {
-
+    
 } */
