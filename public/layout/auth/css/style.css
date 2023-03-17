@@ -73,18 +73,39 @@ main {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    overflow-y: scroll;
 }
 
 main .auth {
+    background: none;
+    display: flex;
+    flex-direction: column;
+}
+
+main .auth form div input{
+    background-color: rgba(114, 133, 142, .1);
+    border: none;
+    margin: 1em;
+    padding: .8em 1.5em;
+    border-radius: 50px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.auth form div input::placeholder {
+    font-family: 'Poppins', sans-serif;
+    color: grey;
+}
+
+main .auth form .extra {
+    display: flex;
+    flex-direction: column;
+}
+
+main .auth form .extra div {
     background-color: red;
 }
 
+/* main .auth form .extra div input {
 
-/* .auth form div input::placeholder {
-    font-family: 'Poppins', sans-serif;
-    color: black;
-}
-
-.auth form div input:focus {
-    border-bottom: 3px solid black;
 } */

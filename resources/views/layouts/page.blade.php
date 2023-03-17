@@ -59,7 +59,7 @@
         @guest
             @if (Route::has('login') && Route::has('register'))
                 <a class="text-light" href="{{ route('login') }}">
-                    <i class="fa-solid fa-house m-2"></i>
+                    <i class="fa-solid fa-right-to-bracket m-2"></i>
                     <span>Login</span>
                 </a>
                 <a class="text-light" href="{{ route('register') }}">
