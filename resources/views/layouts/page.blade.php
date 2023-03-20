@@ -31,6 +31,15 @@
 
 <body>
 
+    {{-- Modal Mobile Start --}}
+    <div class="modal-mobile" id="modal-mobile">
+        <div class="modal-menu">
+            <a class="btn btn-outline-secondary rounded-pill px-5 m-3" href="login?person=1">Login as Employee</a>
+            <a class="btn btn-outline-secondary rounded-pill px-5 m-3" href="login?person=2">Login as Candidate</a>
+        </div>
+    </div>
+    {{-- Modal Mobile End --}}
+
     {{-- Nav Topbar Start --}}
     <nav class="topbar">
         <a href="#">
@@ -111,7 +120,7 @@
         @endif
         @guest
             @if (Route::has('login') && Route::has('register'))
-                <a class="text-light" href="{{ route('login') }}">
+                <a class="text-light" href="#" id="login-mobile">
                     <i class="fa-solid fa-right-to-bracket m-2"></i>
                     <span>Login</span>
                 </a>
@@ -164,6 +173,7 @@
             </div>
         </div>
     </div>
+
     {{-- Bootstrap JS CDN --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">

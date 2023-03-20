@@ -64,7 +64,7 @@ div img {
     width: 900px;
     height: 900px;
     z-index: -999;
-    filter: blur(2px);
+    filter: blur(2px) brightness(100%);
 }
 
 main {
@@ -82,8 +82,13 @@ main .auth {
     flex-direction: column;
 }
 
+main .auth h1 {
+    font-size: 1.5rem;
+    margin: 1em;
+}
+
 main .auth form div input{
-    background-color: rgba(114, 133, 142, .1);
+    background-color: rgba(114, 133, 142, .2);
     border: none;
     margin: 1em;
     padding: .8em 1.5em;
@@ -108,7 +113,7 @@ main .auth form .extra div {
 }
 
 main .auth form .extra a {
-    color: grey;
+    color: black;
     text-decoration: none;
 }
 

@@ -33,6 +33,7 @@ body {
 	line-height: 1;
     font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
+    overflow: hidden;
 }
 ol, ul {
 	list-style: none;
@@ -50,6 +51,32 @@ table {
 	border-spacing: 0;
 }
 /* CSS Reset End */
+
+/* Modal Start */
+.modal-mobile {
+    background-color: red;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+    display: none;
+    padding: 0 1em;
+}
+
+.modal-active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-mobile .modal-menu {
+    background-color: white;
+}
+
+.modal-mobile .modal-menu a {
+    opacity: 0;
+}
+/* Modal End */
 
 /* Nav Topbar Start */
 nav.topbar {
@@ -127,6 +154,7 @@ main section:nth-child(1) img {
 /* Main Jumbo Tron End */
 
 
+
 @media (min-width: 992px) {
     body {
         overflow: hidden;
@@ -141,7 +169,7 @@ main section:nth-child(1) img {
         left: auto;
         padding: 1em;
         width: 5vw;
-        transition: width 1s;
+        transition: 1s;
     }
 
     nav.topbar:hover {
@@ -167,5 +195,12 @@ main section:nth-child(1) img {
         margin: 0 5px;
         opacity: 0;
         transition: .5s;
+    }
+
+    main section:nth-child(1) img {
+        width: 95vw;
+        position: absolute;
+        top: 0;
+        left: 0;
     }
 }
