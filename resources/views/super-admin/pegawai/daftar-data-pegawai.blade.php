@@ -17,6 +17,7 @@
                                 <th scope="col">Nama</th>
                                 <th scope="col">Department</th>
                                 <th scope="col">Golongan</th>
+                                <th scope="col">Role</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -28,7 +29,10 @@
                                 <td>{{ $data->pegawai->nama }}</td>
                                 <td>{{ $data->pegawai->department }}</td>
                                 <td>{{ $data->pegawai->golongan }}</td>
-                                <td>@mdo</td>
+                                <td>{{ $data->role }}</td>
+                                <td>
+                                    <a href="{{ url('/data-pegawai/edit-pegawai/' . $data->id) }}" class="btn btn-warning">Edit</a>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
