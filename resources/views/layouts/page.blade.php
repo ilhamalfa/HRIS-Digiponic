@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
+    <link rel="icon" href="{{ asset('logo/brand-logo.png') }}">
 
     {{-- Google Fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,19 +15,17 @@
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,700;1,300&display=swap"
         rel="stylesheet">
 
-    {{-- Feather Icons --}}
-    <script src="https://unpkg.com/feather-icons"></script>
+    {{-- Font Awesome --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     {{-- Bootstrap CSS CDN --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
+    {{-- CSS --}}
     <link rel="stylesheet" href="{{ asset('layout/css/style.css') }}">
-
-    {{-- Font Awesome --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
-        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -34,8 +33,8 @@
     {{-- Modal Mobile Start --}}
     <div class="modal-mobile" id="modal-mobile">
         <div class="modal-menu">
-            <a class="btn btn-outline-secondary rounded-pill px-5 m-3" href="login?person=1">Login as Employee</a>
-            <a class="btn btn-outline-secondary rounded-pill px-5 m-3" href="login?person=2">Login as Candidate</a>
+            <a class="btn rounded-pill py-3 px-5 m-3" href="login?person=1">Login as Employee</a>
+            <a class="btn rounded-pill py-3 px-5 m-3" href="login?person=2">Login as Candidate</a>
         </div>
     </div>
     {{-- Modal Mobile End --}}
@@ -43,19 +42,16 @@
     {{-- Nav Topbar Start --}}
     <nav class="topbar">
         <a href="#">
-            {{-- <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24"
-                class="d-inline-block align-text-top">
-            Bootstrap --}}
-            <i data-feather="activity">1</i>
+            <img src="{{ asset('logo/brand-logo.png') }}" alt="Brand Logo">
         </a>
         <a href="#" id="hamburger-menu">
-            <i data-feather="menu">1</i>
+            <i class="fa-solid fa-bars fa-2x"></i>
         </a>
         @if (Auth::user())
             <a href="">
-                <i data-feather="search">1</i>
+                <i class="fa-solid fa-magnifying-glass m-2"></i>
                 <span>Search</span>
-            </a>
+            </a>    
             <a href="">
                 <i data-feather="home">1</i>
                 <span>Home</span>
@@ -68,27 +64,23 @@
         @guest
             @if (Route::has('login') && Route::has('register'))
                 <a class="text-light" href="#" data-bs-toggle="modal" data-bs-target="#login">
-                    <i class="fa-solid fa-house"></i>
+                    <i class="fa-solid fa-right-to-bracket m-2"></i>
                     <span>Login</span>
                 </a>
                 <a class="text-light" href="{{ route('register') }}">
-                    <i class="fa-regular fa-house"></i>
+                    <i class="fa-solid fa-file-pen m-2"></i>
                     <span>Register</span>
                 </a>
                 <a href="">
-                    <i data-feather="mail">1</i>
-                    <span>Carrier</span>
-                </a>
-                <a href="">
-                    <i data-feather="mail">1</i>
+                    <i class="fa-solid fa-circle-info m-2"></i>
                     <span>About</span>
                 </a>
                 <a href="">
-                    <i data-feather="mail">1</i>
+                    <i class="fa-solid fa-people-group m-2"></i>
                     <span>Structure</span>
                 </a>
                 <a href="">
-                    <i data-feather="mail">1</i>
+                    <i class="fa-solid fa-envelope m-2"></i>
                     <span>Mail</span>
                 </a>
             @endif
@@ -116,7 +108,6 @@
                 <i class="fa-solid fa-house m-2"></i>
                 <span>Home</span>
             </a>
-            
         @endif
         @guest
             @if (Route::has('login') && Route::has('register'))

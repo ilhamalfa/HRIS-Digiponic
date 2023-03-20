@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="auth">
-        <h1>Register Now</h1>
+        <h1>Create Account</h1>
         <form method="POST" action="{{ route('register') }}">
             @csrf
             <div class="email">
@@ -24,6 +24,18 @@
             </div>
             <div class="button">
                 <button type="submit" class="btn btn-outline-secondary rounded-pill px-5 m-3">REGISTER NOW</button>
+            </div>
+            <div class="switch">
+                <p>Already Have Account?</p>
+                <a href="login?person=1" class="">
+                    <i class="fa-solid fa-user-check m-2"></i>
+                    Login as Employee
+                </a>
+                <p>OR</p>
+                <a href="login?person=2" class="">
+                    <i class="fa-solid fa-user-tie m-2"></i>
+                    Login as Candidate
+                </a>
             </div>
         </form>
     </div>

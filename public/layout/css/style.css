@@ -54,7 +54,6 @@ table {
 
 /* Modal Start */
 .modal-mobile {
-    background-color: red;
     position: fixed;
     width: 100vw;
     height: 100vh;
@@ -70,11 +69,26 @@ table {
 }
 
 .modal-mobile .modal-menu {
-    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    border: 1px solid whitesmoke;
+    border-radius: 20px;
+    height: 50vh;
+    padding: 2em 0;
 }
 
 .modal-mobile .modal-menu a {
-    opacity: 0;
+    color: white;
+    border: 1px solid white;
+}
+
+.modal-mobile .modal-menu a:hover {
+    background-color: black;
+    color: white;
+    border: 1px solid white;
 }
 /* Modal End */
 
@@ -90,6 +104,10 @@ nav.topbar {
     left: 0;
     padding: .8em;
     z-index: 1;
+}
+
+nav.topbar a img {
+    width: 10%;
 }
 
 nav.topbar a {

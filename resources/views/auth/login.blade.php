@@ -34,6 +34,10 @@
                     <div class="button">
                         <button type="submit" class="btn btn-outline-secondary rounded-pill px-5 m-3">LOGIN</button>
                     </div>
+                    <div class="switch">
+                        <p>OR</p>
+                        <a href="{{ route('register') }}" class="">Create Account</a>
+                    </div>
                 </form>
             @else
                 <form action="{{ route('login') }}" method="POST">
@@ -62,6 +66,10 @@
                     </div>
                     <div class="button">
                         <button type="submit" class="btn btn-outline-secondary rounded-pill px-5 m-3">LOGIN</button>
+                    </div>
+                    <div class="switch">
+                        <p>OR</p>
+                        <a href="{{ route('register') }}" class="">Create Account</a>
                     </div>
                 </form>
             @endif
