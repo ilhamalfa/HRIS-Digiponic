@@ -13,7 +13,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,700;1,300&display=swap"
         rel="stylesheet">
-
+    <link rel="stylesheet" href="{{ asset('preloader/style.css') }}">
     {{-- Feather Icons --}}
     <script src="https://unpkg.com/feather-icons"></script>
 
@@ -31,6 +31,16 @@
 
 <body>
 
+    <div id="cssload-loader">
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
     {{-- Modal Mobile Start --}}
     <div class="modal-mobile" id="modal-mobile">
         <div class="modal-menu">
@@ -116,7 +126,6 @@
                 <i class="fa-solid fa-house m-2"></i>
                 <span>Home</span>
             </a>
-            
         @endif
         @guest
             @if (Route::has('login') && Route::has('register'))
@@ -159,6 +168,52 @@
         @yield('content')
     </main>
     {{-- Main End --}}
+
+    <footer class="footer">
+        @if (Request::is('/'))
+            <div class="start-footer mb-3">
+                <div class="row text-center justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="logo">
+                            <img src="" alt="">
+                        </div>
+                        <div class="text-footer">
+                            <p class="mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, quam
+                                exercitationem neque adipisci, sint deserunt reprehenderit illum, aut doloremque aliquid
+                                corporis repellat ducimus at quisquam molestiae commodi tempore assumenda atque.</p>
+                            <p class="mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, quam
+                                exercitationem neque adipisci, sint deserunt reprehenderit illum, aut doloremque aliquid
+                                corporis repellat ducimus at quisquam molestiae commodi tempore assumenda atque.</p>
+                            <p class="mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, quam
+                                exercitationem neque adipisci, sint deserunt reprehenderit illum, aut doloremque aliquid
+                                corporis repellat ducimus at quisquam molestiae commodi tempore assumenda atque.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-2 col-sm-4">
+                        <i class="fs-1 fa-brands fa-whatsapp"></i>
+                    </div>
+                    <div class="col-md-2 col-sm-4">
+                        <i class="fs-1 fa-brands fa-instagram"></i>
+                    </div>
+                    <div class="col-md-2 col-sm-4">
+                        <i class="fs-1 fa-brands fa-twitter"></i>
+                    </div>
+                    <div class="col-md-2 col-sm-4">
+                        <i class="fs-1 fa-brands fa-tiktok"></i>
+                    </div>
+                </div>
+            </div>
+        @endif
+        <div class="end-footer">
+            <div class="row text-center">
+                <div class="col">
+                    &copy; Copyright 2023 Digiponic | Maju Solid | Allright Reserved
+                </div>
+            </div>
+        </div>
+    </footer>
 
     {{-- Modal Login --}}
     <div class="modal fade" id="login" tabindex="1" aria-labelledby="exampleModalLabel" aria-hidden="true">
