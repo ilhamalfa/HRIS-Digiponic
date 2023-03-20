@@ -9,12 +9,22 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+use function PHPUnit\Framework\fileExists;
+
 class PegawaiController extends Controller
 {
     public function dataPegawai(){
         $datas = User::has('pegawai')->where('role', '!=', 'Pelamar')->get();
 
         return view('super-admin.pegawai.daftar-data-pegawai', [
+            'datas' => $datas
+        ]);
+    }
+
+    public function dataUser(){
+        $datas = User::where('role', '!=', 'Pelamar')->get();
+
+        return view('super-admin.pegawai.data-user', [
             'datas' => $datas
         ]);
     }
@@ -130,6 +140,10 @@ class PegawaiController extends Controller
 
             if ($request->has('jumlah_anak')) {
                 $validate['jumlah_anak'] = $request->jumlah_anak;
+            }
+
+            if(fileExists('storage/'. $data->foto)){
+                unlink('storage/'. $data->foto);
             }
 
             $extension_foto = $request->file('foto')->extension();
