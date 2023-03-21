@@ -25,4 +25,17 @@ class HomeController extends Controller
     {
         return redirect('/');
     }
+
+    // public function rutelogin(Request $request)
+    // {
+    //     dd($request);
+    //     if ($request->has('inputemployee')) {
+    //         $person = 1;
+    //     } elseif ($request->has('inputcandidate')) {
+    //         $person = 2;
+    //     } else {
+    //         return redirect('errors.404');
+    //     }
+    //     return view('auth.login', compact('person'));
+    // }
 }

@@ -215,10 +215,15 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
-                    <div><a href="login?person=1" class="btn btn-primary py-2 px-4">Login as Employee</a>
+                    <form action="{{ route('rutelogin') }}" class="form" method="post">
+                        @csrf
+                        <input type="submit" name="inputemployee" value="Login as Employee">
+                        <input type="submit" name="inputcandidate" value="Login as Candidate">
+                    </form>
+                    {{-- <div><a href="userlogin?person=1" class="btn btn-primary py-2 px-4">Login as Employee</a>
                     </div>
-                    <div><a href="login?person=2" class="btn btn-danger py-2 px-4">Login as Candidate</a>
-                    </div>
+                    <div><a href="userlogin?person=2" class="btn btn-danger py-2 px-4">Login as Candidate</a>
+                    </div> --}}
                 </div>
             </div>
         </div>

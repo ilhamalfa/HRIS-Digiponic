@@ -44,9 +44,11 @@
     </div>
     {{-- end promotion --}}
 
-    {{-- our product --}}
-    {{-- end our products --}}
-
     {{-- structur --}}
+    <div class="container-fluid">
+        <div class="row">
+            
+        </div>
+    </div>
     {{-- end structur --}}
 @endsection
