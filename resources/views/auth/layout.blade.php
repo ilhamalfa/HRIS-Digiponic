@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
+    <link rel="icon" href="{{ asset('logo/brand-logo.png') }}">
 
     {{-- Google Fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">

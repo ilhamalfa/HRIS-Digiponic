@@ -1,8 +1,4 @@
 /* CSS Reset Start */
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -52,84 +48,285 @@ table {
 }
 /* CSS Reset End */
 
-div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+@media only screen and (max-width: 600px) {
+
+    /* Image Background Start */
+    div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    div img {
+        position: fixed;
+        top: 0;
+        width: 900px;
+        height: 900px;
+        z-index: -999;
+        filter: blur(2px) brightness(100%);
+    }
+    /* Image Background End */
+
+    /* Main Start */
+    main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow-y: scroll;
+    }
+
+    main .auth {
+        background: none;
+        display: flex;
+        flex-direction: column;
+    }
+
+    main .auth h1 {
+        font-size: 1.5rem;
+        margin: 1em;
+    }
+
+    main .auth form div input{
+        background-color: rgba(114, 133, 142, .2);
+        border: none;
+        margin: 1em;
+        padding: .8em 1.5em;
+        border-radius: 50px;
+        outline: none;
+        box-sizing: border-box;
+    }
+
+    .auth form div input::placeholder {
+        font-family: 'Poppins', sans-serif;
+        color: grey;
+    }
+
+    main .auth form .extra {
+        display: flex;
+        flex-direction: column;
+    }
+
+    main .auth form .extra div {
+        display: flex;
+        align-items: center;
+    }
+
+    main .auth form .extra a {
+        color: black;
+        text-decoration: none;
+    }
+
+    main .auth form .switch {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        margin: 1em 0;
+    }
+
+    main .auth form .switch a {
+        color: black;
+        text-decoration: none;
+        margin: .5em 0;
+    }
+    /* Main End */
+
 }
 
-div img {
-    position: fixed;
-    top: 0;
-    width: 900px;
-    height: 900px;
-    z-index: -999;
-    filter: blur(2px) brightness(100%);
+@media only screen and (min-width: 600px) {
+
+    /* Image Background Start */
+    div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    div img {
+        position: fixed;
+        top: 0;
+        width: auto;
+        height: 100vh;
+        z-index: -999;
+        filter: blur(2px) brightness(100%);
+    }
+    /* Image Background End */
+
+    /* Main Start */
+    main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow-y: scroll;
+    }
+
+    main .auth {
+        background: none;
+        display: flex;
+        flex-direction: column;
+    }
+
+    main .auth h1 {
+        font-size: 2rem;
+        margin: 1em;
+    }
+
+    main .auth form div input{
+        background-color: rgba(114, 133, 142, .2);
+        border: none;
+        margin: 1em;
+        padding: 1em 1.5em;
+        border-radius: 50px;
+        outline: none;
+        box-sizing: border-box;
+    }
+
+    .auth form div input::placeholder {
+        font-family: 'Poppins', sans-serif;
+        color: grey;
+    }
+
+    main .auth form .extra {
+        display: flex;
+        flex-direction: column;
+    }
+
+    main .auth form .extra div {
+        display: flex;
+        align-items: center;
+    }
+
+    main .auth form .extra div label {
+        font-size: 1.2rem;
+    }
+
+    main .auth form .extra a {
+        color: black;
+        text-decoration: none;
+        font-size: 1.2rem;
+    }
+
+    main .auth form .button button {
+        box-sizing: border-box;
+        padding: .5em;
+    }
+
+    main .auth form .switch {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        margin: 1em 0;
+    }
+
+    main .auth form .switch a {
+        font-size: 1.1rem;
+        color: black;
+        text-decoration: none;
+        margin: .5em 0;
+    }
+    /* Main End */
+
 }
 
-main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    overflow-y: scroll;
-}
+@media only screen and (min-width: 992px) {
 
-main .auth {
-    background: none;
-    display: flex;
-    flex-direction: column;
-}
+    /* Image Background Start */
+    div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-main .auth h1 {
-    font-size: 1.5rem;
-    margin: 1em;
-}
+    div img {
+        position: fixed;
+        top: 0;
+        width: 100vw;
+        height: auto;
+        z-index: -999;
+        filter: blur(2px) brightness(100%);
+    }
+    /* Image Background End */
 
-main .auth form div input{
-    background-color: rgba(114, 133, 142, .2);
-    border: none;
-    margin: 1em;
-    padding: .8em 1.5em;
-    border-radius: 50px;
-    outline: none;
-    box-sizing: border-box;
-}
+    /* Main Start */
+    main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow-y: scroll;
+    }
 
-.auth form div input::placeholder {
-    font-family: 'Poppins', sans-serif;
-    color: grey;
-}
+    main .auth {
+        background: none;
+        display: flex;
+        flex-direction: column;
+    }
 
-main .auth form .extra {
-    display: flex;
-    flex-direction: column;
-}
+    main .auth h1 {
+        font-size: 2rem;
+        margin: 1em;
+    }
 
-main .auth form .extra div {
-    display: flex;
-    align-items: center;
-}
+    main .auth form div input{
+        background-color: rgba(114, 133, 142, .2);
+        border: none;
+        margin: 1em;
+        padding: 1em 1.5em;
+        border-radius: 50px;
+        outline: none;
+        box-sizing: border-box;
+    }
 
-main .auth form .extra a {
-    color: black;
-    text-decoration: none;
-}
+    .auth form div input::placeholder {
+        font-family: 'Poppins', sans-serif;
+        color: grey;
+    }
 
-main .auth form .switch {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-}
+    main .auth form .extra {
+        display: flex;
+        flex-direction: column;
+    }
 
-main .auth form .switch a {
-    color: black;
-    text-decoration: none;
-    margin: .5em 0;
-}
+    main .auth form .extra div {
+        display: flex;
+        align-items: center;
+    }
 
-/* main .auth form .extra div input {
-    
-} */
+    main .auth form .extra div label {
+        font-size: 1.2rem;
+    }
+
+    main .auth form .extra a {
+        color: black;
+        text-decoration: none;
+        font-size: 1.2rem;
+    }
+
+    main .auth form .button button {
+        box-sizing: border-box;
+        padding: .5em;
+    }
+
+    main .auth form .switch {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        margin: 1em 0;
+    }
+
+    main .auth form .switch a {
+        font-size: 1.1rem;
+        color: black;
+        text-decoration: none;
+        margin: .5em 0;
+    }
+    /* Main End */
+
+}

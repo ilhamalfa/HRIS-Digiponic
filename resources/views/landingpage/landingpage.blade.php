@@ -7,7 +7,7 @@
         {{-- <img src="{{ asset('background/background-jumbo-tron.jpg') }}" alt=""> --}}
     </section>
 
-    {{-- promotion --}}
+    {{-- Promotion Start --}}
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-4 col-sm-12">
@@ -42,7 +42,7 @@
             </div>
         </div>
     </div>
-    {{-- end promotion --}}
+    {{-- Promotion End --}}
 
     {{-- structur --}}
     <div class="container-fluid">
