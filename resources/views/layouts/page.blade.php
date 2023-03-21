@@ -14,9 +14,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,700;1,300&display=swap"
         rel="stylesheet">
+
+    {{-- Preloader CSS --}}
     <link rel="stylesheet" href="{{ asset('preloader/style.css') }}">
-    {{-- Feather Icons --}}
-    <script src="https://unpkg.com/feather-icons"></script>
 
     {{-- Font Awesome --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
@@ -33,7 +33,8 @@
 
 <body>
 
-    <div id="cssload-loader">
+    {{-- Preloader Start --}}
+    {{-- <div id="cssload-loader">
         <ul>
             <li></li>
             <li></li>
@@ -42,76 +43,34 @@
             <li></li>
             <li></li>
         </ul>
-    </div>
+    </div> --}}
+    {{-- Preloader Start --}}
+
     {{-- Modal Mobile Start --}}
     <div class="modal-mobile" id="modal-mobile">
         <div class="modal-menu">
-            <a class="btn rounded-pill py-3 px-5 m-3" href="login?person=1">Login as Employee</a>
-            <a class="btn rounded-pill py-3 px-5 m-3" href="login?person=2">Login as Candidate</a>
+            <a class="btn rounded-pill py-3 px-5" href="login?person=1">Login as Employee</a>
+            <a class="btn rounded-pill py-3 px-5" href="login?person=2">Login as Candidate</a>
         </div>
     </div>
     {{-- Modal Mobile End --}}
 
     {{-- Nav Topbar Start --}}
-    <nav class="topbar">
+    <nav class="topbar bg-black">
         <a href="#">
             <img src="{{ asset('logo/brand-logo.png') }}" alt="Brand Logo">
         </a>
         <a href="#" id="hamburger-menu">
             <i class="fa-solid fa-bars fa-2x"></i>
         </a>
-        @if (Auth::user())
-            <a href="">
-                <i class="fa-solid fa-magnifying-glass m-2"></i>
-                <span>Search</span>
-            </a>    
-            <a href="">
-                <i data-feather="home">1</i>
-                <span>Home</span>
-            </a>
-            <a href="">
-                <i data-feather="mail">1</i>
-                <span>Mail</span>
-            </a>
-        @endif
-        @guest
-            @if (Route::has('login') && Route::has('register'))
-                <a class="text-light" href="#" data-bs-toggle="modal" data-bs-target="#login">
-                    <i class="fa-solid fa-right-to-bracket m-2"></i>
-                    <span>Login</span>
-                </a>
-                <a class="text-light" href="{{ route('register') }}">
-                    <i class="fa-solid fa-file-pen m-2"></i>
-                    <span>Register</span>
-                </a>
-                <a href="">
-                    <i class="fa-solid fa-circle-info m-2"></i>
-                    <span>About</span>
-                </a>
-                <a href="">
-                    <i class="fa-solid fa-people-group m-2"></i>
-                    <span>Structure</span>
-                </a>
-                <a href="">
-                    <i class="fa-solid fa-envelope m-2"></i>
-                    <span>Mail</span>
-                </a>
-            @endif
-        @else
-            <a class="text-light m-3" href="{{ route('logout') }}"
-                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                <i data-feather="log-out">1</i>
-                <span>Logout</span>
-            </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                @csrf
-            </form>
-        @endguest
     </nav>
     {{-- Nav Topbar End --}}
 
     {{-- Nav Sidebar Start --}}
-    <nav class="sidebar bg-black py-5 bg-opacity-80" id="sidebar">
+    <nav class="sidebar bg-black" id="sidebar">
+        <a href="#">
+            <img src="{{ asset('logo/brand-logo.png') }}" alt="Brand Logo">
+        </a>
         @if (Auth::user())
             <a class="text-light" href="">
                 <i class="fa-solid fa-magnifying-glass m-2"></i>
@@ -164,38 +123,48 @@
     </main>
     {{-- Main End --}}
 
-    <footer class="footer">
+    {{-- Footer Start --}}
+    <footer class="footer bg-dark text-white p-5">
         @if (Request::is('/'))
-            <div class="start-footer mb-3">
+            <div class="start-footer">
                 <div class="row text-center justify-content-center">
-                    <div class="col-lg-8">
-                        <div class="logo">
-                            <img src="" alt="">
+                    <div class="p-2">
+                        <div class="logo m-3">
+                            <img src="{{ asset('logo/brand-logo.png') }}" alt="Brand Logo">
                         </div>
-                        <div class="text-footer">
-                            <p class="mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, quam
+                        <div class="text-footer m-5 px-5">
+                            <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, quam
+                                exercitationem neque adipisci, sint deserunt reprehenderit illum, aut doloremque aliquid
+                                corporis repellat ducimus at quisquam molestiae commodi tempore assumenda atque.Lorem
+                                ipsum dolor sit amet consectetur adipisicing elit. Quia, quam
+                                exercitationem neque adipisci, sint deserunt reprehenderit illum, aut doloremque aliquid
+                                corporis repellat ducimus at quisquam molestiae commodi tempore assumenda atque.
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, quam
                                 exercitationem neque adipisci, sint deserunt reprehenderit illum, aut doloremque aliquid
                                 corporis repellat ducimus at quisquam molestiae commodi tempore assumenda atque.</p>
-                            <p class="mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, quam
+                            <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, quam
+                                exercitationem neque adipisci, sint deserunt reprehenderit illum, aut doloremque aliquid
+                                corporis repellat ducimus at quisquam molestiae commodi tempore assumenda atque.Lorem
+                                ipsum dolor sit amet consectetur adipisicing elit. Quia, quam
                                 exercitationem neque adipisci, sint deserunt reprehenderit illum, aut doloremque aliquid
                                 corporis repellat ducimus at quisquam molestiae commodi tempore assumenda atque.</p>
-                            <p class="mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, quam
+                            <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, quam
                                 exercitationem neque adipisci, sint deserunt reprehenderit illum, aut doloremque aliquid
                                 corporis repellat ducimus at quisquam molestiae commodi tempore assumenda atque.</p>
                         </div>
                     </div>
                 </div>
-                <div class="row justify-content-center">
-                    <div class="col-md-2 col-sm-4">
+                <div class="social-media m-5">
+                    <div>
                         <i class="fs-1 fa-brands fa-whatsapp"></i>
                     </div>
-                    <div class="col-md-2 col-sm-4">
+                    <div>
                         <i class="fs-1 fa-brands fa-instagram"></i>
                     </div>
-                    <div class="col-md-2 col-sm-4">
+                    <div>
                         <i class="fs-1 fa-brands fa-twitter"></i>
                     </div>
-                    <div class="col-md-2 col-sm-4">
+                    <div>
                         <i class="fs-1 fa-brands fa-tiktok"></i>
                     </div>
                 </div>
@@ -209,20 +178,7 @@
             </div>
         </div>
     </footer>
-
-    {{-- Modal Login --}}
-    <div class="modal fade" id="login" tabindex="1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div><a href="login?person=1" class="btn btn-primary py-2 px-4">Login as Employee</a>
-                    </div>
-                    <div><a href="login?person=2" class="btn btn-danger py-2 px-4">Login as Candidate</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{-- Footer End --}}
 
     {{-- Bootstrap JS CDN --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
@@ -231,13 +187,9 @@
 
     {{-- sweetAlert --}}
     @include('sweetalert::alert')
+
     {{-- JS --}}
     <script src="{{ asset('layout/js/script.js') }}"></script>
-
-    {{-- Feather Icons --}}
-    <script>
-        feather.replace()
-    </script>
 </body>
 
 </html>
