@@ -156,16 +156,24 @@
                 </div>
                 <div class="social-media m-5">
                     <div>
-                        <i class="fs-1 fa-brands fa-whatsapp"></i>
+                        <a href="#">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
                     </div>
                     <div>
-                        <i class="fs-1 fa-brands fa-instagram"></i>
+                        <a href="#">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
                     </div>
                     <div>
-                        <i class="fs-1 fa-brands fa-twitter"></i>
+                        <a href="#">
+                            <i class="fa-brands fa-twitter"></i>
+                        </a>
                     </div>
                     <div>
-                        <i class="fs-1 fa-brands fa-tiktok"></i>
+                        <a href="#">
+                            <i class="fa-brands fa-tiktok"></i>
+                        </a>
                     </div>
                 </div>
             </div>

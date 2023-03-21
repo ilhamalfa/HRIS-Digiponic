@@ -333,9 +333,9 @@ table {
         background: none;
     }
 
-    nav.sidebar a:hover i, nav.sidebar a:hover span{
+    /* nav.sidebar a:hover i, nav.sidebar a:hover span{
         color: whitesmoke;
-    }
+    } */
 
     nav.sidebar a:nth-child(1) {
         display: block;
@@ -347,12 +347,12 @@ table {
     }
 
     nav.sidebar a i {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
         transition: .5s;
     }
 
     nav.sidebar a span {
-        font-size: 1.1rem;
+        font-size: 1rem;
         position: absolute;
         left: 100%;
         opacity: 0;
@@ -371,10 +371,30 @@ table {
         width: 10%;
     }
 
+    footer .start-footer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
     footer .social-media {
         display: flex;
         justify-content: space-evenly;
         align-items: center;
+        width: 50vw;
+    }
+
+    footer .social-media a {
+        color: grey;
+        transition: all .5s;
+    }
+
+    footer .social-media a:hover {
+        color: white;
+    }
+
+    footer .social-media div a i {
+        font-size: 2rem;
     }
     /* Footer End */
 
