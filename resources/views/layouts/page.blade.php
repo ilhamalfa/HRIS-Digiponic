@@ -14,6 +14,10 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,700;1,300&display=swap"
         rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 
     {{-- Preloader CSS --}}
     <link rel="stylesheet" href="{{ asset('preloader/style.css') }}">
@@ -56,66 +60,71 @@
     {{-- Modal Mobile End --}}
 
     {{-- Nav Topbar Start --}}
-    <nav class="topbar bg-black">
-        <a href="#">
-            <img src="{{ asset('logo/brand-logo.png') }}" alt="Brand Logo">
-        </a>
-        <a href="#" id="hamburger-menu">
-            <i class="fa-solid fa-bars fa-2x"></i>
-        </a>
+    <div class="design-topbar" id="design-topbar"></div>
+    <nav class="topbar" id="topbar">
+        <div class="brand-logo">
+            <a href="#">
+                <img src="{{ asset('logo/brand-logo.png') }}" alt="Brand Logo">
+                <span>TECH.Solution</span>
+            </a>
+        </div>
+        <div class="hamburger-menu" id="hamburger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="language">
+            <span>EN</span>
+            <span>/</span>
+            <span>ID</span>
+        </div>
     </nav>
     {{-- Nav Topbar End --}}
 
-    {{-- Nav Sidebar Start --}}
-    <nav class="sidebar bg-black" id="sidebar">
-        <a href="#">
-            <img src="{{ asset('logo/brand-logo.png') }}" alt="Brand Logo">
-        </a>
+    {{-- Navbar Start --}}
+    <nav class="navbar" id="navbar">
+        {{-- <a href="#">
+            <form action="{{ route('rutelogin') }}" method="POST">
+                @csrf
+                <input type="submit" name="inputemployee" value="inputemployee">
+                <input type="submit" name="inputcandidate" value="inputcandidate">
+            </form>
+        </a> --}}
         @if (Auth::user())
-            <a class="text-light" href="">
-                <i class="fa-solid fa-magnifying-glass m-2"></i>
+            <a class="" href="">
                 <span>Search</span>
             </a>
-            <a class="text-light" href="">
-                <i class="fa-solid fa-house m-2"></i>
+            <a class="" href="">
                 <span>Home</span>
             </a>
         @endif
         @guest
-            @if (Route::has('login') && Route::has('register'))
-                <a class="text-light" href="#" id="login-mobile">
-                    <i class="fa-solid fa-right-to-bracket m-2"></i>
-                    <span>Login</span>
-                </a>
-                <a class="text-light" href="{{ route('register') }}">
-                    <i class="fa-solid fa-file-pen m-2"></i>
-                    <span>Register</span>
-                </a>
-                <a class="text-light" href="">
-                    <i class="fa-solid fa-circle-info m-2"></i>
-                    <span>About</span>
-                </a>
-                <a class="text-light" href="">
-                    <i class="fa-solid fa-people-group m-2"></i>
-                    <span>Structure</span>
-                </a>
-                <a class="text-light" href="">
-                    <i class="fa-solid fa-envelope m-2"></i>
-                    <span>Mail</span>
-                </a>
-            @endif
+            <a class="" href="" id="login-mobile">
+                <span>Login</span>
+            </a>
+            <a class="" href="{{ route('register') }}">
+                <span>Register</span>
+            </a>
         @else
-            <a class="text-light" href="{{ route('logout') }}"
+            <a class="" href="{{ route('logout') }}"
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                <i class="fa-solid fa-right-from-bracket m-2"></i>
                 <span>Logout</span>
             </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf
             </form>
         @endguest
+        <a class="" href="">
+            <span>About</span>
+        </a>
+        <a class="" href="">
+            <span>Structure</span>
+        </a>
+        <a class="" href="">
+            <span>Mail</span>
+        </a>
     </nav>
-    {{-- Nav Sidebar End --}}
+    {{-- Navbar End --}}
 
     {{-- Main Start --}}
     <main>
@@ -124,7 +133,7 @@
     {{-- Main End --}}
 
     {{-- Footer Start --}}
-    <footer class="footer bg-dark text-white p-5">
+    {{-- <footer class="footer bg-dark text-white">
         @if (Request::is('/'))
             <div class="start-footer">
                 <div class="row text-center justify-content-center">
@@ -185,7 +194,7 @@
                 </div>
             </div>
         </div>
-    </footer>
+    </footer> --}}
     {{-- Footer End --}}
 
     {{-- Bootstrap JS CDN --}}
@@ -195,6 +204,9 @@
 
     {{-- sweetAlert --}}
     @include('sweetalert::alert')
+
+    {{-- JQuery --}}
+    <script src="{{ asset('layout/jquery/jquery-3.6.4.min.js') }}"></script>
 
     {{-- JS --}}
     <script src="{{ asset('layout/js/script.js') }}"></script>
