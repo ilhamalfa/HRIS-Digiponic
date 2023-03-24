@@ -1,52 +1,12 @@
-// let hamburgerMenu = document.getElementById('hamburger-menu')
-// let sidebar = document.getElementById('sidebar')
-// let login = document.getElementById('login-mobile')
-// let modal = document.getElementById('modal-mobile')
-
-// hamburgerMenu.addEventListener('click', function(e) {
-//     e.preventDefault()
-//     sidebar.classList.toggle('slide')
-// })
-
-// document.addEventListener('click', function (e) {
-//     if (!hamburgerMenu.contains(e.target) && !sidebar.contains(e.target) && !modal.contains(e.target)) {
-//         sidebar.classList.remove('slide')
-//     }
-// })
-
-// login.addEventListener('click', function(e) {
-//     e.preventDefault()
-//     modal.classList.add('modal-active')
-// })
-
-
-// modal.addEventListener('click', function() {
-//     modal.classList.remove('modal-active')
-// })
-
 const designTopbar = document.getElementById('design-topbar')
 const topbar = document.getElementById('topbar')
 const hamburgerMenu = document.getElementById('hamburger-menu')
 const navbar = document.getElementById('navbar')
 const span = hamburgerMenu.querySelectorAll('span')
-let cekScroll = $(this).scrollTop()
 
-// hamburgerMenu.addEventListener('click', function() {
-//     topbar.classList.toggle('change')
-//     navbar.classList.toggle('show')
-// })
-
-if (cekScroll > 150) {
-    hamburgerMenu.addEventListener('click', function() {
-        topbar.classList.toggle('change')
-        navbar.classList.toggle('show')
-    })
-} else {
-    hamburgerMenu.addEventListener('click', function() {
-        navbar.classList.toggle('show')
-    })
-}
-
+hamburgerMenu.addEventListener('click', function() {
+    navbar.classList.toggle('show')
+})
 
 document.addEventListener('click', function (e) {
     if (!hamburgerMenu.contains(e.target) && !navbar.contains(e.target)) {
@@ -75,7 +35,7 @@ $(window).scroll(function () {
         })
     }
 
-    // Parallax
+    // Jib Parallax Start
     $('.jib-parallax .design div').css({
         'transform' : 'translate(0px,' + wScroll*2 +'%)'
     })
@@ -83,5 +43,22 @@ $(window).scroll(function () {
     $('.jib-parallax .text-scroll').css({
         'transform' : 'translate(0px,' + wScroll*2 +'%)'
     })
+    // Jib Parallax End
+
+    // Career Annimations Start
+    if (wScroll > $('.career').offset().top - 550) {
+        $('.career h1').css({
+            'opacity' : '1'
+        })
+    } else {
+        $('.career h1').css({
+            'opacity' : '0'
+        })
+    }
+    // Career Annimations End
+
+    // About Us Animations Start
+    
+    // About Us Animations End
 })
 
