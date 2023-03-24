@@ -1,0 +1,21 @@
+.text-custom {
+    background-color: #EFF2F8;
+    border-radius: 100%;
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.text-custom:hover {
+    background-color: #DC3545;
+}
+
+.text-custom:hover .fa-brands{
+    color: whitesmoke !important;
+}
+
+.card-hover:hover {
+    transform: translateY(-20px);
+    transition: .5s;
+}

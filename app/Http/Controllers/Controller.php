@@ -22,4 +22,9 @@ class Controller extends BaseController
         }
         return view('auth.login', compact('person'));
     }
+
+    public function struktur()
+    {
+        return view('struktur.struktur');
+    }
 }
