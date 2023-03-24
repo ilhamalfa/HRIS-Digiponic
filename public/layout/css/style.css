@@ -227,7 +227,6 @@ table {
         display: block;
         width: 15px;
         height: 15px;
-        border-radius: 50px;
         position: absolute;
         top: 90%;
         left: 10%;
@@ -252,7 +251,6 @@ table {
         display: block;
         width: 10px;
         height: 10px;
-        border-radius: 50px;
         position: absolute;
         top: 30%;
         left: 70%;
