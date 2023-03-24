@@ -136,7 +136,7 @@
     {{-- Main End --}}
 
     {{-- Footer Start --}}
-    {{-- <footer class="footer bg-dark text-white">
+    <footer class="footer bg-dark text-white container-fluid">
         @if (Request::is('/'))
             <div class="start-footer">
                 <div class="row text-center justify-content-center">
@@ -169,7 +169,7 @@
                 <div class="social-media m-5">
                     <div>
                         <a href="#">
-                            <i class="fa-brands fa-whatsapp"></i>
+                            <i class="fa-brands fa-twitter"></i>
                         </a>
                     </div>
                     <div>
@@ -179,25 +179,29 @@
                     </div>
                     <div>
                         <a href="#">
-                            <i class="fa-brands fa-twitter"></i>
+                            <i class="fa-brands fa-facebook"></i>
                         </a>
                     </div>
                     <div>
                         <a href="#">
-                            <i class="fa-brands fa-tiktok"></i>
+                            <i class="fa-brands fa-linkedin"></i>
                         </a>
                     </div>
                 </div>
             </div>
         @endif
-        <div class="end-footer">
+        <div class="end-footer py-4">
             <div class="row text-center">
                 <div class="col">
                     &copy; Copyright 2023 Digiponic | Maju Solid | Allright Reserved
                 </div>
             </div>
         </div>
-    </footer> --}}
+        <div class="dots">
+            <span></span>
+            <span></span>
+        </div>
+    </footer>
     {{-- Footer End --}}
 
     {{-- Bootstrap JS CDN --}}

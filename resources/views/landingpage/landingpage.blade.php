@@ -157,7 +157,7 @@
             <h1 class="fs-1 my-5">Our Team</h1>
         </div>
         <div class="row justify-content-evenly">
-            <div class="col-lg-5 col-md-10 card border-0 p-3 shadow mb-3">
+            <div class="col-lg-5 col-md-10 card border-0 card-hover p-3 shadow mb-4">
                 <div class="card-body row text-center">
                     <div class="col-lg-4">
                         <img src="{{ asset('asset/entrepreneur1.jpg') }}" class="rounded-circle" width="130px"
@@ -182,7 +182,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-5 col-md-10 card border-0 p-3 shadow mb-3">
+            <div class="col-lg-5 col-md-10 card border-0 card-hover p-3 shadow mb-4">
                 <div class="card-body row text-center">
                     <div class="col-lg-4">
                         <img src="{{ asset('asset/entrepreneur1.jpg') }}" class="rounded-circle" width="130px"
@@ -207,7 +207,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-5 col-md-10 card border-0 p-3 shadow mb-3">
+            <div class="col-lg-5 col-md-10 card border-0 card-hover p-3 shadow mb-4">
                 <div class="card-body row text-center">
                     <div class="col-lg-4">
                         <img src="{{ asset('asset/entrepreneur1.jpg') }}" class="rounded-circle" width="130px"
@@ -232,7 +232,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-5 col-md-10 card border-0 p-3 shadow mb-3">
+            <div class="col-lg-5 col-md-10 card border-0 card-hover p-3 shadow mb-4">
                 <div class="card-body row text-center">
                     <div class="col-lg-4">
                         <img src="{{ asset('asset/entrepreneur1.jpg') }}" class="rounded-circle" width="130px"
@@ -260,7 +260,8 @@
         </div>
         <div class="row">
             <div class="col my-5">
-                <a href="{{ route('struktur') }}" class="btn btn-sm btn-primary">All Structur -></a>
+                <a href="{{ route('struktur') }}" class="btn btn btn-danger"><i
+                        class="fa-solid fa-people-group me-2"></i>All Team</a>
             </div>
         </div>
     </div>
