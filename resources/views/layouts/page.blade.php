@@ -22,6 +22,9 @@
     {{-- Preloader CSS --}}
     <link rel="stylesheet" href="{{ asset('preloader/style.css') }}">
 
+    {{-- Random CSS --}}
+    <link rel="stylesheet" href="{{ asset('asset/asset.css') }}">
+
     {{-- Font Awesome --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
         integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="

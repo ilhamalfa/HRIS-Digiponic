@@ -24,3 +24,4 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('rutelogin',[Controller::class,'rutelogin'])->name('rutelogin');
+Route::get('struktur',[Controller::class,'struktur'])->name('struktur');
