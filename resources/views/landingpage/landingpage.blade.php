@@ -25,10 +25,90 @@
     </div>
     {{-- Jib Parallax End --}}
 
-    <div class="content">
+    {{-- Career Start --}}
+    <div class="career">
         <div class="designstrip1"></div>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur iure sapiente hic totam laudantium illum voluptates explicabo itaque dolorem, adipisci dolores officia fuga odio dignissimos odit! Aliquam atque mollitia at.</p>
+        <div class="designred1"></div>
+        <div class="designred2"></div>
+        <div class="designred3"></div>
+        <div class="designred4"></div>
+        <h1>CAREER</h1>
+        <div class="picture">
+            <img src="{{ asset('main/career/picture.jpg') }}" alt="Office Picture">
+            <span>OFFICE</span>
+        </div>
+        <div class="description">
+            <h6>START YOUR CAREER</h6>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur iure sapiente hic totam laudantium illum
+                voluptates explicabo itaque dolorem, adipisci dolores officia fuga odio dignissimos odit! Aliquam atque
+                mollitia at Lorem ipsum dolor sit amet consectetur adipisicing elit. Non reprehenderit aut deserunt
+                recusandae dolores nesciunt odio possimus beatae, pariatur voluptatum magnam aliquid sed eaque porro
+                officiis numquam ipsum laborum quaerat.
+            </p>
+            <a class="" href=""><span>START</span></a>
+        </div>
     </div>
+    {{-- Career End --}}
+
+    {{-- About Us Start --}}
+    <div class="about-us">
+        <div class="designstrip1"></div>
+        <div class="designstrip2"></div>
+        <div class="designred1"></div>
+        <div class="designred2"></div>
+        <h1>ABOUT US</h1>
+        <div class="picture">
+            <img src="{{ asset('main/about/ceo.png') }}" alt="Office Picture">
+            <span>CEO Of TECH SOLUTION</span>
+        </div>
+        <div class="description">
+            <h6>BETTER TECHNOLOGY, BETTER FUTURE</h6>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur iure sapiente hic totam laudantium illum
+                voluptates explicabo itaque dolorem, adipisci dolores officia fuga odio dignissimos odit! Aliquam atque
+                mollitia at Lorem ipsum dolor sit amet consectetur adipisicing elit. Non reprehenderit aut deserunt
+                recusandae dolores nesciunt odio possimus beatae, pariatur voluptatum magnam aliquid sed eaque porro
+                officiis numquam ipsum laborum quaerat.
+            </p>
+            <a class="" href=""><span>LEARN</span></a>
+        </div>
+    </div>
+    {{-- About Us End --}}
+
+    {{-- Product Start --}}
+    {{-- <div class="product-introduction">
+        
+    </div>
+    <div class="product">
+
+    </div> --}}
+    {{-- Product End --}}
+
+    {{-- Comment Start --}}
+    <div class="comment">
+        <div class="carrousel-comment">
+            <div class="user">
+                <div class="picture">
+                    <img src="{{ asset('main/comment/profile/profile.jpg') }}" alt="User Picture">
+                </div>
+                <span>Kayle Runner</span>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit explicabo placeat accusamus soluta? Quae
+                    minus id quas veniam odio asperiores quaerat veritatis. Nobis atque modi sunt molestiae enim. Assumenda,
+                    facilis!</p>
+            </div>
+            {{-- <div class="user">
+                <img src="" alt="">
+                <span>Kayle Runner</span>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit explicabo placeat accusamus soluta? Quae
+                    minus id quas veniam odio asperiores quaerat veritatis. Nobis atque modi sunt molestiae enim. Assumenda,
+                    facilis!</p>
+            </div> --}}
+        </div>
+        <div class="dots">
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    {{-- Comment End --}}
 
     {{-- <section class="container-fluid p-0">
         <img src="{{ asset('background/background-jumbo-tron.jpg') }}" alt="">
