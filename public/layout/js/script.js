@@ -14,6 +14,19 @@ document.addEventListener('click', function (e) {
     }
 })
 
+// Animation Opening Start
+const openingH1 = document.querySelector('.jib-parallax h1')
+const openingH6 = document.querySelector('.jib-parallax h6')
+console.log(openingH1);
+setTimeout(function () {
+    openingH1.classList.add('fade')
+}, 1000)
+setTimeout(function () {
+    openingH6.classList.add('fade')
+}, 1500)
+// Animation Opening End
+
+// Scroll Animations Start
 $(window).scroll(function () {
     let wScroll = $(this).scrollTop()
     if (wScroll > 150 || wScroll > 1) {
@@ -35,30 +48,42 @@ $(window).scroll(function () {
         })
     }
 
-    // Jib Parallax Start
+    // Jumbotron Animation Start
     $('.jib-parallax .design div').css({
         'transform' : 'translate(0px,' + wScroll*2 +'%)'
     })
-
+    
     $('.jib-parallax .text-scroll').css({
         'transform' : 'translate(0px,' + wScroll*2 +'%)'
     })
-    // Jib Parallax End
+    // Jumbotron Animation End
 
     // Career Annimations Start
     if (wScroll > $('.career').offset().top - 550) {
         $('.career h1').css({
-            'opacity' : '1'
+            'opacity' : '1',
+            'transform' : 'translateY(0)'
         })
     } else {
         $('.career h1').css({
-            'opacity' : '0'
+            'opacity' : '0',
+            'transform' : 'translateY(20%)'
         })
     }
     // Career Annimations End
 
     // About Us Animations Start
-    
+    if (wScroll > $('.about-us').offset().top - 550) {
+        $('.about-us h1').css({
+            'opacity' : '1',
+            'transform' : 'translateY(0)'
+        })
+    } else {
+        $('.about-us h1').css({
+            'opacity' : '0',
+            'transform' : 'translateY(20%)'
+        })
+    }
     // About Us Animations End
 })
-
+// Scroll Animations End

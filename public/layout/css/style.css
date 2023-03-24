@@ -222,6 +222,13 @@ table {
         z-index: -999;
     }
 
+    main .jib-parallax .design img.design {
+        width: 7%;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+    }
+
     main .jib-parallax .design .designred{
         background-color: #FF4655;
         display: block;
@@ -293,13 +300,25 @@ table {
     main .jib-parallax h1 {
         font-size: 5rem;
         margin: .2em 0;
+        opacity: 0;
+        transition: .7s;
     }
     
+    main .jib-parallax h1.fade {
+        opacity: 1;
+    }
+
     main .jib-parallax h6 {
         font-family: 'Dancing Script', cursive;
         font-size: 1.5rem;
         font-weight: 700;
         margin: .2em 0;
+        opacity: 0;
+        transition: .7s;
+    }
+
+    main .jib-parallax h6.fade {
+        opacity: 1;
     }
 
     main .jib-parallax .text-scroll {
@@ -377,7 +396,8 @@ table {
         top: 5%;
         right: 5%;
         opacity: 0;
-        transition: .5s;
+        transform: translateY(20%);
+        transition: 1s;
     }
 
     main .career .picture {
@@ -508,7 +528,9 @@ table {
         position: absolute;
         top: 5%;
         left: 8%;
-        transition: .5s;
+        transform: translateY(20%);
+        opacity: 0;
+        transition: 1s;
     }
 
     main .about-us .picture img {
@@ -594,7 +616,78 @@ table {
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
-        padding: 5em;
+        padding: 5em 20em;
+        position: relative;
+    }
+
+    main .comment .designstrip1 {
+        background-color: #F9F9F9;
+        display: block;
+        width: 1px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: 95%;
+    }
+
+    main .comment .designstrip2 {
+        background-color: #FF4655;
+        display: block;
+        width: 1px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: 15%;
+    }
+
+    main .comment .designred1 {
+        background-color: #FF4655;
+        display: block;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        top: 25%;
+        right: 95%;
+    }
+
+    main .comment .designred2 {
+        background-color: #FF4655;
+        display: block;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        top: 25%;
+        right: 15%;
+    }
+
+    main .comment .designwhite1 {
+        background-color: #F9F9F9;
+        display: block;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        top: 25%;
+        right: 55%;
+    }
+
+    main .comment .designwhite2 {
+        background-color: #F9F9F9;
+        display: block;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        top: 35%;
+        right: 35%;
+    }
+
+    main .comment .designwhite3 {
+        background-color: #F9F9F9;
+        display: block;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        top: 85%;
+        right: 65%;
     }
 
     main .carrousel-comment .user {

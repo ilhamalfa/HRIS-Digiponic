@@ -7,6 +7,7 @@
     {{-- Jib Parallax Start --}}
     <div class="jib-parallax">
         <div class="design">
+            <img class="design" src="{{ asset('main/opening/triangle.png') }}" alt="">
             <div class="designred"></div>
             <div class="designred"></div>
             <div class="designred"></div>
@@ -85,15 +86,23 @@
 
     {{-- Comment Start --}}
     <div class="comment">
+        <div class="designstrip1"></div>
+        <div class="designstrip2"></div>
+        <div class="designred1"></div>
+        <div class="designred2"></div>
+        <div class="designwhite1"></div>
+        <div class="designwhite2"></div>
+        <div class="designwhite3"></div>
         <div class="carrousel-comment">
             <div class="user">
                 <div class="picture">
                     <img src="{{ asset('main/comment/profile/profile.jpg') }}" alt="User Picture">
                 </div>
                 <span>Kayle Runner</span>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit explicabo placeat accusamus soluta? Quae
+                <p><i class="fa-solid fa-quote-left"></i> Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit
+                    explicabo placeat accusamus soluta? Quae
                     minus id quas veniam odio asperiores quaerat veritatis. Nobis atque modi sunt molestiae enim. Assumenda,
-                    facilis!</p>
+                    facilis! <i class="fa-solid fa-quote-right"></i></p>
             </div>
             {{-- <div class="user">
                 <img src="" alt="">
