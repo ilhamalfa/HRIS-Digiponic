@@ -142,7 +142,7 @@
                 <div class="row text-center justify-content-center">
                     <div class="p-2">
                         <div class="logo m-3">
-                            <img src="{{ asset('logo/brand-logo.png') }}" alt="Brand Logo">
+                            <img class="logo" src="{{ asset('logo/brand-logo.png') }}" alt="Brand Logo" id="footer-brand">
                         </div>
                         <div class="text-footer m-5 px-5">
                             <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, quam

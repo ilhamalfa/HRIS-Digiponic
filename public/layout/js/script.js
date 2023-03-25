@@ -17,7 +17,6 @@ document.addEventListener('click', function (e) {
 // Animation Opening Start
 const openingH1 = document.querySelector('.jib-parallax h1')
 const openingH6 = document.querySelector('.jib-parallax h6')
-console.log(openingH1);
 setTimeout(function () {
     openingH1.classList.add('fade')
 }, 1000)
@@ -85,5 +84,52 @@ $(window).scroll(function () {
         })
     }
     // About Us Animations End
+
+    // Comment Animations Start
+    let comment = $('.comment').offset().top
+    if (wScroll > comment - 500) {
+        $('.carrousel-comment').css({
+            'opacity' : '1',
+            'transform' : 'translateY(0)'
+        })
+        $('.comment .animations1 div').css({
+            'transform' : 'translate(0px, -' + (wScroll - comment) +'%)'
+        })
+        $('.comment .animations2 div').css({
+            'transform' : 'translate(0px,' + (wScroll - comment)*2 +'%)'
+        })
+    } else {
+        $('.carrousel-comment').css({
+            'opacity' : '0',
+            'transform' : 'translateY(20%)'
+        })
+    }
+    
+    // Comment Animations End
+
+    // Footer Animations Start
+    let footer = $('.footer').offset().top
+    if (wScroll > footer - 500) {
+        $('.footer .logo img.logo').css({
+            'opacity' : '1',
+            'transform' : 'translateY(0)'
+        })
+        setTimeout(function () {
+            $('.footer .text-footer').css({
+                'opacity' : '1',
+                'transform' : 'translateY(0)'
+            })
+        }, 500)
+    } else {
+        $('.footer .logo img.logo').css({
+            'opacity' : '0',
+            'transform' : 'translateY(20%)'
+        })
+        $('.footer .text-footer').css({
+            'opacity' : '0',
+            'transform' : 'translateY(20%)'
+        })
+    }
+    // Footer Animations End
 })
 // Scroll Animations End

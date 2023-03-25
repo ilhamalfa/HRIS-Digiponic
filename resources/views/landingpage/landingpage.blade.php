@@ -76,12 +76,34 @@
     {{-- About Us End --}}
 
     {{-- Product Start --}}
-    {{-- <div class="product-introduction">
-        
+    <div class="product-introduction">
+        <h1>OUR PRODUCTS</h1>
+    </div>
+    <div class="product-banner">
+        <h1>SMART HOME</h1>
+        <p>For Smart Owner</p>
+        <a class="btn btn-dark" href="#">More</a>
     </div>
     <div class="product">
-
-    </div> --}}
+        <div class="model-m">
+            <img src="{{ asset('main/product/model-m.png') }}" alt="Product Smart Speak Model M">
+            <div class="description">
+                <h1>Smart Speak Model M</h1>
+                <p>Control Your House Only With Your Mouth.</p>
+                <span>$1,999</span>
+                <a href="#"><span>BUY NOW</span></a>
+            </div>
+        </div>
+        <div class="model-s">
+            <img src="{{ asset('main/product/model-s.png') }}" alt="Product Smart Speak Model M">
+            <div class="description">
+                <h1>Smart Speak Model S</h1>
+                <p>Control Your House Only With Phone.</p>
+                <span>$2,999</span>
+                <a href="#"><span>BUY NOW</span></a>
+            </div>
+        </div>
+    </div>
     {{-- Product End --}}
 
     {{-- Comment Start --}}
@@ -90,9 +112,16 @@
         <div class="designstrip2"></div>
         <div class="designred1"></div>
         <div class="designred2"></div>
-        <div class="designwhite1"></div>
-        <div class="designwhite2"></div>
-        <div class="designwhite3"></div>
+        <div class="animations1">
+            <div class="designwhite1"></div>
+            <div class="designwhite2"></div>
+            <div class="designwhite3"></div>
+        </div>
+        <div class="animations2">
+            <div class="designwhite4"></div>
+            <div class="designwhite5"></div>
+            <div class="designwhite6"></div>
+        </div>
         <div class="carrousel-comment">
             <div class="user">
                 <div class="picture">
@@ -160,119 +189,95 @@
     </div> --}}
     {{-- Promotion End --}}
 
-    {{-- structur --}}
-    <div class="container-fluid">
-        <div class="row">
-            <h1 class="fs-1 my-5">Our Team</h1>
-        </div>
-        <div class="row justify-content-evenly">
-            <div class="col-lg-5 col-md-10 card border-0 card-hover p-3 shadow mb-4">
-                <div class="card-body row text-center">
-                    <div class="col-lg-4">
-                        <img src="{{ asset('asset/entrepreneur1.jpg') }}" class="rounded-circle" width="130px"
-                            height="130px" alt="">
-                    </div>
-                    <div class="col-lg-8 text-start">
-                        <h2 class="fw-bolder text-danger mb-3">Prasada Arif Nurudin</h2>
-                        <h3 class="mb-4">Chief Executive Office</h3>
-                        <p class="fw-light mb-3">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-                        <a href="" class="text-custom mx-2">
-                            <i class="fa-brands p-2 fa-twitter text-danger"></i>
-                        </a>
-                        <a href="" class="text-custom mx-2">
-                            <i class="fa-brands p-2 fa-instagram text-danger"></i>
-                        </a>
-                        <a href="" class="text-custom mx-2">
-                            <i class="fa-brands p-2 fa-facebook text-danger"></i>
-                        </a>
-                        <a href="" class="text-custom mx-2">
-                            <i class="fa-brands p-2 fa-linkedin text-danger"></i>
-                        </a>
-                    </div>
+    {{-- Structur Start --}}
+    <div class="team">
+        <h1>OUR TEAM</h1>
+        <div class="layout-team">
+            <div class="card">
+                <img src="{{ asset('main/team/ceo.jpg') }}" class="card-img-top" alt="CEO Image">
+                <div class="social-media">
+                    <span>
+                        <i class="fa-brands fa-square-twitter m-2"></i>
+                    </span>
+                    <span>
+                        <i class="fa-brands fa-square-facebook m-2"></i>
+                    </span>
+                    <span>
+                        <i class="fa-brands fa-square-instagram m-2"></i>
+                    </span>
+                    <span>
+                        <i class="fa-brands fa-linkedin m-2"></i>
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title">Walter White</h6>
+                    <p class="card-text">Chief Executive Officer</p>
                 </div>
             </div>
-            <div class="col-lg-5 col-md-10 card border-0 card-hover p-3 shadow mb-4">
-                <div class="card-body row text-center">
-                    <div class="col-lg-4">
-                        <img src="{{ asset('asset/entrepreneur1.jpg') }}" class="rounded-circle" width="130px"
-                            height="130px" alt="">
-                    </div>
-                    <div class="col-lg-8 text-start">
-                        <h2 class="fw-bolder text-danger mb-3">Prasada Arif Nurudin</h2>
-                        <h3 class="mb-4">Chief Executive Office</h3>
-                        <p class="fw-light mb-3">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-                        <a href="" class="text-custom mx-2">
-                            <i class="fa-brands p-2 fa-twitter text-danger"></i>
-                        </a>
-                        <a href="" class="text-custom mx-2">
-                            <i class="fa-brands p-2 fa-instagram text-danger"></i>
-                        </a>
-                        <a href="" class="text-custom mx-2">
-                            <i class="fa-brands p-2 fa-facebook text-danger"></i>
-                        </a>
-                        <a href="" class="text-custom mx-2">
-                            <i class="fa-brands p-2 fa-linkedin text-danger"></i>
-                        </a>
-                    </div>
+            <div class="card">
+                <img src="{{ asset('main/team/cto.jpg') }}" class="card-img-top" alt="CEO Image">
+                <div class="social-media">
+                    <span>
+                        <i class="fa-brands fa-square-twitter m-2"></i>
+                    </span>
+                    <span>
+                        <i class="fa-brands fa-square-facebook m-2"></i>
+                    </span>
+                    <span>
+                        <i class="fa-brands fa-square-instagram m-2"></i>
+                    </span>
+                    <span>
+                        <i class="fa-brands fa-linkedin m-2"></i>
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title">William Anderson</h6>
+                    <p class="card-text">CTO</p>
                 </div>
             </div>
-            <div class="col-lg-5 col-md-10 card border-0 card-hover p-3 shadow mb-4">
-                <div class="card-body row text-center">
-                    <div class="col-lg-4">
-                        <img src="{{ asset('asset/entrepreneur1.jpg') }}" class="rounded-circle" width="130px"
-                            height="130px" alt="">
-                    </div>
-                    <div class="col-lg-8 text-start">
-                        <h2 class="fw-bolder text-danger mb-3">Prasada Arif Nurudin</h2>
-                        <h3 class="mb-4">Chief Executive Office</h3>
-                        <p class="fw-light mb-3">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-                        <a href="" class="text-custom mx-2">
-                            <i class="fa-brands p-2 fa-twitter text-danger"></i>
-                        </a>
-                        <a href="" class="text-custom mx-2">
-                            <i class="fa-brands p-2 fa-instagram text-danger"></i>
-                        </a>
-                        <a href="" class="text-custom mx-2">
-                            <i class="fa-brands p-2 fa-facebook text-danger"></i>
-                        </a>
-                        <a href="" class="text-custom mx-2">
-                            <i class="fa-brands p-2 fa-linkedin text-danger"></i>
-                        </a>
-                    </div>
+            <div class="card">
+                <img src="{{ asset('main/team/accountant.jpg') }}" class="card-img-top" alt="CEO Image">
+                <div class="social-media">
+                    <span>
+                        <i class="fa-brands fa-square-twitter m-2"></i>
+                    </span>
+                    <span>
+                        <i class="fa-brands fa-square-facebook m-2"></i>
+                    </span>
+                    <span>
+                        <i class="fa-brands fa-square-instagram m-2"></i>
+                    </span>
+                    <span>
+                        <i class="fa-brands fa-linkedin m-2"></i>
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title">Amanda Jepson</h6>
+                    <p class="card-text">Accountant</p>
                 </div>
             </div>
-            <div class="col-lg-5 col-md-10 card border-0 card-hover p-3 shadow mb-4">
-                <div class="card-body row text-center">
-                    <div class="col-lg-4">
-                        <img src="{{ asset('asset/entrepreneur1.jpg') }}" class="rounded-circle" width="130px"
-                            height="130px" alt="">
-                    </div>
-                    <div class="col-lg-8 text-start">
-                        <h2 class="fw-bolder text-danger mb-3">Prasada Arif Nurudin</h2>
-                        <h3 class="mb-4">Chief Executive Office</h3>
-                        <p class="fw-light mb-3">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-                        <a href="" class="text-custom mx-2">
-                            <i class="fa-brands p-2 fa-twitter text-danger"></i>
-                        </a>
-                        <a href="" class="text-custom mx-2">
-                            <i class="fa-brands p-2 fa-instagram text-danger"></i>
-                        </a>
-                        <a href="" class="text-custom mx-2">
-                            <i class="fa-brands p-2 fa-facebook text-danger"></i>
-                        </a>
-                        <a href="" class="text-custom mx-2">
-                            <i class="fa-brands p-2 fa-linkedin text-danger"></i>
-                        </a>
-                    </div>
+            <div class="card">
+                <img src="{{ asset('main/team/manager.jpg') }}" class="card-img-top" alt="CEO Image">
+                <div class="social-media">
+                    <span>
+                        <i class="fa-brands fa-square-twitter m-2"></i>
+                    </span>
+                    <span>
+                        <i class="fa-brands fa-square-facebook m-2"></i>
+                    </span>
+                    <span>
+                        <i class="fa-brands fa-square-instagram m-2"></i>
+                    </span>
+                    <span>
+                        <i class="fa-brands fa-linkedin m-2"></i>
+                    </span>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col my-5">
-                <a href="{{ route('struktur') }}" class="btn btn btn-danger"><i
-                        class="fa-solid fa-people-group me-2"></i>All Team</a>
+                <div class="card-body">
+                    <h6 class="card-title">Sarah Jhonson</h6>
+                    <p class="card-text">Product Manager</p>
+                </div>
             </div>
         </div>
     </div>
-    {{-- end structur --}}
+    {{-- Structur End --}}
 @endsection

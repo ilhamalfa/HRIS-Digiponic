@@ -205,7 +205,6 @@ table {
     /* Main Start */
     main {
         text-align: center;
-        height: 10000px;
     }
 
     main .jib-parallax {
@@ -607,6 +606,192 @@ table {
         transform: scaleX(1);
     }
 
+    main .product-introduction {
+        background-color: #212529;
+        color: #F9F9F9;
+        font-size: 3rem;
+        font-weight: 700;
+        top: -5%;
+        left: 2%;
+        transition: 1s;
+        padding: 1em 0;
+    }
+
+    main .product-banner {
+        background-image: url('../../main/product/background.jpg');
+        background-position: center;
+        background-size: cover;
+        color: black;
+        padding: 5em 0 15em 0;
+        text-align: center;
+        position: relative;
+    }
+
+    main .product-banner h1 {
+        font-size: 3rem;
+        letter-spacing: 3px;
+    }
+
+    main .product-banner p {
+        font-family: 'Dancing Script', cursive;
+        font-size: 1.5rem;
+        margin: .5em 0;
+    }
+
+    main .product-banner a {
+        position: absolute;
+        bottom: 10%;
+        right: 45%;
+        left: 45%;
+        margin: auto;
+    }
+
+    main .product {
+        width: 90vw;
+    }
+
+    main .product .model-m {
+        width: 80vw;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    main .product .model-m img {
+        width: 50%;
+    }
+
+    main .product .model-m .description {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    main .product .model-m .description h1 {
+        font-size: 3rem;
+    }
+
+    main .product .model-m .description p {
+        font-size: 1rem;
+        margin: 2em 0;
+    }
+    
+    main .product .model-m .description span {
+        font-size: 1.5rem;
+    }
+
+    main .product .model-m .description a {
+        border: 1px solid #212529;
+        font-size: .5rem;
+        font-weight: 700;
+        text-decoration: none;
+        border-radius: 0%;
+        position: relative;
+        padding: 1em 7em;
+        transition: color .3s linear;
+        top: 5em;
+    }
+
+    main .product .model-m .description a span {
+        color: #212529;
+        position: relative;
+        transition: .5s;
+    }
+
+    main .product .model-m .description a:hover span {
+        color: #F9F9F9;
+    }
+
+    main .product .model-m .description a::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #212529;
+        transition: transform .5s;
+        transform-origin: 0 0;
+        transition-timing-function: cubic-bezier(0.5, 1.6);
+        transform: scaleX(0);
+    }
+
+    main .product .model-m .description a:hover::before {
+        transform: scaleX(1);
+    }
+
+    main .product .model-s {
+        width: 80vw;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        padding: 0 5em;
+    }
+
+    main .product .model-s img {
+        width: 30%;
+    }
+
+    main .product .model-s .description {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    main .product .model-s .description h1 {
+        font-size: 3rem;
+    }
+
+    main .product .model-s .description p {
+        font-size: 1rem;
+        margin: 2em 0;
+    }
+    
+    main .product .model-s .description span {
+        font-size: 1.5rem;
+    }
+
+    main .product .model-s .description a {
+        border: 1px solid #212529;
+        font-size: .5rem;
+        font-weight: 700;
+        text-decoration: none;
+        border-radius: 0%;
+        position: relative;
+        padding: 1em 7em;
+        transition: color .3s linear;
+        top: 5em;
+    }
+
+    main .product .model-s .description a span {
+        color: #212529;
+        position: relative;
+        transition: .5s;
+    }
+
+    main .product .model-s .description a:hover span {
+        color: #F9F9F9;
+    }
+
+    main .product .model-s .description a::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #212529;
+        transition: transform .5s;
+        transform-origin: 0 0;
+        transition-timing-function: cubic-bezier(0.5, 1.6);
+        transform: scaleX(0);
+    }
+
+    main .product .model-s .description a:hover::before {
+        transform: scaleX(1);
+    }
+
     main .comment {
         background-image: url('../../main/comment/background.jpg');
         background-position: center;
@@ -618,6 +803,7 @@ table {
         align-items: center;
         padding: 5em 20em;
         position: relative;
+        overflow: hidden;
     }
 
     main .comment .designstrip1 {
@@ -690,6 +876,40 @@ table {
         right: 65%;
     }
 
+    main .comment .animations2 .designwhite4 {
+        background-color: #F9F9F9;
+        display: block;
+        width: 7px;
+        height: 7px;
+        position: absolute;
+        top: 10%;
+        right: 75%;
+    }
+
+    main .comment .animations2 .designwhite5 {
+        background-color: #F9F9F9;
+        display: block;
+        width: 6px;
+        height: 6px;
+        position: absolute;
+        top: 90%;
+        right: 10%;
+    }
+
+    main .comment .animations2 .designwhite6 {
+        background-color: #F9F9F9;
+        display: block;
+        width: 5px;
+        height: 5px;
+        position: absolute;
+        top: 80%;
+        right: 80%;
+    }
+
+    main .carrousel-comment {
+        transition: 1s;
+    }
+
     main .carrousel-comment .user {
         color: #F9F9F9;
         display: flex;
@@ -728,6 +948,67 @@ table {
         border-radius: 50%;
         margin: 0 .5em;
     }
+
+    main .team {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        position: relative;
+        padding: 10em 0;
+    }
+
+    main .team h1 {
+        color: #212529;
+        font-size: 5rem;
+        font-weight: 700;
+        position: absolute;
+        top: 5%;
+        left: 8%;
+        transition: 1s;
+    }
+    
+    main .team .layout-team {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 80%;
+    }
+
+    main .team .layout-team .card {
+        width: 14rem;
+        position: relative;
+        border: 0;
+        transition: .3s;
+    }
+
+    main .team .layout-team .card:hover,
+    main .team .layout-team .card:hover .social-media {
+        opacity: 1;
+        transform: translateY(-10px);
+    }
+
+    main .team .layout-team .card .social-media {
+        background-color: #FF4655;
+        position: absolute;
+        top: -2%;
+        left: -2%;
+        opacity: 0;
+        transition: .3s;
+    }
+
+    main .team .layout-team .card .social-media span {
+        color: #F9F9F9;
+    }
+
+    main .team .layout-team .card .card-body {
+        text-align: left;
+    }
+
+    main .team .layout-team .card .card-body h6.card-title {
+        font-size: 1em;
+        font-weight: bold;
+    }
     /* Main End */
 
     /* Footer Start */
@@ -739,6 +1020,7 @@ table {
 
     footer div img {
         width: 10%;
+        transition: 1s;
     }
 
     footer .start-footer {
@@ -765,6 +1047,10 @@ table {
 
     footer .social-media div a i {
         font-size: 2rem;
+    }
+
+    footer .text-footer {
+        transition: 1s;
     }
     /* Footer End */
 
