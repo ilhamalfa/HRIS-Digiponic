@@ -59,7 +59,7 @@
         <div class="materialstrip2"></div>
         <h1>ABOUT US</h1>
         <div class="image">
-            <img src="{{ asset('main/about/ceo.png') }}" alt="CEO Image">
+            <img src="{{ asset('main/about/ceo.webp') }}" alt="CEO Image">
             <span>CEO Of TECH SOLUTION</span>
         </div>
         <div class="description">
@@ -94,7 +94,7 @@
         <div class="materialblack1"></div>
         <div class="materialblack2"></div>
         <div class="model-m">
-            <img src="{{ asset('main/product/model-m.png') }}" alt="Product Smart Speak Model M">
+            <img src="{{ asset('main/product/model-m.webp') }}" alt="Product Smart Speak Model M">
             <div class="description">
                 <h1>Smart Speak Model M</h1>
                 <p>Control Your House Only With Your Mouth.</p>
@@ -103,7 +103,7 @@
             </div>
         </div>
         <div class="model-s">
-            <img src="{{ asset('main/product/model-s.png') }}" alt="Product Smart Speak Model M">
+            <img src="{{ asset('main/product/model-s.webp') }}" alt="Product Smart Speak Model M">
             <div class="description">
                 <h1>Smart Speak Model S</h1>
                 <p>Control Your House Only With Phone.</p>
@@ -134,7 +134,7 @@
         <div class="carrousel-comment">
             <div class="user">
                 <div class="picture">
-                    <img src="{{ asset('main/comment/profile/profile.jpg') }}" alt="User Picture">
+                    <img src="{{ asset('main/comment/profile/profile.webp') }}" alt="User Picture">
                 </div>
                 <span>Kayle Runner</span>
                 <p><i class="fa-solid fa-quote-left"></i> Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit
@@ -203,7 +203,7 @@
         <h1>OUR TEAM</h1>
         <div class="layout-team">
             <div class="card">
-                <img src="{{ asset('main/team/ceo.jpg') }}" class="card-img-top" alt="CEO Image">
+                <img src="{{ asset('main/team/ceo.webp') }}" class="card-img-top" alt="CEO Image">
                 <div class="social-media">
                     <span>
                         <i class="fa-brands fa-square-twitter m-2"></i>
@@ -224,7 +224,7 @@
                 </div>
             </div>
             <div class="card">
-                <img src="{{ asset('main/team/cto.jpg') }}" class="card-img-top" alt="CEO Image">
+                <img src="{{ asset('main/team/cto.webp') }}" class="card-img-top" alt="CEO Image">
                 <div class="social-media">
                     <span>
                         <i class="fa-brands fa-square-twitter m-2"></i>
@@ -245,7 +245,7 @@
                 </div>
             </div>
             <div class="card">
-                <img src="{{ asset('main/team/accountant.jpg') }}" class="card-img-top" alt="CEO Image">
+                <img src="{{ asset('main/team/accountant.webp') }}" class="card-img-top" alt="CEO Image">
                 <div class="social-media">
                     <span>
                         <i class="fa-brands fa-square-twitter m-2"></i>
@@ -266,7 +266,7 @@
                 </div>
             </div>
             <div class="card">
-                <img src="{{ asset('main/team/manager.jpg') }}" class="card-img-top" alt="CEO Image">
+                <img src="{{ asset('main/team/manager.webp') }}" class="card-img-top" alt="CEO Image">
                 <div class="social-media">
                     <span>
                         <i class="fa-brands fa-square-twitter m-2"></i>
