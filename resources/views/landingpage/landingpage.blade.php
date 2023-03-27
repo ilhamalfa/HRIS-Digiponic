@@ -46,7 +46,7 @@
                 recusandae dolores nesciunt odio possimus beatae, pariatur voluptatum magnam aliquid sed eaque porro
                 officiis numquam ipsum laborum quaerat.
             </p>
-            <a href="#"><span>START</span></a>
+            <a class="{{ route('career') }}" href=""><span>START</span></a>
         </div>
     </div>
     {{-- Career End --}}
@@ -70,7 +70,7 @@
                 recusandae dolores nesciunt odio possimus beatae, pariatur voluptatum magnam aliquid sed eaque porro
                 officiis numquam ipsum laborum quaerat.
             </p>
-            <a href=""><span>LEARN</span></a>
+            <a class="" href=""><span>LEARN</span></a>
         </div>
     </div>
     {{-- About Us End --}}
@@ -287,6 +287,7 @@
                 </div>
             </div>
         </div>
+        <a href="{{ route('struktur') }}" class="btn btn-danger mt-4">All Structur</a>
     </div>
     {{-- Our Team End --}}
 @endsection

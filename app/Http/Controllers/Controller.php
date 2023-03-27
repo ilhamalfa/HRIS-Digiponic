@@ -27,4 +27,19 @@ class Controller extends BaseController
     {
         return view('struktur.struktur');
     }
+
+    public function career()
+    {
+        return view('career.career');
+    }
+
+    public function aboutus()
+    {
+        return view('aboutus');
+    }
+
+    public function product()
+    {
+        return view('product');
+    }
 }
