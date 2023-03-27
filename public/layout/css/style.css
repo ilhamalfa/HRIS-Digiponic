@@ -49,7 +49,6 @@ table {
 
 @media only screen and (min-width: 992px) {
 
-
     /* Modal Start */
     .modal-mobile {
         display: none;
@@ -57,36 +56,18 @@ table {
     /* Modal End */
 
     /* Nav Topbar Start */
-    .design-topbar {
-        display: block;
-        position: fixed;
-        top: 0;
-        width: 100vw;
-        height: 3vh;
-        z-index: 2;
-        transition: .3s;
-    }
-
-    .design-topbar.background {
-        background-color: #212529;
-    }
-
     nav.topbar {
         display: flex;
         justify-content: space-between;
         align-items: center;
         position: fixed;
         top: 0;
+        left: 0;
+        right: 0;
         padding: 1em;
-        box-sizing: border-box;
-        width: 100vw;
         height: 10vh;
-        z-index: 2;
+        z-index: 999;
         transition: .3s;
-    }
-
-    nav.topbar.change {
-        top: 5%;
     }
 
     nav.topbar div {
@@ -95,6 +76,8 @@ table {
 
     nav.topbar .brand-logo a {
         background-color: #212529;
+        color: #F9F9F9;
+        text-decoration: none;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -102,11 +85,6 @@ table {
 
     nav.topbar .brand-logo a img {
         width: 10%;
-    }
-
-    nav.topbar .brand-logo a {
-        color: #F9F9F9;
-        text-decoration: none;
     }
 
     nav.topbar .brand-logo a span {
@@ -123,10 +101,6 @@ table {
         padding: 5px;
         transition: .3s;
     }
-
-    nav.topbar .hamburger-menu.background {
-        background-color: #212529;
-    }
     
     nav.topbar .hamburger-menu span {
         background-color: #212529;
@@ -137,21 +111,21 @@ table {
         transition: .2s;
     }
 
-    nav.topbar .hamburger-menu span.background {
-        background-color: #F9F9F9;
-    }
-
     nav.topbar .hamburger-menu:hover span {
         margin: 4px 0;
     }
 
-    nav.topbar .language {
+    nav.topbar .hamburger-menu span.color-change {
+        background-color: #FF4655;
+    }
+
+    nav.topbar .account {
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
-    nav.topbar .language span {
+    nav.topbar .account span {
         font-family: 'Poppins', sans-serif;
         font-weight: 700;
         margin: 0 2px;
@@ -160,26 +134,23 @@ table {
 
     /* Nav Sidebar Start */
     nav.navbar {
+        background-color: #FF4655;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
         position: fixed;
         top: 10%;
-        left: 0;
-        width: 100vw;
-        padding: 1.5em;
+        left: 40%;
+        right: 40%;
         display: flex;
-        justify-content: space-evenly;
+        transition: .2s;
         visibility: hidden;
         opacity: 0;
-        transition: .2s;
-        z-index: 1;
+        z-index: 999;
     }
 
     nav.navbar.background {
         background-color: #212529;
-    }
-
-    nav.navbar.change {
-        top: 0;
-        transform: translateY(-100%);
     }
 
     nav.show {
@@ -188,15 +159,16 @@ table {
     }
 
     nav.navbar a {
-        color: #212529;
+        color: #F9F9F9;
         text-decoration: none;
         font-weight: 700;
         letter-spacing: 2px;
         transition: .5s;
+        margin: 2em 0;
     }
 
     nav.navbar a:hover {
-        color: #FF4655;
+        color: #212529;
         letter-spacing: 5px;
         position: relative;
     }
@@ -207,7 +179,7 @@ table {
         text-align: center;
     }
 
-    main .jib-parallax {
+    main .opening {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -217,18 +189,18 @@ table {
         overflow: hidden;
     }
 
-    main .jib-parallax .design {
+    main .opening .material {
         z-index: -999;
     }
 
-    main .jib-parallax .design img.design {
+    main .opening .material img.materialtriangle {
         width: 7%;
         position: absolute;
         left: 0;
         bottom: 0;
     }
 
-    main .jib-parallax .design .designred{
+    main .opening .material .materialred{
         background-color: #FF4655;
         display: block;
         width: 15px;
@@ -238,21 +210,21 @@ table {
         left: 10%;
     }
 
-    main .jib-parallax .design div:nth-child(2) {
+    main .opening .material div:nth-child(2) {
         width: 10px;
         height: 10px;
         top: 40%;
         left: 20%;
     }
 
-    main .jib-parallax .design div:nth-child(3) {
+    main .opening .material div:nth-child(3) {
         width: 16px;
         height: 16px;
         top: 70%;
         left: 40%;
     }
 
-    main .jib-parallax .design .designblack{
+    main .opening .material .materialblack{
         background-color: #212529;
         display: block;
         width: 10px;
@@ -262,14 +234,14 @@ table {
         left: 70%;
     }
 
-    main .jib-parallax .design div:nth-child(5) {
+    main .opening .material div:nth-child(6) {
         width: 13px;
         height: 13px;
         top: 60%;
         left: 80%;
     }
 
-    main .jib-parallax .designstrip1 {
+    main .opening .materialstrip1 {
         background-color: #212529;
         display: block;
         width: 1px;
@@ -278,7 +250,7 @@ table {
         right: 10%;
     }
 
-    main .jib-parallax .designstrip2 {
+    main .opening .materialstrip2 {
         background-color: #212529;
         display: block;
         width: 1px;
@@ -287,7 +259,7 @@ table {
         right: 70%;
     }
 
-    main .jib-parallax .designstrip3 {
+    main .opening .materialstrip3 {
         background-color: #212529;
         display: block;
         width: 1px;
@@ -296,18 +268,18 @@ table {
         right: 95%;
     }
 
-    main .jib-parallax h1 {
+    main .opening h1 {
         font-size: 5rem;
         margin: .2em 0;
         opacity: 0;
         transition: .7s;
     }
     
-    main .jib-parallax h1.fade {
+    main .opening h1.fade {
         opacity: 1;
     }
 
-    main .jib-parallax h6 {
+    main .opening h6 {
         font-family: 'Dancing Script', cursive;
         font-size: 1.5rem;
         font-weight: 700;
@@ -316,11 +288,11 @@ table {
         transition: .7s;
     }
 
-    main .jib-parallax h6.fade {
+    main .opening h6.fade {
         opacity: 1;
     }
 
-    main .jib-parallax .text-scroll {
+    main .opening .text-scroll {
         color: #212529;
         font-size: .5rem;
         font-weight: bolder;
@@ -338,7 +310,7 @@ table {
         position: relative;
     }
 
-    main .career .designstrip1 {
+    main .career .materialstrip1 {
         background-color: #F9F9F9;
         display: block;
         width: 1px;
@@ -347,7 +319,7 @@ table {
         right: 95%;
     }
 
-    main .career .designred1 {
+    main .career .materialred1 {
         background-color: #FF4655;
         display: block;
         width: 10px;
@@ -357,7 +329,7 @@ table {
         left: 70%;
     }
 
-    main .career .designred2 {
+    main .career .materialred2 {
         background-color: #FF4655;
         display: block;
         width: 10px;
@@ -367,7 +339,7 @@ table {
         left: 50%;
     }
 
-    main .career .designred3 {
+    main .career .materialred3 {
         background-color: #FF4655;
         display: block;
         width: 10px;
@@ -377,7 +349,7 @@ table {
         left: 55%;
     }
 
-    main .career .designred4 {
+    main .career .materialred4 {
         background-color: #FF4655;
         display: block;
         width: 10px;
@@ -399,22 +371,22 @@ table {
         transition: 1s;
     }
 
-    main .career .picture {
+    main .career .image {
         position: relative;
     }
 
-    main .career .picture img {
-        width: 80%;
+    main .career .image img {
+        width: 45vw;
     }
 
-    main .career .picture span {
+    main .career .image span {
         background-color: #FF4655;
         color: #F9F9F9;
         font-size: 1rem;
         font-weight: 700;
         position: absolute;
         top: 5%;
-        right: 5%;
+        right: -5%;
         padding: 5px 15px;
     }
 
@@ -431,6 +403,7 @@ table {
     main .career .description p {
         color: #76808A;
         text-align: end;
+        padding-left: 2em;
     }
 
     main .career .description a {
@@ -480,7 +453,7 @@ table {
         padding: 10em 10em;
     }
 
-    main .about-us .designred1 {
+    main .about-us .materialred1 {
         background-color: #FF4655;
         display: block;
         width: 10px;
@@ -490,7 +463,7 @@ table {
         left: 70%;
     }
 
-    main .about-us .designred2 {
+    main .about-us .materialred2 {
         background-color: #FF4655;
         display: block;
         width: 10px;
@@ -500,7 +473,7 @@ table {
         left: 60%;
     }
 
-    main .about-us .designstrip1 {
+    main .about-us .materialstrip1 {
         background-color: #FF4655;
         display: block;
         width: 1px;
@@ -510,7 +483,7 @@ table {
         right: 95%;
     }
 
-    main .about-us .designstrip2 {
+    main .about-us .materialstrip2 {
         background-color: #212529;
         display: block;
         width: 1px;
@@ -532,14 +505,14 @@ table {
         transition: 1s;
     }
 
-    main .about-us .picture img {
+    main .about-us .image img {
         width: 430px;
         position: absolute;
         right: 0;
         bottom: 0;
     }
 
-    main .about-us .picture span {
+    main .about-us .image span {
         background-color: #FF4655;
         color: #F9F9F9;
         font-size: 1rem;
@@ -611,10 +584,65 @@ table {
         color: #F9F9F9;
         font-size: 3rem;
         font-weight: 700;
-        top: -5%;
-        left: 2%;
-        transition: 1s;
+        position: relative;
         padding: 1em 0;
+    }
+
+    main .product-introduction h1 {
+        transition: .5s;
+    }
+
+    main .product-introduction .materialstrip1 {
+        background-color: #F9F9F9;
+        display: block;
+        width: 1px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: 95%;
+    }
+
+    main .product-introduction .materialstrip2 {
+        background-color: #FF4655;
+        display: block;
+        width: 1px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: 15%;
+    }
+    
+    main .product-introduction .materialred1 {
+        background-color: #FF4655;
+        display: block;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        top: 75%;
+        left: 30%;
+        transition: 1s;
+    }
+
+    main .product-introduction .materialred2 {
+        background-color: #FF4655;
+        display: block;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        top: 75%;
+        left: 90%;
+        transition: 1s;
+    }
+
+    main .product-introduction .materialred3 {
+        background-color: #F9F9F9;
+        display: block;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        top: 10%;
+        left: 20%;
+        transition: 1s;
     }
 
     main .product-banner {
@@ -647,7 +675,45 @@ table {
     }
 
     main .product {
-        width: 90vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    main .product div {
+        margin: 2em 0;
+    }
+
+    main .product .materialstrip1 {
+        background-color: #FF4655;
+        display: block;
+        width: 1px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: 95%;
+    }
+
+    main .product .materialblack1 {
+        background-color: #212529;
+        display: block;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        top: 75%;
+        right: 95%;
+    }
+
+    main .product .materialblack2 {
+        background-color: #212529;
+        display: block;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        top: 25%;
+        left: 5%;
     }
 
     main .product .model-m {
@@ -806,6 +872,17 @@ table {
         overflow: hidden;
     }
 
+    main .comment span.title {
+        background-color: #FF4655;
+        color: #F9F9F9;
+        font-size: 1.5rem;
+        font-weight: 700;
+        padding: 5px 15px;
+        position: absolute;
+        top: 0;
+        left: 5%;
+    }
+
     main .comment .designstrip1 {
         background-color: #F9F9F9;
         display: block;
@@ -958,6 +1035,46 @@ table {
         padding: 10em 0;
     }
 
+    main .team .materialstrip1 {
+        background-color: #212529;
+        display: block;
+        width: 1px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 95%;
+    }
+
+    main .team .materialstrip2 {
+        background-color: #FF4655;
+        display: block;
+        width: 1px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 5%;
+    }
+
+    main .team .materialred1 {
+        background-color: #FF4655;
+        display: block;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        top: 75%;
+        left: 95%;
+    }
+
+    main .team .materialred2 {
+        background-color: #FF4655;
+        display: block;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        top: 35%;
+        right: 5%;
+    }
+
     main .team h1 {
         color: #212529;
         font-size: 5rem;
@@ -965,7 +1082,7 @@ table {
         position: absolute;
         top: 5%;
         left: 8%;
-        transition: 1s;
+        transition: .5s;
     }
     
     main .team .layout-team {

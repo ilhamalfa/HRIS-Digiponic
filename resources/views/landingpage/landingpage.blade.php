@@ -4,19 +4,19 @@
 
 @section('content')
 
-    {{-- Jib Parallax Start --}}
-    <div class="jib-parallax">
-        <div class="design">
-            <img class="design" src="{{ asset('main/opening/triangle.png') }}" alt="">
-            <div class="designred"></div>
-            <div class="designred"></div>
-            <div class="designred"></div>
-            <div class="designblack"></div>
-            <div class="designblack"></div>
+    {{-- Opening Start --}}
+    <div class="opening">
+        <div class="material">
+            <img class="materialtriangle" src="{{ asset('main/opening/triangle.png') }}" alt="">
+            <div class="materialred"></div>
+            <div class="materialred"></div>
+            <div class="materialred"></div>
+            <div class="materialblack"></div>
+            <div class="materialblack"></div>
         </div>
-        <div class="designstrip1"></div>
-        <div class="designstrip2"></div>
-        <div class="designstrip3"></div>
+        <div class="materialstrip1"></div>
+        <div class="materialstrip2"></div>
+        <div class="materialstrip3"></div>
         <h1>TECH SOLUTION</h1>
         <h6>Modern Problem Need Modern Solution.</h6>
         <div class="text-scroll">
@@ -24,18 +24,18 @@
             <span>SCROLL DOWN</span>
         </div>
     </div>
-    {{-- Jib Parallax End --}}
+    {{-- Opening End --}}
 
     {{-- Career Start --}}
     <div class="career">
-        <div class="designstrip1"></div>
-        <div class="designred1"></div>
-        <div class="designred2"></div>
-        <div class="designred3"></div>
-        <div class="designred4"></div>
+        <div class="materialstrip1"></div>
+        <div class="materialred1"></div>
+        <div class="materialred2"></div>
+        <div class="materialred3"></div>
+        <div class="materialred4"></div>
         <h1>CAREER</h1>
-        <div class="picture">
-            <img src="{{ asset('main/career/picture.jpg') }}" alt="Office Picture">
+        <div class="image">
+            <img src="{{ asset('main/career/picture.webp') }}" alt="Office Image">
             <span>OFFICE</span>
         </div>
         <div class="description">
@@ -46,20 +46,20 @@
                 recusandae dolores nesciunt odio possimus beatae, pariatur voluptatum magnam aliquid sed eaque porro
                 officiis numquam ipsum laborum quaerat.
             </p>
-            <a class="" href=""><span>START</span></a>
+            <a href="#"><span>START</span></a>
         </div>
     </div>
     {{-- Career End --}}
 
     {{-- About Us Start --}}
     <div class="about-us">
-        <div class="designstrip1"></div>
-        <div class="designstrip2"></div>
-        <div class="designred1"></div>
-        <div class="designred2"></div>
+        <div class="materialred1"></div>
+        <div class="materialred2"></div>
+        <div class="materialstrip1"></div>
+        <div class="materialstrip2"></div>
         <h1>ABOUT US</h1>
-        <div class="picture">
-            <img src="{{ asset('main/about/ceo.png') }}" alt="Office Picture">
+        <div class="image">
+            <img src="{{ asset('main/about/ceo.png') }}" alt="CEO Image">
             <span>CEO Of TECH SOLUTION</span>
         </div>
         <div class="description">
@@ -70,13 +70,18 @@
                 recusandae dolores nesciunt odio possimus beatae, pariatur voluptatum magnam aliquid sed eaque porro
                 officiis numquam ipsum laborum quaerat.
             </p>
-            <a class="" href=""><span>LEARN</span></a>
+            <a href=""><span>LEARN</span></a>
         </div>
     </div>
     {{-- About Us End --}}
 
     {{-- Product Start --}}
     <div class="product-introduction">
+        <div class="materialstrip1"></div>
+        <div class="materialstrip2"></div>
+        <div class="materialred1"></div>
+        <div class="materialred2"></div>
+        <div class="materialred3"></div>
         <h1>OUR PRODUCTS</h1>
     </div>
     <div class="product-banner">
@@ -85,6 +90,9 @@
         <a class="btn btn-dark" href="#">More</a>
     </div>
     <div class="product">
+        <div class="materialstrip1"></div>
+        <div class="materialblack1"></div>
+        <div class="materialblack2"></div>
         <div class="model-m">
             <img src="{{ asset('main/product/model-m.png') }}" alt="Product Smart Speak Model M">
             <div class="description">
@@ -122,6 +130,7 @@
             <div class="designwhite5"></div>
             <div class="designwhite6"></div>
         </div>
+        <span class="title">COMMENTS</span>
         <div class="carrousel-comment">
             <div class="user">
                 <div class="picture">
@@ -147,10 +156,6 @@
         </div>
     </div>
     {{-- Comment End --}}
-
-    {{-- <section class="container-fluid p-0">
-        <img src="{{ asset('background/background-jumbo-tron.jpg') }}" alt="">
-    </section> --}}
 
     {{-- Promotion Start --}}
     {{-- <div class="container-fluid">
@@ -189,8 +194,12 @@
     </div> --}}
     {{-- Promotion End --}}
 
-    {{-- Structur Start --}}
+    {{-- Our Team Start --}}
     <div class="team">
+        <div class="materialstrip1"></div>
+        <div class="materialstrip2"></div>
+        <div class="materialred1"></div>
+        <div class="materialred2"></div>
         <h1>OUR TEAM</h1>
         <div class="layout-team">
             <div class="card">
@@ -279,5 +288,5 @@
             </div>
         </div>
     </div>
-    {{-- Structur End --}}
+    {{-- Our Team End --}}
 @endsection

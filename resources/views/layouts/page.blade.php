@@ -63,7 +63,6 @@
     {{-- Modal Mobile End --}}
 
     {{-- Nav Topbar Start --}}
-    <div class="design-topbar" id="design-topbar"></div>
     <nav class="topbar" id="topbar">
         <div class="brand-logo">
             <a href="#">
@@ -76,7 +75,7 @@
             <span></span>
             <span></span>
         </div>
-        <div class="language">
+        <div class="account">
             <span>EN</span>
             <span>/</span>
             <span>ID</span>
@@ -93,37 +92,37 @@
                 <input type="submit" name="inputcandidate" value="inputcandidate">
             </form>
         </a> --}}
-        @if (Auth::user())
-            <a class="" href="">
-                <span>Search</span>
-            </a>
-            <a class="" href="">
-                <span>Home</span>
+        {{-- @if (Auth::user())
+            <a href="#">
+                <span>Account</span>
             </a>
         @endif
         @guest
-            <a class="" href="" id="login-mobile">
+            <a href="#" id="login-mobile">
                 <span>Login</span>
             </a>
-            <a class="" href="{{ route('register') }}">
+            <a href="{{ route('register') }}">
                 <span>Register</span>
             </a>
         @else
-            <a class="" href="{{ route('logout') }}"
+            <a href="{{ route('logout') }}"
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <span>Logout</span>
             </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf
             </form>
-        @endguest
-        <a class="" href="">
+        @endguest --}}
+        <a href="#">
+            <span>Home</span>
+        </a>
+        <a href="#">
             <span>About</span>
         </a>
-        <a class="" href="">
+        <a href="#">
             <span>Structure</span>
         </a>
-        <a class="" href="">
+        <a href="#">
             <span>Mail</span>
         </a>
     </nav>
@@ -193,7 +192,7 @@
         <div class="end-footer py-4">
             <div class="row text-center">
                 <div class="col">
-                    &copy; Copyright 2023 Digiponic | Maju Solid | Allright Reserved
+                    &copy; Copyright 2023 Tech Solution | Maju Solid | Allright Reserved
                 </div>
             </div>
         </div>
