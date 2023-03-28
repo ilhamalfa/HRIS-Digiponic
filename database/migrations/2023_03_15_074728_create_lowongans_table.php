@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('lowongans', function (Blueprint $table) {
             $table->id();
-            $table->string('jenis_pekerjaan');
+            $table->string('posisi');
+            $table->text('kualifikasi');
+            $table->text('deskripsi');
             $table->date('tanggal');
             $table->timestamps();
         });

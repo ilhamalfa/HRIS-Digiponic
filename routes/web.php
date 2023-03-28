@@ -1,6 +1,11 @@
 <?php
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\IndoRegionController;
+use App\Http\Controllers\LowonganController;
+use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\PelamarController;
+use App\Http\Controllers\PerizinanController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -20,12 +25,6 @@ Route::get('/', function () {
     return view('landingpage.landingpage');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::post('rutelogin',[Controller::class,'rutelogin'])->name('rutelogin');
-Route::get('struktur',[Controller::class,'struktur'])->name('struktur');
-Route::get('career',[Controller::class,'career'])->name('career');
-Route::get('aboutus',[Controller::class,'aboutus'])->name('aboutus');
-Route::get('product',[Controller::class,'product'])->name('product');
-

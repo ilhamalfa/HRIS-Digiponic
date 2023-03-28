@@ -3,12 +3,14 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -20,6 +22,9 @@ class User extends Authenticatable
     protected $fillable = [
         'email',
         'password',
+        'role',
+        'nik',
+        'jumlah_cuti'
     ];
 
     /**
@@ -40,4 +45,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function pegawai(){
+        return $this->hasOne(Pegawai::class);
+    }
+
+    public function pelamar(){
+        return $this->hasOne(Pelamar::class);
+    }
+
+    public function lamaran(){
+        return $this->hasMany(Lamaran::class);
+    }
 }
