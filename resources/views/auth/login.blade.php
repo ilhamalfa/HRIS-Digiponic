@@ -81,7 +81,6 @@
                             </div>
                         </div>
                     </form>
->>>>>>> f8ab25b510e1d9f2f208030b5ec9678e8a9c7a80
                 </div>
                 <div class="password">
                     {{-- <label for="password">Password</label> --}}
