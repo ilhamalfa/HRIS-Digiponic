@@ -1,27 +1,29 @@
-@extends('auth.layout')
-
-@section('title', 'Register')
+@extends('layouts.app')
 
 @section('content')
-<<<<<<< HEAD
-    <div class="auth">
-        <h1>Create Account</h1>
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
-            <div class="email">
-                {{-- <label for="email">Email</label> --}}
-                <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="Your Email" required
-                    autocomplete="email">
-=======
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">{{ __('Register Pegawai Baru') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ url('/data-user/store-user') }}">
                         @csrf
+                        <div class="row mb-3">
+                            <label for="nik" class="col-md-4 col-form-label text-md-end">{{ __('NIK') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="nik" type="number" class="form-control @error('nik') is-invalid @enderror" name="nik" value="{{ old('nik') }}" required autocomplete="nik">
+
+                                @error('nik')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
                         <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
 
@@ -67,33 +69,8 @@
                         </div>
                     </form>
                 </div>
->>>>>>> f8ab25b510e1d9f2f208030b5ec9678e8a9c7a80
             </div>
-            <div class="password">
-                {{-- <label for="password">Password</label> --}}
-                <input type="password" id="password" name="password" placeholder="Password" required
-                    autocomplete="new-password">
-            </div>
-            <div class="password-confirm">
-                {{-- <label for="password">Password</label> --}}
-                <input type="password" id="password-confirm" name="password_confirmation"
-                    placeholder="Password Confirmation" required autocomplete="new-password">
-            </div>
-            <div class="button">
-                <button type="submit" class="btn btn-outline-secondary rounded-pill px-5 m-3">REGISTER NOW</button>
-            </div>
-            <div class="switch">
-                <p>Already Have Account?</p>
-                <a href="login?person=1" class="">
-                    <i class="fa-solid fa-user-check m-2"></i>
-                    Login as Employee
-                </a>
-                <p>OR</p>
-                <a href="login?person=2" class="">
-                    <i class="fa-solid fa-user-tie m-2"></i>
-                    Login as Candidate
-                </a>
-            </div>
-        </form>
+        </div>
     </div>
+</div>
 @endsection

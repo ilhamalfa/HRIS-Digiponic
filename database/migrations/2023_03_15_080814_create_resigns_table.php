@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('tanggal_resign');
             $table->string('status_resign');
-            $table->foreignId('pegawai_id')->constrained('pegawais');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }
