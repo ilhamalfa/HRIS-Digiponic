@@ -19,13 +19,12 @@ return new class extends Migration
             $table->integer('umur');
             $table->string('email');
             $table->string('foto');
-            $table->string('jenis kelamin');
+            $table->string('jenis_kelamin');
             $table->string('nomor_hp');
             $table->string('status_pernikahan');
             $table->integer('jumlah_anak');
             $table->string('department');
             $table->string('golongan');
-            $table->integer('jumlah_cuti');
             $table->foreignId('user_id')->constrained('users');
             $table->char('province_id', 2);
             $table->foreign('province_id')

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nik')->unique()->nullable();
             $table->string('password');
             $table->string('role');
+            $table->integer('jumlah_cuti');
             $table->rememberToken();
             $table->timestamps();
         });

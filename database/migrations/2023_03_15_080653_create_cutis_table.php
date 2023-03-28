@@ -16,7 +16,7 @@ return new class extends Migration
             $table->date('tanggal_mulai');
             $table->date('tanggal_berakhir');
             $table->string('status_cuti');
-            $table->foreignId('pegawai_id')->constrained('pegawais');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }

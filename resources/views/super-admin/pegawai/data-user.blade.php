@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Data Pegawai') }}</div>
 
                 <div class="card-body">
-                    <a href="{{ url('/data-pegawai/input-user') }}" class="btn btn-primary">Tambah User Pegawai</a>
+                    <a href="{{ url('/data-user/input-user') }}" class="btn btn-primary">Tambah User Pegawai</a>
                     <table class="table">
                         <thead>
                             <tr>

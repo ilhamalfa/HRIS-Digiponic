@@ -5,6 +5,7 @@ use App\Http\Controllers\IndoRegionController;
 use App\Http\Controllers\LowonganController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PelamarController;
+use App\Http\Controllers\PerizinanController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -31,21 +32,28 @@ Route::get('/login-pegawai', function(){
     return view('auth.login-pegawai');
 });
 
-Route::get('/input-data-pelamar', [PelamarController::class, 'inputPelamar'])->middleware('pelamar');
+// Route Pelamar
+Route::get('/pelamar/input-data-pelamar', [PelamarController::class, 'inputPelamar'])->middleware(['pelamar'], ['verified']);
 
-Route::post('/store/data-pelamar', [PelamarController::class, 'storePelamar']);
+Route::post('/pelamar/input-data-pelamar/store', [PelamarController::class, 'storePelamar']);
 
+Route::get('/pelamar/lowongan/', [PelamarController::class, 'daftarLowongan'])->middleware('pelamar');
 
-Route::get('/data-pegawai/daftar-user', [PegawaiController::class, 'dataUser'])->middleware('superadmin');
-
-Route::get('/data-pegawai/input-user', [PegawaiController::class, 'inputUser'])->middleware('superadmin');
-
-Route::post('/data-pegawai/store-user', [PegawaiController::class, 'storeUser'])->middleware('superadmin');
+Route::get('/pelamar/lowongan/apply/{id}', [PelamarController::class, 'applyLowongan'])->middleware('pelamar');
 
 
+// Route Super Admin
+// Data User
+Route::get('/data-user', [PegawaiController::class, 'dataUser'])->middleware('superadmin');
+
+Route::get('/data-user/input-user', [PegawaiController::class, 'inputUser'])->middleware('superadmin');
+
+Route::post('/data-user/store-user', [PegawaiController::class, 'storeUser'])->middleware('superadmin');
+
+// Data Pegawai
 Route::get('/data-pegawai', [PegawaiController::class, 'dataPegawai'])->middleware('superadmin');
 
-Route::get('/data-pegawai/input-pegawai', [PegawaiController::class, 'inputPegawai'])->middleware('pegawai');
+Route::get('/data-pegawai/input-pegawai', [PegawaiController::class, 'inputPegawai']);
 
 Route::post('/data-pegawai/store-pegawai/', [PegawaiController::class, 'storePegawai']);
 
@@ -53,14 +61,26 @@ Route::get('/data-pegawai/edit-pegawai/{id}', [PegawaiController::class, 'editPe
 
 Route::post('/data-pegawai/update-pegawai/{id}', [PegawaiController::class, 'updatePegawai']);
 
-
+// Data Lowongan
 Route::get('data-lowongan/', [LowonganController::class, 'daftarLowongan']);
 
 Route::get('data-lowongan/tambah-lowongan', [LowonganController::class, 'tambahLowongan']);
 
 Route::post('data-lowongan/store-lowongan', [LowonganController::class, 'storeLowongan']);
 
+Route::get('data-lowongan/lowongan-detail/{id}', [LowonganController::class, 'detailLowongan']);
 
+Route::get('data-lowongan/pelamar-detail/{id}', [LowonganController::class, 'detailPelamar']);
+
+Route::get('pelamar-detail/download-cv/{id}', [LowonganController::class, 'downloadCV']);
+
+// Pegawai
+Route::get('pegawai/cuti-perizinan', [PerizinanController::class, 'daftarPerizinan'])->middleware('pegawai');
+
+
+
+
+// Indoregion
 Route::post('/get-kabupaten', [IndoRegionController::class, 'getKabupaten']);
 
 Route::post('/get-kecamatan', [IndoRegionController::class, 'getKecamatan']);

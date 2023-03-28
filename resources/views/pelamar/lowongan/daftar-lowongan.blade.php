@@ -5,10 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Data Lowongan') }}</div>
+                <div class="card-header">{{ __('Lowongan') }}</div>
 
                 <div class="card-body">
-                    <a href="#" class="btn btn-primary">Tambah Lowongan</a>
                     <table class="table">
                         <thead>
                             <tr>
@@ -27,7 +26,11 @@
                                 <td>{{ $data->tanggal }}</td>
                                 <td>{{ $data->lamaran->count() . " Pendaftar"}}</td>
                                 <td>
-                                    <a href="{{ url('data-lowongan/lowongan-detail/' . $data->id) }}" class="btn btn-primary">Detail</a>
+                                    @if($data->lamaran()->where('user_id', auth()->user()->id)->exists())
+                                        <h6 class="text-success">Sudah Melamar</h6>
+                                    @else
+                                        <a href="{{ url('/pelamar/lowongan/apply/' . $data->id) }}" class="btn btn-primary">Daftar</a>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach

@@ -34,4 +34,12 @@ class Province extends Model
     {
         return $this->hasMany(Regency::class);
     }
+
+    public function pegawai(){
+        return $this->hasMany(Pegawai::class);
+    }
+
+    public function pelamar(){
+        return $this->hasMany(Pelamar::class);
+    }
 }

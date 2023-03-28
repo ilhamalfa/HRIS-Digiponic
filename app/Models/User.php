@@ -23,7 +23,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'role',
-        'nik'
+        'nik',
+        'jumlah_cuti'
     ];
 
     /**
@@ -47,5 +48,13 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function pegawai(){
         return $this->hasOne(Pegawai::class);
+    }
+
+    public function pelamar(){
+        return $this->hasOne(Pelamar::class);
+    }
+
+    public function lamaran(){
+        return $this->hasMany(Lamaran::class);
     }
 }

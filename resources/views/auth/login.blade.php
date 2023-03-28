@@ -16,14 +16,15 @@
 
                             <div class="col-md-6">
                                 <input id="login" type="email"
-                                class="form-control{{ $errors->has('nik') || $errors->has('email') ? ' is-invalid' : '' }}"
-                                name="login" value="{{ old('nik') ?: old('email') }}" required autofocus>
+                                class="form-control @error('email') is-invalid @enderror"
+                                name="login" value="{{ old('email') }}" required autofocus>
 
-                                @if ($errors->has('username') || $errors->has('email'))
+                                @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @endif
+                                @enderror
+
                             </div>
                         </div>
 

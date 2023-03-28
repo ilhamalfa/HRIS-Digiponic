@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('umur');
             $table->string('email');
             $table->string('foto');
-            $table->string('jenis kelamin');
+            $table->string('jenis_kelamin');
             $table->string('nomor_hp');
             $table->string('cv_file');
             $table->char('province_id', 2);

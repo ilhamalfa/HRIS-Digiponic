@@ -42,7 +42,7 @@
                             <label for="kualifikasi" class="col-md-4 col-form-label text-md-end">{{ __('Kualifikasi') }}</label>
 
                             <div class="col-md-6">
-                                <input id="kualifikasi" type="text" class="form-control @error('kualifikasi') is-invalid @enderror" name="kualifikasi" required autocomplete="new-kualifikasi">
+                                <input id="kualifikasi" type="text" class="form-control @error('kualifikasi') is-invalid @enderror" name="kualifikasi" value="{{ old('kualifikasi') }}" required autocomplete="new-kualifikasi">
 
                                 @error('kualifikasi')
                                     <span class="invalid-feedback" role="alert">
@@ -56,7 +56,7 @@
                             <label for="deskripsi" class="col-md-4 col-form-label text-md-end">{{ __('Deskripsi Pekerjaan') }}</label>
 
                             <div class="col-md-6">
-                                <input id="deskripsi" type="text" class="form-control" name="deskripsi" required autocomplete="new-password">
+                                <input id="deskripsi" type="text" class="form-control" name="deskripsi" value="{{ old('deskripsi') }}" required autocomplete="new-password">
                             </div>
                         </div>
 

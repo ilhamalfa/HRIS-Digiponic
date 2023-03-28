@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Register Pegawai Baru') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ url('/data-pegawai/store-user') }}">
+                    <form method="POST" action="{{ url('/data-user/store-user') }}">
                         @csrf
                         <div class="row mb-3">
                             <label for="nik" class="col-md-4 col-form-label text-md-end">{{ __('NIK') }}</label>

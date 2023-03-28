@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Lamaran;
+use App\Models\Lowongan;
 use App\Models\Pelamar;
 use App\Models\Province;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PelamarController extends Controller
 {
@@ -52,7 +55,7 @@ class PelamarController extends Controller
 
         $validate['foto'] = $request->file('foto')->storeAs('Pelamar/foto', $nama_foto);
 
-        $extension_cv = $request->file('foto')->extension();
+        $extension_cv = $request->file('cv_file')->extension();
 
         $nama_cv = $request->nama . '-' . now()->timestamp. '.' . $extension_cv;
 
@@ -61,7 +64,25 @@ class PelamarController extends Controller
         Pelamar::create($validate);
         
         return redirect('home');
-        // dd($validate);
+    }
+
+    public function daftarLowongan(){
+        $datas = Lowongan::all();
+        
+        return view('pelamar.lowongan.daftar-lowongan', [
+            'datas' => $datas
+        ]);
+    }
+
+    public function applyLowongan($id){
+        $data['tanggal'] = Carbon::now();
+        $data['status'] = 'Menunggu';
+        $data['lowongan_id'] = $id;
+        $data['user_id'] = Auth::user()->id;
+
+        Lamaran::create($data);
+
+        return redirect('/pelamar/lowongan/');
     }
 
 }

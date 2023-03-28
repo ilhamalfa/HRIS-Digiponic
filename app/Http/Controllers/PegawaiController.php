@@ -41,6 +41,7 @@ class PegawaiController extends Controller
         ]);
 
         $validate['role'] = 'Pegawai';
+        $validate['jumlah_cuti'] = 14;
         $validate['password'] = Hash::make($request->password);
 
         // dd($request);
