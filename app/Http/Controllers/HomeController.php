@@ -25,18 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-<<<<<<< HEAD
         return redirect('/');
-=======
-        $data = Pelamar::where('user_id', auth()->user()->id)->first();
-
-        if(auth()->user()->role == 'Pelamar' && $data === null){
-            return redirect('/input-data-pelamar');
-        }else{
-            return view('home');
-        }
-        
->>>>>>> f8ab25b510e1d9f2f208030b5ec9678e8a9c7a80
     }
 
     // public function rutelogin(Request $request)
