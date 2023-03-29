@@ -16,8 +16,8 @@ return new class extends Migration
             $table->date('tanggal_mulai');
             $table->date('tanggal_berakhir');
             $table->string('bukti_perizinan');
-            $table->enum('status_perizinan', ['Diterima', 'Ditolak', 'Menunggu']);
-            $table->foreignId('pegawai_id')->constrained('pegawais');
+            $table->string('status_perizinan');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }
