@@ -29,6 +29,7 @@ body {
 	line-height: 1;
     font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
+    overflow-x: hidden;
 }
 ol, ul {
 	list-style: none;
@@ -56,7 +57,7 @@ table {
     /* Modal End */
 
     /* Nav Topbar Start */
-    nav.topbar {
+    .topbar {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -67,42 +68,37 @@ table {
         padding: 1em;
         height: 10vh;
         z-index: 999;
-        transition: .3s;
+        transition: .5s;
     }
 
-    nav.topbar div {
+    .topbar div {
         width: 30%;
     }
 
-    nav.topbar .brand-logo a {
-        background-color: #212529;
-        color: #F9F9F9;
+    .topbar-brand-text {
+        color: #212529;
         text-decoration: none;
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
-    nav.topbar .brand-logo a img {
-        width: 10%;
-    }
-
-    nav.topbar .brand-logo a span {
+    .topbar-brand-text span {
         font-weight: 700;
         margin: 0 10px;
     }
 
-    nav.topbar .hamburger-menu {
+    .topbar-hamburger-menu {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
         width: auto;
         padding: 5px;
-        transition: .3s;
+        transition: .5s;
     }
     
-    nav.topbar .hamburger-menu span {
+    .topbar-hamburger-menu span {
         background-color: #212529;
         display: block;
         width: 28px;
@@ -111,11 +107,11 @@ table {
         transition: .2s;
     }
 
-    nav.topbar .hamburger-menu:hover span {
+    .topbar-hamburger-menu:hover span {
         margin: 4px 0;
     }
 
-    nav.topbar .hamburger-menu span.color-change {
+    .topbar-hamburger-menu span.color-change {
         background-color: #FF4655;
     }
 
@@ -125,21 +121,19 @@ table {
         align-items: center;
     }
 
-    nav.topbar .account span {
-        font-family: 'Poppins', sans-serif;
-        font-weight: 700;
-        margin: 0 2px;
+    nav.topbar .account a {
+        color: #212529;
     }
     /* Nav Topbar End */
 
-    /* Nav Sidebar Start */
-    nav.navbar {
-        background-color: #FF4655;
+    /* Navmenu Start */
+    nav.navmenu {
+        background-color: #212529;
         flex-direction: column;
-        justify-content: space-evenly;
+        justify-content: center;
         align-items: center;
         position: fixed;
-        top: 10%;
+        top: 15%;
         left: 40%;
         right: 40%;
         display: flex;
@@ -149,16 +143,16 @@ table {
         z-index: 999;
     }
 
-    nav.navbar.background {
-        background-color: #212529;
-    }
-
-    nav.show {
+    nav.navmenu.show {
         opacity: 1;
         visibility: visible;
     }
+    
+    nav.navmenu.background {
+        background-color: #FF4655;
+    }
 
-    nav.navbar a {
+    nav.navmenu a {
         color: #F9F9F9;
         text-decoration: none;
         font-weight: 700;
@@ -167,18 +161,97 @@ table {
         margin: 2em 0;
     }
 
-    nav.navbar a:hover {
-        color: #212529;
+    nav.navmenu a:hover {
+        color: #F9F9F9;
+        letter-spacing: 5px;
+    }
+    /* Navmenu End */
+
+    /* Account Menu Start */
+    nav.account-menu {
+        background-color: #212529;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 15%;
+        right: 15%;
+        left: 65%;
+        transition: .2s;
+        visibility: hidden;
+        opacity: 0;
+        z-index: 999;
+    }
+
+    nav.account-menu.show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    nav.account-menu.background {
+        background-color: #FF4655;
+    }
+
+    nav.account-menu a {
+        color: #F9F9F9;
+        text-decoration: none;
+        font-weight: 700;
+        letter-spacing: 2px;
+        transition: .5s;
+        margin: 2em 0;
+    }
+
+    nav.account-menu a:hover {
+        color: #F9F9F9;
         letter-spacing: 5px;
         position: relative;
     }
-    /* Nav Sidebar End */
+
+    nav.account-menu .login-as {
+        display: none;
+        opacity: 0;
+        transition: .5s;
+    }
+
+    nav.account-menu .login-as.show {
+        display: block;
+        opacity: 1;
+    }
+
+    nav.account-menu .login-as form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    nav.account-menu .login-as form input{
+        cursor: pointer;
+        color: #F9F9F9;
+        font-size: 1rem;
+        font-weight: bold;
+        letter-spacing: 2px;
+        outline: none;
+        background: none;
+        border: 1px solid #F9F9F9;
+        margin-bottom: 1em;
+        padding: .5em;
+        transition: .5s;
+    }
+
+    nav.account-menu .login-as form input:hover {
+        color: #FF4655;
+        border: 1px solid #FF4655;
+    }
+    /* Account Menu End */
 
     /* Main Start */
     main {
         text-align: center;
     }
 
+    /* Opening */
     main .opening {
         display: flex;
         flex-direction: column;
@@ -301,6 +374,7 @@ table {
         bottom: 5%;
     }
     
+    /* Career */
     main .career {
         background-color: #212529;
         display: flex;
@@ -447,6 +521,7 @@ table {
         transform: scaleX(1);
     }
 
+    /* About */
     main .about-us {
         display: flex;
         position: relative;
@@ -579,6 +654,7 @@ table {
         transform: scaleX(1);
     }
 
+    /* Product */
     main .product-introduction {
         background-color: #212529;
         color: #F9F9F9;
@@ -858,6 +934,7 @@ table {
         transform: scaleX(1);
     }
 
+    /* Comment */
     main .comment {
         background-image: url('../../main/comment/background.webp');
         background-position: center;
@@ -880,7 +957,7 @@ table {
         padding: 5px 15px;
         position: absolute;
         top: 0;
-        left: 5%;
+        left: 30%;
     }
 
     main .comment .designstrip1 {
@@ -1026,6 +1103,7 @@ table {
         margin: 0 .5em;
     }
 
+    /* Team */
     main .team {
         display: flex;
         flex-direction: column;

@@ -1,23 +1,51 @@
+// Declaration Start
 const topbar = document.getElementById('topbar')
 const hamburgerMenu = document.getElementById('hamburger-menu')
-const navbar = document.getElementById('navbar')
 const span = hamburgerMenu.querySelectorAll('span')
+const navmenu = document.getElementById('navmenu')
+const account = document.querySelector('.account a')
+const accountMenu = document.getElementById('account-menu')
+const loginButton = document.getElementById('login')
+const loginAs = document.getElementById('login-as')
+const openingH1 = document.querySelector('.opening h1')
+const openingH6 = document.querySelector('.opening h6')
+
+// Declaration End
 
 // Hamburger Menu Click Start
 hamburgerMenu.addEventListener('click', function() {
-    navbar.classList.toggle('show')
+    navmenu.classList.toggle('show')
+    accountMenu.classList.remove('show')
 })
 
 document.addEventListener('click', function (e) {
-    if (!hamburgerMenu.contains(e.target) && !navbar.contains(e.target)) {
-        navbar.classList.remove('show')
+    if (!hamburgerMenu.contains(e.target) && !navmenu.contains(e.target)) {
+        navmenu.classList.remove('show')
     }
 })
 // Hamburger Menu Click End
 
+// Account Click Start
+account.addEventListener('click', function (e) {
+    e.preventDefault()
+    accountMenu.classList.toggle('show')
+    navmenu.classList.remove('show')
+})
+
+loginButton.addEventListener('click', function (e) {
+    e.preventDefault()
+    loginAs.classList.toggle('show')
+})
+
+document.addEventListener('click', function (e) {
+    if (!account.contains(e.target) && !accountMenu.contains(e.target)) {
+        accountMenu.classList.remove('show')
+        loginAs.classList.remove('show')
+    }
+})
+// Account Click End
+
 // Animation Opening Start
-const openingH1 = document.querySelector('.opening h1')
-const openingH6 = document.querySelector('.opening h6')
 setTimeout(function () {
     openingH1.classList.add('fade')
 }, 1000)
@@ -30,18 +58,37 @@ setTimeout(function () {
 $(window).scroll(function () {
     let wScroll = $(this).scrollTop()
 
+    if (wScroll > 1) {
+        navmenu.classList.remove('show')
+        accountMenu.classList.remove('show')
+    }
     if (wScroll > 150) {
+        $('.topbar .brand-logo a').css({
+            'color' : '#FF4655'
+        })
         span.forEach(function (e) {
             e.classList.add('color-change')
         })
-        navbar.classList.remove('show')
+        $('.topbar .account a').css({
+            'color' : '#FF4655'
+        })
+        navmenu.classList.add('background')
+        accountMenu.classList.add('background')
     } else {
+        $('.topbar .brand-logo a').css({
+            'color' : '#212529'
+        })
         span.forEach(function (e) {
             e.classList.remove('color-change')
         })
+        $('.topbar .account a').css({
+            'color' : '#212529'
+        })
+        navmenu.classList.remove('background')
+        accountMenu.classList.remove('background')
     }
 
-    // Jumbotron Animation Start
+    // Opening Animation Start
     $('.opening .material div').css({
         'transform' : 'translate(0px,' + wScroll*2 +'%)'
     })
@@ -49,7 +96,7 @@ $(window).scroll(function () {
     $('.opening .text-scroll').css({
         'transform' : 'translate(0px,' + wScroll*2 +'%)'
     })
-    // Jumbotron Animation End
+    // Opening Animation End
 
     // Career Annimations Start
     if (wScroll > $('.career').offset().top - 550) {
@@ -141,7 +188,6 @@ $(window).scroll(function () {
             'transform' : 'translateY(20%)'
         })
     }
-    
     // Comment Animations End
 
     // Our Team Animations Start
