@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -37,19 +36,5 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-    }
-
-    public function sendLoginResponse($request)
-    {
-        $this->clearLoginAttempts($request);
-        Alert::success('Success', 'You have successfully logged in')->autoClose(3000);
-        return redirect('/');
-    }
-
-    public function sendFailedLoginResponse($request)
-    {
-        $this->clearLoginAttempts($request);
-        Alert::error('Error', 'Check your email or password')->autoClose(3000);
-        return redirect('/');
     }
 }

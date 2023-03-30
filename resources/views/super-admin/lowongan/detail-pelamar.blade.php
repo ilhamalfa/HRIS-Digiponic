@@ -12,14 +12,23 @@
                     <h6>{{ "Nama : ". $data->user->pelamar->nama }}</h6>
                     <h6>{{ "Tanggal Lahir : ". date('d-m-Y', strtotime($data->user->pelamar->tanggal_lahir)) }}</h6>
                     <h6>{{ "Umur : ". $data->user->pelamar->umur . " Tahun" }}</h6>
-                    <h6>{{ "Alamat : ". $data->user->alamat . ", Kelurahan " . $data->user->pelamar->kelurahan->name . ", Kecamatan " . $data->user->pelamar->kecamatan->name . ", " . $data->user->pelamar->kabupaten->name . ", " . $data->user->pelamar->provinsi->name  }}</h6>
+                    <h6>{{ "Alamat : ". $data->user->pelamar->alamat . ", Kelurahan " . $data->user->pelamar->kelurahan->name . ", Kecamatan " . $data->user->pelamar->kecamatan->name . ", " . $data->user->pelamar->kabupaten->name . ", " . $data->user->pelamar->provinsi->name  }}</h6>
                     <h6>{{ "Jenis Kelamin : ". $data->user->pelamar->jenis_kelamin }}</h6>
                     <h6>{{ "Nomor Hp : ". $data->user->pelamar->nomor_hp }}</h6>
                     <h6>{{ "email : ". $data->user->pelamar->email }}</h6>
                     <h6>{{ "Status : ". $data->status }}</h6>
                     <h6><a href="{{ url('pelamar-detail/download-cv/' . $data->user->pelamar->id) }}" target="_blank">Lihat CV Pelamar</a></h6>
                     <img src="{{ asset('storage/' . $data->user->pelamar->foto) }}" alt="" style="height: 300px"> <br>
-                    <a href="" class="btn btn-primary mt-3">Lanjut tahap Selanjutnya</a>
+                    @if ($data->status == 'Menunggu')
+                        <a href="" class="btn btn-primary mt-3">Lanjut tahap Wawancara</a>
+                    @elseif ($data->status == 'Wawancara')
+                        <a href="" class="btn btn-primary mt-3">Lanjut tahap Psikotest</a>
+                    @elseif ($data->status == 'Psikotest')
+                        <a href="" class="btn btn-primary mt-3">Lanjut tahap Offering</a>
+                    @elseif ($data->status == 'Offering')
+                        <a href="" class="btn btn-primary mt-3">Terima</a>
+                    @endif
+                        <a href="" class="btn btn-danger mt-3">Tolak</a>
                 </div>
             </div>
         </div>
