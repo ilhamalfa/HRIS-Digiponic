@@ -23,7 +23,7 @@
                 {{-- <label class="auth-remember-checkbox-label" for="remember">
                     {{ __('Remember Me') }}
                 </label> --}}
-                <span>Remember Me</span>
+                <span class="auth-remember-checkbox-label">Remember Me</span>
             </div>
             <div class="auth-button-box">
                 <button type="submit" class="auth-button btn btn-outline-secondary rounded-0 px-5 m-3">

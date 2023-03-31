@@ -77,7 +77,7 @@ table {
     }
 
     .auth {
-        background-color: #F9F9F9;
+        background-color: #212529;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -87,12 +87,14 @@ table {
     }
 
     .auth-title {
+        color: #F9F9F9;
         font-size: 2rem;
         margin: 1em;
     }
 
     .auth-form input{
         background-color: rgba(114, 133, 142, .2);
+        color: #F9F9F9;
         border: none;
         margin: 1em;
         padding: .5em 2em;
@@ -103,7 +105,7 @@ table {
 
     .auth-form input::placeholder {
         font-family: 'Poppins', sans-serif;
-        color: grey;
+        color: #F9F9F9;
     }
 
     .auth-remember-box {
@@ -112,25 +114,29 @@ table {
     }
 
     input[type=checkbox].auth-remember-checkbox {
-        border: 1px solid #212529;
+        border: 1px solid #F9F9F9;
         margin: 5px;
         width: 15px;
         height: 15px;
     }
 
     .auth-remember-checkbox-label {
-        width: 50px;
+        color: #F9F9F9;
     }
 
+
     .auth-button {
-        border: 1px solid #212529;
-        color: #212529;
+        border: 1px solid #F9F9F9;
+        color: #F9F9F9;
         box-sizing: border-box;
         padding: .5em;
+        transition: .2s;
     }
 
     .auth-button:hover {
-        background-color: #212529;
+        background: none;
+        border: 1px solid #FF4655;
+        color: #FF4655;
     }
 
     .auth-switch-box {
@@ -142,13 +148,14 @@ table {
     }   
 
     .auth-switch-title {
+        color: #F9F9F9;
         padding-left: 5%;
         margin: 1em;
         margin-left: 0;
     }
 
     .auth-switch-login-as-box a {
-        border: 1px solid #212529;
+        border: 1px solid #FF4655;
         font-size: .8rem;
         text-decoration: none;
         position: relative;
@@ -160,12 +167,12 @@ table {
 
     .auth-switch-login-as-box a i {
         position: relative;
-        color: #212529;
+        color: #FF4655;
         transition: .5s;
     }
 
     .auth-switch-login-as-box a span {
-        color: #212529;
+        color: #FF4655;
         position: relative;
         transition: .5s;
     }
@@ -183,7 +190,7 @@ table {
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: #212529;
+        background-color: #FF4655;
         transition: transform .5s;
         transform-origin: 0 0;
         transition-timing-function: cubic-bezier(0.5, 1.6);
@@ -195,7 +202,7 @@ table {
     }
 
     .auth-switch-sign-up-box a {
-        border: 1px solid #212529;
+        border: 1px solid #FF4655;
         font-size: .8rem;
         text-decoration: none;
         position: relative;
@@ -207,12 +214,12 @@ table {
 
     .auth-switch-sign-up-box a i {
         position: relative;
-        color: #212529;
+        color: #FF4655;
         transition: .5s;
     }
 
     .auth-switch-sign-up-box a span {
-        color: #212529;
+        color: #FF4655;
         position: relative;
         transition: .5s;
     }
@@ -230,7 +237,7 @@ table {
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: #212529;
+        background-color: #FF4655;
         transition: transform .5s;
         transform-origin: 0 0;
         transition-timing-function: cubic-bezier(0.5, 1.6);
@@ -251,6 +258,10 @@ table {
         justify-content: center;
         align-items: center;
         margin: 1em 0;
+    }
+
+    .auth-extra-text {
+        color: #F9F9F9;
     }
 
     .auth-extra-link {
