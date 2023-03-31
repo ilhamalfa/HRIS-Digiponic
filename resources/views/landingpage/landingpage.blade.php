@@ -116,28 +116,28 @@
 
     {{-- Comment Start --}}
     <div class="comment">
-        <div class="designstrip1"></div>
-        <div class="designstrip2"></div>
-        <div class="designred1"></div>
-        <div class="designred2"></div>
-        <div class="animations1">
-            <div class="designwhite1"></div>
-            <div class="designwhite2"></div>
-            <div class="designwhite3"></div>
+        <div class="comment-material-strip-1"></div>
+        <div class="comment-material-strip-2"></div>
+        <div class="comment-material-red-1"></div>
+        <div class="comment-material-red-2"></div>
+        <div class="comment-animations-1">
+            <div class="comment-material-white-1"></div>
+            <div class="comment-material-white-2"></div>
+            <div class="comment-material-white-3"></div>
         </div>
-        <div class="animations2">
-            <div class="designwhite4"></div>
-            <div class="designwhite5"></div>
-            <div class="designwhite6"></div>
+        <div class="comment-animations-2">
+            <div class="comment-material-white-4"></div>
+            <div class="comment-material-white-5"></div>
+            <div class="comment-material-white-6"></div>
         </div>
-        <span class="title">COMMENTS</span>
-        <div class="carrousel-comment">
-            <div class="user">
-                <div class="picture">
-                    <img src="{{ asset('main/comment/profile/profile.webp') }}" alt="User Picture">
+        <span class="comment-title">COMMENTS</span>
+        <div class="comment-carrousel">
+            <div class="comment-carrousel-user">
+                <div class="comment-carrousel-user-picture-box">
+                    <img class="comment-carrousel-user-picture" src="{{ asset('main/comment/profile/profile.webp') }}" alt="User Picture">
                 </div>
-                <span>Kayle Runner</span>
-                <p><i class="fa-solid fa-quote-left"></i> Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit
+                <span class="comment-carrousel-user-name">Kayle Runner</span>
+                <p class="comment-carrousel-user-comment"><i class="fa-solid fa-quote-left"></i> Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit
                     explicabo placeat accusamus soluta? Quae
                     minus id quas veniam odio asperiores quaerat veritatis. Nobis atque modi sunt molestiae enim. Assumenda,
                     facilis! <i class="fa-solid fa-quote-right"></i></p>
@@ -150,7 +150,7 @@
                     facilis!</p>
             </div> --}}
         </div>
-        <div class="dots">
+        <div class="comment-dots">
             <span></span>
             <span></span>
         </div>
@@ -159,15 +159,15 @@
 
     {{-- Team Start --}}
     <div class="team" id="structure">
-        <div class="materialstrip1"></div>
-        <div class="materialstrip2"></div>
-        <div class="materialred1"></div>
-        <div class="materialred2"></div>
-        <h1>OUR TEAM</h1>
-        <div class="layout-team">
-            <div class="card">
+        <div class="team-material-strip-1"></div>
+        <div class="team-material-strip-2"></div>
+        <div class="team-material-red-1"></div>
+        <div class="team-material-red-2"></div>
+        <h1 class="team-title">OUR TEAM</h1>
+        <div class="team-layout">
+            <div class="card team-card">
                 <img src="{{ asset('main/team/ceo.webp') }}" class="card-img-top" alt="CEO Image">
-                <div class="social-media">
+                <div class="team-social-media">
                     <span>
                         <i class="fa-brands fa-square-twitter m-2"></i>
                     </span>
@@ -181,14 +181,14 @@
                         <i class="fa-brands fa-linkedin m-2"></i>
                     </span>
                 </div>
-                <div class="card-body">
-                    <h6 class="card-title">Walter White</h6>
+                <div class="card-body team-card-body">
+                    <h6 class="card-title team-name">Walter White</h6>
                     <p class="card-text">Chief Executive Officer</p>
                 </div>
             </div>
-            <div class="card">
+            <div class="card team-card">
                 <img src="{{ asset('main/team/cto.webp') }}" class="card-img-top" alt="CEO Image">
-                <div class="social-media">
+                <div class="team-social-media">
                     <span>
                         <i class="fa-brands fa-square-twitter m-2"></i>
                     </span>
@@ -202,14 +202,14 @@
                         <i class="fa-brands fa-linkedin m-2"></i>
                     </span>
                 </div>
-                <div class="card-body">
-                    <h6 class="card-title">William Anderson</h6>
-                    <p class="card-text">CTO</p>
+                <div class="card-body team-card-body">
+                    <h6 class="card-title team-name">Walter White</h6>
+                    <p class="card-text">Chief Executive Officer</p>
                 </div>
             </div>
-            <div class="card">
+            <div class="card team-card">
                 <img src="{{ asset('main/team/accountant.webp') }}" class="card-img-top" alt="CEO Image">
-                <div class="social-media">
+                <div class="team-social-media">
                     <span>
                         <i class="fa-brands fa-square-twitter m-2"></i>
                     </span>
@@ -223,14 +223,14 @@
                         <i class="fa-brands fa-linkedin m-2"></i>
                     </span>
                 </div>
-                <div class="card-body">
-                    <h6 class="card-title">Amanda Jepson</h6>
-                    <p class="card-text">Accountant</p>
+                <div class="card-body team-card-body">
+                    <h6 class="card-title team-name">Walter White</h6>
+                    <p class="card-text">Chief Executive Officer</p>
                 </div>
             </div>
-            <div class="card">
+            <div class="card team-card">
                 <img src="{{ asset('main/team/manager.webp') }}" class="card-img-top" alt="CEO Image">
-                <div class="social-media">
+                <div class="team-social-media">
                     <span>
                         <i class="fa-brands fa-square-twitter m-2"></i>
                     </span>
@@ -244,13 +244,13 @@
                         <i class="fa-brands fa-linkedin m-2"></i>
                     </span>
                 </div>
-                <div class="card-body">
-                    <h6 class="card-title">Sarah Jhonson</h6>
-                    <p class="card-text">Product Manager</p>
+                <div class="card-body team-card-body">
+                    <h6 class="card-title team-name">Walter White</h6>
+                    <p class="card-text">Chief Executive Officer</p>
                 </div>
             </div>
         </div>
-        <a href="{{ route('struktur') }}" class="btn btn-danger mt-4">All Structur</a>
+        <a href="{{ route('struktur') }}" class="btn btn-danger mt-4 team-button-all">All Structure</a>
     </div>
     {{-- Team End --}}
 

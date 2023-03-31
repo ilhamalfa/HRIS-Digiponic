@@ -23,6 +23,16 @@
     <link rel="stylesheet" href="{{ asset('template/assets/css/style.css') }}">
     {{-- Layout CSS End --}}
 
+    {{-- Animations CSS Start --}}
+    <link rel="stylesheet" href="{{ asset('template/assets/css/animations/style.css') }}">
+    {{-- Animations CSS End --}}
+
+    {{-- Font Awesome Start --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {{-- Font Awesome End --}}
+
 </head>
 
 <body>
@@ -92,19 +102,8 @@
                                 <div class="preview-item-content">
                                     <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
                                 </div>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <div class="preview-icon bg-dark rounded-circle">
-                                        <i class="mdi mdi-calendar-today text-success"></i>
-                                    </div>
-                                </div>
-                                <div class="preview-item-content">
-                                    <p class="preview-subject ellipsis mb-1 text-small">To-do list</p>
-                                </div>
-                            </a>
-                        </div>
+                            </a>    
+                            </div>
                         {{-- Sidebar Profile 3 Dots Vertical Menu End --}}
 
                     </div>
@@ -161,7 +160,7 @@
                     <ul class="navbar-nav w-100">
                         <li class="nav-item w-100">
                             <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
-                                <input type="text" class="form-control" placeholder="Search products">
+                                <input type="text" class="form-control text-white topbar-search-input" id="topbar-search-input" placeholder="Search Anythings" autofocus>
                             </form>
                         </li>
                     </ul>
@@ -257,10 +256,13 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
                                 <div class="navbar-profile">
-                                    <img class="img-xs rounded-circle"
-                                        src="{{ asset('template/assets/images/faces/face15.jpg') }}" alt="">
-                                    <p class="mb-0 d-none d-sm-block navbar-profile-name">Henry Klein</p>
-                                    <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                                    {{-- @foreach ($user as $user) --}}
+                                        <img class="img-xs rounded-circle"
+                                            src="{{ asset('template/assets/images/faces/face15.jpg') }}"
+                                            alt="">
+                                        <p class="mb-0 d-none d-sm-block navbar-profile-name">Henry Klein</p>
+                                        <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                                    {{-- @endforeach --}}
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
@@ -318,17 +320,28 @@
                     @yield('content')
                 </div>
                 {{-- Main Content End --}}
-                
+
                 <!-- partial:partials/_footer.html -->
                 <footer class="footer">
                     <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                        <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright ©
-                            bootstrapdash.com 2021</span>
-                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a
-                                href="https://www.bootstrapdash.com/bootstrap-admin-template/"
-                                target="_blank">Bootstrap
-                                admin template</a> from Bootstrapdash.com</span>
-                    </div>
+                        <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">
+                            Copyright © Tech Solution 2023
+                        </span>
+                        <div
+                            class="footer-social-media float-none float-sm-right d-block mt-1 mt-sm-0 text-center text-white">
+                            <a class="mx-1 text-decoration-none" href="#">
+                                <i class="fa-brands fa-twitter"></i>
+                            </a>
+                            <a class="mx-1 text-decoration-none" href="#">
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                            <a class="mx-1 text-decoration-none" href="#">
+                                <i class="fa-brands fa-facebook"></i>
+                            </a>
+                            <a class="mx-1 text-decoration-none" href="#">
+                                <i class="fa-brands fa-linkedin"></i>
+                            </a>
+                        </div>
                 </footer>
                 <!-- partial -->
             </div>

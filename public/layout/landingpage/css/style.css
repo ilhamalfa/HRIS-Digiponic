@@ -50,12 +50,6 @@ table {
 
 @media only screen and (min-width: 992px) {
 
-    /* Modal Start */
-    .modal-mobile {
-        display: none;
-    }
-    /* Modal End */
-
     /* Nav Topbar Start */
     .topbar {
         display: flex;
@@ -73,6 +67,10 @@ table {
 
     .topbar div {
         width: 30%;
+    }
+
+    .topbar div:nth-child(2) {
+        width: auto;
     }
 
     .topbar-brand-text {
@@ -280,12 +278,13 @@ table {
         position: absolute;
         top: 90%;
         left: 10%;
+        filter: blur(1px);
     }
 
     .opening-material div:nth-child(2) {
         width: 10px;
         height: 10px;
-        top: 40%;
+        top: 25%;
         left: 20%;
     }
 
@@ -302,8 +301,9 @@ table {
         width: 10px;
         height: 10px;
         position: absolute;
-        top: 30%;
+        top: 20%;
         left: 70%;
+        filter: blur(1px);
     }
 
     .opening-material div:nth-child(6) {
@@ -724,7 +724,7 @@ table {
     }
 
     .product-banner {
-        background-image: url('../../main/product/background.webp');
+        background-image: url('../../../main/product/background.webp');
         background-position: center;
         background-size: cover;
         color: black;
@@ -761,10 +761,10 @@ table {
     }
 
     .product div {
-        margin: 2em 0;
+        margin-bottom: 2em 0;
     }
 
-    .product .materialstrip1 {
+    .product-material-strip-1 {
         background-color: #FF4655;
         display: block;
         width: 1px;
@@ -774,7 +774,7 @@ table {
         right: 95%;
     }
 
-    .product .materialblack1 {
+    .product-material-black-1 {
         background-color: #212529;
         display: block;
         width: 10px;
@@ -784,7 +784,7 @@ table {
         right: 95%;
     }
 
-    .product .materialblack2 {
+    .product-material-black-2 {
         background-color: #212529;
         display: block;
         width: 10px;
@@ -794,37 +794,37 @@ table {
         left: 5%;
     }
 
-    .product .model-m {
+    .product-model-m {
         width: 80vw;
         display: flex;
         justify-content: space-between;
     }
 
-    .product .model-m img {
+    .product-model-m-image {
         width: 50%;
     }
 
-    .product .model-m .description {
+    .product-model-m-description-box {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
     }
 
-    .product .model-m .description h1 {
+    .product-model-m-title {
         font-size: 3rem;
     }
 
-    .product .model-m .description p {
+    .product-model-m-description {
         font-size: 1rem;
         margin: 2em 0;
     }
     
-    .product .model-m .description span {
+    .product-model-m-price {
         font-size: 1.5rem;
     }
 
-    .product .model-m .description a {
+    .product-model-m-button {
         border: 1px solid #212529;
         font-size: .5rem;
         font-weight: 700;
@@ -836,17 +836,17 @@ table {
         top: 5em;
     }
 
-    .product .model-m .description a span {
+    .product-model-m-button span {
         color: #212529;
         position: relative;
         transition: .5s;
     }
 
-    .product .model-m .description a:hover span {
+    .product-model-m-button:hover span {
         color: #F9F9F9;
     }
 
-    .product .model-m .description a::before {
+    .product-model-m-button::before {
         content: "";
         position: absolute;
         top: 0;
@@ -860,11 +860,11 @@ table {
         transform: scaleX(0);
     }
 
-    .product .model-m .description a:hover::before {
+    .product-model-m-button:hover::before {
         transform: scaleX(1);
     }
 
-    .product .model-s {
+    .product-model-s {
         width: 80vw;
         display: flex;
         flex-direction: row-reverse;
@@ -872,31 +872,31 @@ table {
         padding: 0 5em;
     }
 
-    .product .model-s img {
+    .product-model-s-image {
         width: 30%;
     }
 
-    .product .model-s .description {
+    .product-model-s-description-box {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
     }
 
-    .product .model-s .description h1 {
+    .product-model-s-title {
         font-size: 3rem;
     }
 
-    .product .model-s .description p {
+    .product-model-s-description {
         font-size: 1rem;
         margin: 2em 0;
     }
     
-    .product .model-s .description span {
+    .product-model-s-price {
         font-size: 1.5rem;
     }
 
-    .product .model-s .description a {
+    .product-model-s-button {
         border: 1px solid #212529;
         font-size: .5rem;
         font-weight: 700;
@@ -908,17 +908,17 @@ table {
         top: 5em;
     }
 
-    .product .model-s .description a span {
+    .product-model-s-button span {
         color: #212529;
         position: relative;
         transition: .5s;
     }
 
-    .product .model-s .description a:hover span {
+    .product-model-s-button:hover span {
         color: #F9F9F9;
     }
 
-    .product .model-s .description a::before {
+    .product-model-s-button::before {
         content: "";
         position: absolute;
         top: 0;
@@ -932,13 +932,13 @@ table {
         transform: scaleX(0);
     }
 
-    .product .model-s .description a:hover::before {
+    .product-model-s-button:hover::before {
         transform: scaleX(1);
     }
 
     /* Comment */
-    main .comment {
-        background-image: url('../../main/comment/background.webp');
+    .comment {
+        background-image: url('../../../main/comment/background.webp');
         background-position: center;
         background-size: cover;
         background-attachment: fixed;
@@ -951,7 +951,7 @@ table {
         overflow: hidden;
     }
 
-    main .comment span.title {
+    .comment-title {
         background-color: #FF4655;
         color: #F9F9F9;
         font-size: 1.5rem;
@@ -962,7 +962,7 @@ table {
         left: 30%;
     }
 
-    main .comment .designstrip1 {
+    .comment-material-strip-1 {
         background-color: #F9F9F9;
         display: block;
         width: 1px;
@@ -972,7 +972,7 @@ table {
         right: 95%;
     }
 
-    main .comment .designstrip2 {
+    .comment-material-strip-2 {
         background-color: #FF4655;
         display: block;
         width: 1px;
@@ -982,7 +982,7 @@ table {
         right: 15%;
     }
 
-    main .comment .designred1 {
+    .comment-material-red-1 {
         background-color: #FF4655;
         display: block;
         width: 10px;
@@ -992,7 +992,7 @@ table {
         right: 95%;
     }
 
-    main .comment .designred2 {
+    .comment-material-red-2 {
         background-color: #FF4655;
         display: block;
         width: 10px;
@@ -1002,7 +1002,7 @@ table {
         right: 15%;
     }
 
-    main .comment .designwhite1 {
+    .comment-material-white-1 {
         background-color: #F9F9F9;
         display: block;
         width: 10px;
@@ -1012,7 +1012,7 @@ table {
         right: 55%;
     }
 
-    main .comment .designwhite2 {
+    .comment-material-white-2 {
         background-color: #F9F9F9;
         display: block;
         width: 10px;
@@ -1022,7 +1022,7 @@ table {
         right: 35%;
     }
 
-    main .comment .designwhite3 {
+    .comment-material-white-3 {
         background-color: #F9F9F9;
         display: block;
         width: 10px;
@@ -1032,7 +1032,7 @@ table {
         right: 65%;
     }
 
-    main .comment .animations2 .designwhite4 {
+    .comment-material-white-4 {
         background-color: #F9F9F9;
         display: block;
         width: 7px;
@@ -1042,7 +1042,7 @@ table {
         right: 75%;
     }
 
-    main .comment .animations2 .designwhite5 {
+    .comment-material-white-5 {
         background-color: #F9F9F9;
         display: block;
         width: 6px;
@@ -1052,7 +1052,7 @@ table {
         right: 10%;
     }
 
-    main .comment .animations2 .designwhite6 {
+    .comment-material-white-6 {
         background-color: #F9F9F9;
         display: block;
         width: 5px;
@@ -1062,11 +1062,12 @@ table {
         right: 80%;
     }
 
-    main .carrousel-comment {
+    .comment-carrousel {
         transition: 1s;
+        transform: translateY(20%);
     }
 
-    main .carrousel-comment .user {
+    .comment-carrousel-user {
         color: #F9F9F9;
         display: flex;
         flex-direction: column;
@@ -1074,7 +1075,7 @@ table {
         align-items: center;
     }
 
-    main .carrousel-comment .user .picture {
+    .comment-carrousel-user-picture-box {
         width: 5em;
         height: 5em;
         border-radius: 50%;
@@ -1082,21 +1083,21 @@ table {
         margin: 2em 0;
     }
 
-    main .carrousel-comment .user .picture img {
+    .comment-carrousel-user-picture {
         width: 100%;
     }
 
-    main .carrousel-comment .user p {
+    .comment-carrousel-user-comment {
         margin: 2em 0;
     }
 
-    main .comment .dots {
+    .comment-dots {
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
-    main .comment .dots span {
+    .comment-dots span {
         background-color: #F9F9F9;
         display: block;
         width: 10px;
@@ -1106,7 +1107,7 @@ table {
     }
 
     /* Team */
-    main .team {
+    .team {
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
@@ -1115,7 +1116,7 @@ table {
         padding: 10em 0;
     }
 
-    main .team .materialstrip1 {
+    .team-material-strip-1 {
         background-color: #212529;
         display: block;
         width: 1px;
@@ -1125,7 +1126,7 @@ table {
         left: 95%;
     }
 
-    main .team .materialstrip2 {
+    .team-material-strip-2 {
         background-color: #FF4655;
         display: block;
         width: 1px;
@@ -1135,7 +1136,7 @@ table {
         left: 5%;
     }
 
-    main .team .materialred1 {
+    .team-material-red-1 {
         background-color: #FF4655;
         display: block;
         width: 10px;
@@ -1145,7 +1146,7 @@ table {
         left: 95%;
     }
 
-    main .team .materialred2 {
+    .team-material-red-2 {
         background-color: #FF4655;
         display: block;
         width: 10px;
@@ -1155,7 +1156,7 @@ table {
         right: 5%;
     }
 
-    main .team h1 {
+    .team-title {
         color: #212529;
         font-size: 5rem;
         font-weight: 700;
@@ -1165,27 +1166,27 @@ table {
         transition: .5s;
     }
     
-    main .team .layout-team {
+    .team-layout {
         display: flex;
         justify-content: space-evenly;
         align-items: center;
         width: 80%;
     }
 
-    main .team .layout-team .card {
+    .team-card {
         width: 14rem;
         position: relative;
         border: 0;
         transition: .3s;
     }
 
-    main .team .layout-team .card:hover,
-    main .team .layout-team .card:hover .social-media {
+    .team-card:hover,
+    .team-card:hover .team-social-media {
         opacity: 1;
         transform: translateY(-10px);
     }
 
-    main .team .layout-team .card .social-media {
+    .team-social-media {
         background-color: #FF4655;
         position: absolute;
         top: -2%;
@@ -1194,17 +1195,22 @@ table {
         transition: .3s;
     }
 
-    main .team .layout-team .card .social-media span {
+    .team-social-media span {
         color: #F9F9F9;
     }
 
-    main .team .layout-team .card .card-body {
+    .team-card-body {
         text-align: left;
     }
 
-    main .team .layout-team .card .card-body h6.card-title {
+    .team-name {
         font-size: 1em;
         font-weight: bold;
+    }
+
+    .team-button-all {
+        background-color: #FF4655;
+        color: #F9F9F9;
     }
     /* Main End */
 
@@ -1213,40 +1219,101 @@ table {
         display: block;
         margin-right: 5vw;
         font-size: .8rem;
+        position: relative;
     }
 
-    .footer .logo {
+    .footer-material-strip-1 {
+        background-color: #F9F9F9;
+        display: block;
+        width: 1px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 95%;
+    }
+
+    .footer-material-strip-2 {
+        background-color: #FF4655;
+        display: block;
+        width: 1px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: 95%;
+    }
+
+    .footer-material-red-1 {
+        background-color: #FF4655;
+        display: block;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        top: 15%;
+        right: 5%;
+    }
+
+    .footer-material-red-2 {
+        background-color: #FF4655;
+        display: block;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        top: 85%;
+        left: 95%;
+    }
+
+    .footer-material-red-3 {
+        background-color: #F9F9F9;
+        display: block;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        top: 20%;
+        left: 5%;
+    }
+
+    .footer-material-red-4 {
+        background-color: #F9F9F9;
+        display: block;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        top: 85%;
+        right: 95%;
+    }
+
+    .footer-brand-logo {
         width: 10%;
         transition: 1s;
     }
 
-    .footer .start-footer {
+    .footer-top {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
 
-    .footer .social-media {
+    .footer-social-media-box {
         display: flex;
         justify-content: space-evenly;
         align-items: center;
         width: 50vw;
     }
 
-    .footer .social-media a {
+    .footer-social-media {
         color: grey;
         transition: all .5s;
     }
 
-    .footer .social-media a:hover {
+    .footer-social-media:hover {
         color: white;
     }
 
-    .footer .social-media div a i {
+    .footer-social-media i {
         font-size: 2rem;
     }
 
-    .footer .text-footer {
+    .footer-web-description {
         transition: 1s;
     }
     /* Footer End */

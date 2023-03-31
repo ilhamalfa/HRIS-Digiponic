@@ -61,7 +61,7 @@ $(window).scroll(function () {
         navmenu.classList.remove('show')
         accountMenu.classList.remove('show')
     }
-    if (wScroll > 150) {
+    if (wScroll > 40) {
         $('.topbar-brand-text').css({
             'color' : '#FF4655'
         })
@@ -88,8 +88,12 @@ $(window).scroll(function () {
     }
 
     // Opening Animation Start
-    $('.opening-material div').css({
+    $('.opening-material .opening-material-red').css({
         'transform' : 'translate(0px,' + wScroll*2 +'%)'
+    })
+
+    $('.opening-material .opening-material-black').css({
+        'transform' : 'translate(0px,' + wScroll*5 +'%)'
     })
     
     $('.opening-text-scroll').css({
@@ -103,11 +107,6 @@ $(window).scroll(function () {
             'opacity' : '1',
             'transform' : 'translateY(0)'
         })
-    } else {
-        $('.career-title').css({
-            'opacity' : '0',
-            'transform' : 'translateY(30%)'
-        })
     }
     // Career Annimations End
 
@@ -116,11 +115,6 @@ $(window).scroll(function () {
         $('.about-us-title').css({
             'opacity' : '1',
             'transform' : 'translateY(0)'
-        })
-    } else {
-        $('.about-us-title').css({
-            'opacity' : '0',
-            'transform' : 'translateY(20%)'
         })
     }
     // About Us Animations End
@@ -150,54 +144,24 @@ $(window).scroll(function () {
                 'top' : '65%'
             })
         }, 1500)
-    } else {
-        $('.product-introduction-title').css({
-            'opacity' : '0',
-            'letter-spacing' : '0'
-        })
-        $('.product-introduction-material-red-1').css({
-            'left' : '30%'
-        })
-        $('.product-introduction-material-red-2').css({
-            'top' : '75%'
-        })
-        $('.product-introduction-material-red-3').css({
-            'top' : '15%'
-        })
     }
     // Our Product Animations End
     
     // Comment Animations Start
     let comment = $('.comment').offset().top
     if (wScroll > comment - 500) {
-        $('.carrousel-comment').css({
+        $('.comment-carrousel').css({
             'opacity' : '1',
             'transform' : 'translateY(0)'
-        })
-        $('.comment .animations1 div').css({
-            'transform' : 'translate(0px, -' + (wScroll - comment) +'%)'
-        })
-        $('.comment .animations2 div').css({
-            'transform' : 'translate(0px,' + (wScroll - comment)*2 +'%)'
-        })
-    } else {
-        $('.carrousel-comment').css({
-            'opacity' : '0',
-            'transform' : 'translateY(20%)'
         })
     }
     // Comment Animations End
 
     // Our Team Animations Start
     if (wScroll > $('.team').offset().top - 550) {
-        $('.team h1').css({
+        $('.team-title').css({
             'opacity' : '1',
             'transform' : 'translateY(0)'
-        })
-    } else {
-        $('.team h1').css({
-            'opacity' : '0',
-            'transform' : 'translateY(20%)'
         })
     }
     // Our Team Animations End
@@ -205,25 +169,16 @@ $(window).scroll(function () {
     // Footer Animations Start
     let footer = $('.footer').offset().top
     if (wScroll > footer - 500) {
-        $('.footer .logo img.logo').css({
+        $('.footer-brand-logo').css({
             'opacity' : '1',
             'transform' : 'translateY(0)'
         })
         setTimeout(function () {
-            $('.footer .text-footer').css({
+            $('.footer-web-description').css({
                 'opacity' : '1',
                 'transform' : 'translateY(0)'
             })
         }, 500)
-    } else {
-        $('.footer .logo img.logo').css({
-            'opacity' : '0',
-            'transform' : 'translateY(20%)'
-        })
-        $('.footer .text-footer').css({
-            'opacity' : '0',
-            'transform' : 'translateY(20%)'
-        })
     }
     // Footer Animations End
 })

@@ -22,11 +22,8 @@
     {{-- Preloader CSS --}}
     <link rel="stylesheet" href="{{ asset('preloader/style.css') }}">
 
-    {{-- Random CSS --}}
-    <link rel="stylesheet" href="{{ asset('asset/asset.css') }}">
-
     {{-- CSS --}}
-    <link rel="stylesheet" href="{{ asset('layout/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('layout/landingpage/css/style.css') }}">
 
     {{-- Font Awesome --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
@@ -140,19 +137,20 @@
 
     {{-- Footer Start --}}
     <footer class="footer bg-dark text-white container-fluid">
-        <div class="materialstrip1"></div>
-        <div class="materialred1"></div>
-        <div class="materialred2"></div>
-        <div class="materialred3"></div>
-        <div class="materialred4"></div>
+        <div class="footer-material-strip-1"></div>
+        <div class="footer-material-strip-2"></div>
+        <div class="footer-material-red-1"></div>
+        <div class="footer-material-red-2"></div>
+        <div class="footer-material-red-3"></div>
+        <div class="footer-material-red-4"></div>
         @if (Request::is('/'))
-            <div class="start-footer">
+            <div class="footer-top">
                 <div class="row text-center justify-content-center">
                     <div class="p-2">
                         <div class="logo m-3">
-                            <img class="logo" src="{{ asset('logo/brand-logo.png') }}" alt="Brand Logo" id="footer-brand">
+                            <img class="footer-brand-logo" src="{{ asset('logo/brand-logo.png') }}" alt="Brand Logo" id="footer-brand">
                         </div>
-                        <div class="text-footer m-5 px-5">
+                        <div class="footer-web-description m-5 px-5">
                             <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, quam
                                 exercitationem neque adipisci, sint deserunt reprehenderit illum, aut doloremque aliquid
                                 corporis repellat ducimus at quisquam molestiae commodi tempore assumenda atque.Lorem
@@ -174,24 +172,24 @@
                         </div>
                     </div>
                 </div>
-                <div class="social-media m-5">
+                <div class="footer-social-media-box m-5">
                     <div>
-                        <a href="#">
+                        <a class="footer-social-media" href="#">
                             <i class="fa-brands fa-twitter"></i>
                         </a>
                     </div>
                     <div>
-                        <a href="#">
+                        <a class="footer-social-media" href="#">
                             <i class="fa-brands fa-instagram"></i>
                         </a>
                     </div>
                     <div>
-                        <a href="#">
+                        <a class="footer-social-media" href="#">
                             <i class="fa-brands fa-facebook"></i>
                         </a>
                     </div>
                     <div>
-                        <a href="#">
+                        <a class="footer-social-media" href="#">
                             <i class="fa-brands fa-linkedin"></i>
                         </a>
                     </div>
@@ -205,10 +203,6 @@
                 </div>
             </div>
         </div>
-        <div class="dots">
-            <span></span>
-            <span></span>
-        </div>
     </footer>
     {{-- Footer End --}}
 
@@ -221,10 +215,10 @@
     @include('sweetalert::alert')
 
     {{-- JQuery --}}
-    <script src="{{ asset('layout/jquery/jquery-3.6.4.min.js') }}"></script>
+    <script src="{{ asset('layout/landingpage/jquery/jquery-3.6.4.min.js') }}"></script>
 
     {{-- JS --}}
-    <script src="{{ asset('layout/js/script.js') }}"></script>
+    <script src="{{ asset('layout/landingpage/js/script.js') }}"></script>
 </body>
 
 </html>
