@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IndoRegionController;
 use App\Http\Controllers\LowonganController;
@@ -21,7 +22,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('layouts.template');
+    return view('landingpage.landingpage');
+    // return view('homepage.homepage');
 });
 
 Auth::routes(['verify' => true]);
@@ -53,6 +56,8 @@ Route::get('/pelamar/lowongan/', [PelamarController::class, 'daftarLowongan'])->
 
 Route::get('/pelamar/lowongan/apply/{id}', [PelamarController::class, 'applyLowongan'])->middleware('pelamar');
 
+Route::get('/pelamar/lamaran/', [PelamarController::class, 'daftarLamaran'])->middleware('pelamar');
+
 
 // Route Super Admin
 // Data User
@@ -80,9 +85,13 @@ Route::get('data-lowongan/tambah-lowongan', [LowonganController::class, 'tambahL
 
 Route::post('data-lowongan/store-lowongan', [LowonganController::class, 'storeLowongan']);
 
-Route::get('data-lowongan/lowongan-detail/{id}', [LowonganController::class, 'detailLowongan']);
+Route::get('data-lowongan/daftar-pelamar/{id}', [LowonganController::class, 'detailLowongan']);
 
 Route::get('data-lowongan/pelamar-detail/{id}', [LowonganController::class, 'detailPelamar']);
+
+Route::get('data-lowongan/pelamar-detail/ubah-status/{id}/{status}', [LowonganController::class, 'ubahStatus']);
+
+Route::post('data-lowongan/pelamar-detail/terima/{id}', [LowonganController::class, 'terima']);
 
 Route::get('pelamar-detail/download-cv/{id}', [LowonganController::class, 'downloadCV']);
 

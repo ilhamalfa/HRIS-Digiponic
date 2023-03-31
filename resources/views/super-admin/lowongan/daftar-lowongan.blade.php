@@ -27,7 +27,7 @@
                                 <td>{{ $data->tanggal }}</td>
                                 <td>{{ $data->lamaran->count() . " Pendaftar"}}</td>
                                 <td>
-                                    <a href="{{ url('data-lowongan/lowongan-detail/' . $data->id) }}" class="btn btn-primary">Detail</a>
+                                    <a href="{{ url('data-lowongan/daftar-pelamar/' . $data->id) }}" class="btn btn-primary">Daftar Pelamar</a>
                                 </td>
                             </tr>
                             @endforeach

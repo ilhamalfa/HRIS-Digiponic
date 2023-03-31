@@ -32,12 +32,12 @@
 
     {{-- Image Background Start --}}
     <div class="container-fluid p-0">
-        <img src="{{ asset('background/background-jumbo-tron.jpg') }}" alt="Background Image">
+        <img src="{{ asset('auth/background/background-auth.jpg') }}" alt="Background Image">
     </div>
     {{-- Image Background End --}}
 
     {{-- Main Start --}}
-    <main>
+    <main class="main">
         @yield('content')
     </main>
     {{-- Main End --}}

@@ -3,75 +3,51 @@
 @section('title', 'Login Page')
 
 @section('content')
-<<<<<<< HEAD
     <div class="auth">
-        <h1>Have an account?</h1>
-        @if ($person == 1)
-            <form action="{{ route('login') }}" method="POST">
-                @csrf
-                <div class="nik">
-                    {{-- <label for="email">Email</label> --}}
-                    <input type="number" id="nik" name="nik" value="{{ old('nik') }}" placeholder="Your NIK"
-                        required autocomplete="nik">
+        <h1 class="auth-title">Sign In</h1>
+        <form class="auth-form" method="POST" action="{{ route('login') }}">
+            @csrf
+            <div class="auth-email-box">
+                {{-- <label for="email">Email</label> --}}
+                <input type="email" id="email" name="login" value="{{ old('email') }}" placeholder="Your Email"
+                    required autocomplete="email" autofocus>
+            </div>
+            <div class="auth-password-box">
+                {{-- <label for="password">Password</label> --}}
+                <input type="password" id="password" name="password" placeholder="Password" required
+                    autocomplete="current-password">
+            </div>
+            <div class="auth-remember-box">
+                <input class="auth-remember-checkbox" type="checkbox" name="remember" id="remember"
+                    {{ old('remember') ? 'checked' : '' }}>
+                {{-- <label class="auth-remember-checkbox-label" for="remember">
+                    {{ __('Remember Me') }}
+                </label> --}}
+                <span class="auth-remember-checkbox-label">Remember Me</span>
+            </div>
+            <div class="auth-button-box">
+                <button type="submit" class="auth-button btn btn-outline-secondary rounded-0 px-5 m-3">
+                    SIGN IN
+                </button>
+            </div>
+            <div class="auth-forgot-password-box">
+                @if (Route::has('password.request'))
+                    <a class="btn btn-link auth-forgot-password" href="{{ route('password.request') }}">
+                        {{ __('Forgot Your Password?') }}
+                    </a>
+                @endif
+            </div>
+            <div class="auth-extra-box">
+                <p class="auth-switch-title">Dont Have Account?</p>
+                <div class="auth-switch-sign-up-box">
+                    <a href="{{ route('register') }}" class="auth-switch-sign-up">
+                        <i class="fa-solid fa-file-lines m-2"></i>
+                        <span>Sign Up</span>
+                    </a>
                 </div>
-                <div class="password">
-                    {{-- <label for="password">Password</label> --}}
-                    <input type="password" id="password" name="password" placeholder="Password" required
-                        autocomplete="current-password">
-                </div>
-                <div class="extra">
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" name="remember" id="remember"
-                            {{ old('remember') ? 'checked' : '' }}>
-                        <label class="form-check-label" for="remember">Remember Me!</label>
-                    </div>
-                    @if (Route::has('password.request'))
-                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                            {{ __('Forgot Your Password?') }}
-                        </a>
-                    @endif
-                </div>
-                <div class="button">
-                    <button type="submit" class="btn btn-outline-secondary rounded-pill px-5 m-3">LOGIN</button>
-                </div>
-                <div class="switch">
-                    <p>OR</p>
-                    <a href="{{ route('register') }}" class="">Create Account</a>
-                </div>
-            </form>
-        @else
-            <form action="{{ route('login') }}" method="POST">
-                @csrf
-                <div class="email">
-                    {{-- <label for="email">Email</label> --}}
-                    <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="Your Email"
-                        required autocomplete="email">
-                </div>
-                <div class="password">
-                    {{-- <label for="password">Password</label> --}}
-                    <input type="password" id="password" name="password" placeholder="Password" required
-                        autocomplete="current-password">
-                </div>
-                <div class="extra">
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" name="remember" id="remember"
-                            {{ old('remember') ? 'checked' : '' }}>
-                        <label class="form-check-label" for="remember">Remember Me!</label>
-                    </div>
-                    @if (Route::has('password.request'))
-                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                            {{ __('Forgot Your Password?') }}
-                        </a>
-                    @endif
-                </div>
-                <div class="button">
-                    <button type="submit" class="btn btn-outline-secondary rounded-pill px-5 m-3">LOGIN</button>
-                </div>
-                <div class="switch">
-                    <p>OR</p>
-                    <a href="{{ route('register') }}" class="">Create Account</a>
-                </div>
-            </form>
-        @endif
+            </div>
+        </form>
     </div>
 @endsection
+
+
