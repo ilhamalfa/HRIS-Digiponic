@@ -1,6 +1,6 @@
 @extends('auth.layout')
 
-@section('title', 'Register')
+{{-- @section('title', 'Register') --}}
 
 @section('content')
     <div class="auth">
