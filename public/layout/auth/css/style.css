@@ -77,10 +77,13 @@ table {
     }
 
     .auth {
+        background-color: #F9F9F9;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        margin: 2em auto;
+        padding: 0 5em;
     }
 
     .auth-title {
@@ -110,7 +113,6 @@ table {
 
     input[type=checkbox].auth-remember-checkbox {
         border: 1px solid #212529;
-        outline: none;
         margin: 5px;
         width: 15px;
         height: 15px;
@@ -192,7 +194,7 @@ table {
         transform: scaleX(1);
     }
 
-    .auth-switch-sign-up-as-box a {
+    .auth-switch-sign-up-box a {
         border: 1px solid #212529;
         font-size: .8rem;
         text-decoration: none;
@@ -203,25 +205,25 @@ table {
         transition: color .3s linear;
     }
 
-    .auth-switch-sign-up-as-box a i {
+    .auth-switch-sign-up-box a i {
         position: relative;
         color: #212529;
         transition: .5s;
     }
 
-    .auth-switch-sign-up-as-box a span {
+    .auth-switch-sign-up-box a span {
         color: #212529;
         position: relative;
         transition: .5s;
     }
 
-    .auth-switch-sign-up-as-box a:hover i,
-    .auth-switch-sign-up-as-box a:hover span
+    .auth-switch-sign-up-box a:hover i,
+    .auth-switch-sign-up-box a:hover span
     {
         color: #F9F9F9;
     }
 
-    .auth-switch-sign-up-as-box a::before {
+    .auth-switch-sign-up-box a::before {
         content: "";
         position: absolute;
         top: 0;
@@ -235,8 +237,12 @@ table {
         transform: scaleX(0);
     }
 
-    .auth-switch-sign-up-as-box a:hover::before {
+    .auth-switch-sign-up-box a:hover::before {
         transform: scaleX(1);
+    }
+
+    .auth-forgot-password {
+        text-decoration: none;
     }
 
     .auth-extra-box {
@@ -244,7 +250,7 @@ table {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin: 5em 0;
+        margin: 1em 0;
     }
 
     .auth-extra-link {
