@@ -65,7 +65,7 @@
             <span></span>
             <span></span>
         </div>
-        <div class="topbar-account">
+        <div class="topbar-account" id="topbar-account">
             <a class="topbar-account-logo" href="#">
                 <i class="fa-solid fa-circle-user fa-2x"></i>
             </a>
@@ -111,7 +111,7 @@
                 <span>Login</span>
             </a>
             <div class="login-as" id="login-as">
-                <form action="{{ route('rutelogin') }}" method="POST">
+                <form class="login-as-form" action="{{ route('rutelogin') }}" method="POST">
                     @csrf
                     <input type="submit" name="inputemployee" value="As Employee">
                     <input type="submit" name="inputcandidate" value="As Candidate">
@@ -133,7 +133,7 @@
     {{-- Accountmenu End --}}
 
     {{-- Main Start --}}
-    <main>
+    <main class="main"> 
         @yield('content')
     </main>
     {{-- Main End --}}

@@ -37,7 +37,7 @@
     {{-- Image Background End --}}
 
     {{-- Main Start --}}
-    <main>
+    <main class="main">
         @yield('content')
     </main>
     {{-- Main End --}}

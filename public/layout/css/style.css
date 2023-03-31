@@ -115,19 +115,19 @@ table {
         background-color: #FF4655;
     }
 
-    nav.topbar .account {
+    .topbar-account {
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
-    nav.topbar .account a {
+    .topbar-account a {
         color: #212529;
     }
     /* Nav Topbar End */
 
     /* Navmenu Start */
-    nav.navmenu {
+    .navmenu {
         background-color: #212529;
         flex-direction: column;
         justify-content: center;
@@ -143,16 +143,16 @@ table {
         z-index: 999;
     }
 
-    nav.navmenu.show {
+    .navmenu.show {
         opacity: 1;
         visibility: visible;
     }
     
-    nav.navmenu.background {
+    .navmenu.background {
         background-color: #FF4655;
     }
 
-    nav.navmenu a {
+    .navmenu a {
         color: #F9F9F9;
         text-decoration: none;
         font-weight: 700;
@@ -161,14 +161,14 @@ table {
         margin: 2em 0;
     }
 
-    nav.navmenu a:hover {
+    .navmenu a:hover {
         color: #F9F9F9;
         letter-spacing: 5px;
     }
     /* Navmenu End */
 
     /* Account Menu Start */
-    nav.account-menu {
+    .account-menu {
         background-color: #212529;
         display: flex;
         flex-direction: column;
@@ -184,16 +184,16 @@ table {
         z-index: 999;
     }
 
-    nav.account-menu.show {
+    .account-menu.show {
         opacity: 1;
         visibility: visible;
     }
 
-    nav.account-menu.background {
+    .account-menu.background {
         background-color: #FF4655;
     }
 
-    nav.account-menu a {
+    .account-menu a {
         color: #F9F9F9;
         text-decoration: none;
         font-weight: 700;
@@ -202,31 +202,30 @@ table {
         margin: 2em 0;
     }
 
-    nav.account-menu a:hover {
-        color: #F9F9F9;
+    .account-menu a:hover {
         letter-spacing: 5px;
         position: relative;
     }
 
-    nav.account-menu .login-as {
+    .account-menu .login-as {
         display: none;
         opacity: 0;
         transition: .5s;
     }
 
-    nav.account-menu .login-as.show {
+    .account-menu .login-as.show {
         display: block;
         opacity: 1;
     }
 
-    nav.account-menu .login-as form {
+    .login-as-form {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
     }
 
-    nav.account-menu .login-as form input{
+    .login-as-form input{
         cursor: pointer;
         color: #F9F9F9;
         font-size: 1rem;
@@ -240,19 +239,19 @@ table {
         transition: .5s;
     }
 
-    nav.account-menu .login-as form input:hover {
+    .login-as-form input:hover {
         color: #FF4655;
         border: 1px solid #FF4655;
     }
     /* Account Menu End */
 
     /* Main Start */
-    main {
+    .main {
         text-align: center;
     }
 
-    /* Opening */
-    main .opening {
+    /* Opening Start */
+    .opening {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -262,18 +261,18 @@ table {
         overflow: hidden;
     }
 
-    main .opening .material {
+    .opening-material {
         z-index: -999;
     }
 
-    main .opening .material img.materialtriangle {
+    .opening-material-triangle {
         width: 7%;
         position: absolute;
         left: 0;
         bottom: 0;
     }
 
-    main .opening .material .materialred{
+    .opening-material-red{
         background-color: #FF4655;
         display: block;
         width: 15px;
@@ -283,21 +282,21 @@ table {
         left: 10%;
     }
 
-    main .opening .material div:nth-child(2) {
+    .opening-material div:nth-child(2) {
         width: 10px;
         height: 10px;
         top: 40%;
         left: 20%;
     }
 
-    main .opening .material div:nth-child(3) {
+    .opening-material div:nth-child(3) {
         width: 16px;
         height: 16px;
         top: 70%;
         left: 40%;
     }
 
-    main .opening .material .materialblack{
+    .opening-material-black{
         background-color: #212529;
         display: block;
         width: 10px;
@@ -307,14 +306,14 @@ table {
         left: 70%;
     }
 
-    main .opening .material div:nth-child(6) {
+    .opening-material div:nth-child(6) {
         width: 13px;
         height: 13px;
         top: 60%;
         left: 80%;
     }
 
-    main .opening .materialstrip1 {
+    .opening-material-strip-1 {
         background-color: #212529;
         display: block;
         width: 1px;
@@ -323,7 +322,7 @@ table {
         right: 10%;
     }
 
-    main .opening .materialstrip2 {
+    .opening-material-strip-2 {
         background-color: #212529;
         display: block;
         width: 1px;
@@ -332,7 +331,7 @@ table {
         right: 70%;
     }
 
-    main .opening .materialstrip3 {
+    .opening-material-strip-3 {
         background-color: #212529;
         display: block;
         width: 1px;
@@ -341,18 +340,18 @@ table {
         right: 95%;
     }
 
-    main .opening h1 {
+    .opening-title {
         font-size: 5rem;
         margin: .2em 0;
         opacity: 0;
         transition: .7s;
     }
-    
-    main .opening h1.fade {
+
+    .opening-title.show {
         opacity: 1;
     }
 
-    main .opening h6 {
+    .opening-slogan {
         font-family: 'Dancing Script', cursive;
         font-size: 1.5rem;
         font-weight: 700;
@@ -361,11 +360,11 @@ table {
         transition: .7s;
     }
 
-    main .opening h6.fade {
+    .opening-slogan.show {
         opacity: 1;
     }
 
-    main .opening .text-scroll {
+    .opening-text-scroll {
         color: #212529;
         font-size: .5rem;
         font-weight: bolder;
@@ -373,9 +372,10 @@ table {
         position: absolute;
         bottom: 5%;
     }
+    /* Opening End */
     
-    /* Career */
-    main .career {
+    /* Career Start */
+    .career {
         background-color: #212529;
         display: flex;
         justify-content: space-evenly;
@@ -384,7 +384,7 @@ table {
         position: relative;
     }
 
-    main .career .materialstrip1 {
+    .career-material-strip-1 {
         background-color: #F9F9F9;
         display: block;
         width: 1px;
@@ -393,7 +393,7 @@ table {
         right: 95%;
     }
 
-    main .career .materialred1 {
+    .career-material-red-1 {
         background-color: #FF4655;
         display: block;
         width: 10px;
@@ -403,7 +403,7 @@ table {
         left: 70%;
     }
 
-    main .career .materialred2 {
+    .career-material-red-2 {
         background-color: #FF4655;
         display: block;
         width: 10px;
@@ -413,7 +413,7 @@ table {
         left: 50%;
     }
 
-    main .career .materialred3 {
+    .career-material-red-3 {
         background-color: #FF4655;
         display: block;
         width: 10px;
@@ -423,7 +423,7 @@ table {
         left: 55%;
     }
 
-    main .career .materialred4 {
+    .career-material-red-4 {
         background-color: #FF4655;
         display: block;
         width: 10px;
@@ -433,7 +433,7 @@ table {
         left: 5%;
     }
 
-    main .career h1 {
+    .career-title {
         color: #F9F9F9;
         font-size: 5rem;
         font-weight: 700;
@@ -445,15 +445,15 @@ table {
         transition: 1s;
     }
 
-    main .career .image {
+    .career-image-box {
         position: relative;
     }
 
-    main .career .image img {
+    .career-image {
         width: 45vw;
     }
 
-    main .career .image span {
+    .career-image-span {
         background-color: #FF4655;
         color: #F9F9F9;
         font-size: 1rem;
@@ -464,23 +464,23 @@ table {
         padding: 5px 15px;
     }
 
-    main .career .description {
+    .career-description-box {
         color: #F9F9F9;
         position: relative;
     }
 
-    main .career .description h6 {
+    .career-description-title {
         text-align: end;
         margin-bottom: 3em;
     }
 
-    main .career .description p {
+    .career-description {
         color: #76808A;
         text-align: end;
         padding-left: 2em;
     }
 
-    main .career .description a {
+    .career-description-button {
         color: #FF4655; 
         font-size: 1rem;
         font-weight: 700;
@@ -493,17 +493,17 @@ table {
         top: 5em;
     }
 
-    main .career .description a span {
+    .career-button-span {
         color: #F9F9F9;
         position: relative;
     }
 
-    main .career .description a:hover {
+    .career-description-button:hover {
         color: #F9F9F9;
         border: 1px solid #FF4655;
     }
 
-    main .career .description a::before {
+    .career-description-button::before {
         content: "";
         position: absolute;
         top: 0;
@@ -517,18 +517,19 @@ table {
         transform: scaleX(0);
     }
 
-    main .career .description a:hover::before {
+    .career-description-button:hover::before {
         transform: scaleX(1);
     }
+    /* Career End */
 
-    /* About */
-    main .about-us {
+    /* About Us Start */
+    .about-us {
         display: flex;
         position: relative;
         padding: 10em 10em;
     }
 
-    main .about-us .materialred1 {
+    .about-us-material-red-1 {
         background-color: #FF4655;
         display: block;
         width: 10px;
@@ -538,7 +539,7 @@ table {
         left: 70%;
     }
 
-    main .about-us .materialred2 {
+    .about-us-material-red-2 {
         background-color: #FF4655;
         display: block;
         width: 10px;
@@ -548,7 +549,7 @@ table {
         left: 60%;
     }
 
-    main .about-us .materialstrip1 {
+    .about-us-material-strip-1 {
         background-color: #FF4655;
         display: block;
         width: 1px;
@@ -558,7 +559,7 @@ table {
         right: 95%;
     }
 
-    main .about-us .materialstrip2 {
+    .about-us-material-strip-2 {
         background-color: #212529;
         display: block;
         width: 1px;
@@ -568,7 +569,7 @@ table {
         right: 30%;
     }
 
-    main .about-us h1 {
+    .about-us-title {
         color: #212529;
         font-size: 5rem;
         font-weight: 700;
@@ -580,14 +581,14 @@ table {
         transition: 1s;
     }
 
-    main .about-us .image img {
+    .about-us-image {
         width: 430px;
         position: absolute;
         right: 0;
         bottom: 0;
     }
 
-    main .about-us .image span {
+    .about-us-image-span {
         background-color: #FF4655;
         color: #F9F9F9;
         font-size: 1rem;
@@ -598,23 +599,23 @@ table {
         bottom: 0;
     }
 
-    main .about-us .description {
+    .about-us-description-box {
         width: 40vw;
     }
 
-    main .about-us .description h6 {
+    .about-us-description-title {
         text-align: left;
         font-size: 1rem;
         font-weight: bold;
         margin: 3em 0;
     }
 
-    main .about-us .description p {
+    .about-us-description {
         color: #76808A;
         text-align: left;
     }
 
-    main .about-us .description a {
+    .about-us-description-button {
         background-color: #FF4655;
         color: #FF4655; 
         font-size: 1rem;
@@ -627,16 +628,16 @@ table {
         top: 5em;
     }
 
-    main .about-us .description a span {
+    .about-us-description-button-span {
         color: #F9F9F9;
         position: relative;
     }
 
-    main .about-us .description a:hover {
+    .about-us-description-button:hover {
         color: #F9F9F9;
     }
 
-    main .about-us .description a::before {
+    .about-us-description-button::before {
         content: "";
         position: absolute;
         top: 0;
@@ -650,12 +651,13 @@ table {
         transform: scaleX(0);
     }
 
-    main .about-us .description a:hover::before {
+    .about-us-description-button:hover::before {
         transform: scaleX(1);
     }
+    /* About Us End */
 
     /* Product */
-    main .product-introduction {
+    .product-introduction {
         background-color: #212529;
         color: #F9F9F9;
         font-size: 3rem;
@@ -664,11 +666,11 @@ table {
         padding: 1em 0;
     }
 
-    main .product-introduction h1 {
+    .product-introduction-title {
         transition: .5s;
     }
 
-    main .product-introduction .materialstrip1 {
+    .product-introduction-material-strip-1 {
         background-color: #F9F9F9;
         display: block;
         width: 1px;
@@ -678,7 +680,7 @@ table {
         right: 95%;
     }
 
-    main .product-introduction .materialstrip2 {
+    .product-introduction-material-strip-2 {
         background-color: #FF4655;
         display: block;
         width: 1px;
@@ -688,7 +690,7 @@ table {
         right: 15%;
     }
     
-    main .product-introduction .materialred1 {
+    .product-introduction-material-red-1 {
         background-color: #FF4655;
         display: block;
         width: 10px;
@@ -699,7 +701,7 @@ table {
         transition: 1s;
     }
 
-    main .product-introduction .materialred2 {
+    .product-introduction-material-red-2 {
         background-color: #FF4655;
         display: block;
         width: 10px;
@@ -710,7 +712,7 @@ table {
         transition: 1s;
     }
 
-    main .product-introduction .materialred3 {
+    .product-introduction-material-red-3 {
         background-color: #F9F9F9;
         display: block;
         width: 10px;
@@ -721,7 +723,7 @@ table {
         transition: 1s;
     }
 
-    main .product-banner {
+    .product-banner {
         background-image: url('../../main/product/background.webp');
         background-position: center;
         background-size: cover;
@@ -731,18 +733,18 @@ table {
         position: relative;
     }
 
-    main .product-banner h1 {
+    .product-banner-title {
         font-size: 3rem;
         letter-spacing: 3px;
     }
 
-    main .product-banner p {
+    .product-banner-description {
         font-family: 'Dancing Script', cursive;
         font-size: 1.5rem;
         margin: .5em 0;
     }
 
-    main .product-banner a {
+    .product-banner-button {
         position: absolute;
         bottom: 10%;
         right: 45%;
@@ -750,7 +752,7 @@ table {
         margin: auto;
     }
 
-    main .product {
+    .product {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -758,11 +760,11 @@ table {
         position: relative;
     }
 
-    main .product div {
+    .product div {
         margin: 2em 0;
     }
 
-    main .product .materialstrip1 {
+    .product .materialstrip1 {
         background-color: #FF4655;
         display: block;
         width: 1px;
@@ -772,7 +774,7 @@ table {
         right: 95%;
     }
 
-    main .product .materialblack1 {
+    .product .materialblack1 {
         background-color: #212529;
         display: block;
         width: 10px;
@@ -782,7 +784,7 @@ table {
         right: 95%;
     }
 
-    main .product .materialblack2 {
+    .product .materialblack2 {
         background-color: #212529;
         display: block;
         width: 10px;
@@ -792,37 +794,37 @@ table {
         left: 5%;
     }
 
-    main .product .model-m {
+    .product .model-m {
         width: 80vw;
         display: flex;
         justify-content: space-between;
     }
 
-    main .product .model-m img {
+    .product .model-m img {
         width: 50%;
     }
 
-    main .product .model-m .description {
+    .product .model-m .description {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
     }
 
-    main .product .model-m .description h1 {
+    .product .model-m .description h1 {
         font-size: 3rem;
     }
 
-    main .product .model-m .description p {
+    .product .model-m .description p {
         font-size: 1rem;
         margin: 2em 0;
     }
     
-    main .product .model-m .description span {
+    .product .model-m .description span {
         font-size: 1.5rem;
     }
 
-    main .product .model-m .description a {
+    .product .model-m .description a {
         border: 1px solid #212529;
         font-size: .5rem;
         font-weight: 700;
@@ -834,17 +836,17 @@ table {
         top: 5em;
     }
 
-    main .product .model-m .description a span {
+    .product .model-m .description a span {
         color: #212529;
         position: relative;
         transition: .5s;
     }
 
-    main .product .model-m .description a:hover span {
+    .product .model-m .description a:hover span {
         color: #F9F9F9;
     }
 
-    main .product .model-m .description a::before {
+    .product .model-m .description a::before {
         content: "";
         position: absolute;
         top: 0;
@@ -858,11 +860,11 @@ table {
         transform: scaleX(0);
     }
 
-    main .product .model-m .description a:hover::before {
+    .product .model-m .description a:hover::before {
         transform: scaleX(1);
     }
 
-    main .product .model-s {
+    .product .model-s {
         width: 80vw;
         display: flex;
         flex-direction: row-reverse;
@@ -870,31 +872,31 @@ table {
         padding: 0 5em;
     }
 
-    main .product .model-s img {
+    .product .model-s img {
         width: 30%;
     }
 
-    main .product .model-s .description {
+    .product .model-s .description {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
     }
 
-    main .product .model-s .description h1 {
+    .product .model-s .description h1 {
         font-size: 3rem;
     }
 
-    main .product .model-s .description p {
+    .product .model-s .description p {
         font-size: 1rem;
         margin: 2em 0;
     }
     
-    main .product .model-s .description span {
+    .product .model-s .description span {
         font-size: 1.5rem;
     }
 
-    main .product .model-s .description a {
+    .product .model-s .description a {
         border: 1px solid #212529;
         font-size: .5rem;
         font-weight: 700;
@@ -906,17 +908,17 @@ table {
         top: 5em;
     }
 
-    main .product .model-s .description a span {
+    .product .model-s .description a span {
         color: #212529;
         position: relative;
         transition: .5s;
     }
 
-    main .product .model-s .description a:hover span {
+    .product .model-s .description a:hover span {
         color: #F9F9F9;
     }
 
-    main .product .model-s .description a::before {
+    .product .model-s .description a::before {
         content: "";
         position: absolute;
         top: 0;
@@ -930,7 +932,7 @@ table {
         transform: scaleX(0);
     }
 
-    main .product .model-s .description a:hover::before {
+    .product .model-s .description a:hover::before {
         transform: scaleX(1);
     }
 
@@ -1207,44 +1209,44 @@ table {
     /* Main End */
 
     /* Footer Start */
-    footer {
+    .footer {
         display: block;
         margin-right: 5vw;
         font-size: .8rem;
     }
 
-    footer div img {
+    .footer .logo {
         width: 10%;
         transition: 1s;
     }
 
-    footer .start-footer {
+    .footer .start-footer {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
 
-    footer .social-media {
+    .footer .social-media {
         display: flex;
         justify-content: space-evenly;
         align-items: center;
         width: 50vw;
     }
 
-    footer .social-media a {
+    .footer .social-media a {
         color: grey;
         transition: all .5s;
     }
 
-    footer .social-media a:hover {
+    .footer .social-media a:hover {
         color: white;
     }
 
-    footer .social-media div a i {
+    .footer .social-media div a i {
         font-size: 2rem;
     }
 
-    footer .text-footer {
+    .footer .text-footer {
         transition: 1s;
     }
     /* Footer End */
