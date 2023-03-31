@@ -82,6 +82,10 @@ Route::get('data-lowongan/daftar-pelamar/{id}', [LowonganController::class, 'det
 
 Route::get('data-lowongan/pelamar-detail/{id}', [LowonganController::class, 'detailPelamar']);
 
+Route::get('data-lowongan/pelamar-detail/ubah-status/{id}/{status}', [LowonganController::class, 'ubahStatus']);
+
+Route::post('data-lowongan/pelamar-detail/terima/{id}', [LowonganController::class, 'terima']);
+
 Route::get('pelamar-detail/download-cv/{id}', [LowonganController::class, 'downloadCV']);
 
 // Pegawai
