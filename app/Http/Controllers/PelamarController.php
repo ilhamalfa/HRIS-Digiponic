@@ -85,4 +85,11 @@ class PelamarController extends Controller
         return redirect('/pelamar/lowongan/');
     }
 
+    public function daftarLamaran(){
+        $datas = Lamaran::where('user_id', Auth::user()->id)->get();
+        
+        return view('pelamar.lamaran.daftar-lamaran', [
+            'datas' => $datas
+        ]);
+    }
 }

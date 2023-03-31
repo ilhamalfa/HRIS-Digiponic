@@ -51,6 +51,8 @@ Route::get('/pelamar/lowongan/', [PelamarController::class, 'daftarLowongan'])->
 
 Route::get('/pelamar/lowongan/apply/{id}', [PelamarController::class, 'applyLowongan'])->middleware('pelamar');
 
+Route::get('/pelamar/lamaran/', [PelamarController::class, 'daftarLamaran'])->middleware('pelamar');
+
 
 // Route Super Admin
 // Data User
@@ -78,9 +80,13 @@ Route::get('data-lowongan/tambah-lowongan', [LowonganController::class, 'tambahL
 
 Route::post('data-lowongan/store-lowongan', [LowonganController::class, 'storeLowongan']);
 
-Route::get('data-lowongan/lowongan-detail/{id}', [LowonganController::class, 'detailLowongan']);
+Route::get('data-lowongan/daftar-pelamar/{id}', [LowonganController::class, 'detailLowongan']);
 
 Route::get('data-lowongan/pelamar-detail/{id}', [LowonganController::class, 'detailPelamar']);
+
+Route::get('data-lowongan/pelamar-detail/ubah-status/{id}/{status}', [LowonganController::class, 'ubahStatus']);
+
+Route::post('data-lowongan/pelamar-detail/terima/{id}', [LowonganController::class, 'terima']);
 
 Route::get('pelamar-detail/download-cv/{id}', [LowonganController::class, 'downloadCV']);
 
