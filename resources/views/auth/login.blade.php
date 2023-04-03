@@ -23,7 +23,7 @@
                 {{-- <label class="auth-remember-checkbox-label" for="remember">
                     {{ __('Remember Me') }}
                 </label> --}}
-                <span class="auth-remember-checkbox-label">Remember Me</span>
+                <span>Remember Me</span>
             </div>
             <div class="auth-button-box">
                 <button type="submit" class="auth-button btn btn-outline-secondary rounded-0 px-5 m-3">
@@ -32,22 +32,20 @@
             </div>
             <div class="auth-forgot-password-box">
                 @if (Route::has('password.request'))
-                    <a class="btn btn-link auth-forgot-password" href="{{ route('password.request') }}">
+                    <a class="btn btn-link" href="{{ route('password.request') }}">
                         {{ __('Forgot Your Password?') }}
                     </a>
                 @endif
             </div>
-            <div class="auth-extra-box">
+            <div class="auth-switch-box">
                 <p class="auth-switch-title">Dont Have Account?</p>
-                <div class="auth-switch-sign-up-box">
+                <div class="auth-switch-sign-up-as-box">
                     <a href="{{ route('register') }}" class="auth-switch-sign-up">
                         <i class="fa-solid fa-file-lines m-2"></i>
                         <span>Sign Up</span>
                     </a>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
-@endsection
-
-
+</div>
