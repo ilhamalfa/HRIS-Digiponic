@@ -28,11 +28,11 @@
             <div class="auth-switch-box">
                 <p class="auth-switch-title">Already Have Account?</p>
                 <div class="auth-switch-login-as-box">
-                    <a href="{{ url('/login-pegawai') }}" class="auth-switch-login-as-employee">
+                    <a href="{{ url('login/1') }}" class="auth-switch-login-as-employee">
                         <i class="fa-solid fa-user-check m-2"></i>
                         <span>Login as Employee</span>
                     </a>
-                    <a href="login?person=2" class="auth-switch-login-as-candidate">
+                    <a href="{{ url('login/2') }}" class="auth-switch-login-as-candidate">
                         <i class="fa-solid fa-user-tie m-2"></i>
                         <span>Login as Candidate</span>
                     </a>

@@ -31,7 +31,7 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::post('rutelogin',[Controller::class,'rutelogin'])->name('rutelogin');
+Route::post('rutelogin/',[Controller::class,'rutelogin'])->name('rutelogin');
 Route::get('struktur',[Controller::class,'struktur'])->name('struktur');
 Route::get('career',[Controller::class,'career'])->name('career');
 Route::get('aboutus',[Controller::class,'aboutus'])->name('aboutus');
@@ -91,7 +91,11 @@ Route::post('data-lowongan/pelamar-detail/terima/{id}', [LowonganController::cla
 Route::get('pelamar-detail/download-cv/{id}', [LowonganController::class, 'downloadCV']);
 
 // Pegawai
-Route::get('pegawai/cuti-perizinan', [PerizinanController::class, 'daftarPerizinan'])->middleware('pegawai');
+Route::get('pegawai/cuti', [PerizinanController::class, 'daftarCuti'])->middleware('pegawai');
+
+Route::get('pegawai/cuti/ajukan-cuti', [PerizinanController::class, 'ajukanCuti'])->middleware('pegawai');
+
+Route::post('pegawai/cuti/ajukan-cuti/proses', [PerizinanController::class, 'prosesCuti'])->middleware('pegawai');
 
 
 

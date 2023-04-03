@@ -8,3 +8,7 @@ $(function () {
         }
     });
 });
+
+document.getElementById('checkBox').onchange = function() {
+    document.getElementById('berakhir').disabled = !this.checked;
+};

@@ -13,6 +13,8 @@ class Controller extends BaseController
 
     public function rutelogin(Request $request)
     {
+        // dd($request);
+        
         if ($request->has('inputemployee')) {
             $person = 1;
         } elseif ($request->has('inputcandidate')) {
