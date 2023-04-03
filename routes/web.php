@@ -93,16 +93,24 @@ Route::get('data-lowongan/pelamar-detail/ubah-status/{id}/{status}', [LowonganCo
 
 Route::post('data-lowongan/pelamar-detail/terima/{id}', [LowonganController::class, 'terima']);
 
-Route::get('pelamar-detail/download-cv/{id}', [LowonganController::class, 'downloadCV']);
+Route::get('pelamar-detail/cv/{id}', [LowonganController::class, 'CV']);
 
 // Pegawai
+// Cuti
 Route::get('pegawai/cuti', [PerizinanController::class, 'daftarCuti'])->middleware('pegawai');
 
 Route::get('pegawai/cuti/ajukan-cuti', [PerizinanController::class, 'ajukanCuti'])->middleware('pegawai');
 
 Route::post('pegawai/cuti/ajukan-cuti/proses', [PerizinanController::class, 'prosesCuti'])->middleware('pegawai');
 
+// Izin
+Route::get('pegawai/izin', [PerizinanController::class, 'daftarIzin'])->middleware('pegawai');
 
+Route::get('pegawai/izin/ajukan-izin', [PerizinanController::class, 'ajukanIzin'])->middleware('pegawai');
+
+Route::post('pegawai/izin/ajukan-izin/proses', [PerizinanController::class, 'prosesIzin'])->middleware('pegawai');
+
+Route::get('pegawai/izin/bukti/{id}', [PerizinanController::class, 'buktiIzin'])->middleware('pegawai');
 
 
 // Indoregion

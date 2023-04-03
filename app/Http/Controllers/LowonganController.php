@@ -46,7 +46,7 @@ class LowonganController extends Controller
         ]);
     }
 
-    public function downloadCV($id){
+    public function CV($id){
         $data = Pelamar::find($id);
 
         $cv = $data->cv_file;
