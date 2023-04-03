@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     // return view('layouts.template');
     return view('landingpage.landingpage');
+    // return view('super-admin.lowongan.daftar-lowongan');
     // return view('homepage.homepage');
 });
 
@@ -84,6 +85,8 @@ Route::get('data-lowongan/', [LowonganController::class, 'daftarLowongan']);
 Route::get('data-lowongan/tambah-lowongan', [LowonganController::class, 'tambahLowongan']);
 
 Route::post('data-lowongan/store-lowongan', [LowonganController::class, 'storeLowongan']);
+
+Route::get('data-lowongan/detail-lowongan/{id}', [LowonganController::class, 'detailPerLowongan']);
 
 Route::get('data-lowongan/daftar-pelamar/{id}', [LowonganController::class, 'detailLowongan']);
 
