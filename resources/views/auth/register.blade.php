@@ -1,6 +1,6 @@
 @extends('auth.layout')
 
-@section('title', 'Register')
+{{-- @section('title', 'Register') --}}
 
 @section('content')
     <div class="auth">
@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div class="auth-extra-box">
-                <p>By creating an account you are accepting our</p>
+                <p class="auth-extra-text">By creating an account you are accepting our</p>
                 <a class="auth-extra-link" href="#">Terms & Conditions</a>
             </div>
         </form>

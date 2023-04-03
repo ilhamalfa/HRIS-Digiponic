@@ -77,19 +77,24 @@ table {
     }
 
     .auth {
+        background-color: #212529;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        margin: 2em auto;
+        padding: 0 5em;
     }
 
     .auth-title {
+        color: #F9F9F9;
         font-size: 2rem;
         margin: 1em;
     }
 
     .auth-form input{
         background-color: rgba(114, 133, 142, .2);
+        color: #F9F9F9;
         border: none;
         margin: 1em;
         padding: .5em 2em;
@@ -100,7 +105,7 @@ table {
 
     .auth-form input::placeholder {
         font-family: 'Poppins', sans-serif;
-        color: grey;
+        color: #F9F9F9;
     }
 
     .auth-remember-box {
@@ -109,26 +114,29 @@ table {
     }
 
     input[type=checkbox].auth-remember-checkbox {
-        border: 1px solid #212529;
-        outline: none;
+        border: 1px solid #F9F9F9;
         margin: 5px;
         width: 15px;
         height: 15px;
     }
 
     .auth-remember-checkbox-label {
-        width: 50px;
+        color: #F9F9F9;
     }
 
+
     .auth-button {
-        border: 1px solid #212529;
-        color: #212529;
+        border: 1px solid #F9F9F9;
+        color: #F9F9F9;
         box-sizing: border-box;
         padding: .5em;
+        transition: .2s;
     }
 
     .auth-button:hover {
-        background-color: #212529;
+        background: none;
+        border: 1px solid #FF4655;
+        color: #FF4655;
     }
 
     .auth-switch-box {
@@ -140,13 +148,14 @@ table {
     }   
 
     .auth-switch-title {
+        color: #F9F9F9;
         padding-left: 5%;
         margin: 1em;
         margin-left: 0;
     }
 
     .auth-switch-login-as-box a {
-        border: 1px solid #212529;
+        border: 1px solid #FF4655;
         font-size: .8rem;
         text-decoration: none;
         position: relative;
@@ -158,12 +167,12 @@ table {
 
     .auth-switch-login-as-box a i {
         position: relative;
-        color: #212529;
+        color: #FF4655;
         transition: .5s;
     }
 
     .auth-switch-login-as-box a span {
-        color: #212529;
+        color: #FF4655;
         position: relative;
         transition: .5s;
     }
@@ -181,7 +190,7 @@ table {
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: #212529;
+        background-color: #FF4655;
         transition: transform .5s;
         transform-origin: 0 0;
         transition-timing-function: cubic-bezier(0.5, 1.6);
@@ -192,8 +201,8 @@ table {
         transform: scaleX(1);
     }
 
-    .auth-switch-sign-up-as-box a {
-        border: 1px solid #212529;
+    .auth-switch-sign-up-box a {
+        border: 1px solid #FF4655;
         font-size: .8rem;
         text-decoration: none;
         position: relative;
@@ -203,40 +212,44 @@ table {
         transition: color .3s linear;
     }
 
-    .auth-switch-sign-up-as-box a i {
+    .auth-switch-sign-up-box a i {
         position: relative;
-        color: #212529;
+        color: #FF4655;
         transition: .5s;
     }
 
-    .auth-switch-sign-up-as-box a span {
-        color: #212529;
+    .auth-switch-sign-up-box a span {
+        color: #FF4655;
         position: relative;
         transition: .5s;
     }
 
-    .auth-switch-sign-up-as-box a:hover i,
-    .auth-switch-sign-up-as-box a:hover span
+    .auth-switch-sign-up-box a:hover i,
+    .auth-switch-sign-up-box a:hover span
     {
         color: #F9F9F9;
     }
 
-    .auth-switch-sign-up-as-box a::before {
+    .auth-switch-sign-up-box a::before {
         content: "";
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: #212529;
+        background-color: #FF4655;
         transition: transform .5s;
         transform-origin: 0 0;
         transition-timing-function: cubic-bezier(0.5, 1.6);
         transform: scaleX(0);
     }
 
-    .auth-switch-sign-up-as-box a:hover::before {
+    .auth-switch-sign-up-box a:hover::before {
         transform: scaleX(1);
+    }
+
+    .auth-forgot-password {
+        text-decoration: none;
     }
 
     .auth-extra-box {
@@ -244,7 +257,11 @@ table {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin: 5em 0;
+        margin: 1em 0;
+    }
+
+    .auth-extra-text {
+        color: #F9F9F9;
     }
 
     .auth-extra-link {
