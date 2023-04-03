@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Error Page</title>
-    <style>
+    {{-- <style>
         * {
             font-family: sans-serif;
             color: rgba(0, 0, 0, 0.75);
@@ -71,15 +71,22 @@
             border: none;
             box-shadow: 0 4px 8px 0 #ccc;
         }
+    </style> --}}
+    <style>
+        body {
+            background-color: #212529;
+        }
+
+        
     </style>
 </head>
 <body>
     <div class="wrapper">
         <div class="landing-page">
-            <div style="text-align:center;" class="icon__download">
+            {{-- <div style="text-align:center;" class="icon__download">
                 <svg xmlns="http://www.w3.org/2000/svg" id="b599d709-684a-4b18-9cac-f9c979cf5115" data-name="Layer 1"
                     width="977.71631" height="782.41658" viewBox="0 0 977.71631 782.41658"
-                    src="https://42f2671d685f51e10fc6-b9fcecea3e50b3b59bdc28dead054ebc.ssl.cf5.rackcdn.com/illustrations/imagination_ok71.svg"
+                    src="   "
                     class="item__image" alt="Imagination">
                     <title>imagination</title>
                     <path
@@ -171,6 +178,9 @@
                         d="M214.35815,280.36659s-4,12-2,31,7,83,7,83,8,69,20,74l3,14,23-4-3-17a17.31349,17.31349,0,0,0,0-11c-2-6-18-161-18-161S240.35815,265.36659,214.35815,280.36659Z"
                         transform="translate(-111.14185 -58.79171)" fill="#575a89"></path>
                 </svg>
+            </div> --}}
+            <div class="image-error">
+
             </div>
 
             <h1> @yield('code')</h1>

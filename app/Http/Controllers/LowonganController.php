@@ -24,6 +24,11 @@ class LowonganController extends Controller
         return view('super-admin.lowongan.input-lowongan');
     }
 
+    public function detailPerLowongan($id){
+        $data = Lowongan::findOrFail($id);
+        return view('super-admin.lowongan.detail-lowongan', compact('data'));
+    }
+
     public function detailLowongan($id){
         $data = Lowongan::find($id);
         $datas = Lamaran::where('lowongan_id', $id)->get();
