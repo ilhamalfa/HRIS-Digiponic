@@ -22,9 +22,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    // return view('layouts.template');
     return view('landingpage.landingpage');
-    // return view('homepage.homepage');
 });
 
 Auth::routes(['verify' => true]);
