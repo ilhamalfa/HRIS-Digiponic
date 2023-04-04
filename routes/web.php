@@ -23,10 +23,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    // return view('layouts.template');
     return view('landingpage.landingpage');
-    // return view('super-admin.lowongan.daftar-lowongan');
-    // return view('homepage.homepage');
 });
 
 Auth::routes(['verify' => true]);
@@ -34,18 +31,20 @@ Auth::routes(['verify' => true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Landing Page
-Route::post('rutelogin',[Controller::class,'rutelogin'])->name('rutelogin');
+Route::post('rutelogin', [Controller::class, 'rutelogin'])->name('rutelogin');
 
-Route::get('struktur',[Controller::class,'struktur'])->name('struktur');
+Route::get('struktur', [Controller::class, 'struktur'])->name('struktur');
 
-Route::get('career',[Controller::class,'career'])->name('career');
+Route::get('career', [Controller::class, 'career'])->name('career');
 
-Route::get('aboutus',[Controller::class,'aboutus'])->name('aboutus');
+Route::get('career/vacancy/detail/{id}', [Controller::class, 'careerVacancyDetail']);
 
-Route::get('product',[Controller::class,'product'])->name('product');
+Route::get('aboutus', [Controller::class, 'aboutus'])->name('aboutus');
+
+Route::get('product', [Controller::class, 'product'])->name('product');
 
 
-Route::get('/login-pegawai', function(){
+Route::get('/login-pegawai', function () {
     return view('auth.login-pegawai');
 });
 
@@ -62,6 +61,8 @@ Route::get('/pelamar/lamaran/', [PelamarController::class, 'daftarLamaran'])->mi
 
 
 // Super Admin
+// Route Super Admin Start
+
 // Data User
 Route::get('/data-user', [SuperAdminController::class, 'dataUser'])->middleware('superadmin');
 
@@ -70,7 +71,7 @@ Route::get('/data-user/input-user', [SuperAdminController::class, 'inputUser'])-
 Route::post('/data-user/store-user', [SuperAdminController::class, 'storeUser'])->middleware('superadmin');
 
 // Data Pegawai
-Route::get('/pegawai', [SuperAdminController::class, 'dataPegawai'])->middleware('superadmin');
+Route::get('/data-pegawai', [PegawaiController::class, 'dataPegawai']);
 
 Route::get('/pegawai/edit-pegawai/{id}', [SuperAdminController::class, 'editPegawai']);
 
@@ -132,10 +133,10 @@ Route::post('pegawai/izin/ajukan-izin/proses', [PegawaiController::class, 'prose
 
 Route::get('pegawai/izin/bukti/{id}', [PegawaiController::class, 'buktiIzin'])->middleware('pegawai');
 
-
-// Indoregion
+// Indoregion Start
 Route::post('/get-kabupaten', [IndoRegionController::class, 'getKabupaten']);
 
 Route::post('/get-kecamatan', [IndoRegionController::class, 'getKecamatan']);
 
 Route::post('/get-kelurahan', [IndoRegionController::class, 'getKelurahan']);
+// Indoregion End

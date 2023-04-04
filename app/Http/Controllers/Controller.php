@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Lowongan;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\DB;
 
 class Controller extends BaseController
 {
@@ -32,7 +35,15 @@ class Controller extends BaseController
 
     public function career()
     {
-        return view('career.career');
+        // $datas = DB::select('SELECT created_at FROM lowongans');
+        $datas = Lowongan::all();
+        return view('career.career', compact('datas'));
+    }
+
+    public function careerVacancyDetail($id)
+    {
+        $datas = Lowongan::find($id);
+        return view('career.career-detail', compact('datas'));
     }
 
     public function aboutus()

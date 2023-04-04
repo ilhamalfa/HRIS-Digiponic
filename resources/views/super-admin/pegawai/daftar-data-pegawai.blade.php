@@ -1,4 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.template')
+
+@section('title')
 
 @section('content')
 <div class="container">
@@ -8,7 +10,7 @@
                 <div class="card-header">{{ __('Data Pegawai') }}</div>
 
                 <div class="card-body">
-                    <a href="#" class="btn btn-primary">Tambah User Pegawai</a>
+                    <a href="#" class="btn btn-primary">Add Employee User</a>
                     <table class="table">
                         <thead>
                             <tr>

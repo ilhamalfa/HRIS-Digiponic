@@ -1318,4 +1318,77 @@ table {
     }
     /* Footer End */
 
+    /* Career Page Start */
+    .vacancy {
+        width: 60vw;
+        height: 100vh;
+        margin: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .vacancy-card-link {
+        color: #212529;
+        text-decoration: none;
+    }
+
+    .vacancy-card {
+        width: 14rem;
+        position: relative;
+        border: 0;
+        transition: .3s;
+        border: 1px solid #212529;
+    }
+
+    .vacancy-card:hover {
+        border: 1px solid #FF4655;
+    }
+
+    .vacancy-card:hover,
+    .vacancy-card:hover .vacancy-span {
+        opacity: 1;
+        transform: translateY(-10px);
+    }
+
+    .vacancy-span {
+        background-color: #FF4655;
+        position: absolute;
+        top: -4%;
+        left: -4%;
+        opacity: 0;
+        transition: .3s;
+        padding: 5px;
+    }
+
+    .vacancy-span span {
+        color: #F9F9F9;
+    }
+
+    .vacancy-card-body {
+        text-align: left;
+    }
+
+    .vacancy-position-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .vacancy-position-name {
+        font-size: 1em;
+    }
+
+    .vacancy-deadline-date-title {
+        font-weight: bold;
+    }
+
+    .vacancy-deadline-date {
+        background-color: #FF4655;
+        color: #F9F9F9;
+        width: max-content;
+    }
+    /* Career Page End */
+
 }
