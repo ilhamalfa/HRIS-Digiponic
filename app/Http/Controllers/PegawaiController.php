@@ -6,6 +6,7 @@ use App\Models\Cuti;
 use App\Models\Pegawai;
 use App\Models\Perizinan;
 use App\Models\Province;
+use App\Models\Resign;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -116,6 +117,7 @@ class PegawaiController extends Controller
         }
     }
 
+    // Perizinan
     public function daftarIzin(){
         $izins = Perizinan::where('user_id', Auth::user()->id)->get();
 
@@ -167,5 +169,33 @@ class PegawaiController extends Controller
         $data = Perizinan::find($id);
         
         return Storage::response($data->bukti_perizinan);
+    }
+
+    public function resign(){
+        $datas = Resign::where('user_id', Auth::user()->id)->get();
+
+        return view('pegawai.resign.daftar-resign', [
+            'datas' => $datas
+        ]);
+    }
+
+    public function resignForm(){
+        return view('pegawai.resign.ajukan-resign');
+    }
+
+    public function prosesResign(Request $request){
+        // dd($request);
+        $date = date('d-m-Y', strtotime('+30 days'));
+
+        $validate = $request->validate([
+            'tanggal_resign' => 'required|after:' . $date
+        ]);
+
+        $validate['status_resign'] = 'Menunggu Persetujuan';
+        $validate['user_id'] = Auth::user()->id;
+
+        Resign::create($validate);
+
+        return redirect('pegawai/resign');
     }
 }

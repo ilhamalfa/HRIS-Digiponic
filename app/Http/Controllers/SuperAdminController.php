@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pegawai as Pegawai;
 use App\Models\Province;
+use App\Models\Resign;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -124,5 +125,36 @@ class SuperAdminController extends Controller
         $data->update($validate);
 
         return redirect('/data-pegawai');
+    }
+
+    public function resign(){
+        $datas = Resign::all();
+
+        return view('super-admin.resign.daftar-resign', [
+            'datas' => $datas
+        ]);
+    }
+
+    public function resignProses($id, $konfirmasi){
+        $data = Resign::find($id);
+        $user = User::find($data->user_id);
+
+        // dd($jml_data);
+
+        if($konfirmasi == 'terima'){
+            $data->update([
+                'status_resign' => 'Diterima'
+            ]);
+
+            $user->update([
+                'role' => 'Resign'
+            ]);
+        }else{
+            $data->update([
+                'status_resign' => 'Ditolak'
+            ]);
+        }
+
+        return back()->with('success', 'Status Resign Berhasil Dikonfirmasi!');
     }
 }

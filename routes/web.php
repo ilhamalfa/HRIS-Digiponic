@@ -96,6 +96,12 @@ Route::post('data-lowongan/pelamar-detail/terima/{id}', [LowonganController::cla
 
 Route::get('pelamar-detail/cv/{id}', [LowonganController::class, 'CV']);
 
+// Resign
+Route::get('/resign/daftar-resign', [SuperAdminController::class, 'resign'])->middleware('superadmin');
+
+Route::get('/resign/daftar-resign/{id}/{konfirmasi}', [SuperAdminController::class, 'resignProses'])->middleware('superadmin');
+
+
 
 // Admin
 // Cuti
@@ -132,6 +138,14 @@ Route::get('pegawai/izin/ajukan-izin', [PegawaiController::class, 'ajukanIzin'])
 Route::post('pegawai/izin/ajukan-izin/proses', [PegawaiController::class, 'prosesIzin'])->middleware('pegawai');
 
 Route::get('pegawai/izin/bukti/{id}', [PegawaiController::class, 'buktiIzin'])->middleware('pegawai');
+
+// resign
+Route::get('pegawai/resign', [PegawaiController::class, 'resign'])->middleware('pegawai');
+
+Route::get('pegawai/resign/ajukan-resign', [PegawaiController::class, 'resignForm'])->middleware('pegawai');
+
+Route::post('pegawai/resign/ajukan-resign/proses', [PegawaiController::class, 'prosesResign'])->middleware('pegawai');
+
 
 // Indoregion Start
 Route::post('/get-kabupaten', [IndoRegionController::class, 'getKabupaten']);
