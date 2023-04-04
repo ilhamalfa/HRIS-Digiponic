@@ -23,7 +23,7 @@
                             <h6 class="text-success">{{$data->status }}</h6>
                         @endif
                     </h6>
-                    <h6><a href="{{ url('pelamar-detail/download-cv/' . $data->user->pelamar->id) }}" target="_blank">Lihat CV Pelamar</a></h6>
+                    <h6><a href="{{ url('pelamar-detail/cv/' . $data->user->pelamar->id) }}" target="_blank">Lihat CV Pelamar</a></h6>
                     <img src="{{ asset('storage/' . $data->user->pelamar->foto) }}" alt="" style="height: 300px"> <br>
                     @if ($data->status == 'Menunggu')
                         <a href="{{ url('data-lowongan/pelamar-detail/ubah-status/' . $data->id .'/Menunggu') }}" class="btn btn-primary mt-2">Lanjut tahap Wawancara</a>
