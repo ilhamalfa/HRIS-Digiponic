@@ -2,59 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pegawai as Pegawai;
+use App\Models\Cuti;
+use App\Models\Pegawai;
+use App\Models\Perizinan;
 use App\Models\Province;
-use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-
-use function PHPUnit\Framework\fileExists;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PegawaiController extends Controller
 {
-    public function dataPegawai(){
-        $datas = User::has('pegawai')->where('role', '!=', 'Pelamar')->get();
-
-        return view('super-admin.pegawai.daftar-data-pegawai', [
-            'datas' => $datas
-        ]);
-    }
-
-    public function dataUser(){
-        $datas = User::where('role', '!=', 'Pelamar')->get();
-
-        return view('super-admin.pegawai.data-user', [
-            'datas' => $datas
-        ]);
-    }
-
-    public function inputUser(){
-        return view('super-admin.pegawai.input-user-pegawai');
-    }
-
-    public function storeUser(Request $request){
-        $validate = $request->validate([
-            'email' => 'required|unique:users|email',
-            'nik' => 'required|unique:users|min:10|max:10',
-            'password' => 'required|min:8|confirmed'
-        ]);
-
-        $validate['role'] = 'Pegawai';
-        $validate['jumlah_cuti'] = 14;
-        $validate['password'] = Hash::make($request->password);
-
-        // dd($request);
-        
-        User::create($validate);
-
-        return redirect('home');
-    }
-
+    // Tambah Data Pegawai
     public function inputPegawai(){
         $provinces = Province::all();
 
-        return view('super-admin.pegawai.input-data-pegawai', [
+        return view('pegawai.data-pegawai.input-data-pegawai', [
             'provinces' => $provinces
         ]);
     }
@@ -105,78 +68,104 @@ class PegawaiController extends Controller
         // dd($validate);
     }
 
-    public function editPegawai($id){
-        $data = User::find($id);
-        $provinces = Province::all();
+    // Cuti
+    public function daftarCuti(){
+        $cutis = Cuti::where('user_id', Auth::user()->id)->get();
 
-        return view('super-admin.pegawai.edit-data-pegawai', [
-            'data' => $data,
-            'provinces' => $provinces
+        return view('pegawai.cuti-perizinan.daftar-cuti', [
+            'cutis' => $cutis,
         ]);
+        // dd($datas);
     }
 
-    public function updatePegawai($id, Request $request){
-        $data = Pegawai::where('user_id',$id)->first();
+    public function ajukanCuti(){
+        return view('pegawai.cuti-perizinan.ajukan-cuti');
+        // dd($datas);
+    }
 
+    public function prosesCuti(Request $request){
         // dd($request);
-
-        if($request->has('foto')){
+        $date = date('d-m-Y', strtotime('+3 days'));
+        
+        // dd($request);
+        if(isset($request->check)){
             $validate = $request->validate([
-                'nama' => 'required',
-                'tanggal_lahir' => 'required|before:17 years ago',
-                'jenis_kelamin' => 'required',
-                'nomor_hp' => 'required',
-                'status_pernikahan' => 'required',
-                'department' => 'required',
-                'golongan' => 'required',
-                'province_id' => 'required',
-                'regency_id' => 'required',
-                'district_id' =>'required',
-                'village_id' => 'required',
-                'alamat' => 'required',
-                'foto' => 'required|image',
+                'tanggal_mulai' => 'required|after_or_equal:' . $date,
+                'tanggal_berakhir' => 'required|after_or_equal:tanggal_mulai'
             ]);
-
-            $validate['umur'] = Carbon::parse($request->tanggal_lahir)->age;
-
-            if ($request->has('jumlah_anak')) {
-                $validate['jumlah_anak'] = $request->jumlah_anak;
-            }
-
-            if(fileExists('storage/'. $data->foto)){
-                unlink('storage/'. $data->foto);
-            }
-
-            $extension_foto = $request->file('foto')->extension();
-
-            $nama_foto = $request->nama . '-' . now()->timestamp. '.' . $extension_foto;
-
-            $validate['foto'] = $request->file('foto')->storeAs('Pegawai/foto', $nama_foto);
         }else{
             $validate = $request->validate([
-                'nama' => 'required',
-                'tanggal_lahir' => 'required|before:17 years ago',
-                'jenis_kelamin' => 'required',
-                'nomor_hp' => 'required',
-                'status_pernikahan' => 'required',
-                'department' => 'required',
-                'golongan' => 'required',
-                'province_id' => 'required',
-                'regency_id' => 'required',
-                'district_id' =>'required',
-                'village_id' => 'required',
-                'alamat' => 'required',
+                'tanggal_mulai' => 'required|after_or_equal:' . $date,
             ]);
 
-            $validate['umur'] = Carbon::parse($request->tanggal_lahir)->age;
-
-            if ($request->has('jumlah_anak')) {
-                $validate['jumlah_anak'] = $request->jumlah_anak;
-            }
+            $validate['tanggal_berakhir'] = $validate['tanggal_mulai'];
         }
 
-        $data->update($validate);
+        $jml_cuti = date_diff(date_create($validate['tanggal_mulai']), date_create($validate['tanggal_berakhir']))->days + 1;
+        // dd($jml_cuti);
 
-        return redirect('/data-pegawai');
+        if($jml_cuti <= Auth::user()->jumlah_cuti){
+            $validate['status_cuti'] = "Menunggu Persetujuan";
+            $validate['user_id'] = Auth::user()->id;
+
+            Cuti::create($validate);
+
+            return redirect('pegawai/cuti')->with('success', 'Proses Cuti sedang diproses, Mohon tunggu konfirmasi');
+        }else{
+            return back()->with('failed', 'Proses Cuti Tidak Bisa Dilanjutkan, Jumlah cuti anda tidak mencukupi');
+        }
+    }
+
+    public function daftarIzin(){
+        $izins = Perizinan::where('user_id', Auth::user()->id)->get();
+
+        return view('pegawai.cuti-perizinan.daftar-izin', [
+            'izins' => $izins,
+        ]);
+        // dd($datas);
+    }
+
+    public function ajukanIzin(){
+        return view('pegawai.cuti-perizinan.ajukan-izin');
+        // dd($datas);
+    }
+
+    public function prosesIzin(Request $request){
+        // dd($request); 
+        if(isset($request->check)){
+            $validate = $request->validate([
+                'tanggal_mulai' => 'required|after: today',
+                'tanggal_berakhir' => 'required|after_or_equal:tanggal_mulai',
+                'alasan_perizinan' => 'required',
+                'bukti_perizinan' => 'required|mimes:jpeg,png,pdf|max:1024',
+            ]);
+        }else{
+            $validate = $request->validate([
+                'tanggal_mulai' => 'required|after: today',
+                'alasan_perizinan' => 'required',
+                'bukti_perizinan' => 'required|mimes:jpeg,png,pdf|max:2048',
+            ]);
+
+            $validate['tanggal_berakhir'] = $validate['tanggal_mulai'];
+        }
+
+        $validate['status_perizinan'] = "Menunggu Persetujuan";
+        $validate['user_id'] = Auth::user()->id;
+
+        $extension_file = $request->file('bukti_perizinan')->extension();
+            
+        $nama_file = Auth::user()->pegawai->nama . '-' . now()->timestamp. '.' . $extension_file;
+
+        $validate['bukti_perizinan'] = $request->file('bukti_perizinan')->storeAs('Pegawai/perizinan', $nama_file);
+
+        Perizinan::create($validate);
+
+        return redirect('pegawai/izin')->with('success', 'Proses Cuti sedang diproses, Mohon tunggu konfirmasi');
+    }
+
+    public function buktiIzin($id){
+        $data = Perizinan::find($id);
+        
+        return Storage::response($data->bukti_perizinan);
     }
 }

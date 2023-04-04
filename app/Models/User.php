@@ -57,4 +57,12 @@ class User extends Authenticatable implements MustVerifyEmail
     public function lamaran(){
         return $this->hasMany(Lamaran::class);
     }
+
+    public function cuti(){
+        return $this->hasMany(Cuti::class);
+    }
+
+    public function perizinan(){
+        return $this->hasMany(Perizinan::class);
+    }
 }

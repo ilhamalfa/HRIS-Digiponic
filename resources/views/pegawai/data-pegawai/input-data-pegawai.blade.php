@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Input Data Pegawai') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ url('/data-pegawai/store-pegawai/') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ url('/pegawai/input-pegawai/store-pegawai/') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="row mb-3">
                             <label for="nama" class="col-md-4 col-form-label text-md-end">{{ __('Nama') }}</label>
