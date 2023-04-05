@@ -65,4 +65,8 @@ class User extends Authenticatable implements MustVerifyEmail
     public function perizinan(){
         return $this->hasMany(Perizinan::class);
     }
+
+    public function resign(){
+        return $this->hasMany(Resign::class);
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pegawai as Pegawai;
 use App\Models\Province;
+use App\Models\Resign;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -13,22 +14,6 @@ use function PHPUnit\Framework\fileExists;
 
 class SuperAdminController extends Controller
 {
-    public function dataPegawai(){
-        $datas = User::has('pegawai')->where('role', '!=', 'Pelamar')->get();
-
-        return view('super-admin.pegawai.daftar-data-pegawai', [
-            'datas' => $datas
-        ]);
-    }
-
-    public function dataUser(){
-        $datas = User::where('role', '!=', 'Pelamar')->get();
-
-        return view('super-admin.pegawai.data-user', [
-            'datas' => $datas
-        ]);
-    }
-
     public function inputUser(){
         return view('super-admin.pegawai.input-user-pegawai');
     }
@@ -124,5 +109,36 @@ class SuperAdminController extends Controller
         $data->update($validate);
 
         return redirect('/data-pegawai');
+    }
+
+    public function resign(){
+        $datas = Resign::all();
+
+        return view('super-admin.resign.daftar-resign', [
+            'datas' => $datas
+        ]);
+    }
+
+    public function resignProses($id, $konfirmasi){
+        $data = Resign::find($id);
+        $user = User::find($data->user_id);
+
+        // dd($jml_data);
+
+        if($konfirmasi == 'terima'){
+            $data->update([
+                'status_resign' => 'Diterima'
+            ]);
+
+            $user->update([
+                'role' => 'Resign'
+            ]);
+        }else{
+            $data->update([
+                'status_resign' => 'Ditolak'
+            ]);
+        }
+
+        return back()->with('success', 'Status Resign Berhasil Dikonfirmasi!');
     }
 }

@@ -1,4 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.template')
+
+@section('title')
 
 @section('content')
 <div class="container">
@@ -8,7 +10,9 @@
                 <div class="card-header">{{ __('Data Pegawai') }}</div>
 
                 <div class="card-body">
-                    <a href="{{ url('/data-user/input-user') }}" class="btn btn-primary">Tambah User Pegawai</a>
+                    @if (Auth::user()->role != 'Admin')
+                    <a href="#" class="btn btn-primary mb-3">Add Employee User</a>
+                    @endif
                     <table class="table">
                         <thead>
                             <tr>
@@ -17,7 +21,9 @@
                                 <th scope="col">Email</th>
                                 <th scope="col">Email Verified</th>
                                 <th scope="col">Role</th>
-                                {{-- <th scope="col">Action</th> --}}
+                                @if (Auth::user()->role != 'Admin')
+                                <th scope="col">Action</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>

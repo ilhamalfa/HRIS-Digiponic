@@ -4,7 +4,6 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IndoRegionController;
-use App\Http\Controllers\LowonganController;
 use App\Http\Controllers\PelamarController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\SuperAdminController;
@@ -50,90 +49,109 @@ Route::get('/login-pegawai', function () {
 // sandi (admin123) (pegawai123) (pelamar123)
 
 // Route Pelamar
-Route::get('/pelamar/input-data-pelamar', [PelamarController::class, 'inputPelamar'])->middleware(['verified']);
+Route::middleware(['auth', 'verified', 'pelamar'])->group(function () {
+    Route::get('/pelamar/input-data-pelamar', [PelamarController::class, 'inputPelamar']);
 
-Route::post('/pelamar/input-data-pelamar/store', [PelamarController::class, 'storePelamar']);
+    Route::post('/pelamar/input-data-pelamar/store', [PelamarController::class, 'storePelamar']);
 
-Route::get('/pelamar/lowongan/', [PelamarController::class, 'daftarLowongan'])->middleware('pelamar');
-// Route::get('/pelamar/lowongan/', [PelamarController::class, 'daftarLowongan']);
+    Route::get('/pelamar/lowongan/', [PelamarController::class, 'daftarLowongan']);
 
-Route::get('/pelamar/lowongan/apply/{id}', [PelamarController::class, 'applyLowongan'])->middleware('pelamar');
+    Route::get('/pelamar/lowongan/apply/{id}', [PelamarController::class, 'applyLowongan']);
 
-Route::get('/pelamar/lamaran/', [PelamarController::class, 'daftarLamaran'])->middleware('pelamar');
-
+    Route::get('/pelamar/lamaran/', [PelamarController::class, 'daftarLamaran']);
+});
 
 // Super Admin
 // Route Super Admin Start
+Route::middleware(['auth', 'verified', 'superadmin'])->group(function () {
+    // Data User
+    Route::get('/data-user/input-user', [SuperAdminController::class, 'inputUser']);
 
-// Data User
-Route::get('/data-user', [SuperAdminController::class, 'dataUser'])->middleware('superadmin');
+    Route::post('/data-user/store-user', [SuperAdminController::class, 'storeUser']);
 
-Route::get('/data-user/input-user', [SuperAdminController::class, 'inputUser'])->middleware('superadmin');
+    // Data Pegawai
+    Route::get('/pegawai/edit-pegawai/{id}', [SuperAdminController::class, 'editPegawai']);
 
-Route::post('/data-user/store-user', [SuperAdminController::class, 'storeUser'])->middleware('superadmin');
+    Route::post('/pegawai/update-pegawai/{id}', [SuperAdminController::class, 'updatePegawai']);
 
-// Data Pegawai
-Route::get('/data-pegawai', [PegawaiController::class, 'dataPegawai']);
+    // Resign
+    Route::get('/resign/daftar-resign', [SuperAdminController::class, 'resign']);
 
-Route::get('/pegawai/edit-pegawai/{id}', [SuperAdminController::class, 'editPegawai']);
-
-Route::post('/pegawai/update-pegawai/{id}', [SuperAdminController::class, 'updatePegawai']);
-
-// Data Lowongan
-Route::get('data-lowongan/', [LowonganController::class, 'daftarLowongan']);
-
-Route::get('data-lowongan/tambah-lowongan', [LowonganController::class, 'tambahLowongan']);
-
-Route::post('data-lowongan/store-lowongan', [LowonganController::class, 'storeLowongan']);
-
-Route::get('data-lowongan/detail-lowongan/{id}', [LowonganController::class, 'detailPerLowongan']);
-
-Route::get('data-lowongan/daftar-pelamar/{id}', [LowonganController::class, 'detailLowongan']);
-
-Route::get('data-lowongan/pelamar-detail/{id}', [LowonganController::class, 'detailPelamar']);
-
-Route::get('data-lowongan/pelamar-detail/ubah-status/{id}/{status}', [LowonganController::class, 'ubahStatus']);
-
-Route::post('data-lowongan/pelamar-detail/terima/{id}', [LowonganController::class, 'terima']);
-
-Route::get('pelamar-detail/cv/{id}', [LowonganController::class, 'CV']);
+    Route::get('/resign/daftar-resign/{id}/{konfirmasi}', [SuperAdminController::class, 'resignProses']);
+});
 
 
 // Admin
-// Cuti
-Route::get('admin/cuti', [AdminController::class, 'daftarCuti']);
+Route::middleware(['auth', 'verified', 'admin'], ['auth', 'verified', 'superadmin'])->group(function () {
+    // Data User
+    Route::get('/data-user', [AdminController::class, 'dataUser']);
 
-Route::get('admin/cuti/{id}/{konfirmasi}', [AdminController::class, 'konfirmasiCuti']);
+    // Data Pegawai
+    Route::get('/data-pegawai', [AdminController::class, 'dataPegawai']);
 
-// Izin
-Route::get('admin/izin', [AdminController::class, 'daftarIzin']);
+    // Cuti
+    Route::get('admin/cuti', [AdminController::class, 'daftarCuti']);
 
-Route::get('admin/izin/bukti/{id}', [AdminController::class, 'buktiIzin']);
+    Route::get('admin/cuti/{id}/{konfirmasi}', [AdminController::class, 'konfirmasiCuti']);
 
-Route::get('admin/izin/{id}/{konfirmasi}', [AdminController::class, 'konfirmasiIzin']);
+    // Izin
+    Route::get('admin/izin', [AdminController::class, 'daftarIzin']);
 
+    Route::get('admin/izin/bukti/{id}', [AdminController::class, 'buktiIzin']);
+
+    Route::get('admin/izin/{id}/{konfirmasi}', [AdminController::class, 'konfirmasiIzin']);
+
+    // Data Lowongan
+    Route::get('data-lowongan/', [AdminController::class, 'daftarLowongan']);
+
+    Route::get('data-lowongan/tambah-lowongan', [AdminController::class, 'tambahLowongan']);
+
+    Route::post('data-lowongan/store-lowongan', [AdminController::class, 'storeLowongan']);
+
+    Route::get('data-lowongan/detail-lowongan/{id}', [AdminController::class, 'detailPerLowongan']);
+
+    Route::get('data-lowongan/daftar-pelamar/{id}', [AdminController::class, 'detailLowongan']);
+
+    Route::get('data-lowongan/pelamar-detail/{id}', [AdminController::class, 'detailPelamar']);
+
+    Route::get('data-lowongan/pelamar-detail/ubah-status/{id}/{status}', [AdminController::class, 'ubahStatus']);
+
+    Route::post('data-lowongan/pelamar-detail/terima/{id}', [AdminController::class, 'terima']);
+
+    Route::get('pelamar-detail/cv/{id}', [AdminController::class, 'CV']);
+});
 
 // Pegawai
-// Input data pegawai
-Route::get('/pegawai/input-pegawai', [PegawaiController::class, 'inputPegawai']);
+Route::middleware(['auth', 'verified', 'superadmin', 'admin', 'pegawai'])->group(function () {
+    // Input data pegawai
+    Route::get('/pegawai/input-pegawai', [PegawaiController::class, 'inputPegawai']);
 
-Route::post('/pegawai/input-pegawai/store-pegawai/', [PegawaiController::class, 'storePegawai']);
+    Route::post('/pegawai/input-pegawai/store-pegawai/', [PegawaiController::class, 'storePegawai']);
 
-// Cuti
-Route::get('pegawai/cuti', [PegawaiController::class, 'daftarCuti'])->middleware('pegawai');
+    // Cuti
+    Route::get('pegawai/cuti', [PegawaiController::class, 'daftarCuti'])->middleware('pegawai');
 
-Route::get('pegawai/cuti/ajukan-cuti', [PegawaiController::class, 'ajukanCuti'])->middleware('pegawai');
+    Route::get('pegawai/cuti/ajukan-cuti', [PegawaiController::class, 'ajukanCuti'])->middleware('pegawai');
 
-Route::post('pegawai/cuti/ajukan-cuti/proses', [PegawaiController::class, 'prosesCuti'])->middleware('pegawai');
+    Route::post('pegawai/cuti/ajukan-cuti/proses', [PegawaiController::class, 'prosesCuti'])->middleware('pegawai');
 
-// Izin
-Route::get('pegawai/izin', [PegawaiController::class, 'daftarIzin'])->middleware('pegawai');
+    // Izin
+    Route::get('pegawai/izin', [PegawaiController::class, 'daftarIzin'])->middleware('pegawai');
 
-Route::get('pegawai/izin/ajukan-izin', [PegawaiController::class, 'ajukanIzin'])->middleware('pegawai');
+    Route::get('pegawai/izin/ajukan-izin', [PegawaiController::class, 'ajukanIzin'])->middleware('pegawai');
 
-Route::post('pegawai/izin/ajukan-izin/proses', [PegawaiController::class, 'prosesIzin'])->middleware('pegawai');
+    Route::post('pegawai/izin/ajukan-izin/proses', [PegawaiController::class, 'prosesIzin'])->middleware('pegawai');
 
-Route::get('pegawai/izin/bukti/{id}', [PegawaiController::class, 'buktiIzin'])->middleware('pegawai');
+    Route::get('pegawai/izin/bukti/{id}', [PegawaiController::class, 'buktiIzin'])->middleware('pegawai');
+
+    // resign
+    Route::get('pegawai/resign', [PegawaiController::class, 'resign'])->middleware('pegawai');
+
+    Route::get('pegawai/resign/ajukan-resign', [PegawaiController::class, 'resignForm'])->middleware('pegawai');
+
+    Route::post('pegawai/resign/ajukan-resign/proses', [PegawaiController::class, 'prosesResign'])->middleware('pegawai');
+
+});
 
 // Indoregion Start
 Route::post('/get-kabupaten', [IndoRegionController::class, 'getKabupaten']);
