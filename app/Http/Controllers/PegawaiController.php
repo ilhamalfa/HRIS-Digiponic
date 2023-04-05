@@ -7,6 +7,7 @@ use App\Models\Pegawai;
 use App\Models\Perizinan;
 use App\Models\Province;
 use App\Models\Resign;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

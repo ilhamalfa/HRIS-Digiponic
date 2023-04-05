@@ -10,7 +10,9 @@
                 <div class="card-header">{{ __('Data Pegawai') }}</div>
 
                 <div class="card-body">
-                    <a href="#" class="btn btn-primary">Add Employee User</a>
+                    @if (Auth::user()->role != 'Admin')
+                    <a href="#" class="btn btn-primary mb-3">Add Employee User</a>
+                    @endif
                     <table class="table">
                         <thead>
                             <tr>
@@ -20,7 +22,9 @@
                                 <th scope="col">Department</th>
                                 <th scope="col">Golongan</th>
                                 <th scope="col">Role</th>
+                                @if (Auth::user()->role != 'Admin')
                                 <th scope="col">Action</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -32,9 +36,11 @@
                                 <td>{{ $data->pegawai->department }}</td>
                                 <td>{{ $data->pegawai->golongan }}</td>
                                 <td>{{ $data->role }}</td>
+                                @if (Auth::user()->role != 'Admin')
                                 <td>
                                     <a href="{{ url('/data-pegawai/edit-pegawai/' . $data->id) }}" class="btn btn-warning">Edit</a>
                                 </td>
+                                @endif
                             </tr>
                             @endforeach
                         </tbody>

@@ -14,22 +14,6 @@ use function PHPUnit\Framework\fileExists;
 
 class SuperAdminController extends Controller
 {
-    public function dataPegawai(){
-        $datas = User::has('pegawai')->where('role', '!=', 'Pelamar')->get();
-
-        return view('super-admin.pegawai.daftar-data-pegawai', [
-            'datas' => $datas
-        ]);
-    }
-
-    public function dataUser(){
-        $datas = User::where('role', '!=', 'Pelamar')->get();
-
-        return view('super-admin.pegawai.data-user', [
-            'datas' => $datas
-        ]);
-    }
-
     public function inputUser(){
         return view('super-admin.pegawai.input-user-pegawai');
     }
