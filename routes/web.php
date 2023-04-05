@@ -31,7 +31,7 @@ Auth::routes(['verify' => true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Landing Page
-Route::post('rutelogin', [Controller::class, 'rutelogin'])->name('rutelogin');
+Route::get('/rutelogin', [Controller::class, 'rutelogin'])->name('rutelogin');
 
 Route::get('struktur', [Controller::class, 'struktur'])->name('struktur');
 
@@ -47,6 +47,7 @@ Route::get('product', [Controller::class, 'product'])->name('product');
 Route::get('/login-pegawai', function () {
     return view('auth.login-pegawai');
 });
+// sandi (admin123) (pegawai123) (pelamar123)
 
 // Route Pelamar
 Route::get('/pelamar/input-data-pelamar', [PelamarController::class, 'inputPelamar'])->middleware(['verified']);
@@ -54,6 +55,7 @@ Route::get('/pelamar/input-data-pelamar', [PelamarController::class, 'inputPelam
 Route::post('/pelamar/input-data-pelamar/store', [PelamarController::class, 'storePelamar']);
 
 Route::get('/pelamar/lowongan/', [PelamarController::class, 'daftarLowongan'])->middleware('pelamar');
+// Route::get('/pelamar/lowongan/', [PelamarController::class, 'daftarLowongan']);
 
 Route::get('/pelamar/lowongan/apply/{id}', [PelamarController::class, 'applyLowongan'])->middleware('pelamar');
 
