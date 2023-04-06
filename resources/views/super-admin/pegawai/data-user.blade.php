@@ -13,7 +13,7 @@
                     @if (Auth::user()->role != 'Admin')
                     <a href="#" class="btn btn-primary mb-3">Add Employee User</a>
                     @endif
-                    <table class="table">
+                    <table class="table mb-4">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -51,6 +51,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $datas->links() }}
                 </div>
             </div>
         </div>

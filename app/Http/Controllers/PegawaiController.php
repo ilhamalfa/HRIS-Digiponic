@@ -17,11 +17,17 @@ class PegawaiController extends Controller
 {
     // Tambah Data Pegawai
     public function inputPegawai(){
-        $provinces = Province::all();
+        $data = Pegawai::where('user_id', Auth::user()->id)->first();
 
-        return view('pegawai.data-pegawai.input-data-pegawai', [
-            'provinces' => $provinces
-        ]);
+        if(!isset($data)){
+            $provinces = Province::all();
+
+            return view('pegawai.data-pegawai.input-data-pegawai', [
+                'provinces' => $provinces
+            ]);
+        }else{
+            return redirect('home');
+        }
     }
 
     public function storePegawai(Request $request){

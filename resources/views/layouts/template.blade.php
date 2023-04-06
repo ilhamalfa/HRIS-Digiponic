@@ -63,12 +63,20 @@
                         <div class="profile-pic">
                             <div class="count-indicator">
                                 <img class="img-xs rounded-circle "
-                                    src="{{ asset('template/assets/images/faces/face15.jpg') }}"
+                                    src="{{ asset('storage/'. Auth::user()->pegawai->foto) }}"
                                     alt="Your Profile Image">
                             </div>
                             <div class="profile-name">
-                                <h5 class="mb-0 font-weight-normal">Henry Klein</h5>
-                                <span>Employee</span>
+                                <h5 class="mb-0 font-weight-normal">
+                                    @if (isset(Auth::user()->pegawai))
+                                        {{ Auth::user()->pegawai->nama }}
+                                    @elseif (isset(Auth::user()->pelamar) && Auth::user()->role == 'Pelamar')
+                                        {{ Auth::user()->pelamar->nama }}
+                                    @else
+                                        {{ Auth::user()->email }}
+                                    @endif
+                                </h5>
+                                <span>{{ Auth::user()->pegawai->department . ' - ' .Auth::user()->pegawai->golongan }}</span>
                             </div>
                         </div>
                         {{-- Sidebar Profile Image & Name End --}}
@@ -258,9 +266,17 @@
                                 <div class="navbar-profile">
                                     {{-- @foreach ($user as $user) --}}
                                         <img class="img-xs rounded-circle"
-                                            src="{{ asset('template/assets/images/faces/face15.jpg') }}"
+                                            src="{{ asset('storage/' . Auth::user()->pegawai->foto) }}"
                                             alt="">
-                                        <p class="mb-0 d-none d-sm-block navbar-profile-name">Henry Klein</p>
+                                        <p class="mb-0 d-none d-sm-block navbar-profile-name">
+                                            @if (isset(Auth::user()->pegawai))
+                                                {{ Auth::user()->pegawai->nama }}
+                                            @elseif (isset(Auth::user()->pelamar) && Auth::user()->role == 'Pelamar')
+                                                {{ Auth::user()->pelamar->nama }}
+                                            @else
+                                                {{ Auth::user()->email }}
+                                            @endif
+                                        </p>
                                         <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                                     {{-- @endforeach --}}
                                 </div>
@@ -280,7 +296,7 @@
                                     </div>
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item preview-item">
+                                <a class="dropdown-item preview-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     <div class="preview-thumbnail">
                                         <div class="preview-icon bg-dark rounded-circle">
                                             <i class="mdi mdi-logout text-danger"></i>
@@ -290,6 +306,10 @@
                                         <p class="preview-subject mb-1">Log out</p>
                                     </div>
                                 </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
                                 <div class="dropdown-divider"></div>
                                 <p class="p-3 mb-0 text-center">Advanced settings</p>
                             </div>
