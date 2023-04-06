@@ -1,11 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.template')
+
+@section('title')
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center mb-3">
+    <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Daftar Cuti') }}</div>
+                <div class="card-header mt-3">{{ __('Data Cuti Pegawai') }}</div>
 
                 <div class="card-body">
                     <table class="table">
@@ -21,21 +23,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($cutis as $cuti)
+                            @foreach ($datas as $data)
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
-                                <td>{{ $cuti->user->pegawai->nama }}</td>
-                                <td>{{ $cuti->tanggal_mulai }}</td>
-                                <td>{{ $cuti->tanggal_berakhir }}</td>
-                                <td>{{ date_diff(date_create($cuti->tanggal_mulai), date_create($cuti->tanggal_berakhir))->days + 1 . " Hari" }}</td>
-                                <td>{{ $cuti->status_cuti}}</td>
+                                <td>{{ $data->user->pegawai->nama }}</td>
+                                <td>{{ $data->tanggal_mulai }}</td>
+                                <td>{{ $data->tanggal_berakhir }}</td>
+                                <td>{{ date_diff(date_create($data->tanggal_mulai), date_create($data->tanggal_berakhir))->days + 1 . " Hari" }}</td>
+                                <td>{{ $data->status_cuti}}</td>
                                 <td>
-                                    @if ($cuti->status_cuti == "Menunggu Persetujuan")
-                                        <a href="{{ url('admin/cuti/' . $cuti->id .'/terima') }}" class="btn btn-success">Terima</a>
-                                        <a href="{{ url('admin/cuti/' . $cuti->id .'/tolak') }}" class="btn btn-danger">Tolak</a>
-                                    @elseif ($cuti->status_cuti == "Diterima")
+                                    @if ($data->status_cuti == "Menunggu Persetujuan")
+                                        <a href="{{ url('admin/cuti/' . $data->id .'/terima') }}" class="btn btn-success">Terima</a>
+                                        <a href="{{ url('admin/cuti/' . $data->id .'/tolak') }}" class="btn btn-danger">Tolak</a>
+                                    @elseif ($data->status_cuti == "Diterima")
                                         <h6 class="text-success">(Diterima)</h6>
-                                    @elseif ($cuti->status_cuti == "Ditolak")
+                                    @elseif ($data->status_cuti == "Ditolak")
                                         <h6 class="text-danger">(Ditolak)</h6>
                                     @endif
                                 </td>
@@ -43,6 +45,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $datas->links() }}
                 </div>
             </div>
         </div>

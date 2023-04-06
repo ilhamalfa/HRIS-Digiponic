@@ -6,8 +6,8 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Vacancy Data</h4>
-                <a href="{{ url('data-lowongan/tambah-lowongan') }}" class="btn btn-primary">Tambah Lowongan</a>
+                <h4 class="card-title">Data Lowongan Pekerjaan</h4>
+                <a href="{{ url('data-lowongan/tambah-lowongan') }}" class="btn btn-primary my-2">Tambah Lowongan</a>
                 </p>
                 <div class="table-responsive text-center">
                     <table class="table table-bordered">

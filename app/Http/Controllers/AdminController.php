@@ -33,12 +33,12 @@ class AdminController extends Controller
 
     // Cuti
     public function daftarCuti(){
-        $cutis = Cuti::all();
+        $datas = Cuti::paginate(10);
 
-        // dd($cutis);
+        // dd($datas);
 
         return view('admin.cuti-perizinan.daftar-cuti', [
-            'cutis' => $cutis,
+            'datas' => $datas,
         ]);
     }
 
@@ -68,12 +68,12 @@ class AdminController extends Controller
 
     // Perizinan
     public function daftarIzin(){
-        $izins = Perizinan::all();
+        $datas = Perizinan::paginate(10);
 
-        // dd($izins);
+        // dd($datas);
 
         return view('admin.cuti-perizinan.daftar-izin', [
-            'izins' => $izins,
+            'datas' => $datas,
         ]);
     }
 
@@ -105,18 +105,18 @@ class AdminController extends Controller
     public function daftarLowongan(){
         $datas = Lowongan::all();
         
-        return view('super-admin.lowongan.daftar-lowongan', [
+        return view('admin.lowongan.daftar-lowongan', [
             'datas' => $datas
         ]);
     }
 
     public function tambahLowongan(){
-        return view('super-admin.lowongan.input-lowongan');
+        return view('admin.lowongan.input-lowongan');
     }
 
     public function detailPerLowongan($id){
         $data = Lowongan::findOrFail($id);
-        return view('super-admin.lowongan.detail-lowongan', compact('data'));
+        return view('admin.lowongan.detail-lowongan', compact('data'));
     }
 
     public function detailLowongan($id){
@@ -125,7 +125,7 @@ class AdminController extends Controller
 
         // dd($datas);
         
-        return view('super-admin.lowongan.daftar-pelamar', [
+        return view('admin.lowongan.daftar-pelamar', [
             'data' => $data,
             'datas' => $datas
         ]);
@@ -136,7 +136,7 @@ class AdminController extends Controller
 
         // dd($data);
         
-        return view('super-admin.lowongan.detail-pelamar', [
+        return view('admin.lowongan.detail-pelamar', [
             'data' => $data,
         ]);
     }

@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Data Pegawai') }}</div>
+                <div class="card-header mt-3">{{ __('Data User') }}</div>
 
                 <div class="card-body">
                     @if (Auth::user()->role != 'Admin')
