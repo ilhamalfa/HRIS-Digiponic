@@ -3,6 +3,17 @@
 @section('title')
 
 @section('content')
+    {{-- Search --}}
+    <div class="row mb-3 mx-auto">
+        <form class="nav-link d-none d-lg-flex search" action="{{ url('/career') }}">
+            <div class="col-6">
+                <input type="text" class="form-control text-white topbar-search-input" id="topbar-search-input" placeholder="Enter the job" name="search" autofocus>
+            </div>
+            <div class="col-2 mx-1">
+                <button class="btn mt-1 w-75">Search</button>
+            </div>
+        </form>
+    </div>
     <div class="vacancy mt-5">
         @foreach ($datas as $data)
             <a class="vacancy-card-link" href="{{ url('career/vacancy/detail/' . $data->id) }}">
