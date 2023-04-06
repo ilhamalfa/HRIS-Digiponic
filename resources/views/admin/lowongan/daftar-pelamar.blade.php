@@ -9,7 +9,7 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">{{ __('Vacancy, ' . $data->posisi) }}</h4>
+                <h4 class="card-title">{{ __('Daftar Kandidat, ' . $data->posisi) }}</h4>
                 <table class="table">
                     <thead>
                         <tr>
@@ -19,7 +19,7 @@
                             <th scope="col">Age</th>
                             <th scope="col">Phone Number</th>
                             <th scope="col">Email</th>
-                            <th scope="col"></th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -69,4 +69,5 @@ class User extends Authenticatable implements MustVerifyEmail
     public function resign(){
         return $this->hasMany(Resign::class);
     }
+    
 }

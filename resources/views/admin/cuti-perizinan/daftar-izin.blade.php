@@ -1,14 +1,15 @@
-@extends('layouts.app')
+@extends('layouts.template')
+
+@section('title')
 
 @section('content')
 <div class="container">
-    <a href="{{ url('pegawai/izin/ajukan-izin') }}" class="btn btn-primary">Ajukan izin</a>
-    <div class="row justify-content-center mb-3">
+    <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Daftar izin') }}</div>
+                <div class="card-header mt-3">{{ __('Data Izin Pegawai') }}</div>
 
-                <div class="card-body">
+                <div class="card-body overflow-auto">
                     <table class="table">
                         <thead>
                             <tr>
@@ -24,23 +25,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($izins as $izin)
+                            @foreach ($datas as $data)
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
-                                <td>{{ $izin->user->pegawai->nama }}</td>
-                                <td>{{ $izin->tanggal_mulai }}</td>
-                                <td>{{ $izin->tanggal_berakhir }}</td>
-                                <td>{{ date_diff(date_create($izin->tanggal_mulai), date_create($izin->tanggal_berakhir))->days + 1 . " Hari" }}</td>
-                                <td>{{ $izin->alasan_perizinan }}</td>
-                                <td><a href="{{ url('admin/izin/bukti/' . $izin->id) }}" target="_blank" class="btn btn-primary">Lihat Bukti Perizinan</a></td>
-                                <td>{{ $izin->status_perizinan}}</td>
+                                <td>{{ $data->user->pegawai->nama }}</td>
+                                <td>{{ $data->tanggal_mulai }}</td>
+                                <td>{{ $data->tanggal_berakhir }}</td>
+                                <td>{{ date_diff(date_create($data->tanggal_mulai), date_create($data->tanggal_berakhir))->days + 1 . " Hari" }}</td>
+                                <td>{{ $data->alasan_perizinan }}</td>
+                                <td><a href="{{ url('admin/izin/bukti/' . $data->id) }}" target="_blank" class="btn btn-primary">Lihat Bukti Perizinan</a></td>
+                                <td>{{ $data->status_perizinan}}</td>
                                 <td>
-                                    @if ($izin->status_perizinan == "Menunggu Persetujuan")
-                                        <a href="{{ url('admin/izin/' . $izin->id .'/terima') }}" class="btn btn-success">Terima</a>
-                                        <a href="{{ url('admin/izin/' . $izin->id .'/tolak') }}" class="btn btn-danger">Tolak</a>
-                                    @elseif ($izin->status_perizinan == "Diterima")
+                                    @if ($data->status_perizinan == "Menunggu Persetujuan")
+                                        <a href="{{ url('admin/izin/' . $data->id .'/terima') }}" class="btn btn-success">Terima</a>
+                                        <a href="{{ url('admin/izin/' . $data->id .'/tolak') }}" class="btn btn-danger">Tolak</a>
+                                    @elseif ($data->status_perizinan == "Diterima")
                                         <h6 class="text-success">(Diterima)</h6>
-                                    @elseif ($izin->status_perizinan == "Ditolak")
+                                    @elseif ($data->status_perizinan == "Ditolak")
                                         <h6 class="text-danger">(Ditolak)</h6>
                                     @endif
                                 </td>
@@ -48,6 +49,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $datas->links() }}
                 </div>
             </div>
         </div>
