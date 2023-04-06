@@ -49,16 +49,45 @@ table {
 }
 /* CSS Reset End */
 
+/* Root Start */
+:root {
+    --background-color : #000000;
+    --primary-color : #191C24;
+    --secondary-color-1 : #F9F9F9;
+    --secondary-color-2 : #FF4655;
+    --optional-color : #76808A;
+}
+/* Root End */
+
 @media only screen and (min-width: 992px) {
 
-    /* Image Background Start */
-    div {
+    /* Preloader Start */
+    .preloader {
+        background-color: var(--primary-color);
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 100vh;
+        z-index: 9999;
+        overflow: hidden;
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
-    div img {
+    .preloader-image {
+        width: 10%;
+    }
+    /* Preloader Start */
+
+    /* Background Image Start */
+    .background-image-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .background-image {
         position: fixed;
         top: 0;
         width: 100vw;
@@ -66,46 +95,93 @@ table {
         z-index: -999;
         filter: blur(2px) brightness(100%);
     }
-    /* Image Background End */
+    /* Background Image End */
 
     /* Main Start */
     .main {
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
+        height: 100vh;
     }
 
     .auth {
-        background-color: #212529;
+        background-color: var(--primary-color);
+        text-align: center;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin: 2em auto;
+        margin: auto;
         padding: 0 5em;
+        box-sizing: border-box;
+        position: relative;
+    }
+
+    .auth-back {
+        color: var(--secondary-color-1);
+        position: absolute;
+        top: 2%;
+        left: 2%;
     }
 
     .auth-title {
-        color: #F9F9F9;
+        color: var(--secondary-color-1);
         font-size: 2rem;
-        margin: 1em;
+        margin: .5em;
     }
 
-    .auth-form input{
+    .auth-slogan {
+        color: var(--secondary-color-1);
+        margin-bottom: 1em;
+    }
+
+    .form-input{
         background-color: rgba(114, 133, 142, .2);
-        color: #F9F9F9;
+        color: var(--secondary-color-1);
         border: none;
-        margin: 1em;
-        padding: .5em 2em;
+        margin: 1em 0;
+        padding: .6em 2.5em;
         outline: none;
         box-sizing: border-box;
         width: 100%;
     }
 
-    .auth-form input::placeholder {
+    .form-input:focus {
+        border: 1px solid var(--secondary-color-1);
+    }
+
+    .form-input::placeholder {
         font-family: 'Poppins', sans-serif;
-        color: #F9F9F9;
+        color: var(--optional-color);
+    }
+
+    .form-input:focus::placeholder {
+        color: var(--secondary-color-1);
+    }
+
+    .auth-password-box,
+    .auth-password-confirm-box {
+        position: relative;
+    }
+
+    .password-icon-eye {
+        cursor: pointer;
+        color: var(--secondary-color-1);
+        position: absolute;
+        top: 40%;
+        bottom: 40%;
+        right: 5%;
+        display: none;
+    }
+
+    .password-icon-eye-slash {
+        cursor: pointer;
+        color: var(--secondary-color-1);
+        position: absolute;
+        top: 40%;
+        bottom: 40%;
+        right: 5%;
     }
 
     .auth-remember-box {
@@ -114,23 +190,33 @@ table {
     }
 
     input[type=checkbox].auth-remember-checkbox {
-        border: 1px solid #F9F9F9;
+        border: 1px solid var(--secondary-color-1);
         margin: 5px;
         width: 15px;
         height: 15px;
     }
 
-    .auth-remember-checkbox-label {
-        color: #F9F9F9;
+    input[type=checkbox].auth-remember-checkbox:hover {
+        cursor: pointer;
     }
 
+    .auth-remember-checkbox-label {
+        color: var(--secondary-color-1);
+    }
+
+    .auth-button-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
     .auth-button {
-        border: 1px solid #F9F9F9;
-        color: #F9F9F9;
+        border: 1px solid var(--secondary-color-1);
+        color: var(--secondary-color-1);
         box-sizing: border-box;
         padding: .5em;
         transition: .2s;
+        margin: auto;
     }
 
     .auth-button:hover {
@@ -143,18 +229,19 @@ table {
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
-        align-items: start;
+        align-items: center;
         margin: 1em 0;
     }   
 
     .auth-switch-title {
         color: #F9F9F9;
+        text-align: center;
         padding-left: 5%;
         margin: 1em;
         margin-left: 0;
     }
 
-    .auth-switch-login-as-box a {
+    .auth-switch a {
         border: 1px solid #FF4655;
         font-size: .8rem;
         text-decoration: none;
@@ -165,25 +252,25 @@ table {
         transition: color .3s linear;
     }
 
-    .auth-switch-login-as-box a i {
+    .auth-switch a i {
         position: relative;
         color: #FF4655;
         transition: .5s;
     }
 
-    .auth-switch-login-as-box a span {
+    .auth-switch a span {
         color: #FF4655;
         position: relative;
         transition: .5s;
     }
 
-    .auth-switch-login-as-box a:hover i,
-    .auth-switch-login-as-box a:hover span
+    .auth-switch a:hover i,
+    .auth-switch a:hover span
     {
         color: #F9F9F9;
     }
 
-    .auth-switch-login-as-box a::before {
+    .auth-switch a::before {
         content: "";
         position: absolute;
         top: 0;
@@ -197,54 +284,7 @@ table {
         transform: scaleX(0);
     }
 
-    .auth-switch-login-as-box a:hover::before {
-        transform: scaleX(1);
-    }
-
-    .auth-switch-sign-up-box a {
-        border: 1px solid #FF4655;
-        font-size: .8rem;
-        text-decoration: none;
-        position: relative;
-        border-radius: 0%;
-        margin: 1em;
-        padding: .5em 1em;
-        transition: color .3s linear;
-    }
-
-    .auth-switch-sign-up-box a i {
-        position: relative;
-        color: #FF4655;
-        transition: .5s;
-    }
-
-    .auth-switch-sign-up-box a span {
-        color: #FF4655;
-        position: relative;
-        transition: .5s;
-    }
-
-    .auth-switch-sign-up-box a:hover i,
-    .auth-switch-sign-up-box a:hover span
-    {
-        color: #F9F9F9;
-    }
-
-    .auth-switch-sign-up-box a::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: #FF4655;
-        transition: transform .5s;
-        transform-origin: 0 0;
-        transition-timing-function: cubic-bezier(0.5, 1.6);
-        transform: scaleX(0);
-    }
-
-    .auth-switch-sign-up-box a:hover::before {
+    .auth-switch a:hover::before {
         transform: scaleX(1);
     }
 
@@ -265,7 +305,6 @@ table {
     }
 
     .auth-extra-link {
-        text-decoration: none;
         margin: .5em 0;
     }
     /* Main End */

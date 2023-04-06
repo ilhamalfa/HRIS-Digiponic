@@ -66,7 +66,7 @@
 
             {{-- Sidebar Brand Logo Start --}}
             <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-                <a class="sidebar-brand brand-logo text-decoration-none text-white font-weight-500" href="#">
+                <a class="sidebar-brand brand-logo text-decoration-none text-white font-weight-500" href="/">
                     TECH.Solution
                 </a>
                 <a class="sidebar-brand brand-logo-mini" href="#">
@@ -100,8 +100,26 @@
                                         alt="Your Profile Image">
                                 </div>
                                 <div class="profile-name">
-                                    <h5 class="mb-0 font-weight-normal">Henry Klein</h5>
-                                    <span>Employee</span>
+                                    <h5 class="mb-0 font-weight-normal">
+                                        @if (isset(Auth::user()->pegawai))
+                                            {{ Auth::user()->pegawai->nama }}
+                                        @elseif (isset(Auth::user()->pelamar) && Auth::user()->role == 'Pelamar')
+                                            {{ Auth::user()->pelamar->nama }}
+                                        @else
+                                            {{ Auth::user()->email }}
+                                        @endif
+                                    </h5>
+                                    <span>
+                                        @if (Auth::user()->role == 'SuperAdmin')
+                                            Super Admin
+                                        @elseif(Auth::user()->role == 'Admin')
+                                            Admin
+                                        @elseif(Auth::user()->role == 'Pegawai')
+                                            Employee
+                                        @else
+                                            Candidate
+                                        @endif
+                                    </span>
                                 </div>
                             </div>
                             {{-- Sidebar Profile Image & Name End --}}
@@ -152,7 +170,7 @@
 
                 {{-- Sidebar Dashboard Start --}}
                 <li class="nav-item menu-items">
-                    <a class="nav-link" href="#home">
+                    <a class="nav-link" href="/">
                         <span class="menu-icon">
                             <i class="fa-solid fa-house"></i>
                         </span>
@@ -160,7 +178,7 @@
                     </a>
                 </li>
                 <li class="nav-item menu-items">
-                    <a class="nav-link" href="#career">
+                    <a class="nav-link" href="{{ url('/pelamar/lowongan') }}">
                         <span class="menu-icon">
                             <i class="fa-solid fa-square-pen"></i>
                         </span>
