@@ -70,4 +70,15 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Resign::class);
     }
     
+    public function scopeFilter($query, array $filters)
+    {
+    $query->when($filters['search'] ?? false, function ($query, $search) {
+        return $query->where(function ($query) use ($search) {
+            $query->where('nik', 'like', '%' . $search . '%')
+                ->orwhereHas('pegawai', function($query) use ($search){
+                    $query->where('nama', 'like', '%' . $search . '%');
+                });
+            });
+        });
+    }
 }

@@ -49,7 +49,7 @@ Route::get('/login-pegawai', function () {
 // sandi (admin123) (pegawai123) (pelamar123)
 
 // Route Pelamar
-Route::middleware(['auth', 'verified', 'pelamar'])->group(function () {
+Route::middleware(['auth', 'verified', 'user-access:Pelamar'])->group(function () {
     Route::get('/pelamar/input-data-pelamar', [PelamarController::class, 'inputPelamar']);
 
     Route::post('/pelamar/input-data-pelamar/store', [PelamarController::class, 'storePelamar']);
@@ -63,7 +63,7 @@ Route::middleware(['auth', 'verified', 'pelamar'])->group(function () {
 
 // Super Admin
 // Route Super Admin Start
-Route::middleware(['auth', 'verified', 'superadmin'])->group(function () {
+Route::middleware(['auth', 'verified', 'user-access:SuperAdmin'])->group(function () {
     // Data User
     Route::get('/data-user/input-user', [SuperAdminController::class, 'inputUser']);
 

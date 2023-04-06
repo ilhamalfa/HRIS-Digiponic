@@ -11,12 +11,12 @@
                         <span>
                             <i class="fa-solid fa-check-to-slot"></i>
                         </span>
-                        <span>apply</span>
+                        <span>Detail</span>
                     </div>
-                    <div class="card-body vacancy-card-body">
+                    <div class="card-body vacancy-card-body text-white">
                         <h1 class="vacancy-position-title">Job Desk :</h1>
                         <h6 class="vacancy-position-name">{{ $data->posisi }}</h6>
-                        <p class="vacancy-deadline-date-title m-0">Deadline Date :</p>
+                        <p class="vacancy-deadline-date-title my-3">Deadline Date :</p>
                         <p class="vacancy-deadline-date mx-2 px-2">{{ date('d F Y', strtotime($data->tanggal)) }}</p>
                         <p class="vacancy-uploade-date m-0">Posted On {{ date('d F Y', strtotime($data->created_at)) }}</p>
                     </div>

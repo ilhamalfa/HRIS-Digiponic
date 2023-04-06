@@ -95,13 +95,31 @@
                             {{-- Sidebar Profile Image & Name Start --}}
                             <div class="profile-pic">
                                 <div class="count-indicator">
+                                    @if (Auth::user()->role == 'Pelamar')
                                     <img class="img-xs rounded-circle "
-                                        src="{{ asset('template/assets/images/faces/face15.jpg') }}"
+                                        src="{{ asset('storage/' . Auth::user()->pelamar->foto) }}"
                                         alt="Your Profile Image">
+                                    @else
+                                        <img class="img-xs rounded-circle "
+                                        src="{{ asset('storage/' . Auth::user()->pegawai->foto) }}"
+                                        alt="Your Profile Image">
+                                    @endif
                                 </div>
                                 <div class="profile-name">
-                                    <h5 class="mb-0 font-weight-normal">Henry Klein</h5>
-                                    <span>Employee</span>
+                                    <h5 class="mb-0 font-weight-normal">
+                                        @if (Auth::user()->role == 'Pelamar')
+                                            {{ Auth::user()->pelamar->nama }}
+                                        @else
+                                            {{ Auth::user()->pegawai->nama }}
+                                        @endif
+                                    </h5>
+                                    <span>
+                                        @if (Auth::user()->role == 'Pelamar')
+                                            {{ Auth::user()->role }}
+                                        @else
+                                            {{ Auth::user()->pegawai->department }} - {{ Auth::user()->pegawai->golongan }}
+                                        @endif
+                                    </span>
                                 </div>
                             </div>
                             {{-- Sidebar Profile Image & Name End --}}
@@ -229,11 +247,17 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
                                 <div class="navbar-profile">
-                                    <img class="img-xs rounded-circle"
-                                        src="{{ asset('template/assets/images/faces/face15.jpg') }}" alt="">
+                                    
                                     @guest
                                         <p class="mb-0 d-none d-sm-block navbar-profile-name">Login</p>
                                     @else
+                                        @if (Auth::user()->role == 'Pelamar')
+                                            <img class="img-xs rounded-circle"
+                                            src="{{ asset('storage/' . Auth::user()->pelamar->foto) }}" alt="">
+                                        @else
+                                        <img class="img-xs rounded-circle"
+                                        src="{{ asset('storage/' . Auth::user()->pegawai->foto) }}" alt="">
+                                        @endif
                                         <p class="mb-0 d-none d-sm-block navbar-profile-name">
                                             @if (isset(Auth::user()->pegawai))
                                                 {{ Auth::user()->pegawai->nama }}
@@ -275,6 +299,19 @@
                                     </a>
                                     <div class="dropdown-divider"></div>
                                 @else
+                                    @if (Auth::user()->role == 'Pelamar')
+                                    <a class="dropdown-item preview-item" href="{{ route('register') }}">
+                                        <div class="preview-thumbnail">
+                                            <div class="preview-icon bg-dark rounded-circle">
+                                                <i class="fa-solid fa-file-pen"></i>
+                                            </div>
+                                        </div>
+                                        <div class="preview-item-content">
+                                            <p class="preview-subject mb-1">Applied Jobs</p>
+                                        </div>
+                                    </a>
+                                    @endif
+                                    <div class="dropdown-divider"></div>
                                     <a class="dropdown-item preview-item" href="{{ route('logout') }}" 
                                         onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
