@@ -76,22 +76,26 @@
 
 @extends('auth.layout')
 
-@section('title', 'Login Page')
+@section('title', 'Employee Login Page')
 
 @section('content')
     <div class="auth">
+        <a class="auth-back" href="{{ url('/') }}">
+            <i class="fa-solid fa-hand-point-left"></i>
+        </a>
         <h1 class="auth-title">Sign In</h1>
+        <h6 class="auth-slogan">Work Hard Stay Humble.</h6>
         <form class="auth-form" method="POST" action="{{ route('login') }}">
             @csrf
-            <div class="auth-email-box">
-                {{-- <label for="email">Email</label> --}}
-                <input type="number" id="nik" name="nik" value="{{ old('nik') ?: old('email') }}" placeholder="Nomor Induk Karyawan"
+            <div class="auth-nik-box">
+                <input class="form-input" type="number" id="nik" name="nik" value="{{ old('nik') ?: old('email') }}" placeholder="Your Nik"
                     required autofocus>
             </div>
             <div class="auth-password-box">
-                {{-- <label for="password">Password</label> --}}
-                <input type="password" id="password" name="password" placeholder="Password" required
+                <input class="form-input" type="password" id="password" name="password" placeholder="Password" required
                     autocomplete="current-password">
+                <i class="fa-solid fa-eye password-icon-eye" id="password-icon-eye"></i>
+                <i class="fa-solid fa-eye-slash password-icon-eye-slash" id="password-icon-eye-slash"></i>
             </div>
             <div class="auth-remember-box">
                 <input class="auth-remember-checkbox" type="checkbox" name="remember" id="remember"
@@ -108,14 +112,14 @@
             </div>
             <div class="auth-forgot-password-box">
                 @if (Route::has('password.request'))
-                    <a class="btn btn-link auth-forgot-password" href="{{ route('password.request') }}">
+                    <a class="btn btn-link text-white" href="{{ route('password.request') }}">
                         {{ __('Forgot Your Password?') }}
                     </a>
                 @endif
             </div>
-            <div class="auth-extra-box">
-                <p class="auth-switch-title">Dont Have Account?</p>
-                <div class="auth-switch-sign-up-box">
+            <div class="auth-switch-box">
+                <p class="auth-switch-title">Don't Have Account?</p>
+                <div class="auth-switch">
                     <a href="{{ route('register') }}" class="auth-switch-sign-up">
                         <i class="fa-solid fa-file-lines m-2"></i>
                         <span>Sign Up</span>
