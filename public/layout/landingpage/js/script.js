@@ -2,7 +2,7 @@
 const topbar = document.getElementById('topbar')
 const hamburgerMenu = document.getElementById('topbar-hamburger-menu')
 const span = hamburgerMenu.querySelectorAll('span')
-const account = document.getElementById('topbar-account')
+
 const navmenu = document.getElementById('navmenu')
 const accountMenu = document.getElementById('account-menu')
 const loginButton = document.getElementById('login')
@@ -25,23 +25,23 @@ document.addEventListener('click', function (e) {
 // Hamburger Menu Click End
 
 // Account Click Start
-account.addEventListener('click', function (e) {
-    e.preventDefault()
-    accountMenu.classList.toggle('show')
-    navmenu.classList.remove('show')
-})
+// account.addEventListener('click', function (e) {
+//     e.preventDefault()
+//     accountMenu.classList.toggle('show')
+//     navmenu.classList.remove('show')
+// })
 
-loginButton.addEventListener('click', function (e) {
-    e.preventDefault()
-    loginAs.classList.toggle('show')
-})
+// loginButton.addEventListener('click', function (e) {
+//     e.preventDefault()
+//     loginAs.classList.toggle('show')
+// })
 
-document.addEventListener('click', function (e) {
-    if (!account.contains(e.target) && !accountMenu.contains(e.target)) {
-        accountMenu.classList.remove('show')
-        loginAs.classList.remove('show')
-    }
-})
+// document.addEventListener('click', function (e) {
+//     if (!account.contains(e.target) && !accountMenu.contains(e.target)) {
+//         accountMenu.classList.remove('show')
+//         loginAs.classList.remove('show')
+//     }
+// })
 // Account Click End
 
 // Animation Opening Start
@@ -62,18 +62,19 @@ $(window).scroll(function () {
         accountMenu.classList.remove('show')
     }
     if (wScroll > 40) {
+        $('.topbar').css({
+            'background-color' : '#212529'
+        })
         $('.topbar-brand-text').css({
-            'color' : '#FF4655'
+            'color' : '#F9F9F9'
         })
         span.forEach(function (e) {
             e.classList.add('color-change')
         })
-        $('.topbar-account-logo').css({
-            'color' : '#FF4655'
-        })
-        navmenu.classList.add('background')
-        accountMenu.classList.add('background')
     } else {
+        $('.topbar').css({
+            'background' : 'none'
+        })
         $('.topbar-brand-text').css({
             'color' : '#212529'
         })
@@ -83,8 +84,6 @@ $(window).scroll(function () {
         $('.topbar-account-logo').css({
             'color' : '#212529'
         })
-        navmenu.classList.remove('background')
-        accountMenu.classList.remove('background')
     }
 
     // Opening Animation Start

@@ -30,7 +30,7 @@ Auth::routes(['verify' => true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Landing Page
-Route::post('rutelogin', [Controller::class, 'rutelogin'])->name('rutelogin');
+Route::get('/rutelogin', [Controller::class, 'rutelogin'])->name('rutelogin');
 
 Route::get('struktur', [Controller::class, 'struktur'])->name('struktur');
 
@@ -46,6 +46,7 @@ Route::get('product', [Controller::class, 'product'])->name('product');
 Route::get('/login-pegawai', function () {
     return view('auth.login-pegawai');
 });
+// sandi (admin123) (pegawai123) (pelamar123)
 
 // Route Pelamar
 Route::middleware(['auth', 'verified', 'pelamar'])->group(function () {

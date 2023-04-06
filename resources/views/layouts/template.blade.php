@@ -10,6 +10,18 @@
     {{-- <link rel="icon" href="{{ asset('logo/brand-logo.png') }}"> --}}
     {{-- Header Logo End --}}
 
+    {{-- Google Fonts Start --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,700;1,300&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    {{-- Google Fonts End --}}
+
     {{-- Plugin CSS Start --}}
     <link rel="stylesheet" href="{{ asset('template/assets/vendors/mdi/css/materialdesignicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('template/assets/vendors/css/vendor.bundle.base.css') }}">
@@ -22,6 +34,10 @@
     {{-- Layout CSS Start --}}
     <link rel="stylesheet" href="{{ asset('template/assets/css/style.css') }}">
     {{-- Layout CSS End --}}
+
+    {{-- CSS Start --}}
+    <link rel="stylesheet" href="{{ asset('layout/landingpage/css/style.css') }}">
+    {{-- CSS End --}}
 
     {{-- Animations CSS Start --}}
     <link rel="stylesheet" href="{{ asset('template/assets/css/animations/style.css') }}">
