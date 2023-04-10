@@ -1,11 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.template')
+
+@section('title')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Detail Pelamar, '. $data->user->nama ) }}</div>
+                <div class="card-header m-3">{{ __('Detail Pelamar, '. $data->user->pelamar->nama ) }}</div>
 
                 <div class="card-body text-center">
                     {{-- <img src="{{ asset('storage/' . $data->user->foto) }}" alt="" class="img d-inline-block h-25"> --}}

@@ -95,14 +95,15 @@
                             {{-- Sidebar Profile Image & Name Start --}}
                             <div class="profile-pic">
                                 <div class="count-indicator">
-                                    @if (Auth::user()->role == 'Pelamar')
-                                    <img class="img-xs rounded-circle "
-                                        src="{{ asset('storage/' . Auth::user()->pelamar->foto) }}"
-                                        alt="Your Profile Image">
+                                    @if (Auth::user()->role != 'Pelamar' && isset(Auth::user()->pegawai))
+                                        <img class="img-xs rounded-circle"
+                                        src="{{ asset('storage/' . Auth::user()->pegawai->foto) }}" alt="">
+                                    @elseif (Auth::user()->role == 'Pelamar' && isset(Auth::user()->pelamar))
+                                        <img class="img-xs rounded-circle"
+                                        src="{{ asset('storage/' . Auth::user()->pelamar->foto) }}" alt="">
                                     @else
-                                        <img class="img-xs rounded-circle "
-                                        src="{{ asset('storage/' . Auth::user()->pegawai->foto) }}"
-                                        alt="Your Profile Image">
+                                            <img class="img-xs rounded-circle "
+                                            src="{{ asset('template/assets/images/faces/face18.jpg') }}" alt="">
                                     @endif
                                 </div>
                                 <div class="profile-name">
@@ -251,12 +252,15 @@
                                     @guest
                                         <p class="mb-0 d-none d-sm-block navbar-profile-name">Login</p>
                                     @else
-                                        @if (Auth::user()->role == 'Pelamar')
+                                        @if (Auth::user()->role != 'Pelamar' && isset(Auth::user()->pegawai))
+                                            <img class="img-xs rounded-circle"
+                                            src="{{ asset('storage/' . Auth::user()->pegawai->foto) }}" alt="">
+                                        @elseif (Auth::user()->role == 'Pelamar' && isset(Auth::user()->pegawai))
                                             <img class="img-xs rounded-circle"
                                             src="{{ asset('storage/' . Auth::user()->pelamar->foto) }}" alt="">
                                         @else
-                                        <img class="img-xs rounded-circle"
-                                        src="{{ asset('storage/' . Auth::user()->pegawai->foto) }}" alt="">
+                                            <img class="img-xs rounded-circle "
+                                            src="{{ asset('template/assets/images/faces/face18.jpg') }}" alt="">
                                         @endif
                                         <p class="mb-0 d-none d-sm-block navbar-profile-name">
                                             @if (isset(Auth::user()->pegawai))
@@ -467,6 +471,9 @@
     <script src="{{ asset('template/assets/js/todolist.js') }}"></script>
     {{-- Plugins JS End --}}
     
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="{{ asset('js/alamat.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
 </body>
 
 </html>

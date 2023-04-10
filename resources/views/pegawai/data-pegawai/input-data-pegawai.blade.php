@@ -1,11 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.template')
+
+@section('title')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Input Data Pegawai') }}</div>
+                <div class="card-header mt-3">{{ __('Input User Pegawai Baru') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ url('/pegawai/input-pegawai/store-pegawai/') }}" enctype="multipart/form-data">
@@ -14,7 +16,7 @@
                             <label for="nama" class="col-md-4 col-form-label text-md-end">{{ __('Nama') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nama" type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}">
+                                <input id="nama" type="text" class="form-control text-light @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}">
 
                                 @error('nama')
                                     <span class="invalid-feedback" role="alert">
@@ -28,7 +30,7 @@
                             <label for="tanggal_lahir" class="col-md-4 col-form-label text-md-end">{{ __('Tanggal lahir') }}</label>
 
                             <div class="col-md-6">
-                                <input id="tanggal_lahir" type="date" class="form-control @error('tanggal_lahir') is-invalid @enderror" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}">
+                                <input id="tanggal_lahir" type="date" class="form-control text-light @error('tanggal_lahir') is-invalid @enderror" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}">
 
                                 @error('tanggal_lahir')
                                     <span class="invalid-feedback" role="alert">
@@ -66,7 +68,7 @@
                             <label for="foto" class="col-md-4 col-form-label text-md-end">{{ __('Foto') }}</label>
 
                             <div class="col-md-6">
-                                <input id="foto" type="file" class="form-control @error('foto') is-invalid @enderror" name="foto" value="{{ old('foto') }}">
+                                <input id="foto" type="file" class="form-control text-light @error('foto') is-invalid @enderror" name="foto" value="{{ old('foto') }}">
 
                                 @error('foto')
                                     <span class="invalid-feedback" role="alert">
@@ -80,7 +82,7 @@
                             <label for="nomor_hp" class="col-md-4 col-form-label text-md-end">{{ __('Nomor HP') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nomor_hp" type="number" class="form-control @error('nomor_hp') is-invalid @enderror" name="nomor_hp" value="{{ old('nomor_hp') }}">
+                                <input id="nomor_hp" type="number" class="form-control text-light @error('nomor_hp') is-invalid @enderror" name="nomor_hp" value="{{ old('nomor_hp') }}">
 
                                 @error('nomor_hp')
                                     <span class="invalid-feedback" role="alert">
@@ -124,7 +126,7 @@
                             <label for="jumlah_anak" class="col-md-4 col-form-label text-md-end">{{ __('Jumlah Anak') }}</label>
 
                             <div class="col-md-6">
-                                <input id="jumlah_anak" type="number" class="form-control @error('jumlah_anak') is-invalid @enderror" name="jumlah_anak" value="{{ old('jumlah_anak') }}" disabled="disabled">
+                                <input id="jumlah_anak" type="number" class="form-control text-light @error('jumlah_anak') is-invalid @enderror" name="jumlah_anak" value="{{ old('jumlah_anak') }}" disabled="disabled">
 
                                 @error('jumlah_anak')
                                     <span class="invalid-feedback" role="alert">
@@ -245,7 +247,7 @@
                             <label for="alamat" class="col-md-4 col-form-label text-md-end">{{ __('Detail alamat') }}</label>
 
                             <div class="col-md-6">
-                                <input id="alamat" type="text" class="form-control @error('alamat') is-invalid @enderror" name="alamat" value="{{ old('alamat') }}">
+                                <input id="alamat" type="text" class="form-control text-light @error('alamat') is-invalid @enderror" name="alamat" value="{{ old('alamat') }}">
 
                                 @error('alamat')
                                     <span class="invalid-feedback" role="alert">

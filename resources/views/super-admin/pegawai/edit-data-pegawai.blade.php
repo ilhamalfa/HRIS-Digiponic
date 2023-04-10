@@ -1,11 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.template')
+
+@section('title')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Edit Data Pegawai') }}</div>
+                <div class="card-header mt-3">{{ __('Input User Pegawai Baru') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ url('/data-pegawai/update-pegawai/'. $data->id) }}" enctype="multipart/form-data">

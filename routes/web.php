@@ -81,9 +81,6 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin'])->group(functio
 
     // Data User
     Route::get('/data-user', [AdminController::class, 'dataUser']);
-
-    // Data Pegawai
-    Route::get('/data-pegawai', [AdminController::class, 'dataPegawai']);
     });
 
 
