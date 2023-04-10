@@ -323,6 +323,28 @@
                                 aria-labelledby="profileDropdown">
                                 <h6 class="p-3 mb-0">Profile</h6>
                                 <div class="dropdown-divider"></div>
+                                <a class="dropdown-item preview-item" href="{{ url('/profile/edit-profile') }}">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-clipboard-account text-primary"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject mb-1">Update User Data</p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item preview-item" href="{{ url('/profile/edit-data-pegawai') }}">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-account-edit text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject mb-1">Update Employee Data</p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item preview-item">
                                     <div class="preview-thumbnail">
                                         <div class="preview-icon bg-dark rounded-circle">

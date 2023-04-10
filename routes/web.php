@@ -128,6 +128,16 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin'])->group(f
 
 // Pegawai
 Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin,Pegawai'])->group(function () {
+    // Update data User
+    Route::get('/profile/edit-profile', [PegawaiController::class, 'editUser']);
+
+    Route::post('/profile/edit-profile/update', [PegawaiController::class, 'updateUser']);
+
+     // Update data Pegawai
+    Route::get('/profile/edit-data-pegawai', [PegawaiController::class, 'editPegawai']);
+
+    Route::post('/profile/edit-data-pegawai/update', [PegawaiController::class, 'updatePegawai']);
+
     // Input data pegawai
     Route::get('/pegawai/input-pegawai', [PegawaiController::class, 'inputPegawai']);
 

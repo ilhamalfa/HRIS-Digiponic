@@ -3,15 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cuti;
+use App\Models\District;
 use App\Models\Pegawai;
 use App\Models\Perizinan;
 use App\Models\Province;
+use App\Models\Regency;
 use App\Models\Resign;
 use App\Models\User;
+use App\Models\Village;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+
+use function PHPUnit\Framework\fileExists;
+use function PHPUnit\Framework\isEmpty;
 
 class PegawaiController extends Controller
 {
@@ -30,8 +37,122 @@ class PegawaiController extends Controller
         }
     }
 
+    public function editUser(){
+            return view('pegawai.data-pegawai.update-profile');
+    }
+
+    public function updateUser(Request $request){
+        $data = User::find(Auth::user()->id);
+
+        if($request->email == $data->email){
+            $validate = $request->validate([
+                'email' => ['required', 'string', 'email', 'max:255'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+            ]);
+        }else{
+            $validate = $request->validate([
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+            ]);
+        }
+
+        $validate['password'] = Hash::make($request->password);
+
+        $data->update($validate);
+
+        return redirect()->back();
+    }
+
+    public function editPegawai(){
+        $data = Pegawai::where('user_id', Auth::user()->id)->first();
+
+        $provinces = Province::all();
+        $regency = Regency::find($data->regency_id);
+        $district = District::find($data->district_id);
+        $village = Village::find($data->village_id);
+
+        // dd($districts);
+
+        return view('pegawai.data-pegawai.update-data-pegawai', [
+            'data' => $data,
+            'provinces' => $provinces,
+            'regency' => $regency,
+            'district' => $district,
+            'village' => $village
+        ]);
+    }
+
+    public function updatePegawai(Request $request){
+        $data = Pegawai::find(Auth::user()->pegawai->id);
+        // dd($data);
+
+        if(!$request->has('foto')){
+            $validate = $request->validate([
+                'nama' => 'required',
+                'tanggal_lahir' => 'required|before:17 years ago',
+                'jenis_kelamin' => 'required',
+                'nomor_hp' => 'required',
+                'status_pernikahan' => 'required',
+                'department' => 'required',
+                'golongan' => 'required',
+                'province_id' => 'required',
+                'regency_id' => 'required',
+                'district_id' =>'required',
+                'village_id' => 'required',
+                'alamat' => 'required',
+            ]);
+
+            $validate['umur'] = Carbon::parse($request->tanggal_lahir)->age;
+
+            if($request->has('jumlah_anak')){
+                $validate['jumlah_anak'] = $request->jumlah_anak;
+            }else{
+                $validate['jumlah_anak'] = 0;
+            }
+
+            // dd($validate);
+        }else{
+            $validate = $request->validate([
+                'nama' => 'required',
+                'tanggal_lahir' => 'required|before:17 years ago',
+                'jenis_kelamin' => 'required',
+                'nomor_hp' => 'required',
+                'status_pernikahan' => 'required',
+                'department' => 'required',
+                'golongan' => 'required',
+                'province_id' => 'required',
+                'regency_id' => 'required',
+                'district_id' =>'required',
+                'village_id' => 'required',
+                'alamat' => 'required',
+                'foto' => 'required|image',
+            ]);
+    
+            $validate['umur'] = Carbon::parse($request->tanggal_lahir)->age;
+
+            if($request->has('jumlah_anak')){
+                $validate['jumlah_anak'] = $request->jumlah_anak;
+            }else{
+                $validate['jumlah_anak'] = 0;
+            }
+
+            if(fileExists('storage/'. $data->foto)){
+                unlink('storage/'. $data->foto);
+            }
+
+            $extension_foto = $request->file('foto')->extension();
+                
+            $nama_foto = $request->nama . '-' . now()->timestamp. '.' . $extension_foto;
+    
+            $validate['foto'] = $request->file('foto')->storeAs('Pegawai/foto', $nama_foto);
+        }
+
+        $data->update($validate);
+
+        return redirect()->back();
+    }
+
     public function storePegawai(Request $request){
-        // dd($request);
         $validate = $request->validate([
             'nama' => 'required',
             'tanggal_lahir' => 'required|before:17 years ago',
