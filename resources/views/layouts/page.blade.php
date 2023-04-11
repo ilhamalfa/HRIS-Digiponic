@@ -145,7 +145,11 @@
                                     </div>
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a href="{{ url('/profile/edit-data-pegawai') }}" class="dropdown-item preview-item">
+                                @if (Auth::user()->role == 'Pelamar')
+                                    <a href="{{ url('/profile/edit-data-pelamar') }}" class="dropdown-item preview-item">
+                                @else
+                                    <a href="{{ url('/profile/edit-data-pegawai') }}" class="dropdown-item preview-item">
+                                @endif
                                     <div class="preview-thumbnail">
                                         <div class="preview-icon bg-dark rounded-circle">
                                             <i class="mdi mdi-clipboard-account  text-info"></i>
@@ -304,7 +308,7 @@
                                     <div class="dropdown-divider"></div>
                                 @else
                                     @if (Auth::user()->role == 'Pelamar')
-                                    <a class="dropdown-item preview-item" href="{{ route('register') }}">
+                                    <a class="dropdown-item preview-item" href="{{ url('/pelamar/daftar-lamaran/') }}">
                                         <div class="preview-thumbnail">
                                             <div class="preview-icon bg-dark rounded-circle">
                                                 <i class="fa-solid fa-file-pen"></i>
