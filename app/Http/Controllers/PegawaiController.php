@@ -49,16 +49,23 @@ class PegawaiController extends Controller
                 'email' => ['required', 'string', 'email', 'max:255'],
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
             ]);
+
+            $validate['password'] = Hash::make($request->password);
+
+            $data->update($validate);
         }else{
             $validate = $request->validate([
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
             ]);
+
+            $validate['password'] = Hash::make($request->password);
+            $validate['email_verified_at'] = NULL;
+
+            $data->update($validate);
+
+            $data->sendEmailVerificationNotification();
         }
-
-        $validate['password'] = Hash::make($request->password);
-
-        $data->update($validate);
 
         return redirect()->back();
     }

@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\District;
 use App\Models\Lamaran;
 use App\Models\Lowongan;
 use App\Models\Pelamar;
 use App\Models\Province;
+use App\Models\Regency;
+use App\Models\Village;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
+use function PHPUnit\Framework\fileExists;
 
 class PelamarController extends Controller
 {
@@ -64,6 +69,77 @@ class PelamarController extends Controller
         Pelamar::create($validate);
         
         return redirect('home');
+    }
+
+    public function editPelamar(){
+        $data = Pelamar::where('user_id', Auth::user()->id)->first();
+
+        $provinces = Province::all();
+        $regency = Regency::find($data->regency_id);
+        $district = District::find($data->district_id);
+        $village = Village::find($data->village_id);
+
+        // dd($districts);
+
+        return view('pelamar.edit-data-pelamar', [
+            'data' => $data,
+            'provinces' => $provinces,
+            'regency' => $regency,
+            'district' => $district,
+            'village' => $village
+        ]);
+    }
+
+    public function updatePelamar(Request $request){
+        $data = Pelamar::find(Auth::user()->pelamar->id);
+        // dd($data);
+
+        if(!$request->has('foto')){
+            $validate = $request->validate([
+                'nama' => 'required',
+                'tanggal_lahir' => 'required|before:17 years ago',
+                'jenis_kelamin' => 'required',
+                'nomor_hp' => 'required',
+                'province_id' => 'required',
+                'regency_id' => 'required',
+                'district_id' =>'required',
+                'village_id' => 'required',
+                'alamat' => 'required',
+            ]);
+
+            $validate['umur'] = Carbon::parse($request->tanggal_lahir)->age;
+            // dd($validate);
+        }else{
+            $validate = $request->validate([
+                'nama' => 'required',
+                'tanggal_lahir' => 'required|before:17 years ago',
+                'jenis_kelamin' => 'required',
+                'nomor_hp' => 'required',
+                'province_id' => 'required',
+                'regency_id' => 'required',
+                'district_id' =>'required',
+                'village_id' => 'required',
+                'alamat' => 'required',
+                'foto' => 'required|image',
+            ]);
+    
+            $validate['umur'] = Carbon::parse($request->tanggal_lahir)->age;
+
+            if(fileExists('storage/'. $data->foto)){
+                unlink('storage/'. $data->foto);
+            }
+
+            $extension_foto = $request->file('foto')->extension();
+                
+            $nama_foto = $request->nama . '-' . now()->timestamp. '.' . $extension_foto;
+    
+            $validate['foto'] = $request->file('foto')->storeAs('Pegawai/foto', $nama_foto);
+        }
+        // dd($validate);
+
+        $data->update($validate);
+
+        return redirect()->back();
     }
 
     public function daftarLowongan(){

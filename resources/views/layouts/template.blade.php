@@ -82,13 +82,12 @@
                             <div class="count-indicator">
                                 @if (Auth::user()->role != 'Pelamar' && isset(Auth::user()->pegawai))
                                     <img class="img-xs rounded-circle"
-                                    src="{{ asset('storage/'. Auth::user()->pegawai->foto) }}"
-                                    alt="Your Profile Image">
-                                @elseif (Auth::user()->role == 'Pelamar' && isset(Auth::user()->pegawai))
+                                    src="{{ asset('storage/' . Auth::user()->pegawai->foto) }}" alt="">
+                                @elseif (Auth::user()->role == 'Pelamar' && isset(Auth::user()->pelamar))
                                     <img class="img-xs rounded-circle"
                                     src="{{ asset('storage/' . Auth::user()->pelamar->foto) }}" alt="">
                                 @else
-                                    <img class="img-xs rounded-circle"
+                                    <img class="img-xs rounded-circle "
                                     src="{{ asset('template/assets/images/faces/face18.jpg') }}" alt="">
                                 @endif
                             </div>
@@ -120,7 +119,7 @@
                         {{-- Sidebar Profile 3 Dots Vertical Menu Start --}}
                         <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list"
                             aria-labelledby="profile-dropdown">
-                            <a href="#" class="dropdown-item preview-item">
+                            <a href="{{ url('/Account/account-setting') }}" class="dropdown-item preview-item">
                                 <div class="preview-thumbnail">
                                     <div class="preview-icon bg-dark rounded-circle">
                                         <i class="mdi mdi-settings text-primary"></i>
@@ -131,17 +130,17 @@
                                 </div>
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item preview-item">
+                            <a href="{{ url('/profile/edit-data-pegawai') }}" class="dropdown-item preview-item">
                                 <div class="preview-thumbnail">
                                     <div class="preview-icon bg-dark rounded-circle">
-                                        <i class="mdi mdi-onepassword  text-info"></i>
+                                        <i class="mdi mdi-clipboard-account  text-info"></i>
                                     </div>
                                 </div>
                                 <div class="preview-item-content">
-                                    <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
+                                    <p class="preview-subject ellipsis mb-1 text-small">Change User Data</p>
                                 </div>
                             </a>    
-                            </div>
+                        </div>
                         {{-- Sidebar Profile 3 Dots Vertical Menu End --}}
 
                     </div>
@@ -198,7 +197,7 @@
                     <ul class="navbar-nav w-100">
                         <li class="nav-item w-100">
                             <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
-                                <input type="text" class="form-control text-white topbar-search-input" id="topbar-search-input" placeholder="Search Anythings" autofocus>
+                                <input type="text" class="form-control text-white topbar-search-input" id="topbar-search-input" placeholder="Search Anythings">
                             </form>
                         </li>
                     </ul>
@@ -294,16 +293,15 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
                                 <div class="navbar-profile">
-                                    {{-- @foreach ($user as $user) --}}
+                                        {{-- @foreach ($user as $user) --}}
                                         @if (Auth::user()->role != 'Pelamar' && isset(Auth::user()->pegawai))
                                             <img class="img-xs rounded-circle"
-                                            src="{{ asset('storage/'. Auth::user()->pegawai->foto) }}"
-                                            alt="Your Profile Image">
-                                        @elseif (Auth::user()->role == 'Pelamar' && isset(Auth::user()->pegawai))
+                                            src="{{ asset('storage/' . Auth::user()->pegawai->foto) }}" alt="">
+                                        @elseif (Auth::user()->role == 'Pelamar' && isset(Auth::user()->pelamar))
                                             <img class="img-xs rounded-circle"
                                             src="{{ asset('storage/' . Auth::user()->pelamar->foto) }}" alt="">
                                         @else
-                                            <img class="img-xs rounded-circle"
+                                            <img class="img-xs rounded-circle "
                                             src="{{ asset('template/assets/images/faces/face18.jpg') }}" alt="">
                                         @endif
                                         <p class="mb-0 d-none d-sm-block navbar-profile-name">
@@ -322,28 +320,6 @@
                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
                                 aria-labelledby="profileDropdown">
                                 <h6 class="p-3 mb-0">Profile</h6>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item preview-item" href="{{ url('/profile/edit-profile') }}">
-                                    <div class="preview-thumbnail">
-                                        <div class="preview-icon bg-dark rounded-circle">
-                                            <i class="mdi mdi-clipboard-account text-primary"></i>
-                                        </div>
-                                    </div>
-                                    <div class="preview-item-content">
-                                        <p class="preview-subject mb-1">Update User Data</p>
-                                    </div>
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item preview-item" href="{{ url('/profile/edit-data-pegawai') }}">
-                                    <div class="preview-thumbnail">
-                                        <div class="preview-icon bg-dark rounded-circle">
-                                            <i class="mdi mdi-account-edit text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div class="preview-item-content">
-                                        <p class="preview-subject mb-1">Update Employee Data</p>
-                                    </div>
-                                </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item preview-item">
                                     <div class="preview-thumbnail">

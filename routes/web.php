@@ -58,7 +58,11 @@ Route::middleware(['auth', 'verified', 'user-access:Pelamar'])->group(function (
 
     Route::get('/pelamar/lowongan/apply/{id}', [PelamarController::class, 'applyLowongan']);
 
-    Route::get('/pelamar/lamaran/', [PelamarController::class, 'daftarLamaran']);
+    Route::get('/pelamar/daftar-lamaran/', [PelamarController::class, 'daftarLamaran']);
+
+    Route::get('/profile/edit-data-pelamar', [PelamarController::class, 'editPelamar']);
+
+    Route::post('/profile/edit-data-pelamar/update', [PelamarController::class, 'updatePelamar']);
 });
 
 // Super Admin
@@ -128,11 +132,6 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin'])->group(f
 
 // Pegawai
 Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin,Pegawai'])->group(function () {
-    // Update data User
-    Route::get('/profile/edit-profile', [PegawaiController::class, 'editUser']);
-
-    Route::post('/profile/edit-profile/update', [PegawaiController::class, 'updateUser']);
-
      // Update data Pegawai
     Route::get('/profile/edit-data-pegawai', [PegawaiController::class, 'editPegawai']);
 
@@ -166,6 +165,13 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin,Pegawai'])-
 
     Route::post('pegawai/resign/ajukan-resign/proses', [PegawaiController::class, 'prosesResign']);
 
+});
+
+Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin,Pegawai,Pelamar'])->group(function () {
+        // Update data User
+        Route::get('/Account/account-setting', [PegawaiController::class, 'editUser']);
+
+        Route::post('/Account/account-setting/update', [PegawaiController::class, 'updateUser']);    
 });
 
 // Indoregion Start

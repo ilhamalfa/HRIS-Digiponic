@@ -133,8 +133,8 @@
 
                             {{-- Sidebar Profile 3 Dots Vertical Menu Start --}}
                             <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list"
-                                aria-labelledby="profile-dropdown">
-                                <a href="#" class="dropdown-item preview-item">
+                            aria-labelledby="profile-dropdown">
+                                <a href="{{ url('/Account/account-setting') }}" class="dropdown-item preview-item">
                                     <div class="preview-thumbnail">
                                         <div class="preview-icon bg-dark rounded-circle">
                                             <i class="mdi mdi-settings text-primary"></i>
@@ -145,16 +145,16 @@
                                     </div>
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a href="#" class="dropdown-item preview-item">
+                                <a href="{{ url('/profile/edit-data-pegawai') }}" class="dropdown-item preview-item">
                                     <div class="preview-thumbnail">
                                         <div class="preview-icon bg-dark rounded-circle">
-                                            <i class="mdi mdi-onepassword  text-info"></i>
+                                            <i class="mdi mdi-clipboard-account  text-info"></i>
                                         </div>
                                     </div>
                                     <div class="preview-item-content">
-                                        <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
+                                        <p class="preview-subject ellipsis mb-1 text-small">Change User Data</p>
                                     </div>
-                                </a>
+                                </a>    
                             </div>
                             {{-- Sidebar Profile 3 Dots Vertical Menu End --}}
 
@@ -255,7 +255,7 @@
                                         @if (Auth::user()->role != 'Pelamar' && isset(Auth::user()->pegawai))
                                             <img class="img-xs rounded-circle"
                                             src="{{ asset('storage/' . Auth::user()->pegawai->foto) }}" alt="">
-                                        @elseif (Auth::user()->role == 'Pelamar' && isset(Auth::user()->pegawai))
+                                        @elseif (Auth::user()->role == 'Pelamar' && isset(Auth::user()->pelamar))
                                             <img class="img-xs rounded-circle"
                                             src="{{ asset('storage/' . Auth::user()->pelamar->foto) }}" alt="">
                                         @else
