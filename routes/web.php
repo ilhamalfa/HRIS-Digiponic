@@ -97,7 +97,7 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin'])->group(f
     Route::get('/data-pegawai', [AdminController::class, 'dataPegawai']);
 
     // Cuti
-    Route::get('admin/cuti', [AdminController::class, 'daftarCuti']);
+    Route::get('admin/daftar-cuti', [AdminController::class, 'daftarCuti']);
 
     Route::get('admin/cuti/{id}/{konfirmasi}', [AdminController::class, 'konfirmasiCuti']);
 
@@ -132,7 +132,7 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin'])->group(f
 
 // Pegawai
 Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin,Pegawai'])->group(function () {
-     // Update data Pegawai
+    // Update data Pegawai
     Route::get('/profile/edit-data-pegawai', [PegawaiController::class, 'editPegawai']);
 
     Route::post('/profile/edit-data-pegawai/update', [PegawaiController::class, 'updatePegawai']);
@@ -168,10 +168,10 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin,Pegawai'])-
 });
 
 Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin,Pegawai,Pelamar'])->group(function () {
-        // Update data User
-        Route::get('/Account/account-setting', [PegawaiController::class, 'editUser']);
+    // Update data User
+    Route::get('/Account/account-setting', [PegawaiController::class, 'editUser']);
 
-        Route::post('/Account/account-setting/update', [PegawaiController::class, 'updateUser']);    
+    Route::post('/Account/account-setting/update', [PegawaiController::class, 'updateUser']);    
 });
 
 // Indoregion Start

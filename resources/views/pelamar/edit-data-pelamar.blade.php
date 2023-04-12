@@ -173,6 +173,20 @@
                             </div>
                         </div>
 
+                        <div class="row mb-3">
+                            <label for="cv" class="col-md-4 col-form-label text-md-end">{{ __('CV') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="cv" type="file" class="form-control @error('cv_file') is-invalid @enderror" name="cv_file" value="{{ old('cv_file') }}">
+
+                                @error('cv_file')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

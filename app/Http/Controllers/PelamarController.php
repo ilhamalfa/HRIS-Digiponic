@@ -94,49 +94,54 @@ class PelamarController extends Controller
         $data = Pelamar::find(Auth::user()->pelamar->id);
         // dd($data);
 
-        if(!$request->has('foto')){
-            $validate = $request->validate([
-                'nama' => 'required',
-                'tanggal_lahir' => 'required|before:17 years ago',
-                'jenis_kelamin' => 'required',
-                'nomor_hp' => 'required',
-                'province_id' => 'required',
-                'regency_id' => 'required',
-                'district_id' =>'required',
-                'village_id' => 'required',
-                'alamat' => 'required',
-            ]);
+        $validate = $request->validate([
+            'nama' => 'required',
+            'tanggal_lahir' => 'required|before:17 years ago',
+            'jenis_kelamin' => 'required',
+            'nomor_hp' => 'required',
+            'province_id' => 'required',
+            'regency_id' => 'required',
+            'district_id' =>'required',
+            'village_id' => 'required',
+            'alamat' => 'required',
+        ]);
 
-            $validate['umur'] = Carbon::parse($request->tanggal_lahir)->age;
-            // dd($validate);
-        }else{
-            $validate = $request->validate([
-                'nama' => 'required',
-                'tanggal_lahir' => 'required|before:17 years ago',
-                'jenis_kelamin' => 'required',
-                'nomor_hp' => 'required',
-                'province_id' => 'required',
-                'regency_id' => 'required',
-                'district_id' =>'required',
-                'village_id' => 'required',
-                'alamat' => 'required',
+        $validate['umur'] = Carbon::parse($request->tanggal_lahir)->age;
+
+        if($request->has('foto')){
+            $request->validate([
                 'foto' => 'required|image',
             ]);
-    
-            $validate['umur'] = Carbon::parse($request->tanggal_lahir)->age;
 
             if(fileExists('storage/'. $data->foto)){
                 unlink('storage/'. $data->foto);
             }
-
+    
             $extension_foto = $request->file('foto')->extension();
                 
             $nama_foto = $request->nama . '-' . now()->timestamp. '.' . $extension_foto;
     
             $validate['foto'] = $request->file('foto')->storeAs('Pegawai/foto', $nama_foto);
         }
-        // dd($validate);
 
+        if($request->has('cv_file')){
+            $request->validate([
+                'cv_file' => 'required|mimetypes:application/pdf'
+            ]);
+
+            if(fileExists('storage/'. $data->cv_file)){
+                unlink('storage/'. $data->cv_file);
+            }
+
+            $extension_cv = $request->file('cv_file')->extension();
+
+            $nama_cv = $request->nama . '-' . now()->timestamp. '.' . $extension_cv;
+
+            $validate['cv_file'] = $request->file('cv_file')->storeAs('Pelamar/cv', $nama_cv);
+        }
+
+        // dd($validate);
+        
         $data->update($validate);
 
         return redirect()->back();
