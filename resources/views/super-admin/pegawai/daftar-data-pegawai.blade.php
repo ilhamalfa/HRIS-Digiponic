@@ -10,9 +10,6 @@
                 <div class="card-header mt-3">{{ __('Data Pegawai') }}</div>
 
                 <div class="card-body">
-                    @if (Auth::user()->role != 'Admin')
-                    <a href="#" class="btn btn-primary mb-3">Add Employee User</a>
-                    @endif
                     <div class="row mb-3 mx-1">
                         <form class="nav-link d-none d-lg-flex search" action="{{ url('/data-pegawai') }}">
                             <div class="col-6">
@@ -26,14 +23,14 @@
                     <table class="table mb-4">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">NIK</th>
-                                <th scope="col">Nama</th>
-                                <th scope="col">Department</th>
-                                <th scope="col">Golongan</th>
-                                <th scope="col">Role</th>
+                                <th scope="col" class="fw-bold">#</th>
+                                <th scope="col" class="fw-bold">NIK</th>
+                                <th scope="col" class="fw-bold">Nama</th>
+                                <th scope="col" class="fw-bold">Department</th>
+                                <th scope="col" class="fw-bold">Golongan</th>
+                                <th scope="col" class="fw-bold">Role</th>
                                 @if (Auth::user()->role != 'Admin')
-                                <th scope="col">Action</th>
+                                <th scope="col" class="fw-bold">Action</th>
                                 @endif
                             </tr>
                         </thead>
@@ -46,11 +43,12 @@
                                 <td>{{ $data->pegawai->department }}</td>
                                 <td>{{ $data->pegawai->golongan }}</td>
                                 <td>{{ $data->role }}</td>
-                                @if (Auth::user()->role != 'Admin')
                                 <td>
+                                    @if (Auth::user()->role != 'Admin')
+                                    <a href="{{ url('/data-pegawai/detail-pegawai/' . $data->id) }}" class="btn btn-primary">Detail</a>
+                                    @endif
                                     <a href="{{ url('/data-pegawai/edit-pegawai/' . $data->id) }}" class="btn btn-warning">Edit</a>
                                 </td>
-                                @endif
                             </tr>
                             @endforeach
                         </tbody>

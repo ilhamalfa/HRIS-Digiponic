@@ -96,6 +96,8 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin'])->group(f
     // Data Pegawai
     Route::get('/data-pegawai', [AdminController::class, 'dataPegawai']);
 
+    Route::get('/data-pegawai/detail-pegawai/{id}', [AdminController::class, 'detailPegawai']);
+
     // Cuti
     Route::get('admin/daftar-cuti', [AdminController::class, 'daftarCuti']);
 

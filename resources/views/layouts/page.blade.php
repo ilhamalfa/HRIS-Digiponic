@@ -114,11 +114,13 @@
                                             {{ Auth::user()->pegawai->nama }}
                                         @endif
                                     </h5>
-                                    <span>
+                                    <span class="overflow-auto">
                                         @if (Auth::user()->role == 'Pelamar')
                                             {{ Auth::user()->role }}
                                         @else
-                                            {{ Auth::user()->pegawai->department }} - {{ Auth::user()->pegawai->golongan }}
+                                            {{ Auth::user()->pegawai->golongan }}
+                                            <br>
+                                            {{ Auth::user()->pegawai->department }}
                                         @endif
                                     </span>
                                 </div>
