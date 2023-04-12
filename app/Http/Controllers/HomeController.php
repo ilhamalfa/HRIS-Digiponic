@@ -34,7 +34,8 @@ class HomeController extends Controller
         }else if(auth()->user()->role != 'Pelamar' && $data1 === null){
             return redirect('/pegawai/input-pegawai');
         }else{
-            return view('home');
+            return view('dashboard');
+            // return view('home');
         }
         
     }
