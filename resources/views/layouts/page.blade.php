@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
-    <link rel="icon" href="{{ asset('logo/brand-logo.png') }}">
+
+    {{-- Header Icons Start --}}
+    <link rel="icon" href="{{ asset('logo/brand-logo-red.webp') }}">
+    {{-- Header Icons End --}}
 
     {{-- Google Fonts Start --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,21 +23,15 @@
         rel="stylesheet">
     {{-- Google Fonts End --}}
 
-    {{-- Preloader CSS --}}
-    <link rel="stylesheet" href="{{ asset('preloader/style.css') }}">
-
-    {{-- CSS Start --}}
-    <link rel="stylesheet" href="{{ asset('layout/landingpage/css/style.css') }}">
-    {{-- CSS End --}}
-
-    {{-- Font Awesome --}}
+    {{-- Font Awesome Start --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
         integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {{-- Font Awesome End --}}
 
     {{-- Bootstrap CSS CDN Start --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     {{-- Bootstrap CSS CDN End --}}
 
     {{-- Plugin CSS Start --}}
@@ -48,6 +45,7 @@
 
     {{-- Layout CSS Start --}}
     <link rel="stylesheet" href="{{ asset('template/assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('layout/landingpage/css/style.css') }}">
     {{-- Layout CSS End --}}
 
     {{-- Animations CSS Start --}}
@@ -58,10 +56,16 @@
 
 <body>
 
-    {{-- Container Scroller Start --}}
-    <div class="container-scroller">
+    {{-- Preloader Start --}}
+    <div class="preloader">
+        <img class="preloader-image" src="{{ asset('preloader/landingpage.png') }}" alt="Preloader">
+    </div>
+    {{-- Preloader End --}}
 
-        {{-- Sidebar Start --}}
+    {{-- Topbar Phone Start --}}
+    <div class="container-scroller navbar-phone">
+
+        {{-- Sidebar For Phone Start --}}
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
 
             {{-- Sidebar Brand Logo Start --}}
@@ -219,171 +223,277 @@
                 {{-- Sidebar Dashboard End --}}
 
             </ul>
-            {{-- Sidebar Navigation End --}}
+            {{-- Sidebar Navigation  End --}}
 
         </nav>
-        {{-- Sidebar End --}}
+        {{-- Sidebar For Phone End --}}
 
-        <div class="container-fluid page-body-wrapper">
+        {{-- Topbar Start --}}
+        <nav class="navbar p-0 fixed-top d-flex flex-row justify-between">
 
-            {{-- Topbar Start --}}
-            <nav class="navbar p-0 fixed-top d-flex flex-row">
+            {{-- Topbar Brand Logo Start --}}
+            <div class="navbar-brand d-flex d-lg-none align-items-center justify-content-center ms-2">
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    <img src="{{ asset('logo/brand-logo-red.webp') }}" alt="Brand Logo" width="50" />
+                </a>
+            </div>
+            {{-- Topbar Brand Logo End --}}
 
-                {{-- Topbar Brand Logo Responsive Media Start --}}
-                <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
-                    <a class="navbar-brand brand-logo-mini" href="index.html">
-                        <img src="{{ asset('template/assets/images/logo-mini.svg') }}" alt="logo" />
-                    </a>
-                </div>
-                {{-- Topbar Brand Logo Responsive Media End --}}
+            {{-- Topbar Hamburger Menu Start --}}
+            <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch justify-content-end p-0 m-0">
 
-                {{-- Topbar Menu Start --}}
-                <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+                {{-- Topbar Hamburger Menu Start --}}
+                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                    data-toggle="offcanvas">
+                    <span class="mdi mdi-format-line-spacing"></span>
+                </button>
+                {{-- Topbar Hamburger Menu End --}}
 
-                    {{-- Topbar Hamburger Menu Start --}}
-                    <button class="navbar-toggler navbar-toggler align-self-center" type="button"
-                        data-toggle="minimize">
-                        <span class="mdi mdi-menu"></span>
-                    </button>
-                    {{-- Topbar Hamburger Menu End --}}
+            </div>
+            {{-- Topbar Hamburger Menu End --}}
 
-                    {{-- Topbar Menu Right Side Start --}}
-                    <ul class="navbar-nav navbar-nav-right">
-
-                        {{-- Topbar Menu Right Side Advandce Settings Start --}}
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
-                                <div class="navbar-profile">
-                                    
-                                    @guest
-                                        <p class="mb-0 d-none d-sm-block navbar-profile-name">Login</p>
-                                    @else
-                                        @if (Auth::user()->role != 'Pelamar' && isset(Auth::user()->pegawai))
-                                            <img class="img-xs rounded-circle"
-                                            src="{{ asset('storage/' . Auth::user()->pegawai->foto) }}" alt="">
-                                        @elseif (Auth::user()->role == 'Pelamar' && isset(Auth::user()->pelamar))
-                                            <img class="img-xs rounded-circle"
-                                            src="{{ asset('storage/' . Auth::user()->pelamar->foto) }}" alt="">
-                                        @else
-                                            <img class="img-xs rounded-circle "
-                                            src="{{ asset('template/assets/images/faces/face18.jpg') }}" alt="">
-                                        @endif
-                                        <p class="mb-0 d-none d-sm-block navbar-profile-name">
-                                            @if (isset(Auth::user()->pegawai))
-                                                {{ Auth::user()->pegawai->nama }}
-                                            @elseif (isset(Auth::user()->pelamar) && Auth::user()->role == 'Pelamar')
-                                                {{ Auth::user()->pelamar->nama }}
-                                            @else
-                                                {{ Auth::user()->email }}
-                                            @endif
-                                        </p>
-                                    @endguest
-                                    <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+            {{-- Topbar Profile Start --}}
+            <div class="d-flex">
+                <a class="nav-link" id="profile-mobile" href="#" data-bs-toggle="dropdown">
+                    <div class="d-flex justify-center align-items-center">
+                        @guest
+                            <p class="mb-0 ms-2 d-none d-sm-block navbar-profile-name text-white">Login</p>
+                        @else
+                            @if (Auth::user()->role != 'Pelamar' && isset(Auth::user()->pegawai))
+                                <img class="img-xs rounded-circle"
+                                src="{{ asset('storage/' . Auth::user()->pegawai->foto) }}" alt="">
+                            @elseif (Auth::user()->role == 'Pelamar' && isset(Auth::user()->pelamar))
+                                <img class="img-xs rounded-circle"
+                                src="{{ asset('storage/' . Auth::user()->pelamar->foto) }}" alt="">
+                            @else
+                                <img class="img-xs rounded-circle "
+                                src="{{ asset('template/assets/images/faces/face18.jpg') }}" alt="">
+                            @endif
+                            <p class="mb-0 ms-2 d-none d-sm-block navbar-profile-name text-white">
+                                @if (isset(Auth::user()->pegawai))
+                                    {{ Auth::user()->pegawai->nama }}
+                                @elseif (isset(Auth::user()->pelamar) && Auth::user()->role == 'Pelamar')
+                                    {{ Auth::user()->pelamar->nama }}
+                                @else
+                                    {{ Auth::user()->email }}
+                                @endif
+                            </p>
+                        @endguest
+                        <i class="mdi mdi-menu-down d-none d-sm-block text-warning"></i>
+                    </div>
+                </a>
+                <div class="dropdown-menu-right navbar-dropdown preview-list nav-menu-mobile" id="profile-menu"
+                    aria-labelledby="profileMenu">
+                    <div class="dropdown-divider"></div>
+                    @guest
+                        <a class="dropdown-item preview-item flex align-items-center py-1 my-1 px-2"
+                            href="{{ url('login') }}">
+                            <div class="preview-thumbnail ps-1">
+                                <div class="preview-icon bg-dark rounded-circle">
+                                    <i class="fa-solid fa-right-to-bracket text-success"></i>
+                                </div>
+                            </div>
+                            <div class="preview-item-content">
+                                <p class="preview-subject mb-1 profile-login">Log In</p>
+                            </div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item preview-item flex align-items-center py-1 my-1 px-2"
+                            href="{{ url('register') }}">
+                            <div class="preview-thumbnail ps-1">
+                                <div class="preview-icon bg-dark rounded-circle">
+                                    <i class="fa-solid fa-file-pen text-info"></i>
+                                </div>
+                            </div>
+                            <div class="preview-item-content">
+                                <p class="preview-subject mb-1 profile-register">Register</p>
+                            </div>
+                        </a>
+                    @else
+                        @if (Auth::user()->role == 'Pelamar')
+                            <a class="dropdown-item preview-item" href="{{ url('/pelamar/daftar-lamaran/') }}">
+                                <div class="preview-thumbnail">
+                                    <div class="preview-icon bg-dark rounded-circle">
+                                        <i class="fa-solid fa-file-pen"></i>
+                                    </div>
+                                </div>
+                                <div class="preview-item-content">
+                                    <p class="preview-subject mb-1">Applied Jobs</p>
                                 </div>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                                aria-labelledby="profileDropdown">
-                                <h6 class="p-3 mb-0">Profile</h6>
-                                <div class="dropdown-divider"></div>
-                                @guest
-                                    <a class="dropdown-item preview-item" href="{{ route('login') }}">
-                                        <div class="preview-thumbnail">
-                                            <div class="preview-icon bg-dark rounded-circle">
-                                                <i class="fa-solid fa-right-to-bracket"></i>
-                                            </div>
-                                        </div>
-                                        <div class="preview-item-content">
-                                            <p class="preview-subject mb-1">Login</p>
-                                        </div>
-                                    </a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item preview-item" href="{{ route('register') }}">
-                                        <div class="preview-thumbnail">
-                                            <div class="preview-icon bg-dark rounded-circle">
-                                                <i class="fa-solid fa-file-pen"></i>
-                                            </div>
-                                        </div>
-                                        <div class="preview-item-content">
-                                            <p class="preview-subject mb-1">Register</p>
-                                        </div>
-                                    </a>
-                                    <div class="dropdown-divider"></div>
-                                @else
-                                    @if (Auth::user()->role == 'Pelamar')
-                                    <a class="dropdown-item preview-item" href="{{ url('/pelamar/daftar-lamaran/') }}">
-                                        <div class="preview-thumbnail">
-                                            <div class="preview-icon bg-dark rounded-circle">
-                                                <i class="fa-solid fa-file-pen"></i>
-                                            </div>
-                                        </div>
-                                        <div class="preview-item-content">
-                                            <p class="preview-subject mb-1">Applied Jobs</p>
-                                        </div>
-                                    </a>
-                                    @endif
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item preview-item" href="{{ route('logout') }}" 
-                                        onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
-                                        <div class="preview-thumbnail">
-                                            <div class="preview-icon bg-dark rounded-circle">
-                                                <i class="fa-solid fa-right-from-bracket" style="color: red"></i>
-                                            </div>
-                                        </div>
-                                        <div class="preview-item-content">
-                                            <p class="preview-subject mb-1">Log out</p>
-                                        </div>
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                @endguest
-                                <a class="dropdown-item preview-item">
-                                    <div class="preview-thumbnail">
-                                        <div class="preview-icon bg-dark rounded-circle">
-                                            <i class="mdi mdi-settings" style="color: grey"></i>
-                                        </div>
-                                    </div>
-                                    <div class="preview-item-content">
-                                        <p class="preview-subject mb-1">Settings</p>
-                                    </div>
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <p class="p-3 mb-0 text-center">Advanced settings</p>
+                        @endif
+                        <a class="dropdown-item preview-item flex align-items-center py-1 my-1 px-2">
+                            <div class="preview-thumbnail ps-1">
+                                <div class="preview-icon bg-dark rounded-circle">
+                                    <i class="mdi mdi-settings text-success"></i>
+                                </div>
                             </div>
-                        </li>
-                        {{-- Topbar Menu Right Side Advandce Settings End --}}
-
-                    </ul>
-                    {{-- Topbar Menu Right Side End --}}
-
-                    {{-- Topbar Hamburger Menu Responsive Media Start --}}
-                    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
-                        data-toggle="offcanvas">
-                        <span class="mdi mdi-format-line-spacing"></span>
-                    </button>
-                    {{-- Topbar Hamburger Menu Responsive Media End --}}
-
+                            <div class="preview-item-content">
+                                <p class="preview-subject mb-1 profile-settings">Settings</p>
+                            </div>
+                        </a>
+                        <a class="dropdown-item preview-item flex align-items-center py-1 my-1 px-2"
+                            href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                            <div class="preview-thumbnail ps-1">
+                                <div class="preview-icon bg-dark rounded-circle">
+                                    <i class="fa-solid fa-right-from-bracket text-danger profile-logout"></i>
+                                </div>
+                            </div>
+                            <div class="preview-item-content">
+                                <p class="preview-subject mb-1 profile-logout">Log Out</p>
+                            </div>
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    @endguest
+                    <div class="dropdown-divider"></div>
                 </div>
-                {{-- Topbar Menu End --}}
-
-            </nav>
-            {{-- Topbar End --}}
-
-            {{-- Main Content Start --}}
-            <div class="main-panel">
-
-                {{-- Main Content Start --}}
-                <div class="content-wrapper text-center">
-                    @yield('content')
-                </div>
-                {{-- Main Content End --}}
             </div>
-            <!-- main-panel ends -->
-        </div>
-        <!-- page-body-wrapper ends -->
+            {{-- Topbar Profile End --}}
+
+        </nav>
+        {{-- Topbar End --}}
+
     </div>
-    {{-- Container Scroller End --}}
+    {{-- Topbar Phone End --}}
+
+    {{-- Topbar Start --}}
+    <nav class="topbar">
+        <div class="topbar-brand-box topbar-section">
+            <img class="topbar-image" src="{{ asset('logo/brand-logo-red.webp') }}" alt="Topbar Logo">
+            <a class="topbar-brand" href="{{ url('/') }}">TECH Solution</a>
+        </div>
+        <div class="topbar-menu-box topbar-section">
+            <a class="topbar-menu" href="{{ url('/') }}">
+                <i class="fa-solid fa-house topbar-menu-icon text-primary"></i>
+                <span>Home</span>
+            </a>
+            <a class="topbar-menu" href="{{ url('/career') }}">
+                <i class="fa-solid fa-square-pen topbar-menu-icon text-success"></i>
+                <span>Career</span>
+            </a>
+            <a class="topbar-menu" href="{{ url('/') }}">
+                <i class="fa-solid fa-circle-info topbar-menu-icon text-info"></i>
+                <span>About</span>
+            </a>
+            <a class="topbar-menu" href="{{ url('/') }}">
+                <i class="fa-solid fa-cart-shopping topbar-menu-icon text-warning"></i>
+                <span>Product</span>
+            </a>
+            <a class="topbar-menu" href="{{ url('/') }}">
+                <i class="fa-solid fa-users topbar-menu-icon text-danger"></i>
+                <span>Team</span>
+            </a>
+        </div>
+        <div class="topbar-account-box topbar-section">
+            <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
+                <div class="navbar-profile">
+                    @guest
+                        <p class="mb-0 ms-2 d-none d-sm-block navbar-profile-name text-white">Login</p>
+                    @else
+                        @if (Auth::user()->role != 'Pelamar' && isset(Auth::user()->pegawai))
+                            <img class="img-xs rounded-circle"
+                            src="{{ asset('storage/' . Auth::user()->pegawai->foto) }}" alt="">
+                        @elseif (Auth::user()->role == 'Pelamar' && isset(Auth::user()->pelamar))
+                            <img class="img-xs rounded-circle"
+                            src="{{ asset('storage/' . Auth::user()->pelamar->foto) }}" alt="">
+                        @else
+                            <img class="img-xs rounded-circle "
+                            src="{{ asset('template/assets/images/faces/face18.jpg') }}" alt="">
+                        @endif
+                        <p class="mb-0 ms-2 d-none d-sm-block navbar-profile-name text-white">
+                            @if (isset(Auth::user()->pegawai))
+                                {{ Auth::user()->pegawai->nama }}
+                            @elseif (isset(Auth::user()->pelamar) && Auth::user()->role == 'Pelamar')
+                                {{ Auth::user()->pelamar->nama }}
+                            @else
+                                {{ Auth::user()->email }}
+                            @endif
+                        </p>
+                    @endguest
+                    <i class="mdi mdi-menu-down d-none d-sm-block text-warning"></i>
+                </div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                aria-labelledby="profileDropdown">
+                <div class="dropdown-divider"></div>
+                @guest
+                    <a class="dropdown-item preview-item flex align-items-center py-1 my-1" href="{{ url('login') }}">
+                        <div class="preview-thumbnail ps-1">
+                            <div class="preview-icon bg-dark rounded-circle">
+                                <i class="fa-solid fa-right-to-bracket text-success"></i>
+                            </div>
+                        </div>
+                        <div class="preview-item-content">
+                            <p class="preview-subject mb-1 account-menu-text">Log In</p>
+                        </div>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item preview-item flex align-items-center py-1 my-1" href="{{ url('register') }}">
+                        <div class="preview-thumbnail ps-1">
+                            <div class="preview-icon bg-dark rounded-circle">
+                                <i class="fa-solid fa-file-pen text-info"></i>
+                            </div>
+                        </div>
+                        <div class="preview-item-content">
+                            <p class="preview-subject mb-1 account-menu-text">Register</p>
+                        </div>
+                    </a>
+                @else
+                    @if (Auth::user()->role == 'Pelamar')
+                        <a class="dropdown-item preview-item" href="{{ url('/pelamar/daftar-lamaran/') }}">
+                            <div class="preview-thumbnail">
+                                <div class="preview-icon bg-dark rounded-circle">
+                                    <i class="fa-solid fa-file-pen"></i>
+                                </div>
+                            </div>
+                            <div class="preview-item-content">
+                                <p class="preview-subject mb-1">Applied Jobs</p>
+                            </div>
+                        </a>
+                    @endif
+                    <a class="dropdown-item preview-item flex align-items-center py-1 my-1">
+                        <div class="preview-thumbnail ps-1">
+                            <div class="preview-icon bg-dark rounded-circle">
+                                <i class="mdi mdi-settings text-success"></i>
+                            </div>
+                        </div>
+                        <div class="preview-item-content">
+                            <p class="preview-subject mb-1 account-menu-text">Settings</p>
+                        </div>
+                    </a>
+                    <a class="dropdown-item preview-item flex align-items-center py-1 my-1" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                        <div class="preview-thumbnail ps-1">
+                            <div class="preview-icon bg-dark rounded-circle">
+                                <i class="fa-solid fa-right-from-bracket text-danger"></i>
+                            </div>
+                        </div>
+                        <div class="preview-item-content">
+                            <p class="preview-subject mb-1 account-menu-text">Log Out</p>
+                        </div>
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                @endguest
+                <div class="dropdown-divider"></div>
+            </div>
+        </div>
+    </nav>
+    {{-- Topbar End --}}
+
+    {{-- Main Content Start --}}
+    <div class="main-panel m-0 p-0">
+        <div class="content-wrapper text-center">
+            @yield('content')
+        </div>
+    </div>
+    {{-- Main Content End --}}
 
     {{-- Footer Start --}}
     <footer class="footer-bg container-fluid">
@@ -391,12 +501,12 @@
             <div class="footer-top">
                 <div class="row text-center justify-content-center">
                     <div class="p-2">
-                        <div class="logo m-3">
-                            <img class="footer-brand-logo" src="{{ asset('logo/brand-logo-white.webp') }}" alt="Brand Logo"
-                                id="footer-brand">
+                        <div class="logo">
+                            <img class="footer-brand-logo" src="{{ asset('logo/brand-logo-white.webp') }}"
+                                alt="Brand Logo" id="footer-brand">
                         </div>
-                        <div class="footer-web-description m-5 px-5">
-                            <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, quam
+                        <div class="footer-web-description-box">
+                            <p class="mb-4 footer-web-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, quam
                                 exercitationem neque adipisci, sint deserunt reprehenderit illum, aut doloremque aliquid
                                 corporis repellat ducimus at quisquam molestiae commodi tempore assumenda atque.Lorem
                                 ipsum dolor sit amet consectetur adipisicing elit. Quia, quam
@@ -405,13 +515,13 @@
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, quam
                                 exercitationem neque adipisci, sint deserunt reprehenderit illum, aut doloremque aliquid
                                 corporis repellat ducimus at quisquam molestiae commodi tempore assumenda atque.</p>
-                            <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, quam
+                            <p class="mb-4 footer-web-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, quam
                                 exercitationem neque adipisci, sint deserunt reprehenderit illum, aut doloremque aliquid
                                 corporis repellat ducimus at quisquam molestiae commodi tempore assumenda atque.Lorem
                                 ipsum dolor sit amet consectetur adipisicing elit. Quia, quam
                                 exercitationem neque adipisci, sint deserunt reprehenderit illum, aut doloremque aliquid
                                 corporis repellat ducimus at quisquam molestiae commodi tempore assumenda atque.</p>
-                            <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, quam
+                            <p class="mb-4 footer-web-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, quam
                                 exercitationem neque adipisci, sint deserunt reprehenderit illum, aut doloremque aliquid
                                 corporis repellat ducimus at quisquam molestiae commodi tempore assumenda atque.</p>
                         </div>
@@ -451,14 +561,12 @@
     </footer>
     {{-- Footer End --}}
 
-    {{-- Sweet Alert Start --}}
-    @include('sweetalert::alert')
-    {{-- Sweet Alert End --}}
-
-    {{-- JQuery --}}
-    {{-- <script src="{{ asset('layout/landingpage/jquery/jquery-3.6.4.min.js') }}"></script> --}}
+    {{-- JQuery Start --}}
+    <script src="{{ asset('layout/jquery/jquery-3.6.4.min.js') }}"></script>
+    {{-- JQuery End --}}
 
     {{-- JS Start --}}
+    <script src="{{ asset('layout/landingpage/js/script.js') }}"></script>
     <script src="{{ asset('template/assets/js/dashboard.js') }}"></script>
     {{-- JS End --}}
 
