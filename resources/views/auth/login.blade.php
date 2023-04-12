@@ -12,8 +12,8 @@
         <form class="auth-form" method="POST" action="{{ route('login') }}">
             @csrf
             <div class="auth-email-box">
-                <input class="form-input" type="email" id="email" name="email" value="{{ old('email') }}"
-                    placeholder="Your Email" required autocomplete="email" autofocus>
+                <input class="form-input" type="email" id="login" name="login" value="{{ old('login') }}"
+                    placeholder="Your Email" required autocomplete="login" autofocus>
             </div>
             <div class="auth-password-box">
                 <input class="form-input" type="password" id="password" name="password" placeholder="Password" required

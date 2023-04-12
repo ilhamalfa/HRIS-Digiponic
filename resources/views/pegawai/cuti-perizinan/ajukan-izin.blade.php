@@ -1,11 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.template')
+
+@section('title')
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center mb-3">
+    <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Form Izin') }}</div>
+                <div class="card-header mt-3">{{ __('Ajukan Cuti') }}</div>
 
                 <div class="card-body">
                     <form action="{{ url('pegawai/izin/ajukan-izin/proses') }}" method="POST" enctype="multipart/form-data">
@@ -80,6 +82,7 @@
                         <button class="btn btn-primary">Submit</button>
                     </form>
                 </div>
+
             </div>
         </div>
     </div>

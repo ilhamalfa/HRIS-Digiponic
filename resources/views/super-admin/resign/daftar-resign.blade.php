@@ -1,11 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.template')
+
+@section('title')
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center mb-3">
+    <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Daftar Cuti') }}</div>
+                <div class="card-header mt-3">{{ __('Daftar Resign Pegawai') }}</div>
 
                 <div class="card-body">
                     <table class="table">
@@ -47,3 +49,4 @@
     </div>
 </div>
 @endsection
+

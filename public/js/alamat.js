@@ -17,8 +17,8 @@ $(function(){
 
             success:function(msg){
                 $('#kabupaten').html(msg);
-                $('#kecamatan').html('');
-                $('#kelurahan').html('');
+                $('#kecamatan').html("<option>- Pilih Kecamatan -</option>");
+                $('#kelurahan').html("<option>- Pilih Kelurahan -</option>");
             },
             error: function(data){
                 console.log('error : ', data)
@@ -37,7 +37,7 @@ $(function(){
 
             success:function(msg){
                 $('#kecamatan').html(msg);
-                $('#kelurahan').html('');
+                $('#kelurahan').html("<option>- Pilih Kelurahan -</option>");
             },
             error: function(data){
                 console.log('error : ', data)

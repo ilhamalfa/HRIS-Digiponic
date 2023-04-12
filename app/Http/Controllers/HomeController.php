@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'verified']);
+        $this->middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin,Pegawai']);
     }
 
     /**
@@ -30,11 +30,12 @@ class HomeController extends Controller
         $data1 = Pegawai::where('user_id', auth()->user()->id)->first();
 
         if(auth()->user()->role == 'Pelamar' && $data === null){
-            return redirect('pelamar/input-data-pelamar');
+            return redirect('/pelamar/input-data-pelamar');
         }else if(auth()->user()->role != 'Pelamar' && $data1 === null){
             return redirect('/pegawai/input-pegawai');
         }else{
-            return view('home');
+            return view('dashboard');
+            // return view('home');
         }
         
     }

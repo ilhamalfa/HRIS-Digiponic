@@ -36,7 +36,7 @@ class Controller extends BaseController
     public function career()
     {
         // $datas = DB::select('SELECT created_at FROM lowongans');
-        $datas = Lowongan::all();
+        $datas = Lowongan::latest()->filter(request(['search']))->get();
         return view('career.career', compact('datas'));
     }
 

@@ -1,14 +1,16 @@
-@extends('layouts.app')
+@extends('layouts.template')
+
+@section('title')
 
 @section('content')
 <div class="container">
-    <a href="{{ url('pegawai/cuti/ajukan-cuti') }}" class="btn btn-primary">Ajukan Cuti</a>
-    <div class="row justify-content-center mb-3">
+    <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Daftar Cuti') }}</div>
+                <div class="card-header mt-3">{{ __('Daftar Cuti') }}</div>
 
                 <div class="card-body">
+                    <a href="{{ url('pegawai/cuti/ajukan-cuti') }}" class="btn btn-primary mb-3">Ajukan Cuti</a>
                     <table class="table">
                         <thead>
                             <tr>

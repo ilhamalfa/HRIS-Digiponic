@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@yield('title')</title>
@@ -78,21 +80,32 @@
                         {{-- Sidebar Profile Image & Name Start --}}
                         <div class="profile-pic">
                             <div class="count-indicator">
-                                <img class="img-xs rounded-circle "
-                                    src="{{ asset('storage/'. Auth::user()->pegawai->foto) }}"
-                                    alt="Your Profile Image">
+                                @if (Auth::user()->role != 'Pelamar' && isset(Auth::user()->pegawai))
+                                    <img class="img-xs rounded-circle"
+                                    src="{{ asset('storage/' . Auth::user()->pegawai->foto) }}" alt="">
+                                @elseif (Auth::user()->role == 'Pelamar' && isset(Auth::user()->pelamar))
+                                    <img class="img-xs rounded-circle"
+                                    src="{{ asset('storage/' . Auth::user()->pelamar->foto) }}" alt="">
+                                @else
+                                    <img class="img-xs rounded-circle "
+                                    src="{{ asset('template/assets/images/faces/face18.jpg') }}" alt="">
+                                @endif
                             </div>
                             <div class="profile-name">
-                                <h5 class="mb-0 font-weight-normal">
-                                    @if (isset(Auth::user()->pegawai))
+                                @if (isset(Auth::user()->pegawai))
+                                    <h5 class="mb-0 font-weight-normal">
                                         {{ Auth::user()->pegawai->nama }}
-                                    @elseif (isset(Auth::user()->pelamar) && Auth::user()->role == 'Pelamar')
+                                    </h5>
+                                    <span>{{ Auth::user()->pegawai->department . ' - ' .Auth::user()->pegawai->golongan }}</span>
+                                @elseif (isset(Auth::user()->pelamar) && Auth::user()->role == 'Pelamar')
+                                    <h5 class="mb-0 font-weight-normal">
                                         {{ Auth::user()->pelamar->nama }}
-                                    @else
+                                    </h5>
+                                @else
+                                    <h5 class="mb-0 font-weight-normal">
                                         {{ Auth::user()->email }}
-                                    @endif
-                                </h5>
-                                <span>{{ Auth::user()->pegawai->department . ' - ' .Auth::user()->pegawai->golongan }}</span>
+                                    </h5>
+                                @endif
                             </div>
                         </div>
                         {{-- Sidebar Profile Image & Name End --}}
@@ -106,7 +119,7 @@
                         {{-- Sidebar Profile 3 Dots Vertical Menu Start --}}
                         <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list"
                             aria-labelledby="profile-dropdown">
-                            <a href="#" class="dropdown-item preview-item">
+                            <a href="{{ url('/Account/account-setting') }}" class="dropdown-item preview-item">
                                 <div class="preview-thumbnail">
                                     <div class="preview-icon bg-dark rounded-circle">
                                         <i class="mdi mdi-settings text-primary"></i>
@@ -117,17 +130,17 @@
                                 </div>
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item preview-item">
+                            <a href="{{ url('/profile/edit-data-pegawai') }}" class="dropdown-item preview-item">
                                 <div class="preview-thumbnail">
                                     <div class="preview-icon bg-dark rounded-circle">
-                                        <i class="mdi mdi-onepassword  text-info"></i>
+                                        <i class="mdi mdi-clipboard-account  text-info"></i>
                                     </div>
                                 </div>
                                 <div class="preview-item-content">
-                                    <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
+                                    <p class="preview-subject ellipsis mb-1 text-small">Change User Data</p>
                                 </div>
                             </a>    
-                            </div>
+                        </div>
                         {{-- Sidebar Profile 3 Dots Vertical Menu End --}}
 
                     </div>
@@ -149,6 +162,85 @@
                         <span class="menu-title">Dashboard</span>
                     </a>
                 </li>
+                @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'SuperAdmin')
+                <li class="nav-item menu-items">
+                    <a class="nav-link" href="{{ url('/data-pegawai') }}">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-account-multiple"></i>
+                        </span>
+                        <span class="menu-title">Employees Datas</span>
+                    </a>
+                </li>
+                <li class="nav-item menu-items">
+                    <a class="nav-link" href="{{ url('/data-user') }}">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-account-multiple-outline"></i>
+                        </span>
+                        <span class="menu-title">Users Datas</span>
+                    </a>
+                </li>
+                <li class="nav-item menu-items">
+                    <a class="nav-link" href="{{ url('admin/daftar-cuti') }}">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-note-multiple"></i>
+                        </span>
+                        <span class="menu-title">Daftar Cuti</span>
+                    </a>
+                </li>
+                <li class="nav-item menu-items">
+                    <a class="nav-link" href="{{ url('admin/izin') }}">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-receipt"></i>
+                        </span>
+                        <span class="menu-title">Days Off</span>
+                    </a>
+                </li>
+                <li class="nav-item menu-items">
+                    <a class="nav-link" href="{{ url('data-lowongan/') }}">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-file-multiple"></i>
+                        </span>
+                        <span class="menu-title">lowongan</span>
+                    </a>
+                </li>
+                @endif
+                @if (Auth::user()->role != 'Pelamar')
+                <li class="nav-item nav-category">
+                    <span class="nav-link">Employee Navigation</span>
+                </li>
+                <li class="nav-item menu-items">
+                    <a class="nav-link" href="{{ url('#') }}">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-file-multiple"></i>
+                        </span>
+                        <span class="menu-title">Absensi</span>
+                    </a>
+                </li>
+                <li class="nav-item menu-items">
+                    <a class="nav-link" href="{{ url('pegawai/cuti') }}">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-file-multiple"></i>
+                        </span>
+                        <span class="menu-title">cuti</span>
+                    </a>
+                </li>
+                <li class="nav-item menu-items">
+                    <a class="nav-link" href="{{ url('pegawai/izin') }}">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-file-multiple"></i>
+                        </span>
+                        <span class="menu-title">Izin</span>
+                    </a>
+                </li>
+                <li class="nav-item menu-items">
+                    <a class="nav-link" href="{{ url('pegawai/resign') }}">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-file-multiple"></i>
+                        </span>
+                        <span class="menu-title">Resign</span>
+                    </a>
+                </li>
+                @endif
                 {{-- Sidebar Dashboard End --}}
 
             </ul>
@@ -184,7 +276,7 @@
                     <ul class="navbar-nav w-100">
                         <li class="nav-item w-100">
                             <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
-                                <input type="text" class="form-control text-white topbar-search-input" id="topbar-search-input" placeholder="Search Anythings" autofocus>
+                                <input type="text" class="form-control text-white topbar-search-input" id="topbar-search-input" placeholder="Search Anythings">
                             </form>
                         </li>
                     </ul>
@@ -280,10 +372,17 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
                                 <div class="navbar-profile">
-                                    {{-- @foreach ($user as $user) --}}
-                                        <img class="img-xs rounded-circle"
-                                            src="{{ asset('storage/' . Auth::user()->pegawai->foto) }}"
-                                            alt="">
+                                        {{-- @foreach ($user as $user) --}}
+                                        @if (Auth::user()->role != 'Pelamar' && isset(Auth::user()->pegawai))
+                                            <img class="img-xs rounded-circle"
+                                            src="{{ asset('storage/' . Auth::user()->pegawai->foto) }}" alt="">
+                                        @elseif (Auth::user()->role == 'Pelamar' && isset(Auth::user()->pelamar))
+                                            <img class="img-xs rounded-circle"
+                                            src="{{ asset('storage/' . Auth::user()->pelamar->foto) }}" alt="">
+                                        @else
+                                            <img class="img-xs rounded-circle "
+                                            src="{{ asset('template/assets/images/faces/face18.jpg') }}" alt="">
+                                        @endif
                                         <p class="mb-0 d-none d-sm-block navbar-profile-name">
                                             @if (isset(Auth::user()->pegawai))
                                                 {{ Auth::user()->pegawai->nama }}
@@ -405,6 +504,10 @@
     {{-- JS Start --}}
     <script src="{{ asset('template/assets/js/dashboard.js') }}"></script>
     {{-- JS End --}}
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="{{ asset('js/alamat.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
 
 </body>
 

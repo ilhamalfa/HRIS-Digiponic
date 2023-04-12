@@ -1,11 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.template')
+
+@section('title')
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center mb-3">
+    <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Ajukan Resign') }}</div>
+                <div class="card-header mt-3">{{ __('Ajukan Resign') }}</div>
 
                 <div class="card-body">
                     <form action="{{ url('pegawai/resign/ajukan-resign/proses') }}" method="POST">
@@ -28,6 +30,7 @@
                         <button class="btn btn-primary">Submit</button>
                     </form>
                 </div>
+
             </div>
         </div>
     </div>

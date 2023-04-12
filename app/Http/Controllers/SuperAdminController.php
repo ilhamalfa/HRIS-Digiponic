@@ -33,6 +33,9 @@ class SuperAdminController extends Controller
         
         User::create($validate);
 
+        $data = User::where('email', $validate['email'])->first();
+        $data->sendEmailVerificationNotification();
+
         return redirect('home');
     }
 

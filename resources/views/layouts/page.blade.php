@@ -134,8 +134,6 @@
             {{-- Topbar Hamburger Menu Start --}}
             <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch justify-content-end p-0 m-0">
 
-
-
                 {{-- Topbar Hamburger Menu Start --}}
                 <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
                     data-toggle="offcanvas">
@@ -150,12 +148,20 @@
             <div class="d-flex">
                 <a class="nav-link" id="profile-mobile" href="#" data-bs-toggle="dropdown">
                     <div class="d-flex justify-center align-items-center">
-                        <img class="img-xs rounded-circle"
-                            src="{{ asset('template/assets/images/faces/face15.jpg') }}" alt="Profile Picture">
-                        <p class="mb-0 ms-2 d-none d-sm-block navbar-profile-name text-white">
-                            @guest
-                                Log In
+                        @guest
+                            <p class="mb-0 ms-2 d-none d-sm-block navbar-profile-name text-white">Login</p>
+                        @else
+                            @if (Auth::user()->role != 'Pelamar' && isset(Auth::user()->pegawai))
+                                <img class="img-xs rounded-circle"
+                                src="{{ asset('storage/' . Auth::user()->pegawai->foto) }}" alt="">
+                            @elseif (Auth::user()->role == 'Pelamar' && isset(Auth::user()->pelamar))
+                                <img class="img-xs rounded-circle"
+                                src="{{ asset('storage/' . Auth::user()->pelamar->foto) }}" alt="">
                             @else
+                                <img class="img-xs rounded-circle "
+                                src="{{ asset('template/assets/images/faces/face18.jpg') }}" alt="">
+                            @endif
+                            <p class="mb-0 ms-2 d-none d-sm-block navbar-profile-name text-white">
                                 @if (isset(Auth::user()->pegawai))
                                     {{ Auth::user()->pegawai->nama }}
                                 @elseif (isset(Auth::user()->pelamar) && Auth::user()->role == 'Pelamar')
@@ -163,8 +169,8 @@
                                 @else
                                     {{ Auth::user()->email }}
                                 @endif
-                            @endguest
-                        </p>
+                            </p>
+                        @endguest
                         <i class="mdi mdi-menu-down d-none d-sm-block text-warning"></i>
                     </div>
                 </a>
@@ -196,6 +202,18 @@
                             </div>
                         </a>
                     @else
+                        @if (Auth::user()->role == 'Pelamar')
+                            <a class="dropdown-item preview-item" href="{{ url('/pelamar/daftar-lamaran/') }}">
+                                <div class="preview-thumbnail">
+                                    <div class="preview-icon bg-dark rounded-circle">
+                                        <i class="fa-solid fa-file-pen"></i>
+                                    </div>
+                                </div>
+                                <div class="preview-item-content">
+                                    <p class="preview-subject mb-1">Applied Jobs</p>
+                                </div>
+                            </a>
+                        @endif
                         <a class="dropdown-item preview-item flex align-items-center py-1 my-1 px-2">
                             <div class="preview-thumbnail ps-1">
                                 <div class="preview-icon bg-dark rounded-circle">
@@ -265,12 +283,20 @@
         <div class="topbar-account-box topbar-section">
             <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
                 <div class="navbar-profile">
-                    <img class="img-xs rounded-circle" src="{{ asset('template/assets/images/faces/face15.jpg') }}"
-                        alt="Profile Picture">
-                    <p class="mb-0 ms-2 d-none d-sm-block navbar-profile-name text-white">
-                        @guest
-                            Login
+                    @guest
+                        <p class="mb-0 ms-2 d-none d-sm-block navbar-profile-name text-white">Login</p>
+                    @else
+                        @if (Auth::user()->role != 'Pelamar' && isset(Auth::user()->pegawai))
+                            <img class="img-xs rounded-circle"
+                            src="{{ asset('storage/' . Auth::user()->pegawai->foto) }}" alt="">
+                        @elseif (Auth::user()->role == 'Pelamar' && isset(Auth::user()->pelamar))
+                            <img class="img-xs rounded-circle"
+                            src="{{ asset('storage/' . Auth::user()->pelamar->foto) }}" alt="">
                         @else
+                            <img class="img-xs rounded-circle "
+                            src="{{ asset('template/assets/images/faces/face18.jpg') }}" alt="">
+                        @endif
+                        <p class="mb-0 ms-2 d-none d-sm-block navbar-profile-name text-white">
                             @if (isset(Auth::user()->pegawai))
                                 {{ Auth::user()->pegawai->nama }}
                             @elseif (isset(Auth::user()->pelamar) && Auth::user()->role == 'Pelamar')
@@ -278,8 +304,8 @@
                             @else
                                 {{ Auth::user()->email }}
                             @endif
-                        @endguest
-                    </p>
+                        </p>
+                    @endguest
                     <i class="mdi mdi-menu-down d-none d-sm-block text-warning"></i>
                 </div>
             </a>
@@ -309,6 +335,18 @@
                         </div>
                     </a>
                 @else
+                    @if (Auth::user()->role == 'Pelamar')
+                        <a class="dropdown-item preview-item" href="{{ url('/pelamar/daftar-lamaran/') }}">
+                            <div class="preview-thumbnail">
+                                <div class="preview-icon bg-dark rounded-circle">
+                                    <i class="fa-solid fa-file-pen"></i>
+                                </div>
+                            </div>
+                            <div class="preview-item-content">
+                                <p class="preview-subject mb-1">Applied Jobs</p>
+                            </div>
+                        </a>
+                    @endif
                     <a class="dropdown-item preview-item flex align-items-center py-1 my-1">
                         <div class="preview-thumbnail ps-1">
                             <div class="preview-icon bg-dark rounded-circle">
@@ -438,7 +476,10 @@
     <script src="{{ asset('template/assets/js/settings.js') }}"></script>
     <script src="{{ asset('template/assets/js/todolist.js') }}"></script>
     {{-- Plugins JS End --}}
-
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="{{ asset('js/alamat.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
 </body>
 
 </html>
