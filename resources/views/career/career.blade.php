@@ -6,13 +6,14 @@
     {{-- Search --}}
     <div class="row p-5 mt-5 justify-content-md-center">
         <form class="nav-link d-none d-lg-flex search" action="{{ url('/career') }}">
-
+            <div class="col-2"></div>
             <div class="col col-lg-6">
                 <input type="text" class="form-control text-white topbar-search-input" id="topbar-search-input" placeholder="Enter the job" name="search" autofocus>
             </div>
             <div class="col col-lg-2">
                 <button class="btn mt-1 w-75">Search</button>
             </div>
+            <div class="col-2"></div>
         </form>
     </div>
     <div class="vacancy">

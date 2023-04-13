@@ -26,17 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data = Pelamar::where('user_id', auth()->user()->id)->first();
-        $data1 = Pegawai::where('user_id', auth()->user()->id)->first();
-
-        if(auth()->user()->role == 'Pelamar' && $data === null){
-            return redirect('/pelamar/input-data-pelamar');
-        }else if(auth()->user()->role != 'Pelamar' && $data1 === null){
-            return redirect('/pegawai/input-pegawai');
-        }else{
-            return view('dashboard');
+        return view('dashboard');
             // return view('home');
-        }
         
     }
 

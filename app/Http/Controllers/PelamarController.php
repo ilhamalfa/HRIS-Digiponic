@@ -155,15 +155,30 @@ class PelamarController extends Controller
         ]);
     }
 
-    public function applyLowongan($id){
-        $data['tanggal'] = Carbon::now();
-        $data['status'] = 'Menunggu';
-        $data['lowongan_id'] = $id;
-        $data['user_id'] = Auth::user()->id;
+    public function applyLowongan($id, Request $request){
 
-        Lamaran::create($data);
+        $lowongan = Lowongan::find($id);
 
-        return redirect('/pelamar/lowongan/');
+        $validate = $request->validate([
+            'nama' => 'required',
+            'tanggal_lahir' => 'required|before:17 years ago',
+            'nomor_hp' => 'required',
+            'email' => 'required|email',
+            'cv_file' => 'required|mimetypes:application/pdf'
+        ]);
+
+        $validate['tanggal_melamar'] = Carbon::now();
+        $validate['status'] = 'Menunggu';
+        $validate['lowongan_id'] = $id;
+
+        $extension_cv = $request->file('cv_file')->extension();
+        $nama_cv = $id . '-' .$lowongan->posisi .'_'. $request->nama .'-'. now()->timestamp. '.' . $extension_cv;
+        $validate['cv_file'] = $request->file('cv_file')->storeAs('Pelamar/cv', $nama_cv);
+        // dd($validate);
+
+        Pelamar::create($validate);
+
+        return redirect('career');
     }
 
     public function daftarLamaran(){

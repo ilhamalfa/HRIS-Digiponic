@@ -26,7 +26,7 @@
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>{{ $data->posisi }}</td>
                                 <td>{{ $data->tanggal }}</td>
-                                <td>{{ $data->lamaran->count() . ' Registrans' }}</td>
+                                <td>{{ $data->pelamar->count() . ' Registrans' }}</td>
                                 <td class="table-vacancy-actions">
                                     <a href="{{ url('data-lowongan/detail-lowongan/' . $data->id) }}"
                                         class="btn btn-primary my-2">Details Vacancy</a>

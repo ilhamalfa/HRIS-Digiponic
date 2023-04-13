@@ -14,35 +14,14 @@ return new class extends Migration
         Schema::create('pelamars', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('alamat');
             $table->date('tanggal_lahir');
-            $table->integer('umur');
             $table->string('email');
-            $table->string('foto');
-            $table->string('jenis_kelamin');
             $table->string('nomor_hp');
             $table->string('cv_file');
-            $table->char('province_id', 2);
-            $table->foreign('province_id')
-                ->references('id')
-                ->on('provinces')
-                ->onUpdate('cascade')->onDelete('restrict');
-            $table->char('regency_id', 4);
-            $table->foreign('regency_id')
-                ->references('id')
-                ->on('regencies')
-                ->onUpdate('cascade')->onDelete('restrict');
-            $table->char('district_id', 7);
-            $table->foreign('district_id')
-                ->references('id')
-                ->on('districts')
-                ->onUpdate('cascade')->onDelete('restrict');
-            $table->char('village_id', 10);
-            $table->foreign('village_id')
-                ->references('id')
-                ->on('villages')
-                ->onUpdate('cascade')->onDelete('restrict');
-            $table->foreignid('user_id')->constrained('users');
+            $table->date('tanggal_melamar');
+            $table->string('status');
+            $table->string('alasan')->nullable();
+            $table->foreignId('lowongan_id')->constrained('lowongans');
             $table->timestamps();
         });
     }

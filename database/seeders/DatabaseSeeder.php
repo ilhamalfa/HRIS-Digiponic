@@ -3,7 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,5 +21,29 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        User::create([
+            'nik' => 7708181057,
+            'nama' => 'Niskala Liam',
+            'email' => 's.admin@gmail.com',
+            'password' => Hash::make('admin123'),
+            'role' => 'SuperAdmin',
+            'jumlah_cuti' => 14,
+            'tanggal_lahir' => '1999-03-22',
+            'umur' => 24,
+            'jenis_kelamin' => 'Laki-laki',
+            'nomor_hp' => '081216110775',
+            'status_pernikahan' => 'Lajang',
+            'jumlah_anak' => 0,
+            'department' => 'Human Resource',
+            'golongan' => 'Manager/Kadep',
+            'alamat' => 'Dsn Ngetrep',
+            'province_id' => 35,
+            'regency_id' => 3516,
+            'district_id' => 3516050,
+            'village_id' => 3516050011,
+            'foto' => 'Pegawai/foto/Liam Niskala 22-1681115861.jpg',
+            'digital_signature' => 'Test'
+        ]);
     }
 }
