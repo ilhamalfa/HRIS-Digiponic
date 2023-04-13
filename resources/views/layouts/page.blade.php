@@ -490,7 +490,9 @@
     {{-- Main Content Start --}}
     <div class="main-panel m-0 p-0">
         <div class="content-wrapper text-center">
-            @yield('content')
+            <div class="container m-5">
+                @yield('content')
+            </div>
         </div>
     </div>
     {{-- Main Content End --}}
@@ -554,7 +556,7 @@
         <div class="end-footer py-4">
             <div class="row text-center">
                 <div class="col">
-                    &copy; Copyright 2023 Tech Solution | Maju Solid | Allright Reserved
+                    &copy; Copyright 2023 Tech Solution Indonesia | Solid Solid Solid | Allright Reserved
                 </div>
             </div>
         </div>

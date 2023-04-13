@@ -96,11 +96,7 @@
                                     <h5 class="mb-0 font-weight-normal">
                                         {{ Auth::user()->pegawai->nama }}
                                     </h5>
-                                    <span class="mt-4">
-                                        {{ Auth::user()->pegawai->golongan }}
-                                        <br>
-                                        {{ Auth::user()->pegawai->department }}
-                                    </span>
+                                    <span>{{ Auth::user()->pegawai->department . ' - ' .Auth::user()->pegawai->golongan }}</span>
                                 @elseif (isset(Auth::user()->pelamar) && Auth::user()->role == 'Pelamar')
                                     <h5 class="mb-0 font-weight-normal">
                                         {{ Auth::user()->pelamar->nama }}
