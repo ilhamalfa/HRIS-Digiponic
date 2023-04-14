@@ -149,7 +149,6 @@ class PelamarController extends Controller
 
     public function daftarLowongan(){
         $datas = Lowongan::all();
-        
         return view('pelamar.lowongan.daftar-lowongan', [
             'datas' => $datas
         ]);
@@ -163,7 +162,7 @@ class PelamarController extends Controller
 
         Lamaran::create($data);
 
-        return redirect('/pelamar/lowongan/');
+        return redirect('/career');
     }
 
     public function daftarLamaran(){

@@ -9,7 +9,7 @@
     <title>@yield('title')</title>
 
     {{-- Header Logo Start --}}
-    {{-- <link rel="icon" href="{{ asset('logo/brand-logo.png') }}"> --}}
+    <link rel="icon" href="{{ asset('logo/brand-logo-red.webp') }}">
     {{-- Header Logo End --}}
 
     {{-- Google Fonts Start --}}
@@ -37,14 +37,6 @@
     <link rel="stylesheet" href="{{ asset('template/assets/css/style.css') }}">
     {{-- Layout CSS End --}}
 
-    {{-- CSS Start --}}
-    <link rel="stylesheet" href="{{ asset('layout/landingpage/css/style.css') }}">
-    {{-- CSS End --}}
-
-    {{-- Animations CSS Start --}}
-    <link rel="stylesheet" href="{{ asset('template/assets/css/animations/style.css') }}">
-    {{-- Animations CSS End --}}
-
     {{-- Font Awesome Start --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
         integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
@@ -61,11 +53,11 @@
 
             {{-- Sidebar Brand Logo Start --}}
             <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-                <a class="sidebar-brand brand-logo" href="index.html">
-                    <img src="{{ asset('template/assets/images/logo.svg') }}" alt="Brand Brand Logo" />
+                <a class="sidebar-brand brand-logo text-decoration-none" href="{{ url('/about') }}">
+                    <span class="secondary-color-1-text">TECHSolution</span>
                 </a>
                 <a class="sidebar-brand brand-logo-mini" href="index.html">
-                    <img src="{{ asset('template/assets/images/logo-mini.svg') }}" alt="Brand Logo" />
+                    <img src="{{ asset('logo/brand-logo-white.webp') }}" alt="Brand Logo" />
                 </a>
             </div>
             {{-- Sidebar Brand Logo End --}}
@@ -155,7 +147,7 @@
 
                 {{-- Sidebar Dashboard Start --}}
                 <li class="nav-item menu-items">
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="">
                         <span class="menu-icon">
                             <i class="mdi mdi-speedometer"></i>
                         </span>
@@ -271,16 +263,6 @@
                         <span class="mdi mdi-menu"></span>
                     </button>
                     {{-- Topbar Hamburger Menu End --}}
-
-                    {{-- Topbar Search Form Start --}}
-                    <ul class="navbar-nav w-100">
-                        <li class="nav-item w-100">
-                            <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
-                                <input type="text" class="form-control text-white topbar-search-input" id="topbar-search-input" placeholder="Search Anythings">
-                            </form>
-                        </li>
-                    </ul>
-                    {{-- Topbar Search Form End --}}
 
                     {{-- Topbar Menu Right Side Start --}}
                     <ul class="navbar-nav navbar-nav-right">

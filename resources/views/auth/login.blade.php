@@ -12,7 +12,7 @@
         <form class="auth-form" method="POST" action="{{ route('login') }}">
             @csrf
             <div class="auth-email-box">
-                <input class="form-input" type="email" id="login" name="login" value="{{ old('login') }}"
+                <input class="form-input" type="email" id="login" name="email" value="{{ old('email') }}"
                     placeholder="Your Email" required autocomplete="login" autofocus>
             </div>
             <div class="auth-password-box">
