@@ -34,7 +34,7 @@ class AdminController extends Controller
     }
 
     public function dataUser(){
-        $datas = User::where('role', '!=', 'Pelamar')->paginate(10);
+        $datas = User::filter(request(['search']))->paginate(10);
 
         return view('super-admin.pegawai.daftar-data-user', [
             'datas' => $datas
