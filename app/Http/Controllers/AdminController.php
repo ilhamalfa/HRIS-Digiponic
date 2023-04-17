@@ -10,7 +10,10 @@ use App\Models\Pelamar;
 use App\Models\Perizinan;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
@@ -176,10 +179,12 @@ class AdminController extends Controller
 
     public function ubahStatus($id, $status){
         // dd([$id, $status]);
-        $data = Lamaran::find($id);
+        $data = Pelamar::find($id);
 
         if($status == 'Menunggu'){
             $status = 'Wawancara';
+            $subject = 'Lanjut ke tahap wawancara';
+            $body = 'Selamat, untuk sdr '. $data->nama .' Anda berhasil Lolos ke tahap selanjutnya. Dimohon untuk menunggu email selanjutnya yang berisikan link untuk melakukan tahap wawancara. Jika sdr ada pertanyaan, dapat menghubungi Admin atau dapat mengirim email ke HR@Techsolution.com, Terima kasih';
         }else if($status == 'Wawancara'){
             $status = 'Psikotest';
         }else if($status == 'Psikotest'){
@@ -189,9 +194,28 @@ class AdminController extends Controller
         }else{
             $status = 'Ditolak';
         }
-        $data->update([
-            'status' => $status
-        ]);
+
+        // Mail::raw('Hi, welcome user!', function ($message) {
+        //     $message->to('test@mil.com')
+        //     ->subject('test');
+        // });
+
+        // (new MailMessage)
+        //     ->subject(Lang::get($subject))
+        //     ->line(Lang::get($body));
+        
+        // Mail::raw(->subject(Lang::get($subject))
+        // ->line(Lang::get($body))
+        // ->subject(Lang::get($subject))
+        // ->line(Lang::get($body)))
+        // Mail::send()->subject(Lang::get($subject))
+        // ->line(Lang::get($body1))
+        // ->line(Lang::get($body2))
+        // ->line(Lang::get($body3));
+
+        // $data->update([
+        //     'status' => $status
+        // ]);
 
         return redirect()->back();
     }
