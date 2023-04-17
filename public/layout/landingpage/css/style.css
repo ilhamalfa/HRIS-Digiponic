@@ -1513,80 +1513,6 @@ table {
         color: var(--optional-color);
     }
     /* Footer End */
-
-    /* Career Page Start */
-    .vacancy {
-        width: 60vw;
-        height: 100vh;
-        margin: auto;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-    }
-
-    .vacancy-card-link {
-        color: #212529;
-        text-decoration: none;
-    }
-
-    .vacancy-card {
-        width: 14rem;
-        position: relative;
-        border: 0;
-        transition: .3s;
-        border: 1px solid #212529;
-    }
-
-    .vacancy-card:hover {
-        border: 1px solid #FF4655;
-    }
-
-    .vacancy-card:hover,
-    .vacancy-card:hover .vacancy-span {
-        opacity: 1;
-        transform: translateY(-10px);
-    }
-
-    .vacancy-span {
-        background-color: #FF4655;
-        position: absolute;
-        top: -4%;
-        left: -4%;
-        opacity: 0;
-        transition: .3s;
-        padding: 5px;
-    }
-
-    .vacancy-span span {
-        color: #F9F9F9;
-    }
-
-    .vacancy-card-body {
-        text-align: left;
-    }
-
-    .vacancy-position-title {
-        font-size: 1.5rem;
-        font-weight: bold;
-    }
-
-    .vacancy-position-name {
-        font-size: 1em;
-    }
-
-    .vacancy-deadline-date-title {
-        font-weight: bold;
-    }
-
-    .vacancy-deadline-date {
-        background-color: #FF4655;
-        color: #F9F9F9;
-        width: max-content;
-    }
-    /* Career Page End */
-
 }
 
 @media only screen and (min-width: 1200px) {
@@ -1951,7 +1877,187 @@ table {
     }
     /* Footer End */
 
-    
+    /* Career Page Start */
+    .career {
+        margin: 2em auto 1em auto;
+        height: 70vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+    }
+
+    .career-search-box {
+        margin-top: 1em;
+        margin-bottom: 2em;
+    }
+
+    input.career-input#career-input:focus {
+        border: 1px solid #F9F9F9;
+        color: #F9F9F9;
+    }
+
+    .career-search {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .career-vacancy-box {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    .vacancy-card-link {
+        color: #212529;
+        text-decoration: none;
+    }
+
+    .vacancy-card {
+        width: 14rem;
+        position: relative;
+        border: 0;
+        transition: .3s;
+        border: 1px solid #212529;
+    }
+
+    .vacancy-card:hover {
+        border: 1px solid #FF4655;
+    }
+
+    .vacancy-card:hover,
+    .vacancy-card:hover .vacancy-span {
+        opacity: 1;
+        transform: translateY(-10px);
+    }
+
+    .vacancy-span {
+        background-color: #FF4655;
+        position: absolute;
+        top: -4%;
+        left: -4%;
+        opacity: 0;
+        transition: .3s;
+        padding: 5px;
+    }
+
+    .vacancy-span span {
+        color: #F9F9F9;
+    }
+
+    .vacancy-card-body {
+        text-align: left;
+    }
+
+    .vacancy-position-title {
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    .vacancy-position-name {
+        font-size: 1em;
+        margin-top: .5em;
+        margin-left: .5em;
+        margin-bottom: .5em;
+    }
+
+    .vacancy-deadline-date-title {
+        font-weight: bold;
+    }
+
+    .vacancy-deadline-date {
+        background-color: #FF4655;
+        color: #F9F9F9;
+        padding: .2em;
+        width: max-content;
+        margin-top: .5em;
+        margin-left: .5em;
+        margin-bottom: .5em;
+    }
+
+    .vacancy-uploaded-date {
+        color: var(--optional-color-1);
+        font-size: .6rem;
+        position: absolute;
+        right: 5%;
+        bottom: 5%;
+    }
+
+    .vacancy-logo-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 1em;
+    }
+
+    .vacancy-logo {
+        font-size: 3rem;
+        text-align: center;
+    }
+    /* Career Page End */
+
+    /* Career Detail Start */
+    .carrer-detail {
+        background-color: var(--primary-color);
+        margin: 2em auto 1em auto;
+        padding: 3em 20em 3em 3em;
+        height: 70vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+        position: relative;
+    }
+
+    .career-back {
+        color: var(--optional-color-1);
+        font-size: 1.3rem;
+        position: absolute;
+        top: 2%;
+        left: 1%;
+    }
+
+    .career-back:hover {
+        color: var(--secondary-color-1);
+    }
+
+    .career-qualification-value-box {
+        color: var(--optional-color-1);
+    }
+
+    .career-vacancy-value-box {
+        color: var(--optional-color-1);
+    }
+
+    .career-span {
+        color: var(--optional-color-1);
+    }
+
+    .info-vacancy-box {
+        position: absolute;
+        top: 50%;
+        left: 40%;
+        right: 40%;
+    }
+
+    .career-detail-info-box {
+        position: absolute;
+        bottom: 5%;
+        left: 5%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .career-detail-login-info {
+        color: var(--optional-color-1);
+        font-size: .8rem;
+    }
+    /* Career Detail End */
 }
 /* Style For Laptop End */
 

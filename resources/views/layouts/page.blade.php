@@ -444,14 +444,14 @@
                     </a>
                 @else
                     @if (Auth::user()->role == 'Pelamar')
-                        <a class="dropdown-item preview-item" href="{{ url('/pelamar/daftar-lamaran/') }}">
-                            <div class="preview-thumbnail">
+                        <a class="dropdown-item preview-item flex align-items-center py-1 my-1" href="{{ url('/pelamar/daftar-lamaran/') }}">
+                            <div class="preview-thumbnail ps-1">
                                 <div class="preview-icon bg-dark rounded-circle">
                                     <i class="fa-solid fa-file-pen"></i>
                                 </div>
                             </div>
                             <div class="preview-item-content">
-                                <p class="preview-subject mb-1">Applied Jobs</p>
+                                <p class="preview-subject mb-1 me-2 account-menu-text">Applied Jobs</p>
                             </div>
                         </a>
                     @endif

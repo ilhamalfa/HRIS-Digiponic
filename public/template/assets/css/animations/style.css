@@ -1,21 +1,17 @@
-input.topbar-search-input#topbar-search-input:focus {
+/* input.topbar-search-input#topbar-search-input:focus {
     border: 1px solid #F9F9F9;
     color: #F9F9F9;
 }
 
-/* All Form Input In Main Contet Start */
 input.form-input:focus {
     border: 1px solid #F9F9F9;
     color: #F9F9F9;
 }
-/* All Form Input In Main Contet End */
 
-/* Table Vacancy Actions Start */
 .table-vacancy-actions {
     display: flex;
     flex-direction: column;
 }
-/* Table Vacancy Actions End */
 
 .footer-social-media a {
     color: grey;
@@ -24,4 +20,4 @@ input.form-input:focus {
 
 .footer-social-media a:hover {
     color: #F9F9F9;
-}
+} */

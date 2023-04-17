@@ -149,7 +149,6 @@ class PelamarController extends Controller
 
     public function daftarLowongan(){
         $datas = Lowongan::all();
-        
         return view('pelamar.lowongan.daftar-lowongan', [
             'datas' => $datas
         ]);

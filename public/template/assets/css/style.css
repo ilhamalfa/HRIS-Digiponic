@@ -1,3 +1,70 @@
+:root {
+  --background-color : #000000;
+  --primary-color : #191C24;
+  --secondary-color-1 : #F9F9F9;
+  --secondary-color-2 : #FF4655;
+  --optional-color-1 : #76808A;
+  --optional-color-2 : #22242E;
+}
+
+.background-color {
+  background-color: var(--background-color);
+}
+
+.primary-color {
+  background-color: var(--primary-color);
+}
+
+.secondary-color-1 {
+  background-color: var(--secondary-color-1);
+}
+
+.secondary-color-2 {
+  background-color: var(--secondary-color-2);
+}
+
+.optional-color-1 {
+  background-color: var(--optional-color-1);
+}
+
+.optional-color-2 {
+  background-color: var(--optional-color-2);
+}
+
+.background-color-text {
+  color: var(--background-color);
+}
+
+.primary-color-text {
+  color: var(--primary-color);
+}
+
+.secondary-color-1-text {
+  color: var(--secondary-color-1);
+}
+
+.secondary-color-2-text {
+  color: var(--secondary-color-2);
+}
+
+.optional-color-1-text {
+  color: var(--optional-color-1);
+}
+
+.optional-color-2-text {
+  color: var(--optional-color-2);
+}
+
+/* input.form-input#form-input:focus {
+  border: 1px solid #F9F9F9;
+  color: #F9F9F9;
+} */
+
+input.form-input:focus {
+  border: 1px solid #F9F9F9;
+  color: #F9F9F9;
+}
+
 /*-------------------------------------------------------------------
   ===== Table of Contents =====
 
@@ -8813,7 +8880,8 @@ progress {
 
 .table-hover > tbody > tr:hover > * {
   --bs-table-accent-bg: var(--bs-table-hover-bg);
-  color: var(--bs-table-hover-color); }
+  color: white;
+  }
 
 .table-primary {
   --bs-table-bg: #cfe2ff;

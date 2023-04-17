@@ -124,6 +124,12 @@ class AdminController extends Controller
         return view('admin.lowongan.input-lowongan');
     }
 
+    public function hapusLowongan($id){
+        $data = Lowongan::findOrFail($id);
+        $data->delete();
+        return redirect()->back();
+    }
+
     public function detailPerLowongan($id){
         $data = Lowongan::findOrFail($id);
         return view('admin.lowongan.detail-lowongan', compact('data'));

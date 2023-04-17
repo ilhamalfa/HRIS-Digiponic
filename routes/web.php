@@ -22,7 +22,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('landingpage.landingpage');
+    // return view('landingpage.landingpage');
+    return view('layouts.template');
 });
 
 Auth::routes(['verify' => true]);
@@ -34,7 +35,7 @@ Route::get('/rutelogin', [Controller::class, 'rutelogin'])->name('rutelogin');
 
 Route::get('struktur', [Controller::class, 'struktur'])->name('struktur');
 
-Route::get('career', [Controller::class, 'career'])->name('career');
+Route::get('/career', [Controller::class, 'career'])->name('career');
 
 Route::get('career/vacancy/detail/{id}', [Controller::class, 'careerVacancyDetail']);
 
@@ -80,8 +81,7 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin'])->group(functio
 
     // Data User
     Route::get('/data-user', [AdminController::class, 'dataUser']);
-    });
-
+    });    
 
 // Admin
 Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin'])->group(function () {
@@ -109,6 +109,8 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin'])->group(f
     Route::get('data-lowongan/', [AdminController::class, 'daftarLowongan']);
 
     Route::get('data-lowongan/tambah-lowongan', [AdminController::class, 'tambahLowongan']);
+
+    Route::get('data-lowongan/hapus-lowongan/{id}', [AdminController::class, 'hapusLowongan']);
 
     Route::post('data-lowongan/store-lowongan', [AdminController::class, 'storeLowongan']);
 
