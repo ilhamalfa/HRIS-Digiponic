@@ -113,7 +113,7 @@ class AdminController extends Controller
 
     // Lowongan
     public function daftarLowongan(){
-        $datas = Lowongan::all();
+        $datas = Lowongan::latest()->filter(request(['search']))->paginate(10);
         
         return view('admin.lowongan.daftar-lowongan', [
             'datas' => $datas
@@ -130,14 +130,9 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-    public function detailPerLowongan($id){
-        $data = Lowongan::findOrFail($id);
-        return view('admin.lowongan.detail-lowongan', compact('data'));
-    }
-
     public function detailLowongan($id){
         $data = Lowongan::find($id);
-        $datas = Lamaran::where('lowongan_id', $id)->get();
+        $datas = Pelamar::where('lowongan_id', $id)->get();
 
         // dd($datas);
         

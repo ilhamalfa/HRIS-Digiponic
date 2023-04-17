@@ -15,7 +15,6 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Name</th>
-                            <th scope="col">Gender</th>
                             <th scope="col">Age</th>
                             <th scope="col">Phone Number</th>
                             <th scope="col">Email</th>
@@ -26,13 +25,25 @@
                         @foreach ($datas as $data)
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
-                                <td>{{ $data->user->pelamar->nama }}</td>
-                                <td>{{ $data->user->pelamar->jenis_kelamin }}</td>
-                                <td>{{ $data->user->pelamar->umur }}</td>
-                                <td>{{ $data->user->pelamar->nomor_hp }}</td>
-                                <td>{{ $data->user->pelamar->email }}</td>
-                                <td><a href="{{ url('data-lowongan/pelamar-detail/' . $data->id) }}"
-                                        class="btn btn-primary">Detail</a></td>
+                                <td>{{ $data->nama }}</td>
+                                <td>{{ \Carbon\Carbon::parse($data->tanggal_lahir)->age }}</td>
+                                <td>{{ $data->nomor_hp }}</td>
+                                <td>{{ $data->email }}</td>
+                                <td>
+                                    <a href="{{ url('pelamar-detail/cv/' . $data->id) }}" class="btn btn-primary" target="_blank">CV Detail</a>
+                                    @if ($data->status == 'Menunggu')
+                                        <a href="{{ url('data-lowongan/pelamar-detail/ubah-status/' . $data->id .'/Menunggu') }}" class="btn btn-success">Interview</a>
+                                    @elseif ($data->status == 'Wawancara')
+                                        <a href="{{ url('data-lowongan/pelamar-detail/ubah-status/' . $data->id .'/Wawancara') }}" class="btn btn-success">Psikotest</a>
+                                    @elseif ($data->status == 'Psikotest')
+                                        <a href="{{ url('data-lowongan/pelamar-detail/ubah-status/' . $data->id .'/Psikotest') }}" class="btn btn-success">Offering</a>
+                                    @elseif ($data->status == 'Offering')
+                                        <a href="#" class="btn btn-success">Accept</a>
+                                    @endif
+                                    @if ($data->status != 'Diterima' && $data->status != 'Ditolak')
+                                        <a href="{{ url('data-lowongan/pelamar-detail/ubah-status/' . $data->id .'/Tolak') }}" class="btn btn-danger">Decline</a>
+                                    @endif
+                                </td>    
                             </tr>
                         @endforeach
                     </tbody>

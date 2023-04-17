@@ -6,15 +6,25 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <div class="table-header d-flex justify-between">
-                    <div class="table-header-left">
-                        <h2 class="card-title">Vacancy List</h2>
-                        <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#modalForm">
-                            <i class="fa-solid fa-file-circle-plus"></i>
-                            <span>Add</span>
-                        </button>
+                <div class="table-header-left">
+                    <h2 class="card-title">Vacancy List</h2>
+                    <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#modalForm">
+                        <i class="fa-solid fa-file-circle-plus"></i>
+                        <span>Add</span>
+                    </button>
+                </div>
+                <div class="table-header d-flex justify-between mb-3">
+                    <div class="table-header-left w-100 ms-auto mt-2 me-5">
+                        <form class="nav-link d-none d-lg-flex search" action="{{ url('/data-user') }}">
+                            <div class="col-6">
+                                <input type="text" class="form-control text-white topbar-search-input" id="topbar-search-input" placeholder="Enter NIK or Name" name="search" autofocus>
+                            </div>
+                            <div class="col-2 mx-1">
+                                <button class="btn mt-1 w-75">Search</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="table-header-right ms-auto mt-auto me-5">
+                    <div class="table-header-right ms-auto mt-4 me-5">
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
@@ -67,24 +77,24 @@
                                     <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $data->posisi }}</td>
                                     <td>
-                                        @if (date('d F Y') == date('d F Y', strtotime($data->tanggal)))
-                                            <span class="text-danger">
+                                        @if (\Carbon\Carbon::now() > $data->tanggal)
+                                            <span class="text-danger fw-bold">
                                                 {{ date('d F Y', strtotime($data->tanggal)) }}
                                             </span>
                                         @else
-                                            <span>
+                                            <span class="fw-bold">
                                                 {{ date('d F Y', strtotime($data->tanggal)) }}
                                             </span>
                                         @endif
                                     </td>
                                     <td>
-                                        {{ $data->lamaran->count() }}
-                                        @if ($data->lamaran->count() > 0)
-                                            <i class="fa-solid fa-user-tie text-success"></i>
-                                        @elseif ($data->lamaran->count() > 50)
-                                            <i class="fa-solid fa-user-tie text-warning"></i>
+                                        {{ $data->pelamar->count() }}
+                                        @if ($data->pelamar->count() > 0)
+                                            <i class="fa-solid fa-user-tie text-success ml-2"></i>
+                                        @elseif ($data->pelamar->count() > 50)
+                                            <i class="fa-solid fa-user-tie text-warning ml-2"></i>
                                         @else
-                                            <i class="fa-solid fa-user-tie"></i>
+                                            <i class="fa-solid fa-user-tie ml-2"></i>
                                         @endif
                                     </td>
                                     <td class="table-vacancy-actions">
@@ -134,7 +144,7 @@
                                                 <p class="mx-2 text-white">{{ date('d F Y', strtotime($data->tanggal)) }}</p>
                                                 <p>Registrants :</p>
                                                 <p class="mx-2 text-white">
-                                                    {{ $data->lamaran->count() }}
+                                                    {{ $data->pelamar->count() }}
                                                     <i class="fa-solid fa-user-tie"></i>
                                                 </p>
                                             </div>
