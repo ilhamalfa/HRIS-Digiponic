@@ -47,6 +47,27 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     {{-- Font Awesome End --}}
 
+    <style>
+        .wrapper {
+        position: relative;
+        width: 400px;
+        height: 200px;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .signature-pad {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width:400px;
+        height:200px;
+        background-color: white;
+    }
+    </style>
+
 </head>
 
 <body>
@@ -475,6 +496,9 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script src="{{ asset('js/alamat.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
+
+    {{-- Digital Signature --}}
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
 
 </body>
 

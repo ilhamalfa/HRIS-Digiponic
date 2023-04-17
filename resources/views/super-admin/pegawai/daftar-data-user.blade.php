@@ -11,7 +11,7 @@
 
                 <div class="card-body">
                     @if (Auth::user()->role != 'Admin')
-                    <a href="#" class="btn btn-primary mb-3">Add Employee User</a>
+                    <a href="{{ url('/data-user/input-user') }}" class="btn btn-primary mb-3">Add User</a>
                     @endif
                     <table class="table mb-4">
                         <thead>
@@ -34,19 +34,17 @@
                                 <td>{{ $data->email }}</td>
                                 <td>
                                     @if ($data->email_verified_at == Null)
-                                    <h6 class="text-danger">Verify the email</h6>
+                                        <h6 class="text-danger">Verify the email</h6>
                                     @else
                                         <h6 class="text-success">Verified</h6>
                                     @endif
                                 </td>
                                 <td>{{ $data->role }}</td>
-                                {{-- <td>
-                                    @if(isset($data->pegawai))
-                                        <a href="#" class="btn btn-warning" disabled>Lihat Data User</a>
-                                    @else
-                                        <a href="{{ url('/data-pegawai/edit-pegawai/' . $data->id) }}" class="btn btn-warning">Tambah Data</a>
+                                <td>
+                                    @if ($data->id != Auth::user()->id)
+                                        <a href="{{ '/data-user/delete-user/' . $data->id }}" class="btn btn-danger" disabled>Delete</a>
                                     @endif
-                                </td> --}}
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

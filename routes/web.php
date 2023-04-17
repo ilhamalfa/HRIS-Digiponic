@@ -71,10 +71,7 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin'])->group(functio
 
     Route::post('/data-user/store-user', [SuperAdminController::class, 'storeUser']);
 
-    // Data Pegawai
-    Route::get('/pegawai/edit-pegawai/{id}', [SuperAdminController::class, 'editPegawai']);
-
-    Route::post('/pegawai/update-pegawai/{id}', [SuperAdminController::class, 'updatePegawai']);
+    Route::get('/data-user/delete-user/{id}', [SuperAdminController::class, 'deleteUser']);
 
     // Resign
     Route::get('/resign/daftar-resign', [SuperAdminController::class, 'resign']);
