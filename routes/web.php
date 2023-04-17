@@ -50,21 +50,19 @@ Route::get('/login-pegawai', function () {
 // sandi (admin123) (pegawai123) (pelamar123)
 
 // Route Pelamar
-Route::middleware(['auth', 'verified', 'user-access:Pelamar'])->group(function () {
     Route::get('/pelamar/input-data-pelamar', [PelamarController::class, 'inputPelamar']);
 
     Route::post('/pelamar/input-data-pelamar/store', [PelamarController::class, 'storePelamar']);
 
     Route::get('/pelamar/lowongan/', [PelamarController::class, 'daftarLowongan']);
 
-    Route::get('/pelamar/lowongan/apply/{id}', [PelamarController::class, 'applyLowongan']);
+    Route::post('/pelamar/lowongan/apply/{id}', [PelamarController::class, 'applyLowongan']);
 
     Route::get('/pelamar/daftar-lamaran/', [PelamarController::class, 'daftarLamaran']);
 
     Route::get('/profile/edit-data-pelamar', [PelamarController::class, 'editPelamar']);
 
     Route::post('/profile/edit-data-pelamar/update', [PelamarController::class, 'updatePelamar']);
-});
 
 // Super Admin
 // Route Super Admin Start
@@ -95,6 +93,8 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin'])->group(f
 
     // Data Pegawai
     Route::get('/data-pegawai', [AdminController::class, 'dataPegawai']);
+
+    Route::get('/data-pegawai/detail-pegawai/{id}', [AdminController::class, 'detailPegawai']);
 
     // Cuti
     Route::get('admin/daftar-cuti', [AdminController::class, 'daftarCuti']);

@@ -17,10 +17,19 @@ class AdminController extends Controller
 {
     public function dataPegawai(){
         // $datas = User::has('pegawai')->where('role', '!=', 'Pelamar')->paginate(10);
-        $datas = User::has('pegawai')->where('role', '!=', 'Pelamar')->latest()->filter(request(['search']))->paginate(10);
+        $datas = User::has('pegawai')->where('role', '!=', 'Pelamar')->filter(request(['search']))->paginate(10);
 
         return view('super-admin.pegawai.daftar-data-pegawai', [
             'datas' => $datas
+        ]);
+    }
+
+    public function detailPegawai($id){
+        $data = User::find($id);
+
+        // dd($data);
+        return view('super-admin.pegawai.detail-pegawai', [
+            'data' => $data
         ]);
     }
 

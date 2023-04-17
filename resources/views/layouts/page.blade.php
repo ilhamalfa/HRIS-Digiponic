@@ -68,8 +68,116 @@
         {{-- Sidebar For Phone Start --}}
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
 
-            {{-- Sidebar Navigation  Start --}}
-            <ul class="nav sidebar">
+            {{-- Sidebar Brand Logo Start --}}
+            <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+                <a class="sidebar-brand brand-logo text-decoration-none text-white font-weight-500" href="/">
+                    TECH.Solution
+                </a>
+                <a class="sidebar-brand brand-logo-mini" href="#">
+                    <img src="{{ asset('logo/brand-logo-white.webp') }}" alt="Brand Logo" />
+                </a>
+            </div>
+            {{-- Sidebar Brand Logo End --}}
+
+            {{-- Sidebar Navigation Start --}}
+            <ul class="nav">
+
+                {{-- Sidebar Profile Box Start --}}
+                <li class="nav-item profile">
+                    @guest
+                        <div class="profile-des">
+                            <a class="nav-link" href="{{ route('login') }}">
+                                <span class="menu-icon">
+                                    <i class="fa-solid fa-right-to-bracket"></i>
+                                </span>
+                                <span class="menu-title">Login</span>
+                            </a>
+                        </div>
+                    @else
+                        <div class="profile-desc">
+
+                            {{-- Sidebar Profile Image & Name Start --}}
+                            <div class="profile-pic">
+                                <div class="count-indicator">
+                                    @if (Auth::user()->role != 'Pelamar' && isset(Auth::user()->pegawai))
+                                        <img class="img-xs rounded-circle"
+                                        src="{{ asset('storage/' . Auth::user()->pegawai->foto) }}" alt="">
+                                    @elseif (Auth::user()->role == 'Pelamar' && isset(Auth::user()->pelamar))
+                                        <img class="img-xs rounded-circle"
+                                        src="{{ asset('storage/' . Auth::user()->pelamar->foto) }}" alt="">
+                                    @else
+                                            <img class="img-xs rounded-circle "
+                                            src="{{ asset('template/assets/images/faces/face18.jpg') }}" alt="">
+                                    @endif
+                                </div>
+                                <div class="profile-name">
+                                    <h5 class="mb-0 font-weight-normal">
+                                        @if (Auth::user()->role == 'Pelamar')
+                                            {{ Auth::user()->pelamar->nama }}
+                                        @else
+                                            {{ Auth::user()->pegawai->nama }}
+                                        @endif
+                                    </h5>
+                                    <span class="overflow-auto">
+                                        @if (Auth::user()->role == 'Pelamar')
+                                            {{ Auth::user()->role }}
+                                        @else
+                                            {{ Auth::user()->pegawai->golongan }}
+                                            <br>
+                                            {{ Auth::user()->pegawai->department }}
+                                        @endif
+                                    </span>
+                                </div>
+                            </div>
+                            {{-- Sidebar Profile Image & Name End --}}
+
+                            {{-- Sidebar Profile 3 Dots Vertical Start --}}
+                            <a href="#" id="profile-dropdown" data-bs-toggle="dropdown">
+                                <i class="mdi mdi-dots-vertical"></i>
+                            </a>
+                            {{-- Sidebar Profile 3 Dots Vertical End --}}
+
+                            {{-- Sidebar Profile 3 Dots Vertical Menu Start --}}
+                            <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list"
+                            aria-labelledby="profile-dropdown">
+                                <a href="{{ url('/Account/account-setting') }}" class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-settings text-primary"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject ellipsis mb-1 text-small">Account settings</p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                @if (Auth::user()->role == 'Pelamar')
+                                    <a href="{{ url('/profile/edit-data-pelamar') }}" class="dropdown-item preview-item">
+                                @else
+                                    <a href="{{ url('/profile/edit-data-pegawai') }}" class="dropdown-item preview-item">
+                                @endif
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-clipboard-account  text-info"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject ellipsis mb-1 text-small">Change User Data</p>
+                                    </div>
+                                </a>    
+                            </div>
+                            {{-- Sidebar Profile 3 Dots Vertical Menu End --}}
+
+                        </div>
+                    @endguest
+                </li>
+                {{-- Sidebar Profile Box End --}}
+
+                {{-- Sidebar Title Navigation Start --}}
+                <li class="nav-item nav-category">
+                    <span class="nav-link">Navigation</span>
+                </li>
+                {{-- Sidebar Title Navigation End --}}
 
                 {{-- Sidebar Dashboard Start --}}
                 <li class="nav-item menu-items">
@@ -382,7 +490,9 @@
     {{-- Main Content Start --}}
     <div class="main-panel m-0 p-0">
         <div class="content-wrapper text-center">
-            @yield('content')
+            <div class="container m-5">
+                @yield('content')
+            </div>
         </div>
     </div>
     {{-- Main Content End --}}
@@ -446,7 +556,7 @@
         <div class="end-footer py-4">
             <div class="row text-center">
                 <div class="col">
-                    &copy; Copyright 2023 Tech Solution | Maju Solid | Allright Reserved
+                    &copy; Copyright 2023 Tech Solution Indonesia | Solid Solid Solid | Allright Reserved
                 </div>
             </div>
         </div>

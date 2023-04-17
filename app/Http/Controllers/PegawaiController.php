@@ -100,8 +100,6 @@ class PegawaiController extends Controller
                 'jenis_kelamin' => 'required',
                 'nomor_hp' => 'required',
                 'status_pernikahan' => 'required',
-                'department' => 'required',
-                'golongan' => 'required',
                 'province_id' => 'required',
                 'regency_id' => 'required',
                 'district_id' =>'required',

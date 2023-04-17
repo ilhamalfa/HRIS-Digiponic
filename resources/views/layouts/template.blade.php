@@ -37,6 +37,10 @@
     <link rel="stylesheet" href="{{ asset('template/assets/css/style.css') }}">
     {{-- Layout CSS End --}}
 
+    {{-- Animations CSS Start --}}
+    <link rel="stylesheet" href="{{ asset('template/assets/css/animations/style.css') }}">
+    {{-- Animations CSS End --}}
+
     {{-- Font Awesome Start --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
         integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
@@ -72,32 +76,18 @@
                         {{-- Sidebar Profile Image & Name Start --}}
                         <div class="profile-pic">
                             <div class="count-indicator">
-                                @if (Auth::user()->role != 'Pelamar' && isset(Auth::user()->pegawai))
                                     <img class="img-xs rounded-circle"
-                                    src="{{ asset('storage/' . Auth::user()->pegawai->foto) }}" alt="">
-                                @elseif (Auth::user()->role == 'Pelamar' && isset(Auth::user()->pelamar))
-                                    <img class="img-xs rounded-circle"
-                                    src="{{ asset('storage/' . Auth::user()->pelamar->foto) }}" alt="">
-                                @else
-                                    <img class="img-xs rounded-circle "
-                                    src="{{ asset('template/assets/images/faces/face18.jpg') }}" alt="">
-                                @endif
+                                    src="{{ asset('storage/' . Auth::user()->foto) }}" alt="">
                             </div>
                             <div class="profile-name">
-                                @if (isset(Auth::user()->pegawai))
                                     <h5 class="mb-0 font-weight-normal">
-                                        {{ Auth::user()->pegawai->nama }}
+                                        {{ Auth::user()->nama }}
                                     </h5>
-                                    <span>{{ Auth::user()->pegawai->department . ' - ' .Auth::user()->pegawai->golongan }}</span>
-                                @elseif (isset(Auth::user()->pelamar) && Auth::user()->role == 'Pelamar')
-                                    <h5 class="mb-0 font-weight-normal">
-                                        {{ Auth::user()->pelamar->nama }}
-                                    </h5>
-                                @else
-                                    <h5 class="mb-0 font-weight-normal">
-                                        {{ Auth::user()->email }}
-                                    </h5>
-                                @endif
+                                    <span>
+                                        {{ Auth::user()->department }}
+                                        <br>
+                                        {{ Auth::user()->golongan }}
+                                    </span>
                             </div>
                         </div>
                         {{-- Sidebar Profile Image & Name End --}}
@@ -355,25 +345,10 @@
                             <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
                                 <div class="navbar-profile">
                                         {{-- @foreach ($user as $user) --}}
-                                        @if (Auth::user()->role != 'Pelamar' && isset(Auth::user()->pegawai))
-                                            <img class="img-xs rounded-circle"
-                                            src="{{ asset('storage/' . Auth::user()->pegawai->foto) }}" alt="">
-                                        @elseif (Auth::user()->role == 'Pelamar' && isset(Auth::user()->pelamar))
-                                            <img class="img-xs rounded-circle"
-                                            src="{{ asset('storage/' . Auth::user()->pelamar->foto) }}" alt="">
-                                        @else
-                                            <img class="img-xs rounded-circle "
-                                            src="{{ asset('template/assets/images/faces/face18.jpg') }}" alt="">
-                                        @endif
+                                        <img class="img-xs rounded-circle"
+                                        src="{{ asset('storage/' . Auth::user()->foto) }}" alt="">
                                         <p class="mb-0 d-none d-sm-block navbar-profile-name">
-                                            @if (isset(Auth::user()->pegawai))
-                                                {{ Auth::user()->pegawai->nama }}
-                                            @elseif (isset(Auth::user()->pelamar) && Auth::user()->role == 'Pelamar')
-                                                {{ Auth::user()->pelamar->nama }}
-                                            @else
-                                                {{ Auth::user()->email }}
-                                            @endif
-                                        </p>
+                                            {{ Auth::user()->nama }}
                                         <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                                     {{-- @endforeach --}}
                                 </div>
