@@ -136,7 +136,7 @@ class AdminController extends Controller
 
     public function detailLowongan($id){
         $data = Lowongan::find($id);
-        $datas = Pelamar::where('lowongan_id', $id)->get();
+        $datas = Pelamar::where('lowongan_id', $id)->latest()->filter(request(['search', 'status']))->paginate(10);;
 
         // dd($datas);
         
