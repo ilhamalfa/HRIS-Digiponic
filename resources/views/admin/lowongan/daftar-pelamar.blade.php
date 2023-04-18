@@ -81,6 +81,7 @@
                             <th scope="col">Age</th>
                             <th scope="col">Phone Number</th>
                             <th scope="col">Email</th>
+                            <th scope="col">Status</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -92,6 +93,7 @@
                                 <td>{{ \Carbon\Carbon::parse($data->tanggal_lahir)->age }}</td>
                                 <td>{{ $data->nomor_hp }}</td>
                                 <td>{{ $data->email }}</td>
+                                <td>{{ $data->status }}</td>
                                 <td>
                                     <a href="{{ url('pelamar-detail/cv/' . $data->id) }}" class="btn btn-primary" target="_blank">CV Detail</a>
                                     @if ($data->status == 'Menunggu')
