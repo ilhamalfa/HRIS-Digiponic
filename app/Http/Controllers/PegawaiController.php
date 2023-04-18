@@ -252,10 +252,10 @@ class PegawaiController extends Controller
 
     // Perizinan
     public function daftarIzin(){
-        $izins = Perizinan::where('user_id', Auth::user()->id)->get();
+        $datas = Perizinan::where('user_id', Auth::user()->id)->get();
 
         return view('pegawai.cuti-perizinan.daftar-izin', [
-            'izins' => $izins,
+            'datas' => $datas,
         ]);
         // dd($datas);
     }
@@ -271,37 +271,35 @@ class PegawaiController extends Controller
             $validate = $request->validate([
                 'tanggal_mulai' => 'required|after: today',
                 'tanggal_berakhir' => 'required|after_or_equal:tanggal_mulai',
-                'alasan_perizinan' => 'required',
-                'bukti_perizinan' => 'required|mimes:jpeg,png,pdf|max:1024',
+                'alasan' => 'required',
+                'bukti' => 'required|mimes:jpeg,png,pdf|max:1024',
             ]);
         }else{
             $validate = $request->validate([
                 'tanggal_mulai' => 'required|after: today',
-                'alasan_perizinan' => 'required',
-                'bukti_perizinan' => 'required|mimes:jpeg,png,pdf|max:2048',
+                'alasan' => 'required',
+                'bukti' => 'required|mimes:jpeg,png,pdf|max:2048',
             ]);
 
             $validate['tanggal_berakhir'] = $validate['tanggal_mulai'];
         }
 
-        $validate['status_perizinan'] = "Menunggu Persetujuan";
+        $validate['status'] = "Menunggu Persetujuan";
         $validate['user_id'] = Auth::user()->id;
 
-        $extension_file = $request->file('bukti_perizinan')->extension();
-            
-        $nama_file = Auth::user()->pegawai->nama . '-' . now()->timestamp. '.' . $extension_file;
-
-        $validate['bukti_perizinan'] = $request->file('bukti_perizinan')->storeAs('Pegawai/perizinan', $nama_file);
+        $extension_file = $request->file('bukti')->extension();
+        $nama_file = Auth::user()->nama . '-' . now()->timestamp. '.' . $extension_file;
+        $validate['bukti'] = $request->file('bukti')->storeAs('Pegawai/perizinan', $nama_file);
 
         Perizinan::create($validate);
 
-        return redirect('pegawai/izin')->with('success', 'Proses Cuti sedang diproses, Mohon tunggu konfirmasi');
+        return redirect('pegawai/izin')->with('success', 'Proses Izin sedang diproses, Mohon tunggu konfirmasi');
     }
 
     public function buktiIzin($id){
         $data = Perizinan::find($id);
         
-        return Storage::response($data->bukti_perizinan);
+        return Storage::response($data->bukti);
     }
 
     public function resign(){
