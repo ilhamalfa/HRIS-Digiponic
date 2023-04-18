@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendConfirmMail;
 use App\Models\Lamaran;
 use App\Models\Lowongan;
 use App\Models\Cuti;
@@ -180,38 +181,37 @@ class AdminController extends Controller
     public function ubahStatus($id, $status){
         // dd([$id, $status]);
         $data = Pelamar::find($id);
+        // dd($data->lowongan->posisi);
 
         if($status == 'Menunggu'){
             $status = 'Wawancara';
-            $subject = 'Lanjut ke tahap wawancara';
-            $body = 'Selamat, untuk sdr '. $data->nama .' Anda berhasil Lolos ke tahap selanjutnya. Dimohon untuk menunggu email selanjutnya yang berisikan link untuk melakukan tahap wawancara. Jika sdr ada pertanyaan, dapat menghubungi Admin atau dapat mengirim email ke HR@Techsolution.com, Terima kasih';
+            $subject = 'Lanjut Tahap Wawancara';
+            $body = 'Selamat, untuk sdr '. $data->nama .', Anda berhasil Lolos ke tahap selanjutnya. Dimohon untuk menunggu email selanjutnya yang berisikan link untuk melakukan tahap wawancara. Jika sdr ada pertanyaan, dapat menghubungi Admin atau dapat mengirim email ke HR@Techsolution.com, Terima kasih.';
         }else if($status == 'Wawancara'){
             $status = 'Psikotest';
+            $subject = 'Lanjut Tahap Psikotest';
+            $body = 'Selamat, untuk sdr '. $data->nama .', Anda berhasil Lolos ke tahap selanjutnya. Dimohon untuk menunggu email selanjutnya yang berisikan link untuk melakukan tahap psikotest. Jika sdr ada pertanyaan, dapat menghubungi Admin atau dapat mengirim email ke HR@Techsolution.com, Terima kasih.';
         }else if($status == 'Psikotest'){
             $status = 'Offering';
+            $subject = 'Lanjut Tahap Offering';
+            $body = 'Selamat, untuk sdr '. $data->nama .', Anda berhasil Lolos ke tahap selanjutnya. Dimohon untuk menunggu email selanjutnya mengenai hasil dari proses rekruitment ini. Jika sdr ada pertanyaan, dapat menghubungi Admin atau dapat mengirim email ke HR@Techsolution.com, Terima kasih.';
         }else if($status == 'Offering'){
             $status = 'Diterima';
+            $subject = 'Selamat Telah Diterima';
+            $body = 'Selamat, untuk sdr '. $data->nama .', Anda berhasil Diterima pada posisi '. $data->lowongan->posisi .'. Dimohon untuk menunggu email selanjutnya yang berisikan tanggal masuk dan daftar berkas-berkas yang wajib dibawa. Jika sdr ada pertanyaan, dapat menghubungi Admin atau dapat mengirim email ke HR@Techsolution.com, Terima kasih.';
         }else{
             $status = 'Ditolak';
+            $subject = 'Lamaran Ditolak';
+            $body = 'Terimakasih untuk sdr '. $data->nama .' atas minatnya untuk mengikuti proses seleksi ini, kami mohon maaf sebesar-besarnya dikarenakan sdr sudah tidak dapat mengikuti, kami akan menunggu sdr untuk mengikuti seleksi pada masa mendatang';
         }
 
-        // Mail::raw('Hi, welcome user!', function ($message) {
-        //     $message->to('test@mil.com')
-        //     ->subject('test');
-        // });
+        $maildata = [
+            'subject' => $subject,
+            'greeting' => 'Congratulation!',
+            'body' => $body
+        ];
 
-        // (new MailMessage)
-        //     ->subject(Lang::get($subject))
-        //     ->line(Lang::get($body));
-        
-        // Mail::raw(->subject(Lang::get($subject))
-        // ->line(Lang::get($body))
-        // ->subject(Lang::get($subject))
-        // ->line(Lang::get($body)))
-        // Mail::send()->subject(Lang::get($subject))
-        // ->line(Lang::get($body1))
-        // ->line(Lang::get($body2))
-        // ->line(Lang::get($body3));
+        Mail::to($data->email)->send(new SendConfirmMail($maildata));
 
         // $data->update([
         //     'status' => $status

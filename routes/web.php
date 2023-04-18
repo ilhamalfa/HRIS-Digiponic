@@ -22,8 +22,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    // return view('landingpage.landingpage');
-    return view('layouts.template');
+    return view('landingpage.landingpage');
+    // return view('layouts.template');
 });
 
 Auth::routes(['verify' => true]);

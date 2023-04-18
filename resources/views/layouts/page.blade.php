@@ -99,33 +99,17 @@
                             {{-- Sidebar Profile Image & Name Start --}}
                             <div class="profile-pic">
                                 <div class="count-indicator">
-                                    @if (Auth::user()->role != 'Pelamar' && isset(Auth::user()->pegawai))
-                                        <img class="img-xs rounded-circle"
-                                        src="{{ asset('storage/' . Auth::user()->pegawai->foto) }}" alt="">
-                                    @elseif (Auth::user()->role == 'Pelamar' && isset(Auth::user()->pelamar))
-                                        <img class="img-xs rounded-circle"
-                                        src="{{ asset('storage/' . Auth::user()->pelamar->foto) }}" alt="">
-                                    @else
-                                            <img class="img-xs rounded-circle "
-                                            src="{{ asset('template/assets/images/faces/face18.jpg') }}" alt="">
-                                    @endif
+                                    <img class="img-xs rounded-circle"
+                                    src="{{ asset('storage/' . Auth::user()->foto) }}" alt="">
                                 </div>
                                 <div class="profile-name">
                                     <h5 class="mb-0 font-weight-normal">
-                                        @if (Auth::user()->role == 'Pelamar')
-                                            {{ Auth::user()->pelamar->nama }}
-                                        @else
-                                            {{ Auth::user()->pegawai->nama }}
-                                        @endif
+                                        {{ Auth::user()->nama }}
                                     </h5>
                                     <span class="overflow-auto">
-                                        @if (Auth::user()->role == 'Pelamar')
-                                            {{ Auth::user()->role }}
-                                        @else
-                                            {{ Auth::user()->pegawai->golongan }}
-                                            <br>
-                                            {{ Auth::user()->pegawai->department }}
-                                        @endif
+                                        {{ Auth::user()->golongan }}
+                                        <br>
+                                        {{ Auth::user()->department }}
                                     </span>
                                 </div>
                             </div>
@@ -151,11 +135,7 @@
                                     </div>
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                @if (Auth::user()->role == 'Pelamar')
-                                    <a href="{{ url('/profile/edit-data-pelamar') }}" class="dropdown-item preview-item">
-                                @else
                                     <a href="{{ url('/profile/edit-data-pegawai') }}" class="dropdown-item preview-item">
-                                @endif
                                     <div class="preview-thumbnail">
                                         <div class="preview-icon bg-dark rounded-circle">
                                             <i class="mdi mdi-clipboard-account  text-info"></i>
@@ -259,24 +239,10 @@
                         @guest
                             <p class="mb-0 ms-2 d-none d-sm-block navbar-profile-name text-white">Login</p>
                         @else
-                            @if (Auth::user()->role != 'Pelamar' && isset(Auth::user()->pegawai))
-                                <img class="img-xs rounded-circle"
-                                src="{{ asset('storage/' . Auth::user()->pegawai->foto) }}" alt="">
-                            @elseif (Auth::user()->role == 'Pelamar' && isset(Auth::user()->pelamar))
-                                <img class="img-xs rounded-circle"
-                                src="{{ asset('storage/' . Auth::user()->pelamar->foto) }}" alt="">
-                            @else
-                                <img class="img-xs rounded-circle "
-                                src="{{ asset('template/assets/images/faces/face18.jpg') }}" alt="">
-                            @endif
+                            <img class="img-xs rounded-circle"
+                            src="{{ asset('storage/' . Auth::user()->foto) }}" alt="">
                             <p class="mb-0 ms-2 d-none d-sm-block navbar-profile-name text-white">
-                                @if (isset(Auth::user()->pegawai))
-                                    {{ Auth::user()->pegawai->nama }}
-                                @elseif (isset(Auth::user()->pelamar) && Auth::user()->role == 'Pelamar')
-                                    {{ Auth::user()->pelamar->nama }}
-                                @else
-                                    {{ Auth::user()->email }}
-                                @endif
+                                    {{ Auth::user()->nama }}
                             </p>
                         @endguest
                         <i class="mdi mdi-menu-down d-none d-sm-block text-warning"></i>
@@ -310,18 +276,6 @@
                             </div>
                         </a>
                     @else
-                        @if (Auth::user()->role == 'Pelamar')
-                            <a class="dropdown-item preview-item" href="{{ url('/pelamar/daftar-lamaran/') }}">
-                                <div class="preview-thumbnail">
-                                    <div class="preview-icon bg-dark rounded-circle">
-                                        <i class="fa-solid fa-file-pen"></i>
-                                    </div>
-                                </div>
-                                <div class="preview-item-content">
-                                    <p class="preview-subject mb-1">Applied Jobs</p>
-                                </div>
-                            </a>
-                        @endif
                         <a class="dropdown-item preview-item flex align-items-center py-1 my-1 px-2">
                             <div class="preview-thumbnail ps-1">
                                 <div class="preview-icon bg-dark rounded-circle">
@@ -394,24 +348,10 @@
                     @guest
                         <p class="mb-0 ms-2 d-none d-sm-block navbar-profile-name text-white">Login</p>
                     @else
-                        @if (Auth::user()->role != 'Pelamar' && isset(Auth::user()->pegawai))
-                            <img class="img-xs rounded-circle"
-                            src="{{ asset('storage/' . Auth::user()->pegawai->foto) }}" alt="">
-                        @elseif (Auth::user()->role == 'Pelamar' && isset(Auth::user()->pelamar))
-                            <img class="img-xs rounded-circle"
-                            src="{{ asset('storage/' . Auth::user()->pelamar->foto) }}" alt="">
-                        @else
-                            <img class="img-xs rounded-circle "
-                            src="{{ asset('template/assets/images/faces/face18.jpg') }}" alt="">
-                        @endif
+                        <img class="img-xs rounded-circle"
+                        src="{{ asset('storage/' . Auth::user()->foto) }}" alt="">
                         <p class="mb-0 ms-2 d-none d-sm-block navbar-profile-name text-white">
-                            @if (isset(Auth::user()->pegawai))
-                                {{ Auth::user()->pegawai->nama }}
-                            @elseif (isset(Auth::user()->pelamar) && Auth::user()->role == 'Pelamar')
-                                {{ Auth::user()->pelamar->nama }}
-                            @else
-                                {{ Auth::user()->email }}
-                            @endif
+                            {{ Auth::user()->nama }}
                         </p>
                     @endguest
                     <i class="mdi mdi-menu-down d-none d-sm-block text-warning"></i>
@@ -443,18 +383,6 @@
                         </div>
                     </a>
                 @else
-                    @if (Auth::user()->role == 'Pelamar')
-                        <a class="dropdown-item preview-item flex align-items-center py-1 my-1" href="{{ url('/pelamar/daftar-lamaran/') }}">
-                            <div class="preview-thumbnail ps-1">
-                                <div class="preview-icon bg-dark rounded-circle">
-                                    <i class="fa-solid fa-file-pen"></i>
-                                </div>
-                            </div>
-                            <div class="preview-item-content">
-                                <p class="preview-subject mb-1 me-2 account-menu-text">Applied Jobs</p>
-                            </div>
-                        </a>
-                    @endif
                     <a class="dropdown-item preview-item flex align-items-center py-1 my-1">
                         <div class="preview-thumbnail ps-1">
                             <div class="preview-icon bg-dark rounded-circle">

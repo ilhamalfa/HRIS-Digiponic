@@ -92,6 +92,16 @@
 
                 {{-- Sidebar Profile Box Start --}}
                 <li class="nav-item profile">
+                    @guest
+                        <div class="profile-des">
+                            <a class="nav-link" href="{{ route('login') }}">
+                                <span class="menu-icon">
+                                    <i class="fa-solid fa-right-to-bracket"></i>
+                                </span>
+                                <span class="menu-title">Login</span>
+                            </a>
+                        </div>
+                    @else
                     <div class="profile-desc">
 
                         {{-- Sidebar Profile Image & Name Start --}}
@@ -147,6 +157,8 @@
                         {{-- Sidebar Profile 3 Dots Vertical Menu End --}}
 
                     </div>
+                    @endguest
+
                 </li>
                 {{-- Sidebar Profile Box End --}}
 
@@ -165,85 +177,89 @@
                         <span class="menu-title">Dashboard</span>
                     </a>
                 </li>
-                @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'SuperAdmin')
-                <li class="nav-item menu-items">
-                    <a class="nav-link" href="{{ url('/data-pegawai') }}">
-                        <span class="menu-icon">
-                            <i class="mdi mdi-account-multiple"></i>
-                        </span>
-                        <span class="menu-title">Employees Datas</span>
-                    </a>
-                </li>
-                <li class="nav-item menu-items">
-                    <a class="nav-link" href="{{ url('/data-user') }}">
-                        <span class="menu-icon">
-                            <i class="mdi mdi-account-multiple-outline"></i>
-                        </span>
-                        <span class="menu-title">Users Datas</span>
-                    </a>
-                </li>
-                <li class="nav-item menu-items">
-                    <a class="nav-link" href="{{ url('admin/daftar-cuti') }}">
-                        <span class="menu-icon">
-                            <i class="mdi mdi-note-multiple"></i>
-                        </span>
-                        <span class="menu-title">Daftar Cuti</span>
-                    </a>
-                </li>
-                <li class="nav-item menu-items">
-                    <a class="nav-link" href="{{ url('admin/izin') }}">
-                        <span class="menu-icon">
-                            <i class="mdi mdi-receipt"></i>
-                        </span>
-                        <span class="menu-title">Days Off</span>
-                    </a>
-                </li>
-                <li class="nav-item menu-items">
-                    <a class="nav-link" href="{{ url('data-lowongan/') }}">
-                        <span class="menu-icon">
-                            <i class="mdi mdi-file-multiple"></i>
-                        </span>
-                        <span class="menu-title">lowongan</span>
-                    </a>
-                </li>
-                @endif
-                @if (Auth::user()->role != 'Pelamar')
-                <li class="nav-item nav-category">
-                    <span class="nav-link">Employee Navigation</span>
-                </li>
-                <li class="nav-item menu-items">
-                    <a class="nav-link" href="{{ url('#') }}">
-                        <span class="menu-icon">
-                            <i class="mdi mdi-file-multiple"></i>
-                        </span>
-                        <span class="menu-title">Absensi</span>
-                    </a>
-                </li>
-                <li class="nav-item menu-items">
-                    <a class="nav-link" href="{{ url('pegawai/cuti') }}">
-                        <span class="menu-icon">
-                            <i class="mdi mdi-file-multiple"></i>
-                        </span>
-                        <span class="menu-title">cuti</span>
-                    </a>
-                </li>
-                <li class="nav-item menu-items">
-                    <a class="nav-link" href="{{ url('pegawai/izin') }}">
-                        <span class="menu-icon">
-                            <i class="mdi mdi-file-multiple"></i>
-                        </span>
-                        <span class="menu-title">Izin</span>
-                    </a>
-                </li>
-                <li class="nav-item menu-items">
-                    <a class="nav-link" href="{{ url('pegawai/resign') }}">
-                        <span class="menu-icon">
-                            <i class="mdi mdi-file-multiple"></i>
-                        </span>
-                        <span class="menu-title">Resign</span>
-                    </a>
-                </li>
-                @endif
+                @guest
+                    
+                @else
+                    @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'SuperAdmin')
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('/data-pegawai') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-account-multiple"></i>
+                                </span>
+                                <span class="menu-title">Employees Datas</span>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('/data-user') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-account-multiple-outline"></i>
+                                </span>
+                                <span class="menu-title">Users Datas</span>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('admin/daftar-cuti') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-note-multiple"></i>
+                                </span>
+                                <span class="menu-title">Daftar Cuti</span>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('admin/izin') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-receipt"></i>
+                                </span>
+                                <span class="menu-title">Days Off</span>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('data-lowongan/') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-file-multiple"></i>
+                                </span>
+                                <span class="menu-title">lowongan</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if (Auth::user()->role != 'Pelamar')
+                        <li class="nav-item nav-category">
+                            <span class="nav-link">Employee Navigation</span>
+                        </li>
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('#') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-file-multiple"></i>
+                                </span>
+                                <span class="menu-title">Absensi</span>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('pegawai/cuti') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-file-multiple"></i>
+                                </span>
+                                <span class="menu-title">cuti</span>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('pegawai/izin') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-file-multiple"></i>
+                                </span>
+                                <span class="menu-title">Izin</span>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('pegawai/resign') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-file-multiple"></i>
+                                </span>
+                                <span class="menu-title">Resign</span>
+                            </a>
+                        </li>
+                    @endif
+                @endguest
                 {{-- Sidebar Dashboard End --}}
 
             </ul>
@@ -366,12 +382,16 @@
                             <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
                                 <div class="navbar-profile">
                                         {{-- @foreach ($user as $user) --}}
+                                        @guest
+                                            <p class="mb-0 ms-2 d-none d-sm-block navbar-profile-name text-white">Login</p>
+                                        @else
                                         <img class="img-xs rounded-circle"
                                         src="{{ asset('storage/' . Auth::user()->foto) }}" alt="">
                                         <p class="mb-0 d-none d-sm-block navbar-profile-name">
                                             {{ Auth::user()->nama }}
                                         <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                                     {{-- @endforeach --}}
+                                        @endguest
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
