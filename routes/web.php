@@ -96,8 +96,6 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin'])->group(f
     // Cuti
     Route::get('admin/daftar-cuti', [AdminController::class, 'daftarCuti']);
 
-    Route::get('admin/cuti/{id}/{konfirmasi}', [AdminController::class, 'konfirmasiCuti']);
-
     // Izin
     Route::get('admin/izin', [AdminController::class, 'daftarIzin']);
 
@@ -175,6 +173,10 @@ Route::middleware(['auth', 'verified', 'golongan:Manager/Kadep'])->group(functio
     Route::get('kadep/daftar-perizinan', [PegawaiController::class, 'daftarPerizinan']);
     
     Route::get('kadep/daftar-perizinan/{id}/{konfirmasi}', [AdminController::class, 'konfirmasiIzin']);
+
+    Route::get('kadep/daftar-cuti', [PegawaiController::class, 'daftarCutiKadep']);
+
+    Route::get('kadep/daftar-cuti/{id}/{konfirmasi}', [AdminController::class, 'konfirmasiCuti']);
 });
 
 // Indoregion Start

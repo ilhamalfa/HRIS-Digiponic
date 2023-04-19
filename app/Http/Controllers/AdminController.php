@@ -57,23 +57,21 @@ class AdminController extends Controller
     }
 
     public function konfirmasiCuti($id, $konfirmasi){
-        $cuti = Cuti::find($id);
-        $user = User::find($cuti->user_id);
-        $jml_cuti = date_diff(date_create($cuti->tanggal_mulai), date_create($cuti->tanggal_berakhir))->days + 1;
+        $data = Cuti::find($id);
+        $user = User::find($data->user_id);
+        $jml_cuti = date_diff(date_create($data->tanggal_mulai), date_create($data->tanggal_berakhir))->days + 1;
 
-        // dd($jml_cuti);
-
-        if($konfirmasi == 'terima'){
-            $cuti->update([
-                'status_cuti' => 'Diterima'
+        if($konfirmasi == 'Accept'){
+            $data->update([
+                'status' => 'Accepted'
             ]);
 
             $user->update([
                 'jumlah_cuti' => $user->jumlah_cuti - $jml_cuti
             ]);
-        }else{
-            $cuti->update([
-                'status_cuti' => 'Ditolak'
+        }else if($konfirmasi == 'Decline'){
+            $data->update([
+                'status' => 'Declined'
             ]);
         }
 

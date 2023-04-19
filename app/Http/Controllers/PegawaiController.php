@@ -347,4 +347,16 @@ class PegawaiController extends Controller
         ]);
         // dd($datas);
     }
+
+    // Kadep daftarCuti
+    public function daftarCutiKadep(){
+        $datas = Cuti::whereHas('user', function($query) {
+            $query->where('department', Auth::user()->department);
+        })->filter(request(['status','search']))->paginate(10);
+
+        return view('pegawai.kadep.daftar-cuti', [
+            'datas' => $datas,
+        ]);
+        // dd($datas);
+    }
 }
