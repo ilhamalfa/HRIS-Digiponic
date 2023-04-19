@@ -359,4 +359,16 @@ class PegawaiController extends Controller
         ]);
         // dd($datas);
     }
+
+    // Kadep daftarResign
+    public function daftarResign(){
+        $datas = Resign::whereHas('user', function($query) {
+            $query->where('department', Auth::user()->department);
+        })->filter(request(['status','search']))->paginate(10);
+
+        return view('pegawai.kadep.daftar-resign', [
+            'datas' => $datas,
+        ]);
+        // dd($datas);
+    }
 }
