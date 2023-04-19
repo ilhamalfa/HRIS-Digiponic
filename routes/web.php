@@ -173,6 +173,10 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin,Pegawai,Pel
     Route::post('/Account/account-setting/update', [PegawaiController::class, 'updateUser']);    
 });
 
+Route::middleware(['auth', 'verified', 'golongan:Manager/Kadep'])->group(function () {
+    Route::get('kadep/daftar-perizinan', [PegawaiController::class, 'daftarPerizinan']);
+});
+
 // Indoregion Start
 Route::post('/get-kabupaten', [IndoRegionController::class, 'getKabupaten']);
 

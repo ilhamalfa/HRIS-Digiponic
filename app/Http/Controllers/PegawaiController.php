@@ -329,4 +329,24 @@ class PegawaiController extends Controller
 
         return redirect('pegawai/resign');
     }
+
+    // Kadep Daftar Izin
+    public function daftarPerizinan(){
+        // $datas = Perizinan::whereHas('user', function($query) {
+        //     $query->where('department', Auth::user()->department);
+        // })->paginate(10);
+
+        $datas = Perizinan::whereHas('user', function($query) {
+                $query->where('department', Auth::user()->department);
+            })->filter(request(['status','search']))->paginate(10);
+
+        // $datas = Perizinan::has('user')->where('users.department', Auth::user()->department)->paginate(10);
+
+            // dd(request(['status','search']));
+        
+        return view('pegawai.kadep.daftar-izin', [
+            'datas' => $datas,
+        ]);
+        // dd($datas);
+    }
 }
