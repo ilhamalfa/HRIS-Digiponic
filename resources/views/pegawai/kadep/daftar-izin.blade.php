@@ -78,11 +78,13 @@
                                 <td>{{ $data->alasan }}</td>
                                 <td><a href="{{ url('pegawai/izin/bukti/' . $data->id) }}" target="_blank" class="btn btn-primary">Bukti Perizinan</a></td>
                                 <td>
-                                    @if ($data->status == 'Diterima')
+                                    @if ($data->status == 'Accepted')
                                         <a href="" class="btn btn-primary">SK Izin</a>
+                                    @elseif($data->status == 'Declined')
+                                        <button disabled class="btn btn-danger">Declined</button>
                                     @else
-                                        <a href="" class="btn btn-success">Accept</a>
-                                        <a href="" class="btn btn-danger">Decline</a>
+                                        <a href="{{ url('kadep/daftar-perizinan/'. $data->id .'/Accept') }}" class="btn btn-success">Accept</a>
+                                        <a href="{{ url('kadep/daftar-perizinan/'. $data->id .'/Decline') }}" class="btn btn-danger">Decline</a>
                                     @endif
                                 </td>
                             </tr>

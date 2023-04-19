@@ -103,8 +103,6 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin'])->group(f
 
     Route::get('admin/izin/bukti/{id}', [AdminController::class, 'buktiIzin']);
 
-    Route::get('admin/izin/{id}/{konfirmasi}', [AdminController::class, 'konfirmasiIzin']);
-
     // Data Lowongan
     Route::get('data-lowongan/', [AdminController::class, 'daftarLowongan']);
 
@@ -175,6 +173,8 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin,Pegawai,Pel
 
 Route::middleware(['auth', 'verified', 'golongan:Manager/Kadep'])->group(function () {
     Route::get('kadep/daftar-perizinan', [PegawaiController::class, 'daftarPerizinan']);
+    
+    Route::get('kadep/daftar-perizinan/{id}/{konfirmasi}', [AdminController::class, 'konfirmasiIzin']);
 });
 
 // Indoregion Start

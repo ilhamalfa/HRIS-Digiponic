@@ -98,17 +98,15 @@ class AdminController extends Controller
     }
 
     public function konfirmasiIzin($id, $konfirmasi){
-        $izin = Perizinan::find($id);
+        $data = Perizinan::find($id);
 
-        // dd($jml_izin);
-
-        if($konfirmasi == 'terima'){
-            $izin->update([
-                'status_perizinan' => 'Diterima'
+        if($konfirmasi == 'Accept'){
+            $data->update([
+                'status' => 'Accepted'
             ]);
-        }else{
-            $izin->update([
-                'status_perizinan' => 'Ditolak'
+        }else if($konfirmasi == 'Decline'){
+            $data->update([
+                'status' => 'Declined'
             ]);
         }
 

@@ -204,10 +204,10 @@ class PegawaiController extends Controller
 
     // Cuti
     public function daftarCuti(){
-        $cutis = Cuti::where('user_id', Auth::user()->id)->get();
+        $datas = Cuti::where('user_id', Auth::user()->id)->get();
 
         return view('pegawai.cuti-perizinan.daftar-cuti', [
-            'cutis' => $cutis,
+            'datas' => $datas,
         ]);
         // dd($datas);
     }
@@ -225,11 +225,13 @@ class PegawaiController extends Controller
         if(isset($request->check)){
             $validate = $request->validate([
                 'tanggal_mulai' => 'required|after_or_equal:' . $date,
-                'tanggal_berakhir' => 'required|after_or_equal:tanggal_mulai'
+                'tanggal_berakhir' => 'required|after_or_equal:tanggal_mulai',
+                'alasan' => 'required'
             ]);
         }else{
             $validate = $request->validate([
                 'tanggal_mulai' => 'required|after_or_equal:' . $date,
+                'alasan' => 'required'
             ]);
 
             $validate['tanggal_berakhir'] = $validate['tanggal_mulai'];
@@ -239,7 +241,7 @@ class PegawaiController extends Controller
         // dd($jml_cuti);
 
         if($jml_cuti <= Auth::user()->jumlah_cuti){
-            $validate['status_cuti'] = "Menunggu Persetujuan";
+            $validate['status'] = "Menunggu Persetujuan";
             $validate['user_id'] = Auth::user()->id;
 
             Cuti::create($validate);
@@ -339,10 +341,6 @@ class PegawaiController extends Controller
         $datas = Perizinan::whereHas('user', function($query) {
                 $query->where('department', Auth::user()->department);
             })->filter(request(['status','search']))->paginate(10);
-
-        // $datas = Perizinan::has('user')->where('users.department', Auth::user()->department)->paginate(10);
-
-            // dd(request(['status','search']));
         
         return view('pegawai.kadep.daftar-izin', [
             'datas' => $datas,
