@@ -17,9 +17,9 @@ class Lowongan extends Model
 
     public function scopeFilter($query, array $filters)
     {
-    $query->when($filters['search'] ?? false, function ($query, $search) {
-        return $query->where(function ($query) use ($search) {
-            $query->where('posisi', 'like', '%' . $search . '%');
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            return $query->where(function ($query) use ($search) {
+                $query->where('posisi', 'like', '%' . $search . '%');
             });
         });
     }

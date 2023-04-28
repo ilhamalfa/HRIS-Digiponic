@@ -71,7 +71,7 @@ class PegawaiController extends Controller
     }
 
     public function editPegawai(){
-        $data = Pegawai::where('user_id', Auth::user()->id)->first();
+        $data = Auth::user();
 
         $provinces = Province::all();
         $regency = Regency::find($data->regency_id);
@@ -90,71 +90,64 @@ class PegawaiController extends Controller
     }
 
     public function updatePegawai(Request $request){
-        $data = Pegawai::find(Auth::user()->pegawai->id);
-        // dd($data);
+        $data = User::find(Auth::user()->id);
+        // dd($request);
 
-        if(!$request->has('foto')){
-            $validate = $request->validate([
-                'nama' => 'required',
-                'tanggal_lahir' => 'required|before:17 years ago',
-                'jenis_kelamin' => 'required',
-                'nomor_hp' => 'required',
-                'status_pernikahan' => 'required',
-                'province_id' => 'required',
-                'regency_id' => 'required',
-                'district_id' =>'required',
-                'village_id' => 'required',
-                'alamat' => 'required',
-            ]);
+        $validate = $request->validate([
+            'nama' => 'required',
+            'tanggal_lahir' => 'required|before:17 years ago',
+            'jenis_kelamin' => 'required',
+            'nomor_hp' => 'required',
+            'status_pernikahan' => 'required',
+            'province_id' => 'required',
+            'regency_id' => 'required',
+            'district_id' =>'required',
+            'village_id' => 'required',
+            'alamat' => 'required',
+        ]);
 
-            $validate['umur'] = Carbon::parse($request->tanggal_lahir)->age;
+        $validate['umur'] = Carbon::parse($request->tanggal_lahir)->age;
 
-            if($request->has('jumlah_anak')){
-                $validate['jumlah_anak'] = $request->jumlah_anak;
-            }else{
-                $validate['jumlah_anak'] = 0;
-            }
-
-            // dd($validate);
+        if($request->has('jumlah_anak')){
+            $validate['jumlah_anak'] = $request->jumlah_anak;
         }else{
-            $validate = $request->validate([
-                'nama' => 'required',
-                'tanggal_lahir' => 'required|before:17 years ago',
-                'jenis_kelamin' => 'required',
-                'nomor_hp' => 'required',
-                'status_pernikahan' => 'required',
-                'department' => 'required',
-                'golongan' => 'required',
-                'province_id' => 'required',
-                'regency_id' => 'required',
-                'district_id' =>'required',
-                'village_id' => 'required',
-                'alamat' => 'required',
-                'foto' => 'required|image',
-            ]);
-    
-            $validate['umur'] = Carbon::parse($request->tanggal_lahir)->age;
-
-            if($request->has('jumlah_anak')){
-                $validate['jumlah_anak'] = $request->jumlah_anak;
-            }else{
-                $validate['jumlah_anak'] = 0;
-            }
-
-            if(fileExists('storage/'. $data->foto)){
-                unlink('storage/'. $data->foto);
-            }
-
-            $extension_foto = $request->file('foto')->extension();
-                
-            $nama_foto = $request->nama . '-' . now()->timestamp. '.' . $extension_foto;
-    
-            $validate['foto'] = $request->file('foto')->storeAs('Pegawai/foto', $nama_foto);
+            $validate['jumlah_anak'] = 0;
         }
+
+        // dd($validate);
 
         $data->update($validate);
 
         return redirect()->back();
+    }
+
+    public function signature(){
+        return view('pegawai.data-pegawai.user-signature');
+    }
+
+    public function saveSignature(Request $request){
+        $user = User::find(Auth::user()->id);
+
+        $data_uri = $request->signature;
+        $encoded_image = explode(",", $data_uri)[1];
+        $decoded_image = base64_decode($encoded_image);
+        $nama_file = Auth::user()->nama . '-' . now()->timestamp . ".png";
+        // Error
+        file_put_contents(__DIR__ . DIRECTORY_SEPARATOR . "Pegawai\signature". $nama_file, $decoded_image);
+
+        $user->update([
+            'digital_signature' => 'Pegawai/signature/'.$nama_file
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function editFoto(){
+        $data = Auth::user();
+
+        return view('pegawai.data-pegawai.update-foto-pegawai', [
+            'data' => $data,
+        ]);
     }
 
     public function storePegawai(Request $request){
@@ -204,10 +197,10 @@ class PegawaiController extends Controller
 
     // Cuti
     public function daftarCuti(){
-        $cutis = Cuti::where('user_id', Auth::user()->id)->get();
+        $datas = Cuti::where('user_id', Auth::user()->id)->get();
 
         return view('pegawai.cuti-perizinan.daftar-cuti', [
-            'cutis' => $cutis,
+            'datas' => $datas,
         ]);
         // dd($datas);
     }
@@ -225,11 +218,13 @@ class PegawaiController extends Controller
         if(isset($request->check)){
             $validate = $request->validate([
                 'tanggal_mulai' => 'required|after_or_equal:' . $date,
-                'tanggal_berakhir' => 'required|after_or_equal:tanggal_mulai'
+                'tanggal_berakhir' => 'required|after_or_equal:tanggal_mulai',
+                'alasan' => 'required'
             ]);
         }else{
             $validate = $request->validate([
                 'tanggal_mulai' => 'required|after_or_equal:' . $date,
+                'alasan' => 'required'
             ]);
 
             $validate['tanggal_berakhir'] = $validate['tanggal_mulai'];
@@ -239,7 +234,7 @@ class PegawaiController extends Controller
         // dd($jml_cuti);
 
         if($jml_cuti <= Auth::user()->jumlah_cuti){
-            $validate['status_cuti'] = "Menunggu Persetujuan";
+            $validate['status'] = "Menunggu Persetujuan";
             $validate['user_id'] = Auth::user()->id;
 
             Cuti::create($validate);
@@ -252,10 +247,10 @@ class PegawaiController extends Controller
 
     // Perizinan
     public function daftarIzin(){
-        $izins = Perizinan::where('user_id', Auth::user()->id)->get();
+        $datas = Perizinan::where('user_id', Auth::user()->id)->get();
 
         return view('pegawai.cuti-perizinan.daftar-izin', [
-            'izins' => $izins,
+            'datas' => $datas,
         ]);
         // dd($datas);
     }
@@ -271,37 +266,35 @@ class PegawaiController extends Controller
             $validate = $request->validate([
                 'tanggal_mulai' => 'required|after: today',
                 'tanggal_berakhir' => 'required|after_or_equal:tanggal_mulai',
-                'alasan_perizinan' => 'required',
-                'bukti_perizinan' => 'required|mimes:jpeg,png,pdf|max:1024',
+                'alasan' => 'required',
+                'bukti' => 'required|mimes:jpeg,png,pdf|max:1024',
             ]);
         }else{
             $validate = $request->validate([
                 'tanggal_mulai' => 'required|after: today',
-                'alasan_perizinan' => 'required',
-                'bukti_perizinan' => 'required|mimes:jpeg,png,pdf|max:2048',
+                'alasan' => 'required',
+                'bukti' => 'required|mimes:jpeg,png,pdf|max:2048',
             ]);
 
             $validate['tanggal_berakhir'] = $validate['tanggal_mulai'];
         }
 
-        $validate['status_perizinan'] = "Menunggu Persetujuan";
+        $validate['status'] = "Menunggu Persetujuan";
         $validate['user_id'] = Auth::user()->id;
 
-        $extension_file = $request->file('bukti_perizinan')->extension();
-            
-        $nama_file = Auth::user()->pegawai->nama . '-' . now()->timestamp. '.' . $extension_file;
-
-        $validate['bukti_perizinan'] = $request->file('bukti_perizinan')->storeAs('Pegawai/perizinan', $nama_file);
+        $extension_file = $request->file('bukti')->extension();
+        $nama_file = Auth::user()->nama . '-' . now()->timestamp. '.' . $extension_file;
+        $validate['bukti'] = $request->file('bukti')->storeAs('Pegawai/perizinan', $nama_file);
 
         Perizinan::create($validate);
 
-        return redirect('pegawai/izin')->with('success', 'Proses Cuti sedang diproses, Mohon tunggu konfirmasi');
+        return redirect('pegawai/izin')->with('success', 'Proses Izin sedang diproses, Mohon tunggu konfirmasi');
     }
 
     public function buktiIzin($id){
         $data = Perizinan::find($id);
         
-        return Storage::response($data->bukti_perizinan);
+        return Storage::response($data->bukti);
     }
 
     public function resign(){
@@ -330,5 +323,45 @@ class PegawaiController extends Controller
         Resign::create($validate);
 
         return redirect('pegawai/resign');
+    }
+
+    // Kadep Daftar Izin
+    public function daftarPerizinan(){
+        // $datas = Perizinan::whereHas('user', function($query) {
+        //     $query->where('department', Auth::user()->department);
+        // })->paginate(10);
+
+        $datas = Perizinan::whereHas('user', function($query) {
+                $query->where('department', Auth::user()->department);
+            })->filter(request(['status','search']))->paginate(10);
+        
+        return view('pegawai.kadep.daftar-izin', [
+            'datas' => $datas,
+        ]);
+        // dd($datas);
+    }
+
+    // Kadep daftarCuti
+    public function daftarCutiKadep(){
+        $datas = Cuti::whereHas('user', function($query) {
+            $query->where('department', Auth::user()->department);
+        })->filter(request(['status','search']))->paginate(10);
+
+        return view('pegawai.kadep.daftar-cuti', [
+            'datas' => $datas,
+        ]);
+        // dd($datas);
+    }
+
+    // Kadep daftarResign
+    public function daftarResign(){
+        $datas = Resign::whereHas('user', function($query) {
+            $query->where('department', Auth::user()->department);
+        })->filter(request(['status','search']))->paginate(10);
+
+        return view('pegawai.kadep.daftar-resign', [
+            'datas' => $datas,
+        ]);
+        // dd($datas);
     }
 }

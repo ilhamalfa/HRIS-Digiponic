@@ -15,28 +15,79 @@ use function PHPUnit\Framework\fileExists;
 class SuperAdminController extends Controller
 {
     public function inputUser(){
-        return view('super-admin.pegawai.input-user-pegawai');
+        $provinces = Province::all();
+
+        return view('super-admin.pegawai.input-user-pegawai', [
+            'provinces' => $provinces
+        ]);
     }
 
     public function storeUser(Request $request){
+
+        // dd($request);
+        
         $validate = $request->validate([
-            'email' => 'required|unique:users|email',
             'nik' => 'required|unique:users|min:10|max:10',
+            'nama' => 'required',
+            'email' => 'required|unique:users|email',
+            'tanggal_lahir' => 'required|before:17 years ago',
+            'jenis_kelamin' => 'required',
+            'nomor_hp' => 'required',
+            'status_pernikahan' => 'required',
+            'department' => 'required',
+            'golongan' => 'required',
+            'province_id' => 'required',
+            'regency_id' => 'required',
+            'district_id' =>'required',
+            'village_id' => 'required',
+            'alamat' => 'required',
+            'foto' => 'required|image',
+            'signature' => 'required|image',
             'password' => 'required|min:8|confirmed'
         ]);
 
         $validate['role'] = 'Pegawai';
         $validate['jumlah_cuti'] = 14;
+        $validate['umur'] = Carbon::parse($request->tanggal_lahir)->age;
+
+        if($request->has('jumlah_anak')){
+            $validate['jumlah_anak'] = $request->jumlah_anak;
+        }else{
+            $validate['jumlah_anak'] = 0;
+        }
+
         $validate['password'] = Hash::make($request->password);
 
-        // dd($request);
+        $extension_foto = $request->file('foto')->extension();
+        $nama_foto = $request->nama . '-' . now()->timestamp. '.' . $extension_foto;
+        $validate['foto'] = $request->file('foto')->storeAs('Pegawai/foto', $nama_foto);
+
+        $extension_signature = $request->file('foto')->extension();
+        $extension_signature = $request->nama . '-' . now()->timestamp. '.' . $extension_signature;
+        $validate['digital_signature'] = $request->file('foto')->storeAs('Pegawai/signature', $nama_foto);
         
         User::create($validate);
 
         $data = User::where('email', $validate['email'])->first();
         $data->sendEmailVerificationNotification();
 
-        return redirect('home');
+        return redirect()->back();
+    }
+
+    public function deleteUser($id){
+        $data = User::find($id);
+
+        if(fileExists('storage/'. $data->foto)){
+            unlink('storage/'. $data->foto);
+        }
+
+        if(fileExists('storage/'. $data->digital_signature)){
+            unlink('storage/'. $data->digital_signature);
+        }
+
+        $data->delete();
+
+        return redirect()->back();
     }
 
     public function editPegawai($id){

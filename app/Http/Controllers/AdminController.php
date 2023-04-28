@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendConfirmMail;
 use App\Models\Lamaran;
 use App\Models\Lowongan;
 use App\Models\Cuti;
@@ -10,7 +11,10 @@ use App\Models\Pelamar;
 use App\Models\Perizinan;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
@@ -34,7 +38,7 @@ class AdminController extends Controller
     }
 
     public function dataUser(){
-        $datas = User::where('role', '!=', 'Pelamar')->paginate(10);
+        $datas = User::filter(request(['search']))->paginate(10);
 
         return view('super-admin.pegawai.daftar-data-user', [
             'datas' => $datas
@@ -53,23 +57,21 @@ class AdminController extends Controller
     }
 
     public function konfirmasiCuti($id, $konfirmasi){
-        $cuti = Cuti::find($id);
-        $user = User::find($cuti->user_id);
-        $jml_cuti = date_diff(date_create($cuti->tanggal_mulai), date_create($cuti->tanggal_berakhir))->days + 1;
+        $data = Cuti::find($id);
+        $user = User::find($data->user_id);
+        $jml_cuti = date_diff(date_create($data->tanggal_mulai), date_create($data->tanggal_berakhir))->days + 1;
 
-        // dd($jml_cuti);
-
-        if($konfirmasi == 'terima'){
-            $cuti->update([
-                'status_cuti' => 'Diterima'
+        if($konfirmasi == 'Accept'){
+            $data->update([
+                'status' => 'Accepted'
             ]);
 
             $user->update([
                 'jumlah_cuti' => $user->jumlah_cuti - $jml_cuti
             ]);
-        }else{
-            $cuti->update([
-                'status_cuti' => 'Ditolak'
+        }else if($konfirmasi == 'Decline'){
+            $data->update([
+                'status' => 'Declined'
             ]);
         }
 
@@ -94,17 +96,15 @@ class AdminController extends Controller
     }
 
     public function konfirmasiIzin($id, $konfirmasi){
-        $izin = Perizinan::find($id);
+        $data = Perizinan::find($id);
 
-        // dd($jml_izin);
-
-        if($konfirmasi == 'terima'){
-            $izin->update([
-                'status_perizinan' => 'Diterima'
+        if($konfirmasi == 'Accept'){
+            $data->update([
+                'status' => 'Accepted'
             ]);
-        }else{
-            $izin->update([
-                'status_perizinan' => 'Ditolak'
+        }else if($konfirmasi == 'Decline'){
+            $data->update([
+                'status' => 'Declined'
             ]);
         }
 
@@ -113,7 +113,7 @@ class AdminController extends Controller
 
     // Lowongan
     public function daftarLowongan(){
-        $datas = Lowongan::all();
+        $datas = Lowongan::latest()->filter(request(['search']))->paginate(10);
         
         return view('admin.lowongan.daftar-lowongan', [
             'datas' => $datas
@@ -130,14 +130,9 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-    public function detailPerLowongan($id){
-        $data = Lowongan::findOrFail($id);
-        return view('admin.lowongan.detail-lowongan', compact('data'));
-    }
-
     public function detailLowongan($id){
         $data = Lowongan::find($id);
-        $datas = Lamaran::where('lowongan_id', $id)->get();
+        $datas = Pelamar::where('lowongan_id', $id)->latest()->filter(request(['search', 'status']))->paginate(10);;
 
         // dd($datas);
         
@@ -181,22 +176,42 @@ class AdminController extends Controller
 
     public function ubahStatus($id, $status){
         // dd([$id, $status]);
-        $data = Lamaran::find($id);
+        $data = Pelamar::find($id);
+        // dd($data->lowongan->posisi);
 
         if($status == 'Menunggu'){
             $status = 'Wawancara';
+            $subject = 'Lanjut Tahap Wawancara';
+            $body = 'Selamat, untuk sdr '. $data->nama .', Anda berhasil Lolos ke tahap selanjutnya. Dimohon untuk menunggu email selanjutnya yang berisikan link untuk melakukan tahap wawancara. Jika sdr ada pertanyaan, dapat menghubungi Admin atau dapat mengirim email ke HR@Techsolution.com, Terima kasih.';
         }else if($status == 'Wawancara'){
             $status = 'Psikotest';
+            $subject = 'Lanjut Tahap Psikotest';
+            $body = 'Selamat, untuk sdr '. $data->nama .', Anda berhasil Lolos ke tahap selanjutnya. Dimohon untuk menunggu email selanjutnya yang berisikan link untuk melakukan tahap psikotest. Jika sdr ada pertanyaan, dapat menghubungi Admin atau dapat mengirim email ke HR@Techsolution.com, Terima kasih.';
         }else if($status == 'Psikotest'){
             $status = 'Offering';
+            $subject = 'Lanjut Tahap Offering';
+            $body = 'Selamat, untuk sdr '. $data->nama .', Anda berhasil Lolos ke tahap selanjutnya. Dimohon untuk menunggu email selanjutnya mengenai hasil dari proses rekruitment ini. Jika sdr ada pertanyaan, dapat menghubungi Admin atau dapat mengirim email ke HR@Techsolution.com, Terima kasih.';
         }else if($status == 'Offering'){
             $status = 'Diterima';
+            $subject = 'Selamat Telah Diterima';
+            $body = 'Selamat, untuk sdr '. $data->nama .', Anda berhasil Diterima pada posisi '. $data->lowongan->posisi .'. Dimohon untuk menunggu email selanjutnya yang berisikan tanggal masuk dan daftar berkas-berkas yang wajib dibawa. Jika sdr ada pertanyaan, dapat menghubungi Admin atau dapat mengirim email ke HR@Techsolution.com, Terima kasih.';
         }else{
             $status = 'Ditolak';
+            $subject = 'Lamaran Ditolak';
+            $body = 'Terimakasih untuk sdr '. $data->nama .' atas minatnya untuk mengikuti proses seleksi ini, kami mohon maaf sebesar-besarnya dikarenakan sdr sudah tidak dapat mengikuti, kami akan menunggu sdr untuk mengikuti seleksi pada masa mendatang';
         }
-        $data->update([
-            'status' => $status
-        ]);
+
+        $maildata = [
+            'subject' => $subject,
+            'greeting' => 'Congratulation!',
+            'body' => $body
+        ];
+
+        Mail::to($data->email)->send(new SendConfirmMail($maildata));
+
+        // $data->update([
+        //     'status' => $status
+        // ]);
 
         return redirect()->back();
     }

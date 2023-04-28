@@ -47,6 +47,55 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     {{-- Font Awesome End --}}
 
+    
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+
+    <style type="text/css">
+        img {
+            display: block;
+            max-width: 100%;
+        }
+        .preview {
+            overflow: hidden;
+            width: 160px; 
+            height: 160px;
+            margin: 10px;
+            border: 1px solid red;
+        }
+        .modal-lg{
+            max-width: 1000px !important;
+        }
+
+        .signature-pad {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width:400px;
+                height:200px;
+            }
+    </style>
+
+    <style>
+        .wrapper {
+        position: relative;
+        width: 400px;
+        height: 200px;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .signature-pad {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width:400px;
+        height:200px;
+        background-color: white;
+    }
+    </style>
+
 </head>
 
 <body>
@@ -71,6 +120,16 @@
 
                 {{-- Sidebar Profile Box Start --}}
                 <li class="nav-item profile">
+                    @guest
+                        <div class="profile-des">
+                            <a class="nav-link" href="{{ route('login') }}">
+                                <span class="menu-icon">
+                                    <i class="fa-solid fa-right-to-bracket"></i>
+                                </span>
+                                <span class="menu-title">Login</span>
+                            </a>
+                        </div>
+                    @else
                     <div class="profile-desc">
 
                         {{-- Sidebar Profile Image & Name Start --}}
@@ -101,6 +160,16 @@
                         {{-- Sidebar Profile 3 Dots Vertical Menu Start --}}
                         <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list"
                             aria-labelledby="profile-dropdown">
+                            <a href="{{ url('/profile/edit-foto-pegawai') }}" class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <div class="preview-icon bg-dark rounded-circle">
+                                        <i class="mdi mdi-account-edit text-warning"></i>
+                                    </div>
+                                </div>
+                                <div class="preview-item-content">
+                                    <p class="preview-subject ellipsis mb-1 text-small">Change User's Photo</p>
+                                </div>
+                            </a>
                             <a href="{{ url('/Account/account-setting') }}" class="dropdown-item preview-item">
                                 <div class="preview-thumbnail">
                                     <div class="preview-icon bg-dark rounded-circle">
@@ -121,11 +190,23 @@
                                 <div class="preview-item-content">
                                     <p class="preview-subject ellipsis mb-1 text-small">Change User Data</p>
                                 </div>
-                            </a>    
+                            </a> 
+                            <a href="{{ url('/profile/signature') }}" class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <div class="preview-icon bg-dark rounded-circle">
+                                        <i class="mdi mdi-check-circle-outline text-danger"></i>
+                                    </div>
+                                </div>
+                                <div class="preview-item-content">
+                                    <p class="preview-subject ellipsis mb-1 text-small">Digital Signature</p>
+                                </div>
+                            </a>   
                         </div>
                         {{-- Sidebar Profile 3 Dots Vertical Menu End --}}
 
                     </div>
+                    @endguest
+
                 </li>
                 {{-- Sidebar Profile Box End --}}
 
@@ -144,85 +225,89 @@
                         <span class="menu-title">Dashboard</span>
                     </a>
                 </li>
-                @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'SuperAdmin')
-                <li class="nav-item menu-items">
-                    <a class="nav-link" href="{{ url('/data-pegawai') }}">
-                        <span class="menu-icon">
-                            <i class="mdi mdi-account-multiple"></i>
-                        </span>
-                        <span class="menu-title">Employees Datas</span>
-                    </a>
-                </li>
-                <li class="nav-item menu-items">
-                    <a class="nav-link" href="{{ url('/data-user') }}">
-                        <span class="menu-icon">
-                            <i class="mdi mdi-account-multiple-outline"></i>
-                        </span>
-                        <span class="menu-title">Users Datas</span>
-                    </a>
-                </li>
-                <li class="nav-item menu-items">
-                    <a class="nav-link" href="{{ url('admin/daftar-cuti') }}">
-                        <span class="menu-icon">
-                            <i class="mdi mdi-note-multiple"></i>
-                        </span>
-                        <span class="menu-title">Daftar Cuti</span>
-                    </a>
-                </li>
-                <li class="nav-item menu-items">
-                    <a class="nav-link" href="{{ url('admin/izin') }}">
-                        <span class="menu-icon">
-                            <i class="mdi mdi-receipt"></i>
-                        </span>
-                        <span class="menu-title">Days Off</span>
-                    </a>
-                </li>
-                <li class="nav-item menu-items">
-                    <a class="nav-link" href="{{ url('data-lowongan/') }}">
-                        <span class="menu-icon">
-                            <i class="mdi mdi-file-multiple"></i>
-                        </span>
-                        <span class="menu-title">lowongan</span>
-                    </a>
-                </li>
-                @endif
-                @if (Auth::user()->role != 'Pelamar')
-                <li class="nav-item nav-category">
-                    <span class="nav-link">Employee Navigation</span>
-                </li>
-                <li class="nav-item menu-items">
-                    <a class="nav-link" href="{{ url('#') }}">
-                        <span class="menu-icon">
-                            <i class="mdi mdi-file-multiple"></i>
-                        </span>
-                        <span class="menu-title">Absensi</span>
-                    </a>
-                </li>
-                <li class="nav-item menu-items">
-                    <a class="nav-link" href="{{ url('pegawai/cuti') }}">
-                        <span class="menu-icon">
-                            <i class="mdi mdi-file-multiple"></i>
-                        </span>
-                        <span class="menu-title">cuti</span>
-                    </a>
-                </li>
-                <li class="nav-item menu-items">
-                    <a class="nav-link" href="{{ url('pegawai/izin') }}">
-                        <span class="menu-icon">
-                            <i class="mdi mdi-file-multiple"></i>
-                        </span>
-                        <span class="menu-title">Izin</span>
-                    </a>
-                </li>
-                <li class="nav-item menu-items">
-                    <a class="nav-link" href="{{ url('pegawai/resign') }}">
-                        <span class="menu-icon">
-                            <i class="mdi mdi-file-multiple"></i>
-                        </span>
-                        <span class="menu-title">Resign</span>
-                    </a>
-                </li>
-                @endif
+                @guest
+                    
+                @else
+                    @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'SuperAdmin')
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('/data-pegawai') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-account-multiple"></i>
+                                </span>
+                                <span class="menu-title">Employees Datas</span>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('/data-user') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-account-multiple-outline"></i>
+                                </span>
+                                <span class="menu-title">Users Datas</span>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('admin/daftar-cuti') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-note-multiple"></i>
+                                </span>
+                                <span class="menu-title">Daftar Cuti</span>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('admin/izin') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-receipt"></i>
+                                </span>
+                                <span class="menu-title">Days Off</span>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('data-lowongan/') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-file-multiple"></i>
+                                </span>
+                                <span class="menu-title">lowongan</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if (Auth::user()->role != 'Pelamar')
+                        <li class="nav-item nav-category">
+                            <span class="nav-link">Employee Navigation</span>
+                        </li>
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('#') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-file-multiple"></i>
+                                </span>
+                                <span class="menu-title">Absensi</span>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('pegawai/cuti') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-file-multiple"></i>
+                                </span>
+                                <span class="menu-title">cuti</span>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('pegawai/izin') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-file-multiple"></i>
+                                </span>
+                                <span class="menu-title">Izin</span>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('pegawai/resign') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-file-multiple"></i>
+                                </span>
+                                <span class="menu-title">Resign</span>
+                            </a>
+                        </li>
+                    @endif
+                @endguest
                 {{-- Sidebar Dashboard End --}}
 
             </ul>
@@ -345,12 +430,16 @@
                             <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
                                 <div class="navbar-profile">
                                         {{-- @foreach ($user as $user) --}}
+                                        @guest
+                                            <p class="mb-0 ms-2 d-none d-sm-block navbar-profile-name text-white">Login</p>
+                                        @else
                                         <img class="img-xs rounded-circle"
                                         src="{{ asset('storage/' . Auth::user()->foto) }}" alt="">
                                         <p class="mb-0 d-none d-sm-block navbar-profile-name">
                                             {{ Auth::user()->nama }}
                                         <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                                     {{-- @endforeach --}}
+                                        @endguest
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
@@ -465,6 +554,98 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script src="{{ asset('js/alamat.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
+
+    {{-- Digital Signature --}}
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>
+    <script>
+        var $modal = $('#modal');
+        var image = document.getElementById('image');
+        var cropper;
+        
+        $("body").on("change", ".image", function(e){
+            var files = e.target.files;
+            var done = function (url) {
+            image.src = url;
+            $modal.modal('show');
+            };
+            var reader;
+            var file;
+            var url;
+            if (files && files.length > 0) {
+            file = files[0];
+            if (URL) {
+                done(URL.createObjectURL(file));
+            } else if (FileReader) {
+                reader = new FileReader();
+                reader.onload = function (e) {
+                done(reader.result);
+                };
+                reader.readAsDataURL(file);
+            }
+            }
+        });
+        $modal.on('shown.bs.modal', function () {
+            cropper = new Cropper(image, {
+            aspectRatio: 1,
+            viewMode: 3,
+            preview: '.preview'
+            });
+        }).on('hidden.bs.modal', function () {
+        cropper.destroy();
+        cropper = null;
+        });
+        $("#crop").click(function(){
+            canvas = cropper.getCroppedCanvas({
+                width: 160,
+                height: 160,
+            });
+            canvas.toBlob(function(blob) {
+                url = URL.createObjectURL(blob);
+                var reader = new FileReader();
+                reader.readAsDataURL(blob); 
+                reader.onloadend = function() {
+                    var base64data = reader.result; 
+                    $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        url: "crop-image-upload",
+                        data: {'_token': $('meta[name="_token"]').attr('content'), 'image': base64data},
+                        success: function(data){
+                            console.log(data);
+                            $modal.modal('hide');
+                            alert("Crop image successfully uploaded");
+                        }
+                    });
+                }
+            });
+        })
+    </script>
+
+    <script>
+        // Signature Pad
+        var signaturePad = new SignaturePad(document.getElementById('signature-pad'), {
+        backgroundColor: 'rgba(255, 255, 255, 0)',
+        penColor: 'rgb(0, 0, 0)'
+        });
+        var saveButton = document.getElementById('save');
+        var cancelButton = document.getElementById('clear');
+
+        $('#save').click(function (e) { 
+            document.getElementById("signature").value = signaturePad.toDataURL();
+
+            document.getElementById("myForm").submit();
+        });
+
+
+        cancelButton.addEventListener('click', function (event) {
+        signaturePad.clear();
+        });
+
+        // End Signature Pad
+    </script>
 
 </body>
 

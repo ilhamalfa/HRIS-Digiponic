@@ -78,9 +78,7 @@ class User extends Authenticatable implements MustVerifyEmail
     $query->when($filters['search'] ?? false, function ($query, $search) {
         return $query->where(function ($query) use ($search) {
             $query->where('nik', 'like', '%' . $search . '%')
-                ->orwhereHas('pegawai', function($query) use ($search){
-                    $query->where('nama', 'like', '%' . $search . '%');
-                });
+            ->orwhere('nama', 'like', '%' . $search . '%');
             });
         });
     }

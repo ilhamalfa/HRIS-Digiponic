@@ -72,10 +72,7 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin'])->group(functio
 
     Route::post('/data-user/store-user', [SuperAdminController::class, 'storeUser']);
 
-    // Data Pegawai
-    Route::get('/pegawai/edit-pegawai/{id}', [SuperAdminController::class, 'editPegawai']);
-
-    Route::post('/pegawai/update-pegawai/{id}', [SuperAdminController::class, 'updatePegawai']);
+    Route::get('/data-user/delete-user/{id}', [SuperAdminController::class, 'deleteUser']);
 
     // Resign
     Route::get('/resign/daftar-resign', [SuperAdminController::class, 'resign']);
@@ -99,14 +96,10 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin'])->group(f
     // Cuti
     Route::get('admin/daftar-cuti', [AdminController::class, 'daftarCuti']);
 
-    Route::get('admin/cuti/{id}/{konfirmasi}', [AdminController::class, 'konfirmasiCuti']);
-
     // Izin
     Route::get('admin/izin', [AdminController::class, 'daftarIzin']);
 
     Route::get('admin/izin/bukti/{id}', [AdminController::class, 'buktiIzin']);
-
-    Route::get('admin/izin/{id}/{konfirmasi}', [AdminController::class, 'konfirmasiIzin']);
 
     // Data Lowongan
     Route::get('data-lowongan/', [AdminController::class, 'daftarLowongan']);
@@ -138,6 +131,11 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin,Pegawai'])-
     Route::get('/profile/edit-data-pegawai', [PegawaiController::class, 'editPegawai']);
 
     Route::post('/profile/edit-data-pegawai/update', [PegawaiController::class, 'updatePegawai']);
+
+    // Update Foto Pegawai
+    Route::get('/profile/signature', [PegawaiController::class, 'signature']);
+
+    Route::post('profile/save-signature',  [PegawaiController::class, 'saveSignature']);
 
     // Input data pegawai
     Route::get('/pegawai/input-pegawai', [PegawaiController::class, 'inputPegawai']);
@@ -174,6 +172,18 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin,Pegawai,Pel
     Route::get('/Account/account-setting', [PegawaiController::class, 'editUser']);
 
     Route::post('/Account/account-setting/update', [PegawaiController::class, 'updateUser']);    
+});
+
+Route::middleware(['auth', 'verified', 'golongan:Manager/Kadep'])->group(function () {
+    Route::get('kadep/daftar-perizinan', [PegawaiController::class, 'daftarPerizinan']);
+    
+    Route::get('kadep/daftar-perizinan/{id}/{konfirmasi}', [AdminController::class, 'konfirmasiIzin']);
+
+    Route::get('kadep/daftar-cuti', [PegawaiController::class, 'daftarCutiKadep']);
+
+    Route::get('kadep/daftar-cuti/{id}/{konfirmasi}', [AdminController::class, 'konfirmasiCuti']);
+
+    Route::get('kadep/daftar-resign', [PegawaiController::class, 'daftarResign']);
 });
 
 // Indoregion Start
