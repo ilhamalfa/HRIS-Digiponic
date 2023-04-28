@@ -132,6 +132,11 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin,Pegawai'])-
 
     Route::post('/profile/edit-data-pegawai/update', [PegawaiController::class, 'updatePegawai']);
 
+    // Update Foto Pegawai
+    Route::get('/profile/signature', [PegawaiController::class, 'signature']);
+
+    Route::post('profile/save-signature',  [PegawaiController::class, 'saveSignature']);
+
     // Input data pegawai
     Route::get('/pegawai/input-pegawai', [PegawaiController::class, 'inputPegawai']);
 

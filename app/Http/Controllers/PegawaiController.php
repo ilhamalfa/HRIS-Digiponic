@@ -71,7 +71,7 @@ class PegawaiController extends Controller
     }
 
     public function editPegawai(){
-        $data = Pegawai::where('user_id', Auth::user()->id)->first();
+        $data = Auth::user();
 
         $provinces = Province::all();
         $regency = Regency::find($data->regency_id);
@@ -90,71 +90,64 @@ class PegawaiController extends Controller
     }
 
     public function updatePegawai(Request $request){
-        $data = Pegawai::find(Auth::user()->pegawai->id);
-        // dd($data);
+        $data = User::find(Auth::user()->id);
+        // dd($request);
 
-        if(!$request->has('foto')){
-            $validate = $request->validate([
-                'nama' => 'required',
-                'tanggal_lahir' => 'required|before:17 years ago',
-                'jenis_kelamin' => 'required',
-                'nomor_hp' => 'required',
-                'status_pernikahan' => 'required',
-                'province_id' => 'required',
-                'regency_id' => 'required',
-                'district_id' =>'required',
-                'village_id' => 'required',
-                'alamat' => 'required',
-            ]);
+        $validate = $request->validate([
+            'nama' => 'required',
+            'tanggal_lahir' => 'required|before:17 years ago',
+            'jenis_kelamin' => 'required',
+            'nomor_hp' => 'required',
+            'status_pernikahan' => 'required',
+            'province_id' => 'required',
+            'regency_id' => 'required',
+            'district_id' =>'required',
+            'village_id' => 'required',
+            'alamat' => 'required',
+        ]);
 
-            $validate['umur'] = Carbon::parse($request->tanggal_lahir)->age;
+        $validate['umur'] = Carbon::parse($request->tanggal_lahir)->age;
 
-            if($request->has('jumlah_anak')){
-                $validate['jumlah_anak'] = $request->jumlah_anak;
-            }else{
-                $validate['jumlah_anak'] = 0;
-            }
-
-            // dd($validate);
+        if($request->has('jumlah_anak')){
+            $validate['jumlah_anak'] = $request->jumlah_anak;
         }else{
-            $validate = $request->validate([
-                'nama' => 'required',
-                'tanggal_lahir' => 'required|before:17 years ago',
-                'jenis_kelamin' => 'required',
-                'nomor_hp' => 'required',
-                'status_pernikahan' => 'required',
-                'department' => 'required',
-                'golongan' => 'required',
-                'province_id' => 'required',
-                'regency_id' => 'required',
-                'district_id' =>'required',
-                'village_id' => 'required',
-                'alamat' => 'required',
-                'foto' => 'required|image',
-            ]);
-    
-            $validate['umur'] = Carbon::parse($request->tanggal_lahir)->age;
-
-            if($request->has('jumlah_anak')){
-                $validate['jumlah_anak'] = $request->jumlah_anak;
-            }else{
-                $validate['jumlah_anak'] = 0;
-            }
-
-            if(fileExists('storage/'. $data->foto)){
-                unlink('storage/'. $data->foto);
-            }
-
-            $extension_foto = $request->file('foto')->extension();
-                
-            $nama_foto = $request->nama . '-' . now()->timestamp. '.' . $extension_foto;
-    
-            $validate['foto'] = $request->file('foto')->storeAs('Pegawai/foto', $nama_foto);
+            $validate['jumlah_anak'] = 0;
         }
+
+        // dd($validate);
 
         $data->update($validate);
 
         return redirect()->back();
+    }
+
+    public function signature(){
+        return view('pegawai.data-pegawai.user-signature');
+    }
+
+    public function saveSignature(Request $request){
+        $user = User::find(Auth::user()->id);
+
+        $data_uri = $request->signature;
+        $encoded_image = explode(",", $data_uri)[1];
+        $decoded_image = base64_decode($encoded_image);
+        $nama_file = Auth::user()->nama . '-' . now()->timestamp . ".png";
+        // Error
+        file_put_contents(__DIR__ . DIRECTORY_SEPARATOR . "Pegawai\signature". $nama_file, $decoded_image);
+
+        $user->update([
+            'digital_signature' => 'Pegawai/signature/'.$nama_file
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function editFoto(){
+        $data = Auth::user();
+
+        return view('pegawai.data-pegawai.update-foto-pegawai', [
+            'data' => $data,
+        ]);
     }
 
     public function storePegawai(Request $request){

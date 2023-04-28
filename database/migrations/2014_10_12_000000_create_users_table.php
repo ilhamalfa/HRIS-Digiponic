@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('department');
             $table->string('golongan');
             $table->string('foto');
-            $table->string('digital_signature');
+            $table->string('digital_signature')->nullable();
             $table->char('province_id', 2);
             $table->foreign('province_id')
                 ->references('id')

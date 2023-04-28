@@ -47,6 +47,34 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     {{-- Font Awesome End --}}
 
+    
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+
+    <style type="text/css">
+        img {
+            display: block;
+            max-width: 100%;
+        }
+        .preview {
+            overflow: hidden;
+            width: 160px; 
+            height: 160px;
+            margin: 10px;
+            border: 1px solid red;
+        }
+        .modal-lg{
+            max-width: 1000px !important;
+        }
+
+        .signature-pad {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width:400px;
+                height:200px;
+            }
+    </style>
+
     <style>
         .wrapper {
         position: relative;
@@ -132,6 +160,16 @@
                         {{-- Sidebar Profile 3 Dots Vertical Menu Start --}}
                         <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list"
                             aria-labelledby="profile-dropdown">
+                            <a href="{{ url('/profile/edit-foto-pegawai') }}" class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <div class="preview-icon bg-dark rounded-circle">
+                                        <i class="mdi mdi-account-edit text-warning"></i>
+                                    </div>
+                                </div>
+                                <div class="preview-item-content">
+                                    <p class="preview-subject ellipsis mb-1 text-small">Change User's Photo</p>
+                                </div>
+                            </a>
                             <a href="{{ url('/Account/account-setting') }}" class="dropdown-item preview-item">
                                 <div class="preview-thumbnail">
                                     <div class="preview-icon bg-dark rounded-circle">
@@ -152,7 +190,17 @@
                                 <div class="preview-item-content">
                                     <p class="preview-subject ellipsis mb-1 text-small">Change User Data</p>
                                 </div>
-                            </a>    
+                            </a> 
+                            <a href="{{ url('/profile/signature') }}" class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <div class="preview-icon bg-dark rounded-circle">
+                                        <i class="mdi mdi-check-circle-outline text-danger"></i>
+                                    </div>
+                                </div>
+                                <div class="preview-item-content">
+                                    <p class="preview-subject ellipsis mb-1 text-small">Digital Signature</p>
+                                </div>
+                            </a>   
                         </div>
                         {{-- Sidebar Profile 3 Dots Vertical Menu End --}}
 
@@ -509,6 +557,95 @@
 
     {{-- Digital Signature --}}
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>
+    <script>
+        var $modal = $('#modal');
+        var image = document.getElementById('image');
+        var cropper;
+        
+        $("body").on("change", ".image", function(e){
+            var files = e.target.files;
+            var done = function (url) {
+            image.src = url;
+            $modal.modal('show');
+            };
+            var reader;
+            var file;
+            var url;
+            if (files && files.length > 0) {
+            file = files[0];
+            if (URL) {
+                done(URL.createObjectURL(file));
+            } else if (FileReader) {
+                reader = new FileReader();
+                reader.onload = function (e) {
+                done(reader.result);
+                };
+                reader.readAsDataURL(file);
+            }
+            }
+        });
+        $modal.on('shown.bs.modal', function () {
+            cropper = new Cropper(image, {
+            aspectRatio: 1,
+            viewMode: 3,
+            preview: '.preview'
+            });
+        }).on('hidden.bs.modal', function () {
+        cropper.destroy();
+        cropper = null;
+        });
+        $("#crop").click(function(){
+            canvas = cropper.getCroppedCanvas({
+                width: 160,
+                height: 160,
+            });
+            canvas.toBlob(function(blob) {
+                url = URL.createObjectURL(blob);
+                var reader = new FileReader();
+                reader.readAsDataURL(blob); 
+                reader.onloadend = function() {
+                    var base64data = reader.result; 
+                    $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        url: "crop-image-upload",
+                        data: {'_token': $('meta[name="_token"]').attr('content'), 'image': base64data},
+                        success: function(data){
+                            console.log(data);
+                            $modal.modal('hide');
+                            alert("Crop image successfully uploaded");
+                        }
+                    });
+                }
+            });
+        })
+    </script>
+
+    <script>
+        // Signature Pad
+        var signaturePad = new SignaturePad(document.getElementById('signature-pad'), {
+        backgroundColor: 'rgba(255, 255, 255, 0)',
+        penColor: 'rgb(0, 0, 0)'
+        });
+        var saveButton = document.getElementById('save');
+        var cancelButton = document.getElementById('clear');
+
+        $('#save').click(function (e) { 
+            document.getElementById("signature").value = signaturePad.toDataURL();
+
+            document.getElementById("myForm").submit();
+        });
+
+
+        cancelButton.addEventListener('click', function (event) {
+        signaturePad.clear();
+        });
+
+        // End Signature Pad
+    </script>
 
 </body>
 
