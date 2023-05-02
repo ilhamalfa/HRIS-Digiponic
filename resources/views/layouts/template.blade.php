@@ -230,14 +230,6 @@
                 @else
                     @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'SuperAdmin')
                         <li class="nav-item menu-items">
-                            <a class="nav-link" href="{{ url('/data-pegawai') }}">
-                                <span class="menu-icon">
-                                    <i class="mdi mdi-account-multiple"></i>
-                                </span>
-                                <span class="menu-title">Employees Datas</span>
-                            </a>
-                        </li>
-                        <li class="nav-item menu-items">
                             <a class="nav-link" href="{{ url('/data-user') }}">
                                 <span class="menu-icon">
                                     <i class="mdi mdi-account-multiple-outline"></i>

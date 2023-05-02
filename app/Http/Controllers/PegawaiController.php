@@ -134,14 +134,13 @@ class PegawaiController extends Controller
         $decoded_image = base64_decode($encoded_image);
         $nama_file = "Pegawai/signature/". Auth::user()->nama . '-' . now()->timestamp . ".png";
 
-        // Error
-        // file_put_contents($nama_file, $decoded_image);
-        Storage::put($nama_file,$decoded_image);
-
         if(FileExists('storage/' . $user->digital_signature)){
             // dd('Exist');
             unlink('storage/' . $user->digital_signature);
         }
+        // Error
+        // file_put_contents($nama_file, $decoded_image);
+        Storage::put($nama_file,$decoded_image);
 
         $user->update([
             'digital_signature' => $nama_file
@@ -221,7 +220,7 @@ class PegawaiController extends Controller
 
     // Cuti
     public function daftarCuti(){
-        $datas = Cuti::where('user_id', Auth::user()->id)->get();
+        $datas = Cuti::where('user_id_1', Auth::user()->id)->get();
 
         return view('pegawai.cuti-perizinan.daftar-cuti', [
             'datas' => $datas,
@@ -259,7 +258,7 @@ class PegawaiController extends Controller
 
         if($jml_cuti <= Auth::user()->jumlah_cuti){
             $validate['status'] = "Menunggu Persetujuan";
-            $validate['user_id'] = Auth::user()->id;
+            $validate['user_id_1'] = Auth::user()->id;
 
             Cuti::create($validate);
 
@@ -304,7 +303,7 @@ class PegawaiController extends Controller
         }
 
         $validate['status'] = "Menunggu Persetujuan";
-        $validate['user_id'] = Auth::user()->id;
+        $validate['user_id_1'] = Auth::user()->id;
 
         $extension_file = $request->file('bukti')->extension();
         $nama_file = Auth::user()->nama . '-' . now()->timestamp. '.' . $extension_file;
@@ -342,7 +341,7 @@ class PegawaiController extends Controller
         ]);
 
         $validate['status_resign'] = 'Menunggu Persetujuan';
-        $validate['user_id'] = Auth::user()->id;
+        $validate['user_id_1'] = Auth::user()->id;
 
         Resign::create($validate);
 
@@ -367,7 +366,7 @@ class PegawaiController extends Controller
 
     // Kadep daftarCuti
     public function daftarCutiKadep(){
-        $datas = Cuti::whereHas('user', function($query) {
+        $datas = Cuti::whereHas('user1', function($query) {
             $query->where('department', Auth::user()->department);
         })->filter(request(['status','search']))->paginate(10);
 
@@ -387,5 +386,14 @@ class PegawaiController extends Controller
             'datas' => $datas,
         ]);
         // dd($datas);
+    }
+
+    // SK Cuti
+    public function skCuti($id){
+        $data = Cuti::find($id);
+
+        return view('pegawai.cuti-perizinan.surat.sk-cuti', [
+            'data' => $data,
+        ]);
     }
 }
