@@ -95,7 +95,7 @@
                                 <div class="phone-number-box">
                                     <label for="phoneNumber">Phone Number :</label>
                                     <input class="vacancy-input" type="number" id="phoneNumber" name="nomor_hp"
-                                        placeholder="Ex: +62....." required autocomplete="off">
+                                        placeholder="Ex: 08...." required autocomplete="off">
                                 </div>
                                 <div class="cv-box">
                                     <label for="cv">Upload Your CV</label>
