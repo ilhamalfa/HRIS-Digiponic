@@ -2,13 +2,27 @@
 <html lang="en">
 
 <head>
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@yield('title')</title>
 
     {{-- Header Logo Start --}}
-    {{-- <link rel="icon" href="{{ asset('logo/brand-logo.png') }}"> --}}
+    <link rel="icon" href="{{ asset('logo/brand-logo-red.webp') }}">
     {{-- Header Logo End --}}
+
+    {{-- Google Fonts Start --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,700;1,300&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    {{-- Google Fonts End --}}
 
     {{-- Plugin CSS Start --}}
     <link rel="stylesheet" href="{{ asset('template/assets/vendors/mdi/css/materialdesignicons.min.css') }}">
@@ -23,6 +37,65 @@
     <link rel="stylesheet" href="{{ asset('template/assets/css/style.css') }}">
     {{-- Layout CSS End --}}
 
+    {{-- Animations CSS Start --}}
+    <link rel="stylesheet" href="{{ asset('template/assets/css/animations/style.css') }}">
+    {{-- Animations CSS End --}}
+
+    {{-- Font Awesome Start --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {{-- Font Awesome End --}}
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+
+    <style type="text/css">
+        img {
+            display: block;
+            max-width: 100%;
+        }
+        .preview {
+            overflow: hidden;
+            width: 160px; 
+            height: 160px;
+            margin: 10px;
+            border: 1px solid red;
+        }
+        .modal-lg{
+            max-width: 1000px !important;
+        }
+
+        .signature-pad {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width:400px;
+                height:200px;
+            }
+    </style>
+
+    <style>
+        .wrapper {
+        position: relative;
+        width: 400px;
+        height: 200px;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .signature-pad {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width:400px;
+        height:200px;
+        background-color: white;
+    }
+    </style>
+
 </head>
 
 <body>
@@ -33,11 +106,11 @@
 
             {{-- Sidebar Brand Logo Start --}}
             <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-                <a class="sidebar-brand brand-logo" href="index.html">
-                    <img src="{{ asset('template/assets/images/logo.svg') }}" alt="Brand Brand Logo" />
+                <a class="sidebar-brand brand-logo text-decoration-none" href="{{ url('/about') }}">
+                    <span class="secondary-color-1-text">TECHSolution</span>
                 </a>
                 <a class="sidebar-brand brand-logo-mini" href="index.html">
-                    <img src="{{ asset('template/assets/images/logo-mini.svg') }}" alt="Brand Logo" />
+                    <img src="{{ asset('logo/brand-logo-white.webp') }}" alt="Brand Logo" />
                 </a>
             </div>
             {{-- Sidebar Brand Logo End --}}
@@ -47,18 +120,33 @@
 
                 {{-- Sidebar Profile Box Start --}}
                 <li class="nav-item profile">
+                    @guest
+                        <div class="profile-des">
+                            <a class="nav-link" href="{{ route('login') }}">
+                                <span class="menu-icon">
+                                    <i class="fa-solid fa-right-to-bracket"></i>
+                                </span>
+                                <span class="menu-title">Login</span>
+                            </a>
+                        </div>
+                    @else
                     <div class="profile-desc">
 
                         {{-- Sidebar Profile Image & Name Start --}}
                         <div class="profile-pic">
                             <div class="count-indicator">
-                                <img class="img-xs rounded-circle "
-                                    src="{{ asset('template/assets/images/faces/face15.jpg') }}"
-                                    alt="Your Profile Image">
+                                    <img class="img-xs rounded-circle"
+                                    src="{{ asset('storage/' . Auth::user()->foto) }}" alt="">
                             </div>
                             <div class="profile-name">
-                                <h5 class="mb-0 font-weight-normal">Henry Klein</h5>
-                                <span>Employee</span>
+                                    <h5 class="mb-0 font-weight-normal">
+                                        {{ Auth::user()->nama }}
+                                    </h5>
+                                    <span>
+                                        {{ Auth::user()->department }}
+                                        <br>
+                                        {{ Auth::user()->golongan }}
+                                    </span>
                             </div>
                         </div>
                         {{-- Sidebar Profile Image & Name End --}}
@@ -72,7 +160,17 @@
                         {{-- Sidebar Profile 3 Dots Vertical Menu Start --}}
                         <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list"
                             aria-labelledby="profile-dropdown">
-                            <a href="#" class="dropdown-item preview-item">
+                            <a href="{{ url('/profile/photo-profile') }}" class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <div class="preview-icon bg-dark rounded-circle">
+                                        <i class="mdi mdi-account-edit text-warning"></i>
+                                    </div>
+                                </div>
+                                <div class="preview-item-content">
+                                    <p class="preview-subject ellipsis mb-1 text-small">Change User's Photo</p>
+                                </div>
+                            </a>
+                            <a href="{{ url('/Account/account-setting') }}" class="dropdown-item preview-item">
                                 <div class="preview-thumbnail">
                                     <div class="preview-icon bg-dark rounded-circle">
                                         <i class="mdi mdi-settings text-primary"></i>
@@ -83,31 +181,32 @@
                                 </div>
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item preview-item">
+                            <a href="{{ url('/profile/edit-data-pegawai') }}" class="dropdown-item preview-item">
                                 <div class="preview-thumbnail">
                                     <div class="preview-icon bg-dark rounded-circle">
-                                        <i class="mdi mdi-onepassword  text-info"></i>
+                                        <i class="mdi mdi-clipboard-account  text-info"></i>
                                     </div>
                                 </div>
                                 <div class="preview-item-content">
-                                    <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
+                                    <p class="preview-subject ellipsis mb-1 text-small">Change User Data</p>
                                 </div>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item preview-item">
+                            </a> 
+                            <a href="{{ url('/profile/signature') }}" class="dropdown-item preview-item">
                                 <div class="preview-thumbnail">
                                     <div class="preview-icon bg-dark rounded-circle">
-                                        <i class="mdi mdi-calendar-today text-success"></i>
+                                        <i class="mdi mdi-check-circle-outline text-danger"></i>
                                     </div>
                                 </div>
                                 <div class="preview-item-content">
-                                    <p class="preview-subject ellipsis mb-1 text-small">To-do list</p>
+                                    <p class="preview-subject ellipsis mb-1 text-small">Digital Signature</p>
                                 </div>
-                            </a>
+                            </a>   
                         </div>
                         {{-- Sidebar Profile 3 Dots Vertical Menu End --}}
 
                     </div>
+                    @endguest
+
                 </li>
                 {{-- Sidebar Profile Box End --}}
 
@@ -119,13 +218,88 @@
 
                 {{-- Sidebar Dashboard Start --}}
                 <li class="nav-item menu-items">
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="">
                         <span class="menu-icon">
                             <i class="mdi mdi-speedometer"></i>
                         </span>
                         <span class="menu-title">Dashboard</span>
                     </a>
                 </li>
+                @guest
+                    
+                @else
+                    @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'SuperAdmin')
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('/data-user') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-account-multiple-outline"></i>
+                                </span>
+                                <span class="menu-title">Users Datas</span>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('admin/daftar-cuti') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-note-multiple"></i>
+                                </span>
+                                <span class="menu-title">Daftar Cuti</span>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('admin/izin') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-receipt"></i>
+                                </span>
+                                <span class="menu-title">Days Off</span>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('data-lowongan/') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-file-multiple"></i>
+                                </span>
+                                <span class="menu-title">lowongan</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if (Auth::user()->role != 'Pelamar')
+                        <li class="nav-item nav-category">
+                            <span class="nav-link">Employee Navigation</span>
+                        </li>
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('#') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-file-multiple"></i>
+                                </span>
+                                <span class="menu-title">Absensi</span>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('pegawai/cuti') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-file-multiple"></i>
+                                </span>
+                                <span class="menu-title">cuti</span>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('pegawai/izin') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-file-multiple"></i>
+                                </span>
+                                <span class="menu-title">Izin</span>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('pegawai/resign') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-file-multiple"></i>
+                                </span>
+                                <span class="menu-title">Resign</span>
+                            </a>
+                        </li>
+                    @endif
+                @endguest
                 {{-- Sidebar Dashboard End --}}
 
             </ul>
@@ -156,16 +330,6 @@
                         <span class="mdi mdi-menu"></span>
                     </button>
                     {{-- Topbar Hamburger Menu End --}}
-
-                    {{-- Topbar Search Form Start --}}
-                    <ul class="navbar-nav w-100">
-                        <li class="nav-item w-100">
-                            <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
-                                <input type="text" class="form-control" placeholder="Search products">
-                            </form>
-                        </li>
-                    </ul>
-                    {{-- Topbar Search Form End --}}
 
                     {{-- Topbar Menu Right Side Start --}}
                     <ul class="navbar-nav navbar-nav-right">
@@ -257,10 +421,17 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
                                 <div class="navbar-profile">
-                                    <img class="img-xs rounded-circle"
-                                        src="{{ asset('template/assets/images/faces/face15.jpg') }}" alt="">
-                                    <p class="mb-0 d-none d-sm-block navbar-profile-name">Henry Klein</p>
-                                    <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                                        {{-- @foreach ($user as $user) --}}
+                                        @guest
+                                            <p class="mb-0 ms-2 d-none d-sm-block navbar-profile-name text-white">Login</p>
+                                        @else
+                                        <img class="img-xs rounded-circle"
+                                        src="{{ asset('storage/' . Auth::user()->foto) }}" alt="">
+                                        <p class="mb-0 d-none d-sm-block navbar-profile-name">
+                                            {{ Auth::user()->nama }}
+                                        <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                                    {{-- @endforeach --}}
+                                        @endguest
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
@@ -278,7 +449,7 @@
                                     </div>
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item preview-item">
+                                <a class="dropdown-item preview-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     <div class="preview-thumbnail">
                                         <div class="preview-icon bg-dark rounded-circle">
                                             <i class="mdi mdi-logout text-danger"></i>
@@ -288,6 +459,10 @@
                                         <p class="preview-subject mb-1">Log out</p>
                                     </div>
                                 </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
                                 <div class="dropdown-divider"></div>
                                 <p class="p-3 mb-0 text-center">Advanced settings</p>
                             </div>
@@ -318,17 +493,28 @@
                     @yield('content')
                 </div>
                 {{-- Main Content End --}}
-                
+
                 <!-- partial:partials/_footer.html -->
                 <footer class="footer">
                     <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                        <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright ©
-                            bootstrapdash.com 2021</span>
-                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a
-                                href="https://www.bootstrapdash.com/bootstrap-admin-template/"
-                                target="_blank">Bootstrap
-                                admin template</a> from Bootstrapdash.com</span>
-                    </div>
+                        <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">
+                            Copyright © Tech Solution 2023
+                        </span>
+                        <div
+                            class="footer-social-media float-none float-sm-right d-block mt-1 mt-sm-0 text-center text-white">
+                            <a class="mx-1 text-decoration-none" href="#">
+                                <i class="fa-brands fa-twitter"></i>
+                            </a>
+                            <a class="mx-1 text-decoration-none" href="#">
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                            <a class="mx-1 text-decoration-none" href="#">
+                                <i class="fa-brands fa-facebook"></i>
+                            </a>
+                            <a class="mx-1 text-decoration-none" href="#">
+                                <i class="fa-brands fa-linkedin"></i>
+                            </a>
+                        </div>
                 </footer>
                 <!-- partial -->
             </div>
@@ -356,6 +542,102 @@
     {{-- JS Start --}}
     <script src="{{ asset('template/assets/js/dashboard.js') }}"></script>
     {{-- JS End --}}
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="{{ asset('js/alamat.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
+
+    {{-- Digital Signature --}}
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>
+    <script>
+        var $modal = $('#modal');
+        var image = document.getElementById('image');
+        var cropper;
+        
+        $("body").on("change", ".image", function(e){
+            var files = e.target.files;
+            var done = function (url) {
+            image.src = url;
+            $modal.modal('show');
+            };
+            var reader;
+            var file;
+            var url;
+            if (files && files.length > 0) {
+            file = files[0];
+            if (URL) {
+                done(URL.createObjectURL(file));
+            } else if (FileReader) {
+                reader = new FileReader();
+                reader.onload = function (e) {
+                done(reader.result);
+                };
+                reader.readAsDataURL(file);
+            }
+            }
+        });
+        $modal.on('shown.bs.modal', function () {
+            cropper = new Cropper(image, {
+            aspectRatio: 1,
+            viewMode: 3,
+            preview: '.preview'
+            });
+        }).on('hidden.bs.modal', function () {
+        cropper.destroy();
+        cropper = null;
+        });
+        $("#crop").click(function(){
+            canvas = cropper.getCroppedCanvas({
+                width: 160,
+                height: 160,
+            });
+            canvas.toBlob(function(blob) {
+                url = URL.createObjectURL(blob);
+                var reader = new FileReader();
+                reader.readAsDataURL(blob); 
+                reader.onloadend = function() {
+                    var base64data = reader.result; 
+                    $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        url: "crop-image-upload",
+                        data: {'_token': $('meta[name="_token"]').attr('content'), 'image': base64data},
+                        success: function(data){
+                            console.log(data);
+                            $modal.modal('hide');
+                            alert("Crop image successfully uploaded");
+                        }
+                    });
+                }
+            });
+        })
+    </script>
+
+    <script>
+        // Signature Pad
+        var signaturePad = new SignaturePad(document.getElementById('signature-pad'), {
+        backgroundColor: 'rgba(255, 255, 255, 0)',
+        penColor: 'rgb(0, 0, 0)'
+        });
+        var saveButton = document.getElementById('save');
+        var cancelButton = document.getElementById('clear');
+
+        $('#save').click(function (e) { 
+            document.getElementById("signature").value = signaturePad.toDataURL();
+
+            document.getElementById("myForm").submit();
+        });
+
+
+        cancelButton.addEventListener('click', function (event) {
+        signaturePad.clear();
+        });
+
+        // End Signature Pad
+    </script>
 
 </body>
 

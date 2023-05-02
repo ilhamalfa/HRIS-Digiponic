@@ -19,13 +19,16 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'email',
-        'password',
-        'role',
-        'nik',
-        'jumlah_cuti'
-    ];
+    // protected $fillable = [
+    //     'email',
+    //     'password',
+    //     'role',
+    //     'nik',
+    //     'jumlah_cuti',
+    //     'email_verified_at'
+    // ];
+
+    protected $guarded = ['id'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -56,5 +59,27 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function lamaran(){
         return $this->hasMany(Lamaran::class);
+    }
+
+    public function cuti(){
+        return $this->hasMany(Cuti::class);
+    }
+
+    public function perizinan(){
+        return $this->hasMany(Perizinan::class);
+    }
+
+    public function resign(){
+        return $this->hasMany(Resign::class);
+    }
+    
+    public function scopeFilter($query, array $filters)
+    {
+    $query->when($filters['search'] ?? false, function ($query, $search) {
+        return $query->where(function ($query) use ($search) {
+            $query->where('nik', 'like', '%' . $search . '%')
+            ->orwhere('nama', 'like', '%' . $search . '%');
+            });
+        });
     }
 }

@@ -53,17 +53,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    @if (isset(Auth::user()->pegawai) && Auth::user()->role == 'Pegawai')
-                                        {{ Auth::user()->pegawai->nama }}
-                                    @elseif (isset(Auth::user()->pegawai) && Auth::user()->role == 'Super Admin')
-                                        {{ Auth::user()->pegawai->nama }}
-                                    @elseif (isset(Auth::user()->pegawai) && Auth::user()->role == 'Admin')
-                                        {{ Auth::user()->pegawai->nama }}
-                                    @elseif (isset(Auth::user()->pelamar) && Auth::user()->role == 'Pelamar')
-                                        {{ Auth::user()->pelamar->nama }}
-                                    @else
-                                        {{ Auth::user()->email }}
-                                    @endif
+                                    {{ Auth::user()->nama }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">

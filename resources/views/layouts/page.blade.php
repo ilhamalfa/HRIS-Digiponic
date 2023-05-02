@@ -6,154 +6,255 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
-    <link rel="icon" href="{{ asset('logo/brand-logo.png') }}">
 
-    {{-- Google Fonts --}}
+    {{-- Header Icons Start --}}
+    <link rel="icon" href="{{ asset('logo/brand-logo-red.webp') }}">
+    {{-- Header Icons End --}}
+
+    {{-- Google Fonts Start --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,700;1,300&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;0,600;0,700;0,800;1,100&display=swap"
         rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+    {{-- Google Fonts End --}}
 
-    {{-- Preloader CSS --}}
-    <link rel="stylesheet" href="{{ asset('preloader/style.css') }}">
-
-    {{-- Random CSS --}}
-    <link rel="stylesheet" href="{{ asset('asset/asset.css') }}">
-
-    {{-- CSS --}}
-    <link rel="stylesheet" href="{{ asset('layout/css/style.css') }}">
-
-    {{-- Font Awesome --}}
+    {{-- Font Awesome Start --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
         integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {{-- Font Awesome End --}}
 
-    {{-- Bootstrap CSS CDN --}}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    {{-- Bootstrap CSS CDN Start --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    {{-- Bootstrap CSS CDN End --}}
+
+    {{-- Layout CSS Start --}}
+    <link rel="stylesheet" href="{{ asset('layout/landingpage/css/style.css') }}">
+    {{-- Layout CSS End --}}
+
 </head>
 
 <body>
 
     {{-- Preloader Start --}}
-    {{-- <div id="cssload-loader">
-        <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
+    {{-- <div class="preloader">
+        <img class="preloader-image" src="{{ asset('preloader/landingpage.png') }}" alt="Preloader">
     </div> --}}
-    {{-- Preloader Start --}}
+    {{-- Preloader End --}}
+
+    {{--  Topbar Modal Form Start --}}
+    <div class="modal fade" id="loginForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-secondary-color-1">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 tx-primary-color" id="exampleModalLabel">Sign In</h1>
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fa-solid fa-xmark m-auto"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="auth-form" method="POST" action="{{ route('login') }}">
+                        @csrf
+                        <div class="auth-email-box">
+                            <input class="form-input" type="email" id="loginEmail" name="email"
+                                value="{{ old('email') }}" placeholder="Your Email" required autocomplete="off"
+                                autofocus>
+                        </div>
+                        <div class="auth-password-box">
+                            <input class="form-input" type="password" id="loginPassword" name="password"
+                                placeholder="Password" required autocomplete="off">
+                            <i class="fa-solid fa-eye password-icon-eye" id="login-icon-eye"></i>
+                            <i class="fa-solid fa-eye-slash password-icon-eye-slash" id="login-icon-eye-slash"></i>
+                        </div>
+                        <div class="auth-forgot-password-box">
+                            @if (Route::has('password.request'))
+                                <a class="btn btn-link text-black" href="{{ route('password.request') }}">
+                                    {{ __('Forgot Your Password?') }}
+                                </a>
+                            @endif
+                        </div>
+                        <div class="auth-button-box">
+                            <button type="submit" class="auth-button btn btn-outline-secondary rounded-0 px-5 m-3">
+                                SIGN IN
+                            </button>
+                        </div>
+                        <div class="auth-switch-box">
+                            <p class="auth-switch-title">Don't Have Account?</p>
+                            <div class="auth-switch">
+                                <button type="button" class="button-animation-black auth-switch-button"
+                                    data-bs-toggle="modal" data-bs-target="#registerForm">
+                                    <i class="fa-solid fa-file-lines m-2 icon"></i>
+                                    <span>Sign Up</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="registerForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-secondary-color-1">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 tx-primary-color" id="exampleModalLabel">Sign Up</h1>
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fa-solid fa-xmark m-auto"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="auth-form" method="POST" action="{{ route('login') }}">
+                        @csrf
+                        <div class="auth-email-box">
+                            <input class="form-input" type="email" id="login" name="email"
+                                value="{{ old('email') }}" placeholder="Your Email" required autocomplete="off"
+                                autofocus>
+                        </div>
+                        <div class="auth-password-box">
+                            <input class="form-input" type="password" id="registerPassword" name="password"
+                                placeholder="Password" required autocomplete="off">
+                            <i class="fa-solid fa-eye password-icon-eye" id="register-icon-eye"></i>
+                            <i class="fa-solid fa-eye-slash password-icon-eye-slash" id="register-icon-eye-slash"></i>
+                        </div>
+                        <div class="auth-password-confirm-box">
+                            <input class="form-input" type="password" id="password-confirm" name="password_confirmation"
+                                placeholder="Password Confirm" required autocomplete="off">
+                            <i class="fa-solid fa-eye password-icon-eye" id="password-confirm-icon-eye"></i>
+                            <i class="fa-solid fa-eye-slash password-icon-eye-slash" id="password-confirm-icon-eye-slash"></i>
+                        </div>
+                        <div class="auth-button-box">
+                            <button type="submit" class="auth-button btn btn-outline-secondary rounded-0 px-5 m-3">
+                                SIGN UP
+                            </button>
+                        </div>
+                        <div class="auth-switch-box">
+                            <p class="auth-switch-title">Already Have Account?</p>
+                            <div class="auth-switch">
+                                <button type="button" class="button-animation-black auth-switch-button"
+                                    data-bs-toggle="modal" data-bs-target="#loginForm">
+                                    <i class="fa-solid fa-file-lines m-2 icon"></i>
+                                    <span>Sign In</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- Topbar Modal Form End --}}
 
     {{-- Topbar Start --}}
-    <nav class="topbar" id="topbar">
-        <div class="topbar-brand">
-            <a class="topbar-brand-text" href="/">
-                <span>TECH.Solution</span>
+    @if (Request::is('/'))
+        <nav class="topbar px-5">
+    @else
+        <nav class="topbar px-5 bg-primary-color">
+    @endif
+        <div class="brand-box topbar-section">
+            <img class="image" src="{{ asset('logo/brand-logo-white.webp') }}" alt="Brand Logo">
+            <a class="text tx-secondary-color-1" href="{{ url('/') }}">TECH Solution</a>
+        </div>
+        <div class="menu-box topbar-section">
+            <a class="link tx-secondary-color-1" href="{{ url('/') }}">
+                <span>Home</span>
+            </a>
+            <a class="link tx-secondary-color-1" href="{{ url('/career') }}">
+                <span>Career</span>
+            </a>
+            <a class="link tx-secondary-color-1" href="{{ url('/') }}">
+                <span>About</span>
+            </a>
+            <a class="link tx-secondary-color-1" href="{{ url('/') }}">
+                <span>Product</span>
+            </a>
+            <a class="link tx-secondary-color-1" href="{{ url('/') }}">
+                <span>Team</span>
             </a>
         </div>
-        <div class="topbar-hamburger-menu" id="topbar-hamburger-menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <div class="topbar-account" id="topbar-account">
-            <a class="topbar-account-logo" href="#">
-                <i class="fa-solid fa-circle-user fa-2x"></i>
-            </a>
+        <div class="account-box topbar-section">
+            @guest
+                <button type="button" class="button-animation-lime button-login btn rounded-0" data-bs-toggle="modal"
+                    data-bs-target="#loginForm">
+                    <span>Sign In</span>
+                </button>
+            @else
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle tx-secondary-color-1" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        @if (Auth::user()->role != 'Pelamar' && isset(Auth::user()->pegawai))
+                            <img class="img rounded-circle" src="{{ asset('storage/' . Auth::user()->pegawai->foto) }}"
+                                alt="Profile Image">
+                        @elseif (Auth::user()->role == 'Pelamar' && isset(Auth::user()->pelamar))
+                            <img class="img rounded-circle" src="{{ asset('storage/' . Auth::user()->pelamar->foto) }}"
+                                alt="Profile Image">
+                        @else
+                            <img class="img rounded-circle " src="{{ asset('template/assets/images/faces/face18.jpg') }}"
+                                alt="Profile Image">
+                        @endif
+                        @if (isset(Auth::user()->pegawai))
+                            <span>{{ Auth::user()->pegawai->nama }}</span>
+                        @elseif (isset(Auth::user()->pelamar) && Auth::user()->role == 'Pelamar')
+                            <span>{{ Auth::user()->pelamar->nama }}</span>
+                        @else
+                            <span>{{ Auth::user()->email }}</span>
+                        @endif
+                    </button>
+                    <ul class="dropdown-menu bg-optional-color-2">
+                        @if (Auth::user()->role == 'Pelamar')
+                            <li>
+                                <a class="dropdown-item tx-secondary-color-1"
+                                    href="{{ url('/pelamar/daftar-lamaran/') }}">
+                                    <i class="fa-solid fa-file-pen text-white me-2"></i>
+                                    <span>Applied Vacancy</span>
+                                </a>
+                            </li>
+                        @endif
+                        <li>
+                            <a class="dropdown-item tx-secondary-color-1 setting" href="{{ url('/') }}">
+                                <img class="gif me-2" src="{{ asset('layout/landingpage/topbar/settings.gif') }}"
+                                    alt="...">
+                                <span>Settings</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item tx-secondary-color-1 log-out" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                <i class="fa-solid fa-right-from-bracket text-danger me-2"></i>
+                                <span class="text-danger">Log Out</span>
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            @endguest
         </div>
     </nav>
     {{-- Topbar End --}}
 
-    {{-- Navmenu Start --}}
-    <nav class="navmenu" id="navmenu">
-        <a href="/">
-            <span>Home</span>
-        </a>
-        <a href="#career">
-            <span>Career</span>
-        </a>
-        <a href="#about">
-            <span>About</span>
-        </a>
-        <a href="#product">
-            <span>Product</span>
-        </a>
-        <a href="#structure">
-            <span>Structure</span>
-        </a>
-        <a href="#">
-            <span>Mail</span>
-        </a>
-    </nav>
-    {{-- Navmenu End --}}
-
-    {{-- Accountmenu Start --}}
-    <nav class="account-menu" id="account-menu">
-        @if (Auth::user())
-            <a href="#">
-                <span>Account</span>
-            </a>
-            <a href="#">
-                <span>Setting</span>
-            </a>
-        @endif
-        @guest
-            <a href="#" id="login">
-                <span>Login</span>
-            </a>
-            <div class="login-as" id="login-as">
-                <form class="login-as-form" action="{{ route('rutelogin') }}" method="POST">
-                    @csrf
-                    <input type="submit" name="inputemployee" value="As Employee">
-                    <input type="submit" name="inputcandidate" value="As Candidate">
-                </form>
-            </div>
-            <a href="{{ route('register') }}">
-                <span>Register</span>
-            </a>
-        @else
-            <a href="{{ route('logout') }}"
-                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                <span>Logout</span>
-            </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                @csrf
-            </form>
-        @endguest
-    </nav>
-    {{-- Accountmenu End --}}
-
-    {{-- Main Start --}}
-    <main class="main"> 
+    {{-- Main Content Start --}}
+    <div class="main bg-primary-color">
         @yield('content')
-    </main>
-    {{-- Main End --}}
+    </div>
+    {{-- Main Content End --}}
 
     {{-- Footer Start --}}
-    <footer class="footer bg-dark text-white container-fluid">
-        <div class="materialstrip1"></div>
-        <div class="materialred1"></div>
-        <div class="materialred2"></div>
-        <div class="materialred3"></div>
-        <div class="materialred4"></div>
+    <footer class="footer-bg container-fluid">
         @if (Request::is('/'))
-            <div class="start-footer">
+            <div class="footer-top">
                 <div class="row text-center justify-content-center">
                     <div class="p-2">
-                        <div class="logo m-3">
-                            <img class="logo" src="{{ asset('logo/brand-logo.png') }}" alt="Brand Logo" id="footer-brand">
+                        <div class="logo">
+                            <img class="footer-brand-logo" src="{{ asset('logo/brand-logo-white.webp') }}"
+                                alt="Brand Logo" id="footer-brand">
                         </div>
-                        <div class="text-footer m-5 px-5">
-                            <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, quam
+                        <div class="footer-web-description-box">
+                            <p class="mb-4 footer-web-description">Lorem ipsum dolor sit amet consectetur adipisicing
+                                elit. Quia, quam
                                 exercitationem neque adipisci, sint deserunt reprehenderit illum, aut doloremque aliquid
                                 corporis repellat ducimus at quisquam molestiae commodi tempore assumenda atque.Lorem
                                 ipsum dolor sit amet consectetur adipisicing elit. Quia, quam
@@ -162,36 +263,38 @@
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, quam
                                 exercitationem neque adipisci, sint deserunt reprehenderit illum, aut doloremque aliquid
                                 corporis repellat ducimus at quisquam molestiae commodi tempore assumenda atque.</p>
-                            <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, quam
+                            <p class="mb-4 footer-web-description">Lorem ipsum dolor sit amet consectetur adipisicing
+                                elit. Quia, quam
                                 exercitationem neque adipisci, sint deserunt reprehenderit illum, aut doloremque aliquid
                                 corporis repellat ducimus at quisquam molestiae commodi tempore assumenda atque.Lorem
                                 ipsum dolor sit amet consectetur adipisicing elit. Quia, quam
                                 exercitationem neque adipisci, sint deserunt reprehenderit illum, aut doloremque aliquid
                                 corporis repellat ducimus at quisquam molestiae commodi tempore assumenda atque.</p>
-                            <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, quam
+                            <p class="mb-4 footer-web-description">Lorem ipsum dolor sit amet consectetur adipisicing
+                                elit. Quia, quam
                                 exercitationem neque adipisci, sint deserunt reprehenderit illum, aut doloremque aliquid
                                 corporis repellat ducimus at quisquam molestiae commodi tempore assumenda atque.</p>
                         </div>
                     </div>
                 </div>
-                <div class="social-media m-5">
+                <div class="footer-social-media-box m-5">
                     <div>
-                        <a href="#">
+                        <a class="footer-social-media" href="#">
                             <i class="fa-brands fa-twitter"></i>
                         </a>
                     </div>
                     <div>
-                        <a href="#">
+                        <a class="footer-social-media" href="#">
                             <i class="fa-brands fa-instagram"></i>
                         </a>
                     </div>
                     <div>
-                        <a href="#">
+                        <a class="footer-social-media" href="#">
                             <i class="fa-brands fa-facebook"></i>
                         </a>
                     </div>
                     <div>
-                        <a href="#">
+                        <a class="footer-social-media" href="#">
                             <i class="fa-brands fa-linkedin"></i>
                         </a>
                     </div>
@@ -201,30 +304,30 @@
         <div class="end-footer py-4">
             <div class="row text-center">
                 <div class="col">
-                    &copy; Copyright 2023 Tech Solution | Maju Solid | Allright Reserved
+                    &copy; Copyright 2023 Tech Solution Indonesia | Solid Solid Solid | Allright Reserved
                 </div>
             </div>
-        </div>
-        <div class="dots">
-            <span></span>
-            <span></span>
         </div>
     </footer>
     {{-- Footer End --}}
 
-    {{-- Bootstrap JS CDN --}}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
-    </script>
-
-    {{-- sweetAlert --}}
-    @include('sweetalert::alert')
-
-    {{-- JQuery --}}
+    {{-- JQuery Start --}}
     <script src="{{ asset('layout/jquery/jquery-3.6.4.min.js') }}"></script>
+    {{-- JQuery End --}}
 
-    {{-- JS --}}
-    <script src="{{ asset('layout/js/script.js') }}"></script>
+    {{-- JS Start --}}
+    <script src="{{ asset('layout/landingpage/js/script.js') }}"></script>
+    {{-- JS End --}}
+
+    {{-- JS CDN Start --}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+    </script>
+    {{-- JS CDN End --}}
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="{{ asset('js/alamat.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
 </body>
 
 </html>

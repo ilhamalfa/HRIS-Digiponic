@@ -11,23 +11,22 @@ class Pelamar extends Model
 
     protected $guarded = ['id'];
 
-    public function user(){
-        return $this->belongsTo(User::class);
+    public function lowongan(){
+        return $this->belongsTo(Lowongan::class);
     }
 
-    public function provinsi(){
-        return $this->belongsTo(Province::class, 'province_id');
-    }
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            return $query->where(function ($query) use ($search) {
+                $query->where('nama', 'like', '%' . $search . '%');
+            });
+        });
 
-    public function kabupaten(){
-        return $this->belongsTo(Regency::class, 'regency_id');
-    }
-
-    public function kecamatan(){
-        return $this->belongsTo(District::class, 'district_id');
-    }
-
-    public function kelurahan(){
-        return $this->belongsTo(Village::class, 'village_id');
+        $query->when($filters['status'] ?? false, function ($query, $status) {
+            return $query->where(function ($query) use ($status) {
+                $query->where('status', $status);
+            });
+        });
     }
 }
