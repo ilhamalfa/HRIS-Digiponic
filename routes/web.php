@@ -127,12 +127,22 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin'])->group(f
 
 // Pegawai
 Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin,Pegawai'])->group(function () {
+    // Update data User
+    Route::get('/Account/account-setting', [PegawaiController::class, 'editUser']);
+
+    Route::post('/Account/account-setting/update', [PegawaiController::class, 'updateUser']);    
+
     // Update data Pegawai
     Route::get('/profile/edit-data-pegawai', [PegawaiController::class, 'editPegawai']);
 
     Route::post('/profile/edit-data-pegawai/update', [PegawaiController::class, 'updatePegawai']);
 
     // Update Foto Pegawai
+    Route::get('/profile/photo-profile', [PegawaiController::class, 'userPhoto']);
+
+    Route::post('/profile/photo-profile/update',  [PegawaiController::class, 'updatePhoto']);
+
+    // Update Signature Pegawai
     Route::get('/profile/signature', [PegawaiController::class, 'signature']);
 
     Route::post('profile/save-signature',  [PegawaiController::class, 'saveSignature']);
@@ -165,13 +175,6 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin,Pegawai'])-
 
     Route::post('pegawai/resign/ajukan-resign/proses', [PegawaiController::class, 'prosesResign']);
 
-});
-
-Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin,Pegawai,Pelamar'])->group(function () {
-    // Update data User
-    Route::get('/Account/account-setting', [PegawaiController::class, 'editUser']);
-
-    Route::post('/Account/account-setting/update', [PegawaiController::class, 'updateUser']);    
 });
 
 Route::middleware(['auth', 'verified', 'golongan:Manager/Kadep'])->group(function () {
