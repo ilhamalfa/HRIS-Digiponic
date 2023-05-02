@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use PHPUnit\Framework\Constraint\FileExists;
 
 use function PHPUnit\Framework\fileExists;
 use function PHPUnit\Framework\isEmpty;
@@ -137,7 +138,10 @@ class PegawaiController extends Controller
         // file_put_contents($nama_file, $decoded_image);
         Storage::put($nama_file,$decoded_image);
 
-        unlink('storage/' . $user->digital_signature);
+        if(FileExists('storage/' . $user->digital_signature)){
+            // dd('Exist');
+            unlink('storage/' . $user->digital_signature);
+        }
 
         $user->update([
             'digital_signature' => $nama_file
@@ -146,12 +150,28 @@ class PegawaiController extends Controller
         return redirect()->back();
     }
 
-    public function editFoto(){
-        $data = Auth::user();
+    public function userPhoto(){
+        return view('pegawai.data-pegawai.update-foto-pegawai');
+    }
 
-        return view('pegawai.data-pegawai.update-foto-pegawai', [
-            'data' => $data,
+    public function updatePhoto(Request $request){
+        $user = User::find(Auth::user()->id);
+
+        $image_parts = explode(";base64,", $request->image);
+        $image_type_aux = explode("image/", $image_parts[0]);
+        $image_type = $image_type_aux[1];
+        $image_base64 = base64_decode($image_parts[1]);
+        $imageName = "Pegawai/foto/" . Auth::user()->nama . "-" .uniqid() . '.png';
+
+        Storage::put($imageName,$image_base64);
+
+        unlink('storage/' . $user->foto);
+
+        $user->update([
+            'foto' => $imageName
         ]);
+
+        return response()->json(['success'=>'Crop Image Uploaded Successfully']);
     }
 
     public function storePegawai(Request $request){

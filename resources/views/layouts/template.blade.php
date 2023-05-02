@@ -160,7 +160,7 @@
                         {{-- Sidebar Profile 3 Dots Vertical Menu Start --}}
                         <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list"
                             aria-labelledby="profile-dropdown">
-                            <a href="{{ url('/profile/edit-foto-pegawai') }}" class="dropdown-item preview-item">
+                            <a href="{{ url('/profile/photo-profile') }}" class="dropdown-item preview-item">
                                 <div class="preview-thumbnail">
                                     <div class="preview-icon bg-dark rounded-circle">
                                         <i class="mdi mdi-account-edit text-warning"></i>

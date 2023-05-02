@@ -1,9 +1,5 @@
-@if (Auth::user()->role  == 'Pelamar')
-    @extends('layouts.template')
-@else
-    @extends('layouts.page')
-@endif
-    @section('title')
+@extends('layouts.template')
+@section('title')
 
     @section('content')
     <div class="container">
