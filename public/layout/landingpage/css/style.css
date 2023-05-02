@@ -29,6 +29,7 @@ body {
     font-family: 'Montserrat', sans-serif;
     box-sizing: border-box;
     overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 ol, ul {
 	list-style: none;
@@ -52,6 +53,7 @@ table {
     --primary-color : #000;
     --secondary-color-1 : #F9F9F9;
     --secondary-color-2 : #0edfb9;
+    --secondary-color-3 : red;
     --optional-color-1 : #76808A;
     --optional-color-2 : #191c24;
 }
@@ -64,8 +66,20 @@ a {
     background-color: var(--primary-color);
 }
 
+.bg-secondary-color-1 {
+    background-color: var(--secondary-color-1);
+}
+
+.bg-secondary-color-2 {
+    background-color: var(--secondary-color-2);
+}
+
 .bg-optional-color-2 {
     background-color: var(--optional-color-2);
+}
+
+.tx-primary-color {
+    color: var(--primary-color);
 }
 
 .tx-secondary-color-1 {
@@ -74,6 +88,10 @@ a {
 
 .tx-secondary-color-2 {
     color: var(--secondary-color-2)
+}
+
+.tx-secondary-color-3 {
+    color: var(--secondary-color-3)
 }
 
 .nav-menu-mobile {
@@ -1147,7 +1165,7 @@ a {
 }
 
 @media only screen and (min-width: 1200px) {
-    
+
     /* All Button Start */
     .button-animation-red {
         font-size: 1rem;
@@ -1159,6 +1177,7 @@ a {
     /* All Button End */
 
     /* Topbar Start */
+
     .topbar {
         padding: 15px 0;
         position: fixed;
@@ -1170,6 +1189,10 @@ a {
         justify-content: space-between;
         align-items: center;
         z-index: 999;
+    }
+
+    .topbar.background {
+        background-color: var(--primary-color);
     }
 
     .topbar-section {
@@ -1313,6 +1336,110 @@ a {
         transform-origin: left;
         transform: scaleX(1);
     }
+
+    .modal-title {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    .auth-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .form-input{
+        color: var(--primary-color);
+        background: none;
+        border: none;
+        border-bottom: 2px solid var(--primary-color);
+        margin: 1em 0;
+        padding: .6em 1em;
+        outline: none;
+        box-sizing: border-box;
+        width: 100%;
+        transition: .5s ease;
+    }
+
+    .form-input::placeholder {
+        color: var(--primary-color);
+        font-weight: bold;
+        transition: .5s;
+    }
+
+    .form-input:focus::placeholder {
+        color: var(--primary-color);
+    }
+
+    .auth-password-box,
+    .auth-password-confirm-box {
+        position: relative;
+    }
+
+    .password-icon-eye {
+        cursor: pointer;
+        color: var(--primary-color);
+        position: absolute;
+        top: 40%;
+        bottom: 40%;
+        right: 5%;
+        display: none;
+    }
+
+    .password-icon-eye-slash {
+        cursor: pointer;
+        color: var(--primary-color);
+        position: absolute;
+        top: 40%;
+        bottom: 40%;
+        right: 5%;
+    }
+
+    .auth-remember-box {
+        width: 70%;
+        margin: auto;
+    }
+
+    .auth-button-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .auth-button {
+        background-color: var(--secondary-color-2);
+        color: var(--secondary-color-1);
+        font-weight: bold;
+        border: none;
+        box-sizing: border-box;
+        padding: .5em;
+        transition: .2s;
+        margin: auto;
+    }
+
+    .auth-button:hover {
+        background-color: var(--secondary-color-2);
+    }
+
+    .auth-switch-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        margin: 1em 0;
+    }   
+
+    .auth-switch-title {
+        color: var(--primary-color);
+        text-align: center;
+        margin: 1em;
+    }
+
+    .auth-switch-button {
+        padding: .5em 1em;
+        background: none;
+    }
     /* Topbar End */
 
     /* Main Start */
@@ -1320,7 +1447,16 @@ a {
     .opening {
         width: 100%;
         height: 100vh;
-        position: relative;
+        position: fixed;
+        top: 0;
+        left: 0;
+        opacity: 1;
+        z-index: 998;
+        transition: 1s;
+    }
+
+    .opening.fade {
+        opacity: 0;
     }
 
     .opening .video {
@@ -1362,22 +1498,31 @@ a {
 
     /* About Us Start */
     .about {
+        background-color: var(--primary-color);
         width: 100%;
-        position: relative;
-        transition: .5s;
-    }
-
-    .about.parallax {
         position: fixed;
         top: 0;
         left: 0;
+        opacity: 0;
+        transform: translateY(100%);
+        transition: 1s;
+        z-index: 998;
     }
 
-    .about .image {
-        position: absolute;
-        width: 100%;
-        transform: translateY(-5px);
-        transition: .5s;
+    .about.fade {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .about .background-color {
+        background-color: var(--primary-color);
+        display: block;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        transition: 1s;
     }
 
     .about .video {
@@ -1392,7 +1537,7 @@ a {
         font-weight: 700;
         position: absolute;
         top: 22%;
-        left: 5%;
+        left: 10%;
         transition: .1s;
     }
 
@@ -1431,15 +1576,33 @@ a {
     }
 
     .about-extra-space {
-        height: 300vh;
+        height: 400vh;
     }
     /* About Us End */
 
     /* Product Start */
     .product-introduction {
+        background-color: var(--primary-color);
         position: relative;
         width: 100%;
-        padding: 0;
+        padding-top: 5em;
+        padding-left: 5em;
+        padding-right: 0;
+        padding-bottom: 0;
+        z-index: 998;
+        overflow: hidden;
+    }
+
+    .product-introduction .background-color {
+        background-color: var(--secondary-color-1);
+        position: absolute;
+        bottom: -20%;
+        left: -10%;
+        display: block;
+        width: 150%;
+        height: 80%;
+        /* transform-origin: 0%; */
+        transform: rotate(-10deg);
     }
 
     .product-introduction .background {
@@ -1447,14 +1610,16 @@ a {
     }
 
     .product-introduction .title {
-        position: absolute;
-        top: 10%;
-        left: 5%;
         font-size: 5em;
         font-weight: 700;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        opacity: 0;
+        transform: translateX(-10px);
+        transition: .5s;
+    }
+
+    .product-introduction .project-image {
+        position: relative;
+        width: 35%;
     }
 
     .product-introduction .text {
@@ -1475,13 +1640,9 @@ a {
         font-size: 2rem;
         font-weight: 700;
         text-align: center;
-    }
-
-    .product-introduction .project-image {
-        width: 90%;
-        position: absolute;
-        bottom: 0;
-        left: 0;
+        opacity: 0;
+        transition: .5s;
+        transform: translateX(10px);
     }
 
     .product-introduction .project-link {
@@ -1491,13 +1652,22 @@ a {
         position: absolute;
         bottom: 10%;
         left: 35%;
+        opacity: 0;
+        transition: .5s;
+    }
+
+    .product-introduction .button {
+        opacity: 0;
+        transition: .5s;
     }
 
     .product {
+        background-color: var(--primary-color);
         position: relative;
         width: 100%;
         height: 100vh;
         padding: 0;
+        z-index: 998;
     }
 
     .product .background {
@@ -1518,6 +1688,8 @@ a {
 
     .product .image {
         width: 45%;
+        transform: translateY(80px);
+        transition: 1s;
     }
 
     .product .description {
@@ -1529,18 +1701,26 @@ a {
         top: 10%;
         left: 30%;
         right: 30%;
+        opacity: 0;
+        transition: .5s;
     }
 
     .product .button-buy-box {
         position: absolute;
         left: 2%;
         bottom: 15%;
+        opacity: 0;
+        transform: translateX(-20px);
+        transition: .5s;
     }
 
     .product .button-watch-box {
         position: absolute;
         right: 2%;
         bottom: 15%;
+        opacity: 0;
+        transform: translateX(20px);
+        transition: .5s;
     }
 
     .product .button-animation-white {
@@ -1557,6 +1737,7 @@ a {
         flex-direction: row;
         justify-content: end;
         align-items: end;
+        z-index: 998;
     }
 
     .team .title-box {
@@ -1575,12 +1756,24 @@ a {
         width: 30px;
         height: 1px;
         margin: 0 10px;
+        opacity: 0;
+        transition: 1s;
+    }
+
+    .team .span-1 {
+        transform: translateX(20px);
+    }
+
+    .team .span-2 {
+        transform: translateX(-20px);
     }
 
     .team .title {
         color: var(--primary-color);
         font-size: 2rem;
         font-weight: bold;
+        opacity: 0;
+        transition: .5s;
     }
 
     .team .bg-text-1 {
@@ -1590,7 +1783,9 @@ a {
         position: absolute;
         top: 10%;
         left: -20%;
-        opacity: 20%;
+        opacity: 0;
+        transform: translateX(-100%);
+        transition: 1s;
     }
 
     .team .bg-text-2 {
@@ -1600,7 +1795,9 @@ a {
         position: absolute;
         top: 40%;
         right: -15%;
-        opacity: 20%;
+        opacity: 0;
+        transform: translateX(100%);
+        transition: 1s;
     }
 
     .team .bg-text-3 {
@@ -1610,7 +1807,9 @@ a {
         position: absolute;
         bottom: 10%;
         left: 5%;
-        opacity: 20%;
+        opacity: 0;
+        transform: translateX(-100%);
+        transition: 1s;
     }
 
     .element-box {
@@ -1620,6 +1819,9 @@ a {
 
     .element {
         width: 80%;
+        opacity: 0;
+        transform: translateY(40px);
+        transition: 1s;
     }
 
     .team-image-box {
@@ -1676,6 +1878,7 @@ a {
         margin: 0;
         padding: 0 2em;
         height: 80vh;
+        z-index: 998;
     }
 
     .career .section {
@@ -1692,6 +1895,9 @@ a {
         color: var(--secondary-color-1);
         font-size: 5rem;
         font-weight: 700;
+        opacity: 0;
+        transform: translateX(40px);
+        transition: .5s;
     }
 
     .career .elementbg {
@@ -1713,6 +1919,8 @@ a {
         font-size: 2rem;
         font-weight: bold;
         margin: 2em 0;
+        opacity: 0;
+        transition: .5s;
     }
 
     .career .employee-box {
@@ -1723,19 +1931,173 @@ a {
 
     .career .employee-image {
         width: 40%;
+        opacity: 0;
+        transform: translateY(40px);
+        transition: 1s;
     }
 
     .career .element-box {
         position: absolute;
         top: 40%;
         right: -30%;
+        z-index: 999;
     }
 
     .career .element {
         width: 50%;
     }
+
+    .career .button {
+        opacity: 0;
+        transition: .5s;
+    }
     /* Career End */
     /* Main End */
+
+    /* Career Start */
+    .career-vacancy-box {
+        height: 100vh;
+    }
+    .filter-buton {
+        background: none;
+        border: none;
+        transition: .5s;
+    }
+
+    .filter-buton:hover {
+        background: none;
+    }
+    
+    .filter-buton:focus {
+        background-color: var(--secondary-color-2);
+    }
+
+    .dropdown-item:hover {
+        color: var(--secondary-color-2);
+    }
+
+    .search-input{
+        color: var(--secondary-color-1);
+        background: none;
+        border: none;
+        border-bottom: 2px solid var(--secondary-color-1);
+        padding: .6em 1em;
+        outline: none;
+        box-sizing: border-box;
+        width: 100%;
+        transition: .5s ease;
+    }
+
+    .search-input::placeholder {
+        color: var(--secondary-color-1);
+        font-weight: bold;
+        transition: .5s;
+    }
+
+    .search-input:focus::placeholder {
+        color: var(--secondary-color-1);
+    }
+
+    .search-button {
+        background: none;
+        color: var(--secondary-color-2);
+        font-weight: bold;
+        border: none;
+        box-sizing: border-box;
+        padding: .5em;
+        transition: .2s;
+        margin: auto;
+    }
+
+    .vacancy-card-link {
+        background: none;
+    }
+
+    .vacancy-card {
+        position: relative;
+        background: none;
+        border-bottom: 1px solid var(--secondary-color-1);
+        transition: .5s;
+    }
+
+    .vacancy-card:hover {
+        border-bottom: 1px solid var(--secondary-color-2);
+    }
+
+    .vacancy-card:hover .apply-text {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .vacancy-position-name {
+        font-size: 1.5rem;
+        margin: 1em 0;
+    }
+
+    .vacancy-description {
+        font-weight: 200;
+        margin-right: 6em;
+        margin: 1em 6em 1em 0;
+    }
+
+    .vacancy-kualification {
+        font-weight: 200;
+        font-size: 1rem;
+        margin: 1em 0;
+    }
+
+    .vacancy-date {
+        font-size: .8rem;
+    }
+
+    .apply-text {
+        background-color: var(--secondary-color-2);
+        color: var(--secondary-color-1);
+        padding: .5em 1em;
+        position: absolute;
+        bottom: 0;
+        right: 5%;
+        opacity: 0;
+        transform: translateY(5px);
+        transition: .5s;
+    }
+
+    .vacancy-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .vacancy-input{
+        color: var(--primary-color);
+        background: none;
+        border: none;
+        border-bottom: 2px solid var(--primary-color);
+        margin: 1em 0;
+        padding: .6em 1em;
+        outline: none;
+        box-sizing: border-box;
+        width: 300px;
+        transition: .5s ease;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .vacancy-input::placeholder {
+        color: var(--primary-color);
+        font-weight: bold;
+        transition: .5s;
+    }
+
+    .vacancy-input:focus::placeholder {
+        color: var(--primary-color);
+    }
+
+    .vacancy-button-box {
+        align-self: center;
+    }
+    /* Career End */
 
     /* Footer Start */
     .footer-web-description {
