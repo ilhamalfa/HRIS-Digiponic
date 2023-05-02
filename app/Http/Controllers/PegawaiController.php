@@ -131,12 +131,16 @@ class PegawaiController extends Controller
         $data_uri = $request->signature;
         $encoded_image = explode(",", $data_uri)[1];
         $decoded_image = base64_decode($encoded_image);
-        $nama_file = Auth::user()->nama . '-' . now()->timestamp . ".png";
+        $nama_file = "Pegawai/signature/". Auth::user()->nama . '-' . now()->timestamp . ".png";
+
         // Error
-        file_put_contents(__DIR__ . DIRECTORY_SEPARATOR . "Pegawai\signature". $nama_file, $decoded_image);
+        // file_put_contents($nama_file, $decoded_image);
+        Storage::put($nama_file,$decoded_image);
+
+        unlink('storage/' . $user->digital_signature);
 
         $user->update([
-            'digital_signature' => 'Pegawai/signature/'.$nama_file
+            'digital_signature' => $nama_file
         ]);
 
         return redirect()->back();
