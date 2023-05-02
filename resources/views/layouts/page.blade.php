@@ -45,11 +45,61 @@
     {{-- Preloader End --}}
 
     {{--  Topbar Modal Form Start --}}
-    <div class="modal fade" id="modalForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="loginForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
+            <div class="modal-content bg-secondary-color-1">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Sign In</h1>
+                    <h1 class="modal-title fs-5 tx-primary-color" id="exampleModalLabel">Sign In</h1>
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fa-solid fa-xmark m-auto"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="auth-form" method="POST" action="{{ route('login') }}">
+                        @csrf
+                        <div class="auth-email-box">
+                            <input class="form-input" type="email" id="loginEmail" name="email"
+                                value="{{ old('email') }}" placeholder="Your Email" required autocomplete="off"
+                                autofocus>
+                        </div>
+                        <div class="auth-password-box">
+                            <input class="form-input" type="password" id="loginPassword" name="password"
+                                placeholder="Password" required autocomplete="off">
+                            <i class="fa-solid fa-eye password-icon-eye" id="login-icon-eye"></i>
+                            <i class="fa-solid fa-eye-slash password-icon-eye-slash" id="login-icon-eye-slash"></i>
+                        </div>
+                        <div class="auth-forgot-password-box">
+                            @if (Route::has('password.request'))
+                                <a class="btn btn-link text-black" href="{{ route('password.request') }}">
+                                    {{ __('Forgot Your Password?') }}
+                                </a>
+                            @endif
+                        </div>
+                        <div class="auth-button-box">
+                            <button type="submit" class="auth-button btn btn-outline-secondary rounded-0 px-5 m-3">
+                                SIGN IN
+                            </button>
+                        </div>
+                        <div class="auth-switch-box">
+                            <p class="auth-switch-title">Don't Have Account?</p>
+                            <div class="auth-switch">
+                                <button type="button" class="button-animation-black auth-switch-button"
+                                    data-bs-toggle="modal" data-bs-target="#registerForm">
+                                    <i class="fa-solid fa-file-lines m-2 icon"></i>
+                                    <span>Sign Up</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="registerForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-secondary-color-1">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 tx-primary-color" id="exampleModalLabel">Sign Up</h1>
                     <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close">
                         <i class="fa-solid fa-xmark m-auto"></i>
                     </button>
@@ -59,39 +109,34 @@
                         @csrf
                         <div class="auth-email-box">
                             <input class="form-input" type="email" id="login" name="email"
-                                value="{{ old('email') }}" placeholder="Your Email" required autocomplete="login"
+                                value="{{ old('email') }}" placeholder="Your Email" required autocomplete="off"
                                 autofocus>
                         </div>
                         <div class="auth-password-box">
-                            <input class="form-input" type="password" id="password" name="password"
-                                placeholder="Password" required autocomplete="current-password">
-                            <i class="fa-solid fa-eye password-icon-eye" id="password-icon-eye"></i>
-                            <i class="fa-solid fa-eye-slash password-icon-eye-slash" id="password-icon-eye-slash"></i>
+                            <input class="form-input" type="password" id="registerPassword" name="password"
+                                placeholder="Password" required autocomplete="off">
+                            <i class="fa-solid fa-eye password-icon-eye" id="register-icon-eye"></i>
+                            <i class="fa-solid fa-eye-slash password-icon-eye-slash" id="register-icon-eye-slash"></i>
                         </div>
-                        <div class="auth-remember-box">
-                            <input class="auth-remember-checkbox" type="checkbox" name="remember" id="remember"
-                                {{ old('remember') ? 'checked' : '' }}>
-                            <span class="auth-remember-checkbox-label">Remember Me</span>
+                        <div class="auth-password-confirm-box">
+                            <input class="form-input" type="password" id="password-confirm" name="password_confirmation"
+                                placeholder="Password Confirm" required autocomplete="off">
+                            <i class="fa-solid fa-eye password-icon-eye" id="password-confirm-icon-eye"></i>
+                            <i class="fa-solid fa-eye-slash password-icon-eye-slash" id="password-confirm-icon-eye-slash"></i>
                         </div>
                         <div class="auth-button-box">
                             <button type="submit" class="auth-button btn btn-outline-secondary rounded-0 px-5 m-3">
-                                SIGN IN
+                                SIGN UP
                             </button>
                         </div>
-                        <div class="auth-forgot-password-box">
-                            @if (Route::has('password.request'))
-                                <a class="btn btn-link text-white" href="{{ route('password.request') }}">
-                                    {{ __('Forgot Your Password?') }}
-                                </a>
-                            @endif
-                        </div>
                         <div class="auth-switch-box">
-                            <p class="auth-switch-title">Don't Have Account?</p>
+                            <p class="auth-switch-title">Already Have Account?</p>
                             <div class="auth-switch">
-                                <a href="{{ route('register') }}" class="auth-switch-sign-up">
-                                    <i class="fa-solid fa-file-lines m-2"></i>
-                                    <span>Sign Up</span>
-                                </a>
+                                <button type="button" class="button-animation-black auth-switch-button"
+                                    data-bs-toggle="modal" data-bs-target="#loginForm">
+                                    <i class="fa-solid fa-file-lines m-2 icon"></i>
+                                    <span>Sign In</span>
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -102,7 +147,11 @@
     {{-- Topbar Modal Form End --}}
 
     {{-- Topbar Start --}}
-    <nav class="topbar px-5">
+    @if (Request::is('/'))
+        <nav class="topbar px-5">
+    @else
+        <nav class="topbar px-5 bg-primary-color">
+    @endif
         <div class="brand-box topbar-section">
             <img class="image" src="{{ asset('logo/brand-logo-white.webp') }}" alt="Brand Logo">
             <a class="text tx-secondary-color-1" href="{{ url('/') }}">TECH Solution</a>
@@ -127,7 +176,7 @@
         <div class="account-box topbar-section">
             @guest
                 <button type="button" class="button-animation-lime button-login btn rounded-0" data-bs-toggle="modal"
-                    data-bs-target="#modalForm">
+                    data-bs-target="#loginForm">
                     <span>Sign In</span>
                 </button>
             @else
@@ -135,14 +184,14 @@
                     <button class="btn dropdown-toggle tx-secondary-color-1" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         @if (Auth::user()->role != 'Pelamar' && isset(Auth::user()->pegawai))
-                            <img class="img rounded-circle"
-                                src="{{ asset('storage/' . Auth::user()->pegawai->foto) }}" alt="Profile Image">
+                            <img class="img rounded-circle" src="{{ asset('storage/' . Auth::user()->pegawai->foto) }}"
+                                alt="Profile Image">
                         @elseif (Auth::user()->role == 'Pelamar' && isset(Auth::user()->pelamar))
-                            <img class="img rounded-circle"
-                                src="{{ asset('storage/' . Auth::user()->pelamar->foto) }}" alt="Profile Image">
+                            <img class="img rounded-circle" src="{{ asset('storage/' . Auth::user()->pelamar->foto) }}"
+                                alt="Profile Image">
                         @else
-                            <img class="img rounded-circle "
-                                src="{{ asset('template/assets/images/faces/face18.jpg') }}" alt="Profile Image">
+                            <img class="img rounded-circle " src="{{ asset('template/assets/images/faces/face18.jpg') }}"
+                                alt="Profile Image">
                         @endif
                         @if (isset(Auth::user()->pegawai))
                             <span>{{ Auth::user()->pegawai->nama }}</span>

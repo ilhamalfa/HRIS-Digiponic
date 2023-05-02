@@ -28,9 +28,7 @@
 
     {{-- About Us Start --}}
     <div class="about">
-        <div class="background-image">
-            <img class="image" src="{{ asset('main/about/background.webp') }}" alt="">
-        </div>
+        <div class="background-color"></div>
         <div class="video-box">
             <video class="video" src="{{ asset('main/about/about.mp4') }}" autoplay loop muted></video>
         </div>
@@ -44,31 +42,25 @@
             </a>
         </div>
     </div>
-    {{-- About Us End --}}
-
     <div class="about-extra-space"></div>
+    {{-- About Us End --}}
 
     {{-- Product Start --}}
     <div class="product-introduction" id="product">
-        <div class="background-box">
-            <img class="background" src="{{ asset('main/product/background.webp') }}" alt="...">
+        <div class="background-color"></div>
+        <div class="left-side">
+            <h1 class="title tx-secondary-color-1">DISCOVER <br> OUR PRODUCT</h1>
+            <img class="project-image" src="{{ asset('main/product/project.webp') }}" alt="Project Image">
+            <a class="project-link" href="{{ url('/') }}">Our Lastest Project</a>
         </div>
-        <h1 class="title tx-secondary-color-1">
-            <span>DISCOVER</span>
-            <span>OUR PRODUCT</span>
-        </h1>
         <div class="text">
             <p class="description">
                 Our technology product is a software designed to help simplify work processes for companies or individuals.
             </p>
-            <a class="button-animation-black" href="">
+            <a class="button-animation-black button" href="">
                 <span>VISIT OUR SHOP</span>
                 <i class="icon fa-solid fa-arrow-up-right-from-square icon"></i>
             </a>
-        </div>
-        <div class="image-box">
-            <img class="project-image" src="{{ asset('main/product/project.webp') }}" alt="Project Image">
-            <a class="project-link" href="{{ url('/') }}">Our Lastest Project</a>
         </div>
     </div>
     <div class="product">
@@ -82,7 +74,7 @@
         <div class="button-buy-box">
             <a class="button-animation-white" href="">
                 <span>BUY NOW</span>
-                <i class="icon fa-solid fa-arrow-up-right-from-square icon"></i>
+                <i class="icon fa-brands fa-opencart icon"></i>
             </a>
         </div>
         <div class="button-watch-box">
@@ -97,9 +89,9 @@
     {{-- Team Start --}}
     <div class="team">
         <div class="title-box">
-            <span></span>
+            <span class="span-1"></span>
             <div class="title">OUR TEAM</div>
-            <span></span>
+            <span class="span-2"></span>
         </div>
         <div class="background-box">
             <h1 class="bg-text-1">OUR TEAM</h1>
@@ -130,7 +122,7 @@
         </div>
         <div class="description-box section">
             <p class="description">Build a career that builds your future, right now!</p>
-            <a class="button-animation-white" href="{{ url('/') }}">
+            <a class="button-animation-white button" href="{{ url('/') }}">
                 <span>JOIN</span>
                 <i class="icon fa-solid fa-arrow-up-right-from-square icon"></i>
             </a>

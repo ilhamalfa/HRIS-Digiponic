@@ -5,10 +5,6 @@ let eyeConfirm = document.getElementById('password-confirm-icon-eye')
 let inputPasswordType = document.getElementById('password')
 let inputPasswordConfirmType = document.getElementById('password-confirm')
 
-$(document).ready(function () {
-    $('.preloader').delay('1500').fadeOut();
-})
-
 eyeSlash.addEventListener('click', function () {
     eyeSlash.style.display = 'none'
     eye.style.display = 'block'
