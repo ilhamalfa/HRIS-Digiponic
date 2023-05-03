@@ -1955,9 +1955,14 @@ a {
     /* Main End */
 
     /* Career Start */
-    .career-vacancy-box {
-        height: 100vh;
+    .vacancy-title {
+        color: var(--secondary-color-1);
+        font-size: 2rem;
+        font-weight: 500;
+        text-align: center;
+        margin-bottom: 1em;
     }
+    
     .filter-buton {
         background: none;
         border: none;
@@ -2009,13 +2014,28 @@ a {
         margin: auto;
     }
 
+    .career-vacancy-box {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: start;
+        flex-wrap: wrap;
+        height: 100vh;
+    }
+
+    .vacancy-card-link-box {
+        width: 30%;
+    }
+
     .vacancy-card-link {
         background: none;
     }
 
     .vacancy-card {
+        /* background-color: var(--secondary-color-1); */
         position: relative;
-        background: none;
+        background: none;   
+        height: 200px;
         border-bottom: 1px solid var(--secondary-color-1);
         transition: .5s;
     }
@@ -2048,6 +2068,10 @@ a {
 
     .vacancy-date {
         font-size: .8rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
     }
 
     .apply-text {
@@ -2096,6 +2120,38 @@ a {
 
     .vacancy-button-box {
         align-self: center;
+    }
+
+    .vacancy-modal-body-box {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: start;
+    }
+
+    .detail-box {
+        width: 60%;
+    }
+
+    .vacancy-form-box {
+        width: 40%;
+    }
+
+    .vision-mission-box {
+        background-color: var(--secondary-color-1);
+        margin: 0 5em;
+        padding: 2em;
+    }
+
+    .vision-title {
+        color: var(--primary-color);
+        font-size: 1.5rem;
+        margin-bottom: .5em;
+    }
+
+    .vision {
+        color: var(--primary-color);
+        margin-left: .5em;
     }
     /* Career End */
 

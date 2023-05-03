@@ -7,6 +7,7 @@ use App\Http\Controllers\IndoRegionController;
 use App\Http\Controllers\PelamarController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\SuperAdminController;
+use Illuminate\Routing\Controller as RoutingController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -33,16 +34,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Landing Page
 Route::get('/rutelogin', [Controller::class, 'rutelogin'])->name('rutelogin');
 
-Route::get('struktur', [Controller::class, 'struktur'])->name('struktur');
-
 Route::get('/career', [Controller::class, 'career'])->name('career');
 
-Route::get('career/vacancy/detail/{id}', [Controller::class, 'careerVacancyDetail']);
+Route::get('/career/search', [Controller::class, 'search']);
 
-Route::get('aboutus', [Controller::class, 'aboutus'])->name('aboutus');
-
-Route::get('product', [Controller::class, 'product'])->name('product');
-
+Route::get('/career/filter', [Controller::class, 'filter']);
 
 Route::get('/login-pegawai', function () {
     return view('auth.login-pegawai');
@@ -63,6 +59,7 @@ Route::get('/login-pegawai', function () {
     Route::get('/profile/edit-data-pelamar', [PelamarController::class, 'editPelamar']);
 
     Route::post('/profile/edit-data-pelamar/update', [PelamarController::class, 'updatePelamar']);
+
 
 // Super Admin
 // Route Super Admin Start

@@ -119,10 +119,12 @@
                             <i class="fa-solid fa-eye-slash password-icon-eye-slash" id="register-icon-eye-slash"></i>
                         </div>
                         <div class="auth-password-confirm-box">
-                            <input class="form-input" type="password" id="password-confirm" name="password_confirmation"
-                                placeholder="Password Confirm" required autocomplete="off">
+                            <input class="form-input" type="password" id="password-confirm"
+                                name="password_confirmation" placeholder="Password Confirm" required
+                                autocomplete="off">
                             <i class="fa-solid fa-eye password-icon-eye" id="password-confirm-icon-eye"></i>
-                            <i class="fa-solid fa-eye-slash password-icon-eye-slash" id="password-confirm-icon-eye-slash"></i>
+                            <i class="fa-solid fa-eye-slash password-icon-eye-slash"
+                                id="password-confirm-icon-eye-slash"></i>
                         </div>
                         <div class="auth-button-box">
                             <button type="submit" class="auth-button btn btn-outline-secondary rounded-0 px-5 m-3">
@@ -149,90 +151,48 @@
     {{-- Topbar Start --}}
     @if (Request::is('/'))
         <nav class="topbar px-5">
-    @else
-        <nav class="topbar px-5 bg-primary-color">
+        @else
+            <nav class="topbar px-5 bg-primary-color">
     @endif
-        <div class="brand-box topbar-section">
-            <img class="image" src="{{ asset('logo/brand-logo-white.webp') }}" alt="Brand Logo">
-            <a class="text tx-secondary-color-1" href="{{ url('/') }}">TECH Solution</a>
-        </div>
-        <div class="menu-box topbar-section">
-            <a class="link tx-secondary-color-1" href="{{ url('/') }}">
-                <span>Home</span>
+    <div class="brand-box topbar-section">
+        <img class="image" src="{{ asset('logo/brand-logo-white.webp') }}" alt="Brand Logo">
+        <a class="text tx-secondary-color-1" href="{{ url('/') }}">TECH Solution</a>
+    </div>
+    <div class="menu-box topbar-section">
+        <a class="link tx-secondary-color-1" href="{{ url('/') }}">
+            <span>Home</span>
+        </a>
+        <a class="link tx-secondary-color-1" href="{{ url('/career') }}">
+            <span>Career</span>
+        </a>
+        <a class="link tx-secondary-color-1" href="{{ url('/') }}">
+            <span>About</span>
+        </a>
+        <a class="link tx-secondary-color-1" href="{{ url('/') }}">
+            <span>Product</span>
+        </a>
+        <a class="link tx-secondary-color-1" href="{{ url('/') }}">
+            <span>Team</span>
+        </a>
+    </div>
+    <div class="account-box topbar-section">
+        @guest
+            <button type="button" class="button-animation-lime button-login btn rounded-0" data-bs-toggle="modal"
+                data-bs-target="#loginForm">
+                <span>Sign In</span>
+            </button>
+        @else
+            <a class="tx-secondary-color-1 log-out" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                <i class="fa-solid fa-right-from-bracket text-danger me-2"></i>
+                <span class="text-danger">Log Out</span>
             </a>
-            <a class="link tx-secondary-color-1" href="{{ url('/career') }}">
-                <span>Career</span>
-            </a>
-            <a class="link tx-secondary-color-1" href="{{ url('/') }}">
-                <span>About</span>
-            </a>
-            <a class="link tx-secondary-color-1" href="{{ url('/') }}">
-                <span>Product</span>
-            </a>
-            <a class="link tx-secondary-color-1" href="{{ url('/') }}">
-                <span>Team</span>
-            </a>
-        </div>
-        <div class="account-box topbar-section">
-            @guest
-                <button type="button" class="button-animation-lime button-login btn rounded-0" data-bs-toggle="modal"
-                    data-bs-target="#loginForm">
-                    <span>Sign In</span>
-                </button>
-            @else
-                <div class="dropdown">
-                    <button class="btn dropdown-toggle tx-secondary-color-1" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        @if (Auth::user()->role != 'Pelamar' && isset(Auth::user()->pegawai))
-                            <img class="img rounded-circle" src="{{ asset('storage/' . Auth::user()->pegawai->foto) }}"
-                                alt="Profile Image">
-                        @elseif (Auth::user()->role == 'Pelamar' && isset(Auth::user()->pelamar))
-                            <img class="img rounded-circle" src="{{ asset('storage/' . Auth::user()->pelamar->foto) }}"
-                                alt="Profile Image">
-                        @else
-                            <img class="img rounded-circle " src="{{ asset('template/assets/images/faces/face18.jpg') }}"
-                                alt="Profile Image">
-                        @endif
-                        @if (isset(Auth::user()->pegawai))
-                            <span>{{ Auth::user()->pegawai->nama }}</span>
-                        @elseif (isset(Auth::user()->pelamar) && Auth::user()->role == 'Pelamar')
-                            <span>{{ Auth::user()->pelamar->nama }}</span>
-                        @else
-                            <span>{{ Auth::user()->email }}</span>
-                        @endif
-                    </button>
-                    <ul class="dropdown-menu bg-optional-color-2">
-                        @if (Auth::user()->role == 'Pelamar')
-                            <li>
-                                <a class="dropdown-item tx-secondary-color-1"
-                                    href="{{ url('/pelamar/daftar-lamaran/') }}">
-                                    <i class="fa-solid fa-file-pen text-white me-2"></i>
-                                    <span>Applied Vacancy</span>
-                                </a>
-                            </li>
-                        @endif
-                        <li>
-                            <a class="dropdown-item tx-secondary-color-1 setting" href="{{ url('/') }}">
-                                <img class="gif me-2" src="{{ asset('layout/landingpage/topbar/settings.gif') }}"
-                                    alt="...">
-                                <span>Settings</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item tx-secondary-color-1 log-out" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
-                                <i class="fa-solid fa-right-from-bracket text-danger me-2"></i>
-                                <span class="text-danger">Log Out</span>
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-            @endguest
-        </div>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+        @endguest
+    </div>
     </nav>
     {{-- Topbar End --}}
 
