@@ -6,24 +6,24 @@
     {{-- Search --}}
     <div class="row p-5 mt-5 justify-content-md-center">
         <div class="col-lg-1">
-            <form action="" method="get">
-                <div class="dropdown">
-                    <button class="btn dropdown-toggle filter-buton" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <i class="fa-solid fa-filter text-white"></i>
-                        <i class="fa-solid fa-sort text-white"></i>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <button class="dropdown-item" type="submit" value="lastest" name="filter">Lastest</button>
-                        </li>
-                        <li>
-                            <button class="dropdown-item" type="submit" value="deadline" name="filter">Deadline
-                                Date</button>
-                        </li>
-                    </ul>
-                </div>
-            </form>
+            <div class="dropdown">
+                <button class="btn dropdown-toggle filter-buton" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <i class="fa-solid fa-filter text-white"></i>
+                    <i class="fa-solid fa-sort text-white"></i>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="dropdown-item" href="{{ url('career?status=' . now()->toDateTimeString()) }}">
+                            Lastest
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{{ url('career?status=deadline') }}">
+                            Deadline Date
+                        </a>
+                </ul>
+            </div>
         </div>
         <div class="col-lg-6">
             <form class="nav-link d-none d-lg-flex search" action="" method="get">
