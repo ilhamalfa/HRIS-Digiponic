@@ -27,7 +27,7 @@ class Controller extends BaseController
 
     public function career()
     {
-        $datas = Lowongan::paginate(5);
+        $datas = Lowongan::filter(request(['search']))->paginate(5);
         return view('career.career', compact('datas'));
     }              
 
