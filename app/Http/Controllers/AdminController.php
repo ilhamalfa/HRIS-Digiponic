@@ -58,12 +58,13 @@ class AdminController extends Controller
 
     public function konfirmasiCuti($id, $konfirmasi){
         $data = Cuti::find($id);
-        $user = User::find($data->user_id);
+        $user = User::find($data->user_id_1);
         $jml_cuti = date_diff(date_create($data->tanggal_mulai), date_create($data->tanggal_berakhir))->days + 1;
 
         if($konfirmasi == 'Accept'){
             $data->update([
-                'status' => 'Accepted'
+                'status' => 'Accepted',
+                'user_id_2' => Auth::user()->id
             ]);
 
             $user->update([
@@ -71,7 +72,8 @@ class AdminController extends Controller
             ]);
         }else if($konfirmasi == 'Decline'){
             $data->update([
-                'status' => 'Declined'
+                'status' => 'Declined',
+                'user_id_2' => Auth::user()->id
             ]);
         }
 
@@ -100,11 +102,13 @@ class AdminController extends Controller
 
         if($konfirmasi == 'Accept'){
             $data->update([
-                'status' => 'Accepted'
+                'status' => 'Accepted',
+                'user_id_2' => Auth::user()->id
             ]);
         }else if($konfirmasi == 'Decline'){
             $data->update([
-                'status' => 'Declined'
+                'status' => 'Declined',
+                'user_id_2' => Auth::user()->id
             ]);
         }
 
@@ -218,7 +222,7 @@ class AdminController extends Controller
 
     public function terima($id, Request $request){
         $data = Lamaran::find($id);
-        $user = User::find($data->user_id);
+        $user = User::find($data->user_id_1);
 
         $validate = $request->validate([
             'nik' => 'required',

@@ -301,21 +301,6 @@
                             </div>
                         </div>
 
-                        {{-- Digital Signature --}}
-                        <div class="row mb-3">
-                            <label for="signature" class="col-md-4 col-form-label text-md-end">{{ __('Digital Signature') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="signature" type="file" class="form-control text-light @error('signature') is-invalid @enderror" name="signature" value="{{ old('signature') }}">
-
-                                @error('signature')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
                         {{-- Password --}}
                         <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>

@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('alasan');
             $table->string('bukti');
             $table->string('status');
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id_1')->constrained('users');
+            $table->foreignId('user_id_2')->nullable()->constrained('users');
             $table->timestamps();
         });
     }

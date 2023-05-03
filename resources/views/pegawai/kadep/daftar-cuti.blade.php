@@ -69,15 +69,15 @@
                             @foreach ($datas as $data)
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
-                                <td>{{ $data->user->nik }}</td>
-                                <td>{{ $data->user->nama}}</td>
+                                <td>{{ $data->user1->nik }}</td>
+                                <td>{{ $data->user1->nama}}</td>
                                 <td>{{ $data->tanggal_mulai }}</td>
                                 <td>{{ $data->tanggal_berakhir }}</td>
                                 <td>{{ date_diff(date_create($data->tanggal_mulai), date_create($data->tanggal_berakhir))->days + 1 . " Hari" }}</td>
                                 <td>{{ $data->alasan }}</td>
                                 <td>
                                     @if ($data->status == 'Accepted')
-                                        <a href="" class="btn btn-primary">SK Izin</a>
+                                        <a href="{{ url('pegawai/cuti/sk/' . $data->id) }}" class="btn btn-primary">SK Izin</a>
                                     @elseif($data->status == 'Declined')
                                         <button disabled class="btn btn-danger">Declined</button>
                                     @else

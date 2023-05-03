@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->date('tanggal_resign');
             $table->string('status_resign');
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id_1')->constrained('users');
+            $table->foreignId('user_id_2')->nullable()->constrained('users');
             $table->timestamps();
         });
     }

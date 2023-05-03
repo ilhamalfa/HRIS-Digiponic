@@ -42,7 +42,6 @@ class SuperAdminController extends Controller
             'village_id' => 'required',
             'alamat' => 'required',
             'foto' => 'required|image',
-            'signature' => 'required|image',
             'password' => 'required|min:8|confirmed'
         ]);
 
