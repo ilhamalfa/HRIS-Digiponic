@@ -137,9 +137,9 @@
                                             <div class="modal-body">
                                                 <p>Position : <span class="text-white">{{ $data->posisi }}</span></p>
                                                 <p>Qualification :</p>
-                                                <p class="mx-2 text-white">{{ $data->kualifikasi }}</p>
+                                                <p class="mx-2 text-white">{!! $data->kualifikasi !!}</p>
                                                 <p>Description :</p>
-                                                <p class="mx-2 text-white">{{ $data->deskripsi }}</p>
+                                                <p class="mx-2 text-white">{!! $data->deskripsi !!}</p>
                                                 <p>Deadline Date :</p>
                                                 <p class="mx-2 text-white">{{ date('d F Y', strtotime($data->tanggal)) }}</p>
                                                 <p>Registrants :</p>

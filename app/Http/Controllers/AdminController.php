@@ -165,6 +165,7 @@ class AdminController extends Controller
     }
 
     public function storeLowongan(Request $request){
+        // dd($request);
         $validate = $request->validate([
             'posisi' => 'required',
             'tanggal' => 'required|after:yesterday',
