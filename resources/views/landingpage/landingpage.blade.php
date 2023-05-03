@@ -27,7 +27,7 @@
     {{-- Opening End --}}
 
     {{-- About Us Start --}}
-    <div class="about">
+    <div class="about" id="about">
         <div class="background-color"></div>
         <div class="video-box">
             <video class="video" src="{{ asset('main/about/about.mp4') }}" autoplay loop muted></video>
