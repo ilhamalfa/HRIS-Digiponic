@@ -184,19 +184,19 @@ class AdminController extends Controller
         $data = Pelamar::find($id);
         // dd($data->lowongan->posisi);
 
-        if($status == 'Menunggu'){
+        if($status == 'Wawancara'){
             $status = 'Wawancara';
             $subject = 'Lanjut Tahap Wawancara';
             $body = 'Selamat, untuk sdr '. $data->nama .', Anda berhasil Lolos ke tahap selanjutnya. Dimohon untuk menunggu email selanjutnya yang berisikan link untuk melakukan tahap wawancara. Jika sdr ada pertanyaan, dapat menghubungi Admin atau dapat mengirim email ke HR@Techsolution.com, Terima kasih.';
-        }else if($status == 'Wawancara'){
+        }else if($status == 'Psikotest'){
             $status = 'Psikotest';
             $subject = 'Lanjut Tahap Psikotest';
             $body = 'Selamat, untuk sdr '. $data->nama .', Anda berhasil Lolos ke tahap selanjutnya. Dimohon untuk menunggu email selanjutnya yang berisikan link untuk melakukan tahap psikotest. Jika sdr ada pertanyaan, dapat menghubungi Admin atau dapat mengirim email ke HR@Techsolution.com, Terima kasih.';
-        }else if($status == 'Psikotest'){
+        }else if($status == 'Offering'){
             $status = 'Offering';
             $subject = 'Lanjut Tahap Offering';
             $body = 'Selamat, untuk sdr '. $data->nama .', Anda berhasil Lolos ke tahap selanjutnya. Dimohon untuk menunggu email selanjutnya mengenai hasil dari proses rekruitment ini. Jika sdr ada pertanyaan, dapat menghubungi Admin atau dapat mengirim email ke HR@Techsolution.com, Terima kasih.';
-        }else if($status == 'Offering'){
+        }else if($status == 'Terima'){
             $status = 'Diterima';
             $subject = 'Selamat Telah Diterima';
             $body = 'Selamat, untuk sdr '. $data->nama .', Anda berhasil Diterima pada posisi '. $data->lowongan->posisi .'. Dimohon untuk menunggu email selanjutnya yang berisikan tanggal masuk dan daftar berkas-berkas yang wajib dibawa. Jika sdr ada pertanyaan, dapat menghubungi Admin atau dapat mengirim email ke HR@Techsolution.com, Terima kasih.';
@@ -214,9 +214,9 @@ class AdminController extends Controller
 
         Mail::to($data->email)->send(new SendConfirmMail($maildata));
 
-        // $data->update([
-        //     'status' => $status
-        // ]);
+        $data->update([
+            'status' => $status
+        ]);
 
         return redirect()->back();
     }

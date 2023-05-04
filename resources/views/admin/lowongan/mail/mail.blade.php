@@ -1,6 +1,6 @@
 <x-mail::message>
 {{-- Greeting --}}
-{{-- # @lang($mailData['greeting']) --}}
+# @lang($mailData['greeting'])
 
 {{-- Intro Lines --}}
 {{-- @foreach ($introLines as $line)

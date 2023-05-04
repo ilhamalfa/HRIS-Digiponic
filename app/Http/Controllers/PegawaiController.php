@@ -270,7 +270,7 @@ class PegawaiController extends Controller
 
     // Perizinan
     public function daftarIzin(){
-        $datas = Perizinan::where('user_id', Auth::user()->id)->get();
+        $datas = Perizinan::where('user_id_1', Auth::user()->id)->get();
 
         return view('pegawai.cuti-perizinan.daftar-izin', [
             'datas' => $datas,
@@ -321,7 +321,7 @@ class PegawaiController extends Controller
     }
 
     public function resign(){
-        $datas = Resign::where('user_id', Auth::user()->id)->get();
+        $datas = Resign::where('user_id_1', Auth::user()->id)->get();
 
         return view('pegawai.resign.daftar-resign', [
             'datas' => $datas

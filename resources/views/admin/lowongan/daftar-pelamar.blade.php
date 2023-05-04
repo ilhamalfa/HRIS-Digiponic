@@ -97,13 +97,13 @@
                                 <td>
                                     <a href="{{ url('pelamar-detail/cv/' . $data->id) }}" class="btn btn-primary" target="_blank">CV Detail</a>
                                     @if ($data->status == 'Menunggu')
-                                        <a href="{{ url('data-lowongan/pelamar-detail/ubah-status/' . $data->id .'/Menunggu') }}" class="btn btn-success">Interview</a>
+                                        <a href="{{ url('data-lowongan/pelamar-detail/ubah-status/' . $data->id .'/Wawancara') }}" class="btn btn-success">Interview</a>
                                     @elseif ($data->status == 'Wawancara')
-                                        <a href="{{ url('data-lowongan/pelamar-detail/ubah-status/' . $data->id .'/Wawancara') }}" class="btn btn-success">Psikotest</a>
+                                        <a href="{{ url('data-lowongan/pelamar-detail/ubah-status/' . $data->id .'/Psikotest') }}" class="btn btn-success">Psikotest</a>
                                     @elseif ($data->status == 'Psikotest')
-                                        <a href="{{ url('data-lowongan/pelamar-detail/ubah-status/' . $data->id .'/Psikotest') }}" class="btn btn-success">Offering</a>
+                                        <a href="{{ url('data-lowongan/pelamar-detail/ubah-status/' . $data->id .'/Offering') }}" class="btn btn-success">Offering</a>
                                     @elseif ($data->status == 'Offering')
-                                        <a href="#" class="btn btn-success">Accept</a>
+                                        <a href="{{ url('data-lowongan/pelamar-detail/ubah-status/' . $data->id .'/Terima') }}" class="btn btn-success">Accept</a>
                                     @endif
                                     @if ($data->status != 'Diterima' && $data->status != 'Ditolak')
                                         <a href="{{ url('data-lowongan/pelamar-detail/ubah-status/' . $data->id .'/Tolak') }}" class="btn btn-danger">Decline</a>

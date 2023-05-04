@@ -117,7 +117,7 @@
                                 </div>
                                 <div class="vacancy-form-box">
                                     <form class="vacancy-form" method="POST"
-                                        action={{ url('/pelamar/input-data-pelamar/store') }}"" enctype="multipart/form-data">
+                                        action={{ url('/career/apply/'. $data->id) }} enctype="multipart/form-data">
                                         @csrf
                                         <p class="mb-5 d-flex">
                                             <i class="fa-solid fa-circle-info mx-2"></i>
