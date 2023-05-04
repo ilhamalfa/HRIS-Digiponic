@@ -14,13 +14,18 @@
                 </button>
                 <ul class="dropdown-menu">
                     <li>
-                        <a class="dropdown-item" href="{{ url('career?status=' . now()->toDateTimeString()) }}">
-                            Lastest
+                        <a class="dropdown-item" href="{{ url('career?orderBy=desc') }}">
+                            Deadline &nbsp
+                            <i class="fa-solid fa-arrow-down"></i>
+                        </a>
+                        <a class="dropdown-item" href="{{ url('career?orderBy=asc') }}">
+                            Deadline &nbsp
+                            <i class="fa-solid fa-arrow-up"></i>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="{{ url('career?status=deadline') }}">
-                            Deadline Date
+                        <a class="dropdown-item" href="{{ url('career?closed=true') }}">
+                            Closed
                         </a>
                 </ul>
             </div>
@@ -49,11 +54,11 @@
         <div class="career-vacancy-box">
             @foreach ($datas as $data)
                 <div class="vacancy-card-link-box">
-                    <a class="vacancy-card-link" data-bs-toggle="modal" data-bs-target="#apply{{ $data->id }}">
+                    <a class="vacancy-card-link" data-bs-toggle="modal" data-bs-target="#apply{{ $loop->iteration }}">
                         <div class="card vacancy-card mx-3 my-2">
                             <div class="card-body vacancy-card-body text-white">
                                 <h6 class="vacancy-position-name">{{ $data->posisi }}</h6>
-                                <p class="vacancy-kualification">{!! \Illuminate\Support\Str::limit($data->deskripsi, 50, $end='...') !!}</p>
+                                <p class="vacancy-kualification">{!! substr(strip_tags($data->deskripsi), 0, 30) . '...' !!}</p>
                                 <p class="vacancy-date">
                                     <span class="my-2 tx-secondary-color-2">Posted On
                                         {{ date('d F Y', strtotime($data->created_at)) }}</span>
@@ -65,7 +70,9 @@
                         </div>
                     </a>
                 </div>
-                <div class="modal fade" id="apply{{ $data->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                
+                {{-- Modal --}}
+                <div class="modal fade" id="apply{{ $loop->iteration }}" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-xl">
                         <div class="modal-content bg-secondary-color-1 vacancy-modal-box ">
