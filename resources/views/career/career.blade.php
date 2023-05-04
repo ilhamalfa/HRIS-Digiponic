@@ -53,6 +53,7 @@
 
         <div class="career-vacancy-box">
             @foreach ($datas as $data)
+                @if ($data->tanggal > now()->toDateString())
                 <div class="vacancy-card-link-box">
                     <a class="vacancy-card-link" data-bs-toggle="modal" data-bs-target="#apply{{ $loop->iteration }}">
                         <div class="card vacancy-card mx-3 my-2">
@@ -70,6 +71,25 @@
                         </div>
                     </a>
                 </div>
+                @else
+                <div class="vacancy-card-link-box">
+                    <a class="vacancy-card-link">
+                        <div class="card vacancy-card mx-3 my-2">
+                            <div class="card-body vacancy-card-body text-white">
+                                <h6 class="vacancy-position-name">{{ $data->posisi }}</h6>
+                                <p class="vacancy-kualification">{!! substr(strip_tags($data->deskripsi), 0, 30) . '...' !!}</p>
+                                <p class="vacancy-date">
+                                    <span class="my-2 tx-secondary-color-2">Posted On
+                                        {{ date('d F Y', strtotime($data->created_at)) }}</span>
+                                    <span class="my-2 tx-secondary-color-3">Ended
+                                        {{ date('d F Y', strtotime($data->tanggal)) }}</span>
+                                </p>
+                                <p class="apply-text bg-danger">Ended</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                @endif
                 
                 {{-- Modal --}}
                 <div class="modal fade" id="apply{{ $loop->iteration }}" tabindex="-1" aria-labelledby="exampleModalLabel"
