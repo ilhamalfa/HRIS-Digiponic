@@ -11,6 +11,8 @@ use App\Models\Regency;
 use App\Models\Resign;
 use App\Models\User;
 use App\Models\Village;
+// use Barryvdh\DomPDF\PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -318,6 +320,44 @@ class PegawaiController extends Controller
         $data = Perizinan::find($id);
         
         return Storage::response($data->bukti);
+    }
+
+    public function cetakSK($sk, $id){
+        if($sk == 'cuti'){
+            $data_sk = Cuti::find($id);
+        }else if($sk == 'izin'){
+            $data_sk = Perizinan::find($id);
+        }else if($sk == 'resign'){
+            $data_sk = Resign::find($id);
+        }
+
+        // dd($data_sk->user_1);
+        // dd($data_sk);
+
+        // $pdf = app('dompdf.wrapper');
+        // $pdf->loadView('view');
+        $data = [
+            'no_surat' => $data_sk->id . '-' . $data_sk->tanggal_mulai . '-' . $data_sk->user1->nik . '-' . $data_sk->user_id_1,
+            'nama' => $data_sk->user1->nama,
+            'nik' => $data_sk->user1->nik,
+            'golongan' => $data_sk->user1->golongan,
+            'department' => $data_sk->user1->department,
+            'digital_signature' => $data_sk->user1->digital_signature,
+            'tanggal_mulai' => $data_sk->tanggal_mulai,
+            'tanggal_berakhir' => $data_sk->tanggal_berakhir,
+            'alasan' => $data_sk->alasan,
+            'penyetuju_golongan' => $data_sk->user2->golongan,
+            'penyetuju_department' => $data_sk->user2->department,
+            'penyetuju_nama' => $data_sk->user2->nama,
+            'penyetuju_nik' => $data_sk->user2->nik,
+            'penyetuju_signature' => $data_sk->user2->digital_signature,
+        ];
+
+        // dd($data['tanggal_mulai']);
+
+        $pdf = PDF::loadView('pegawai.cuti-perizinan.surat.sk-cuti', $data);
+
+        return $pdf->download('surat SK '. $sk .'-'. Auth::user()->nama . '-' . Auth::user()->nik. '.pdf');
     }
 
     public function resign(){

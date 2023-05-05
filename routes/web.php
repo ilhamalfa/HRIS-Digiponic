@@ -161,7 +161,8 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin,Pegawai'])-
     Route::post('pegawai/resign/ajukan-resign/proses', [PegawaiController::class, 'prosesResign']);
 
     // SK
-    Route::get('pegawai/cuti/sk/{id}', [PegawaiController::class, 'skCuti']);
+    // Route::get('pegawai/cuti/sk/{id}', [PegawaiController::class, 'skCuti']);
+    Route::get('pegawai/cetak-sk/{sk}/{id}',[PegawaiController::class, 'cetakSK']);
 
 });
 

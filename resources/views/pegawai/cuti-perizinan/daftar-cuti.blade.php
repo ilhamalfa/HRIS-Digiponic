@@ -39,7 +39,7 @@
                                 <td>{{ $data->status }}</td>
                                 <td>
                                     @if ($data->status == 'Accepted')
-                                        <a href="" class="btn btn-primary">Cetak SK Izin</a>
+                                        <a href="{{url('pegawai/cetak-sk/cuti/' . $data->id)}}" class="btn btn-primary">Cetak SK Cuti</a>
                                     @else
                                         <button class="btn btn-primary" disabled>Cetak SK Izin</button>
                                     @endif
