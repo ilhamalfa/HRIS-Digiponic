@@ -198,45 +198,50 @@
     {{-- Main Content End --}}
 
     {{-- Footer Start --}}
-    <footer class="footer">
-        <div class="footer-left-side">
-            <div class="footer-logo-box">
-                <img class="footer-brand-logo" src="{{ asset('main/footer/brand-logo.webp') }}" alt="Footer Logo">
+    @if (Request::is('/'))
+        <footer class="footer">
+            <div class="footer-left-side">
+                <div class="footer-logo-box">
+                    <img class="footer-brand-logo" src="{{ asset('main/footer/brand-logo.webp') }}"
+                        alt="Footer Logo">
+                </div>
+                <div class="footer-tagline-box">
+                    <p class="footer-tagline">Modern Problem <br> Need Modern Solution</p>
+                </div>
+                <div class="footer-social-media-box">
+                    <a class="footer-social-media" href="{{ url('/') }}">
+                        <i class="fa-brands fa-twitter twitter"></i>
+                    </a>
+                    <a class="footer-social-media" href="{{ url('/') }}">
+                        <i class="fa-brands fa-instagram instagram"></i>
+                    </a>
+                    <a class="footer-social-media" href="{{ url('/') }}">
+                        <i class="fa-brands fa-facebook-f facebook"></i>
+                    </a>
+                    <a class="footer-social-media" href="{{ url('/') }}">
+                        <i class="fa-brands fa-linkedin-in linkedin"></i>
+                    </a>
+                </div>
             </div>
-            <div class="footer-tagline-box">
-                <p class="footer-tagline">Modern Problem <br> Need Modern Solution</p>
+            <div class="footer-right-side">
+                <div class="footer-map">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.833149015558!2d112.6390140743083!3d-7.912491878754486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd62b0ceafe747d%3A0xe99b9f79753df0b2!2sPT%20Digiponic%20Maju%20Jaya!5e0!3m2!1sid!2sid!4v1683252672527!5m2!1sid!2sid"
+                        width="500" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <div class="footer-contact-box">
+                    <h6 class="footer-contact tx-secondary-color-1 text-end my-2">Contact</h6>
+                    <p class="footer-phone tx-secondary-color-1 text-end my-2 me-2">Phone +62 888-8888-8888</p>
+                    <p class="footer-email tx-secondary-color-1 text-end my-2 me-2">Email techsolution@gmail.com</p>
+                    <p class="footer-address tx-secondary-color-1 text-end my-2 me-2">Jl. Perusahaan Raya no. 27
+                        Bodosari, <br> Tanjungtirto, Bodosari, Kabupaten,
+                        <br> Kec. Singosari, Kabupaten Malang, <br> Jawa Timur 65153
+                    </p>
+                </div>
             </div>
-            <div class="footer-social-media-box">
-                <a class="footer-social-media" href="{{ url('/') }}">
-                    <i class="fa-brands fa-twitter twitter"></i>
-                </a>
-                <a class="footer-social-media" href="{{ url('/') }}">
-                    <i class="fa-brands fa-instagram instagram"></i>
-                </a>
-                <a class="footer-social-media" href="{{ url('/') }}">
-                    <i class="fa-brands fa-facebook-f facebook"></i>
-                </a>
-                <a class="footer-social-media" href="{{ url('/') }}">
-                    <i class="fa-brands fa-linkedin-in linkedin"></i>
-                </a>
-            </div>
-        </div>
-        <div class="footer-right-side">
-            <div class="footer-map">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.833149015558!2d112.6390140743083!3d-7.912491878754486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd62b0ceafe747d%3A0xe99b9f79753df0b2!2sPT%20Digiponic%20Maju%20Jaya!5e0!3m2!1sid!2sid!4v1683252672527!5m2!1sid!2sid"
-                    width="500" height="300" style="border:0;" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-            <div class="footer-contact-box">
-                <h6 class="footer-contact tx-secondary-color-1 text-end my-2">Contact</h6>
-                <p class="footer-phone tx-secondary-color-1 text-end my-2 me-2">Phone +62 888-8888-8888</p>
-                <p class="footer-email tx-secondary-color-1 text-end my-2 me-2">Email techsolution@gmail.com</p>
-                <p class="footer-address tx-secondary-color-1 text-end my-2 me-2">Jl. Perusahaan Raya no. 27 Bodosari, <br> Tanjungtirto, Bodosari, Kabupaten,
-                    <br> Kec. Singosari, Kabupaten Malang, <br> Jawa Timur 65153</p>
-            </div>
-        </div>
-    </footer>
+        </footer>
+    @endif
     <div class="footer-mini">
         &copy; Copyright 2023 Tech Solution Indonesia | Solid Solid Solid | Allright Reserved
     </div>
