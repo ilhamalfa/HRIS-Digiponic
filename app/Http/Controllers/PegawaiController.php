@@ -336,28 +336,31 @@ class PegawaiController extends Controller
 
         // $pdf = app('dompdf.wrapper');
         // $pdf->loadView('view');
-        $data = [
-            'no_surat' => $data_sk->id . '-' . $data_sk->tanggal_mulai . '-' . $data_sk->user1->nik . '-' . $data_sk->user_id_1,
-            'nama' => $data_sk->user1->nama,
-            'nik' => $data_sk->user1->nik,
-            'golongan' => $data_sk->user1->golongan,
-            'department' => $data_sk->user1->department,
-            'digital_signature' => $data_sk->user1->digital_signature,
-            'tanggal_mulai' => $data_sk->tanggal_mulai,
-            'tanggal_berakhir' => $data_sk->tanggal_berakhir,
-            'alasan' => $data_sk->alasan,
-            'penyetuju_golongan' => $data_sk->user2->golongan,
-            'penyetuju_department' => $data_sk->user2->department,
-            'penyetuju_nama' => $data_sk->user2->nama,
-            'penyetuju_nik' => $data_sk->user2->nik,
-            'penyetuju_signature' => $data_sk->user2->digital_signature,
-        ];
+        if($sk == 'cuti' || $sk == 'izin'){
+            $data = [
+                'no_surat' => $data_sk->id . '-' . $data_sk->tanggal_mulai . '-' . $data_sk->user1->nik . '-' . $data_sk->user_id_1,
+                'nama' => $data_sk->user1->nama,
+                'nik' => $data_sk->user1->nik,
+                'golongan' => $data_sk->user1->golongan,
+                'department' => $data_sk->user1->department,
+                'digital_signature' => $data_sk->user1->digital_signature,
+                'tanggal_mulai' => $data_sk->tanggal_mulai,
+                'tanggal_berakhir' => $data_sk->tanggal_berakhir,
+                'alasan' => $data_sk->alasan,
+                'penyetuju_golongan' => $data_sk->user2->golongan,
+                'penyetuju_department' => $data_sk->user2->department,
+                'penyetuju_nama' => $data_sk->user2->nama,
+                'penyetuju_nik' => $data_sk->user2->nik,
+                'penyetuju_signature' => $data_sk->user2->digital_signature,
+                'sk' => $sk,
+            ];
+    
+            $pdf = PDF::loadView('pegawai.cuti-perizinan.surat.sk', $data);
+    
+            return $pdf->download('surat SK '. $sk .'-'. Auth::user()->nama . '-' . Auth::user()->nik. '.pdf');
+        }else if($sk == 'resign'){
 
-        // dd($data['tanggal_mulai']);
-
-        $pdf = PDF::loadView('pegawai.cuti-perizinan.surat.sk-cuti', $data);
-
-        return $pdf->download('surat SK '. $sk .'-'. Auth::user()->nama . '-' . Auth::user()->nik. '.pdf');
+        }
     }
 
     public function resign(){
