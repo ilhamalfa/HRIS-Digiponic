@@ -58,9 +58,9 @@
                     <td><p>{{ $nama }}</p></td>
                 </tr>
                 <tr>
-                    <td><p>{{ $penyetuju_nik }}</p></td>
+                    <td><p>{{ 'NIK. '. $penyetuju_nik }}</p></td>
                     <td></td>
-                    <td><p>{{ $nik }}</p></td>
+                    <td><p>{{ 'NIK. '. $nik }}</p></td>
                 </tr>
             </table>
         </div>
@@ -114,9 +114,9 @@
                     <td><p>{{ $nama }}</p></td>
                 </tr>
                 <tr>
-                    <td><p>{{ $penyetuju_nik }}</p></td>
+                    <td><p>{{ 'NIK. '. $penyetuju_nik }}</p></td>
                     <td></td>
-                    <td><p>{{ $nik }}</p></td>
+                    <td><p>{{ 'NIK. '. $nik }}</p></td>
                 </tr>
             </table>
         </div>

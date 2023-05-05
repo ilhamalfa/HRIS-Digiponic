@@ -238,8 +238,14 @@ class PegawaiController extends Controller
     public function prosesCuti(Request $request){
         // dd($request);
         $date = date('d-m-Y', strtotime('+3 days'));
-        
-        // dd($request);
+
+        $datas = Cuti::where('user_id_1', Auth::user()->id)->where('status', 'Menunggu Persetujuan')->get();
+        // dd($datas);
+        $jml = 0;
+        foreach($datas as $data){
+            $jml = $jml + date_diff(date_create($data['tanggal_mulai']), date_create($data['tanggal_berakhir']))->days + 1;
+        }
+        // dd($jml);
         if(isset($request->check)){
             $validate = $request->validate([
                 'tanggal_mulai' => 'required|after_or_equal:' . $date,
@@ -255,7 +261,7 @@ class PegawaiController extends Controller
             $validate['tanggal_berakhir'] = $validate['tanggal_mulai'];
         }
 
-        $jml_cuti = date_diff(date_create($validate['tanggal_mulai']), date_create($validate['tanggal_berakhir']))->days + 1;
+        $jml_cuti = $jml + date_diff(date_create($validate['tanggal_mulai']), date_create($validate['tanggal_berakhir']))->days + 1;
         // dd($jml_cuti);
 
         if($jml_cuti <= Auth::user()->jumlah_cuti){
