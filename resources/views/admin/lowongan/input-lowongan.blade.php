@@ -34,9 +34,8 @@
                     </div>
                     <div class="form-group">
                         <label for="Qualification">Qualification</label>
-                        <input id="Qualification" type="text"
-                            class="form-control @error('kualifikasi') is-invalid @enderror form-input" name="kualifikasi"
-                            value="{{ old('kualifikasi') }}" placeholder="Qualification" required autocomplete="new-kualifikasi">
+                        <input id="Qualification" type="hidden" name="kualifikasi">
+                        <trix-editor input="Qualification" class="form-control @error('kualifikasi') is-invalid @enderror form-input text-white" placeholder="Input The Job Qualification" required autocomplete="new-kualifikasi"></trix-editor>
 
                         @error('kualifikasi')
                             <span class="invalid-feedback" role="alert">
@@ -46,8 +45,8 @@
                     </div>
                     <div class="form-group">
                         <label for="Description">Description</label>
-                        <input id="Description" type="text" class="form-control form-input" name="deskripsi"
-                            value="{{ old('deskripsi') }}" placeholder="Description" required autocomplete="new-deskripsi">
+                        <input id="Description" type="hidden" name="deskripsi">
+                        <trix-editor input="Description" class="form-control @error('deskripsi') is-invalid @enderror form-input text-white" placeholder="Input The Job Deskription" required autocomplete="new-deskripsi"></trix-editor>    
                     </div>
                     <button type="submit" class="btn btn-primary me-2">Create New</button>
                     <a class="btn btn-dark" href="{{ url('data-lowongan') }}">Cancel</a>

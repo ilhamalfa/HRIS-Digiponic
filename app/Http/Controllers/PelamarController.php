@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendConfirmMail;
 use App\Models\District;
 use App\Models\Lamaran;
 use App\Models\Lowongan;
@@ -12,6 +13,7 @@ use App\Models\Village;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 use function PHPUnit\Framework\fileExists;
 
@@ -176,6 +178,14 @@ class PelamarController extends Controller
         // dd($validate);
 
         Pelamar::create($validate);
+
+        $maildata = [
+            'subject' => "Success! You have applied for " . $lowongan->posisi,
+            'greeting' => 'Hi There! ' . $validate['nama'],
+            'body' => "You have applied for ". $lowongan->posisi . ". Please kindly wait and check your email for our next process",
+        ];
+
+        Mail::to($validate['email'])->send(new SendConfirmMail($maildata));
 
         return redirect('career');
     }

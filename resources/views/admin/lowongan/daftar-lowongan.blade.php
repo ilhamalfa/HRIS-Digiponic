@@ -137,9 +137,9 @@
                                             <div class="modal-body">
                                                 <p>Position : <span class="text-white">{{ $data->posisi }}</span></p>
                                                 <p>Qualification :</p>
-                                                <p class="mx-2 text-white">{{ $data->kualifikasi }}</p>
+                                                <p class="mx-2 text-white">{!! $data->kualifikasi !!}</p>
                                                 <p>Description :</p>
-                                                <p class="mx-2 text-white">{{ $data->deskripsi }}</p>
+                                                <p class="mx-2 text-white">{!! $data->deskripsi !!}</p>
                                                 <p>Deadline Date :</p>
                                                 <p class="mx-2 text-white">{{ date('d F Y', strtotime($data->tanggal)) }}</p>
                                                 <p>Registrants :</p>
@@ -159,7 +159,7 @@
                                 {{-- Modal Form Start --}}
                                 <div class="modal fade" id="modalForm" tabindex="-1" aria-labelledby="exampleModalLabel"
                                     aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-dialog modal-lg modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h1 class="modal-title fs-5" id="exampleModalLabel">Add Vacancy</h1>
@@ -198,11 +198,8 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="Qualification">Qualification</label>
-                                                        <input id="Qualification" type="text"
-                                                            class="form-control @error('kualifikasi') is-invalid @enderror form-input"
-                                                            name="kualifikasi" value="{{ old('kualifikasi') }}"
-                                                            placeholder="Qualification" required
-                                                            autocomplete="new-kualifikasi">
+                                                        <input id="Qualification" type="hidden" name="kualifikasi">
+                                                        <trix-editor input="Qualification" class=" @error('kualifikasi') is-invalid @enderror form-input text-white" placeholder="Input The Job Qualification" required autocomplete="new-kualifikasi"></trix-editor>
                                                         @error('kualifikasi')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
@@ -211,10 +208,8 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="Description">Description</label>
-                                                        <input id="Description" type="text"
-                                                            class="form-control form-input" name="deskripsi"
-                                                            value="{{ old('deskripsi') }}" placeholder="Description"
-                                                            required autocomplete="new-deskripsi">
+                                                        <input id="Description" type="hidden" name="deskripsi">
+                                                        <trix-editor input="Description" class=" @error('deskripsi') is-invalid @enderror form-input text-white" placeholder="Input The Job Deskription" required autocomplete="new-deskripsi"></trix-editor>   
                                                     </div>
                                                     <button type="submit" class="btn btn-primary me-2">
                                                         <span>Add</span>
