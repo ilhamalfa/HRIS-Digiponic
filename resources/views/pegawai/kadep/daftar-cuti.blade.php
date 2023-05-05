@@ -77,7 +77,11 @@
                                 <td>{{ $data->alasan }}</td>
                                 <td>
                                     @if ($data->status == 'Accepted')
-                                        <a href="{{ url('pegawai/cuti/sk/' . $data->id) }}" class="btn btn-primary">SK Izin</a>
+                                        @if (isset($data->user1->digital_signature))
+                                            <a href="{{url('pegawai/cetak-sk/cuti/' . $data->id)}}" class="btn btn-primary">SK Cuti</a>
+                                        @else
+                                            <button disabled class="btn btn-danger">SIgnature Not Found</button>
+                                        @endif
                                     @elseif($data->status == 'Declined')
                                         <button disabled class="btn btn-danger">Declined</button>
                                     @else

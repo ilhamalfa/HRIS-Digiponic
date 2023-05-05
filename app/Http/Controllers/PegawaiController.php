@@ -331,14 +331,9 @@ class PegawaiController extends Controller
             $data_sk = Resign::find($id);
         }
 
-        // dd($data_sk->user_1);
-        // dd($data_sk);
-
-        // $pdf = app('dompdf.wrapper');
-        // $pdf->loadView('view');
         if($sk == 'cuti' || $sk == 'izin'){
             $data = [
-                'no_surat' => $data_sk->id . '-' . $data_sk->tanggal_mulai . '-' . $data_sk->user1->nik . '-' . $data_sk->user_id_1,
+                'no_surat' => $data_sk->id . '-' . $sk . '-'. $data_sk->tanggal_mulai . '-' . $data_sk->user1->nik . '-' . $data_sk->user_id_1,
                 'nama' => $data_sk->user1->nama,
                 'nik' => $data_sk->user1->nik,
                 'golongan' => $data_sk->user1->golongan,
@@ -354,13 +349,27 @@ class PegawaiController extends Controller
                 'penyetuju_signature' => $data_sk->user2->digital_signature,
                 'sk' => $sk,
             ];
-    
-            $pdf = PDF::loadView('pegawai.cuti-perizinan.surat.sk', $data);
+        }else if($sk == 'resign'){
+            $data = [
+                'no_surat' => $data_sk->id . '-' . $sk . '-' . $data_sk->tanggal_mulai . '-' . $data_sk->user1->nik . '-' . $data_sk->user_id_1,
+                'nama' => $data_sk->user1->nama,
+                'nik' => $data_sk->user1->nik,
+                'golongan' => $data_sk->user1->golongan,
+                'department' => $data_sk->user1->department,
+                'digital_signature' => $data_sk->user1->digital_signature,
+                'tanggal' => $data_sk->tanggal_resign,
+                'penyetuju_golongan' => $data_sk->user2->golongan,
+                'penyetuju_department' => $data_sk->user2->department,
+                'penyetuju_nama' => $data_sk->user2->nama,
+                'penyetuju_nik' => $data_sk->user2->nik,
+                'penyetuju_signature' => $data_sk->user2->digital_signature,
+                'sk' => $sk,
+            ];
+        }
+
+        $pdf = PDF::loadView('pegawai.cuti-perizinan.surat.sk', $data);
     
             return $pdf->download('surat SK '. $sk .'-'. Auth::user()->nama . '-' . Auth::user()->nik. '.pdf');
-        }else if($sk == 'resign'){
-
-        }
     }
 
     public function resign(){
@@ -397,7 +406,7 @@ class PegawaiController extends Controller
         //     $query->where('department', Auth::user()->department);
         // })->paginate(10);
 
-        $datas = Perizinan::whereHas('user', function($query) {
+        $datas = Perizinan::whereHas('user1', function($query) {
                 $query->where('department', Auth::user()->department);
             })->filter(request(['status','search']))->paginate(10);
         
@@ -421,7 +430,7 @@ class PegawaiController extends Controller
 
     // Kadep daftarResign
     public function daftarResign(){
-        $datas = Resign::whereHas('user', function($query) {
+        $datas = Resign::whereHas('user1', function($query) {
             $query->where('department', Auth::user()->department);
         })->filter(request(['status','search']))->paginate(10);
 

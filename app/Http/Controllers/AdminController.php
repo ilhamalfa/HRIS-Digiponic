@@ -9,6 +9,7 @@ use App\Models\Cuti;
 use App\Models\Pegawai;
 use App\Models\Pelamar;
 use App\Models\Perizinan;
+use App\Models\Resign;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -108,6 +109,31 @@ class AdminController extends Controller
         }else if($konfirmasi == 'Decline'){
             $data->update([
                 'status' => 'Declined',
+                'user_id_2' => Auth::user()->id
+            ]);
+        }
+
+        return back()->with('success', 'Status Perizinan Berhasil Dikonfirmasi!');
+    }
+
+    // Resign
+    public function konfirmasiResign($id, $konfirmasi){
+        $data = Resign::find($id);
+
+        if($konfirmasi == 'Accept'){
+            $user = User::find($data->user_id_1);
+
+            $data->update([
+                'status_resign' => 'Accepted',
+                'user_id_2' => Auth::user()->id
+            ]);
+
+            $user->update([
+                'role' => 'Ex-Employee'
+            ]);
+        }else if($konfirmasi == 'Decline'){
+            $data->update([
+                'status_resign' => 'Declined',
                 'user_id_2' => Auth::user()->id
             ]);
         }

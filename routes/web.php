@@ -176,6 +176,8 @@ Route::middleware(['auth', 'verified', 'golongan:Manager/Kadep'])->group(functio
     Route::get('kadep/daftar-cuti/{id}/{konfirmasi}', [AdminController::class, 'konfirmasiCuti']);
 
     Route::get('kadep/daftar-resign', [PegawaiController::class, 'daftarResign']);
+
+    Route::get('kadep/daftar-resign/{id}/{konfirmasi}', [AdminController::class, 'konfirmasiResign']);
 });
 
 // Indoregion Start
