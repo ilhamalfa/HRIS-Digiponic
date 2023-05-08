@@ -39,7 +39,11 @@ class AdminController extends Controller
     }
 
     public function dataUser(){
-        $datas = User::filter(request(['search']))->paginate(10);
+        if(Auth::user()->role == 'Super Admin' || Auth::user()->role == 'Admin'){
+            $datas = User::filter(request(['search']))->paginate(10);
+        }else{
+            $datas = User::where('department', Auth::user()->department)->filter(request(['search']))->paginate(10);
+        }
 
         return view('super-admin.pegawai.daftar-data-user', [
             'datas' => $datas

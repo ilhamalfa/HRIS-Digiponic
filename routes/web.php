@@ -64,9 +64,6 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin'])->group(functio
     Route::get('/resign/daftar-resign', [SuperAdminController::class, 'resign']);
 
     Route::get('/resign/daftar-resign/{id}/{konfirmasi}', [SuperAdminController::class, 'resignProses']);
-
-    // Data User
-    Route::get('/data-user', [AdminController::class, 'dataUser']);
     });    
 
 // Admin
@@ -107,6 +104,9 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin'])->group(f
     Route::post('data-lowongan/pelamar-detail/terima/{id}', [AdminController::class, 'terima']);
 
     Route::get('pelamar-detail/cv/{id}', [AdminController::class, 'CV']);
+
+    // Data User
+    Route::get('/data-user', [AdminController::class, 'dataUser']);
 });
 
 // Pegawai
@@ -177,6 +177,9 @@ Route::middleware(['auth', 'verified', 'golongan:Manager/Kadep'])->group(functio
     Route::get('kadep/daftar-resign', [PegawaiController::class, 'daftarResign']);
 
     Route::get('kadep/daftar-resign/{id}/{konfirmasi}', [AdminController::class, 'konfirmasiResign']);
+
+    // Data User
+    Route::get('/data-user', [AdminController::class, 'dataUser']);
 });
 
 // Indoregion
