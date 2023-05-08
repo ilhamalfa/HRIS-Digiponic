@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('presensis', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pegawai_id');
-            $table->foreign('pegawai_id')->references('id')->on('pegawais');
+            $table->foreign('pegawai_id')->references('id')->on('users');
             $table->date('tanggal');
             $table->time('jam_masuk');
             $table->time('jam_keluar')->nullable();
