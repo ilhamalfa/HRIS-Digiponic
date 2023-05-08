@@ -66,18 +66,22 @@
                             @foreach ($datas as $data)
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
-                                <td>{{ $data->user->nik }}</td>
-                                <td>{{ $data->user->nama}}</td>
+                                <td>{{ $data->user1->nik }}</td>
+                                <td>{{ $data->user1->nama}}</td>
                                 <td>{{ $data->tanggal_resign }}</td>
                                 <td>{{ $data->status_resign }}</td>
                                 <td>
                                     @if ($data->status_resign == 'Accepted')
-                                        <a href="" class="btn btn-primary">SK Izin</a>
+                                        @if (isset($data->user1->digital_signature))
+                                            <a href="{{url('pegawai/cetak-sk/resign/' . $data->id)}}" class="btn btn-primary">SK Izin</a>
+                                        @else
+                                            <button disabled class="btn btn-danger">SIgnature Not Found</button>
+                                        @endif
                                     @elseif($data->status_resign == 'Declined')
                                         <button disabled class="btn btn-danger">Declined</button>
                                     @else
-                                        <a href="{{ url('kadep/daftar-cuti/'. $data->id .'/Accept') }}" class="btn btn-success">Accept</a>
-                                        <a href="{{ url('kadep/daftar-cuti/'. $data->id .'/Decline') }}" class="btn btn-danger">Decline</a>
+                                        <a href="{{ url('kadep/daftar-resign/'. $data->id .'/Accept') }}" class="btn btn-success">Accept</a>
+                                        <a href="{{ url('kadep/daftar-resign/'. $data->id .'/Decline') }}" class="btn btn-danger">Decline</a>
                                     @endif
                                 </td>
                             </tr>

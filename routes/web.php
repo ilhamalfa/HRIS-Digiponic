@@ -156,7 +156,8 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin,Pegawai'])-
     Route::post('pegawai/resign/ajukan-resign/proses', [PegawaiController::class, 'prosesResign']);
 
     // SK
-    Route::get('pegawai/cuti/sk/{id}', [PegawaiController::class, 'skCuti']);
+    // Route::get('pegawai/cuti/sk/{id}', [PegawaiController::class, 'skCuti']);
+    Route::get('pegawai/cetak-sk/{sk}/{id}',[PegawaiController::class, 'cetakSK']);
 
 });
 
@@ -170,6 +171,8 @@ Route::middleware(['auth', 'verified', 'golongan:Manager/Kadep'])->group(functio
     Route::get('kadep/daftar-cuti/{id}/{konfirmasi}', [AdminController::class, 'konfirmasiCuti']);
 
     Route::get('kadep/daftar-resign', [PegawaiController::class, 'daftarResign']);
+
+    Route::get('kadep/daftar-resign/{id}/{konfirmasi}', [AdminController::class, 'konfirmasiResign']);
 });
 
 // Indoregion

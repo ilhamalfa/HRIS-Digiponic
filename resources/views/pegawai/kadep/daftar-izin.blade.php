@@ -70,8 +70,8 @@
                             @foreach ($datas as $data)
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
-                                <td>{{ $data->user->nik }}</td>
-                                <td>{{ $data->user->nama}}</td>
+                                <td>{{ $data->user1->nik }}</td>
+                                <td>{{ $data->user1->nama}}</td>
                                 <td>{{ $data->tanggal_mulai }}</td>
                                 <td>{{ $data->tanggal_berakhir }}</td>
                                 <td>{{ date_diff(date_create($data->tanggal_mulai), date_create($data->tanggal_berakhir))->days + 1 . " Hari" }}</td>
@@ -79,7 +79,11 @@
                                 <td><a href="{{ url('pegawai/izin/bukti/' . $data->id) }}" target="_blank" class="btn btn-primary">Bukti Perizinan</a></td>
                                 <td>
                                     @if ($data->status == 'Accepted')
-                                        <a href="" class="btn btn-primary">SK Izin</a>
+                                        @if (isset($data->user1->digital_signature))
+                                            <a href="{{url('pegawai/cetak-sk/izin/' . $data->id)}}" class="btn btn-primary">SK Izin</a>
+                                        @else
+                                            <button disabled class="btn btn-danger">SIgnature Not Found</button>
+                                        @endif
                                     @elseif($data->status == 'Declined')
                                         <button disabled class="btn btn-danger">Declined</button>
                                     @else

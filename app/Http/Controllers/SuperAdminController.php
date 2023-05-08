@@ -60,10 +60,6 @@ class SuperAdminController extends Controller
         $extension_foto = $request->file('foto')->extension();
         $nama_foto = $request->nama . '-' . now()->timestamp. '.' . $extension_foto;
         $validate['foto'] = $request->file('foto')->storeAs('Pegawai/foto', $nama_foto);
-
-        $extension_signature = $request->file('foto')->extension();
-        $extension_signature = $request->nama . '-' . now()->timestamp. '.' . $extension_signature;
-        $validate['digital_signature'] = $request->file('foto')->storeAs('Pegawai/signature', $nama_foto);
         
         User::create($validate);
 
