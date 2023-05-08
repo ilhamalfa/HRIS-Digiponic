@@ -588,6 +588,10 @@ a {
     /* Topbar End */
 
     /* Main Start */
+    .main {
+        background-color: var(--primary-color);
+        height: auto;
+    }
 
         /* Opening Start */
         .opening {
@@ -1499,7 +1503,7 @@ a {
         text-align: center;
         position: relative;
         font-size: .8rem;
-        padding: .5em;
+        padding: 2em 0 .5em 0;
         z-index: 1000;
     }
     /* Footer End */
