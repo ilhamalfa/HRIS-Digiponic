@@ -43,14 +43,11 @@ Route::get('/career/filter', [Controller::class, 'filter']);
 Route::get('/login-pegawai', function () {
     return view('auth.login-pegawai');
 });
-// sandi (admin123) (pegawai123) (pelamar123)
 
 // Route Pelamar
-    Route::post('/career/apply/{id}', [PelamarController::class, 'applyLowongan']);
-
+Route::post('/career/apply/{id}', [PelamarController::class, 'applyLowongan']);
 
 // Super Admin
-// Route Super Admin Start
 Route::middleware(['auth', 'verified', 'user-access:SuperAdmin'])->group(function () {
     // Data User
     Route::get('/data-user/input-user', [SuperAdminController::class, 'inputUser']);
@@ -107,8 +104,6 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin'])->group(f
 
     Route::get('pelamar-detail/cv/{id}', [AdminController::class, 'CV']);
 });
-
-
 
 // Pegawai
 Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin,Pegawai'])->group(function () {
@@ -177,10 +172,9 @@ Route::middleware(['auth', 'verified', 'golongan:Manager/Kadep'])->group(functio
     Route::get('kadep/daftar-resign', [PegawaiController::class, 'daftarResign']);
 });
 
-// Indoregion Start
+// Indoregion
 Route::post('/get-kabupaten', [IndoRegionController::class, 'getKabupaten']);
 
 Route::post('/get-kecamatan', [IndoRegionController::class, 'getKecamatan']);
 
 Route::post('/get-kelurahan', [IndoRegionController::class, 'getKelurahan']);
-// Indoregion End

@@ -53,7 +53,7 @@
                         @csrf
                         <div class="auth-email-box">
                             <input class="form-input" type="number" id="loginEmail" name="nik"
-                                value="{{ old('nik') }}" placeholder="Your Email" required autocomplete="off"
+                                value="{{ old('nik') }}" placeholder="Your Nik" required autocomplete="off"
                                 autofocus>
                         </div>
                         <div class="auth-password-box">
@@ -192,7 +192,7 @@
     {{-- Topbar End --}}
 
     {{-- Main Content Start --}}
-    <div class="main bg-primary-color">
+    <div class="main">
         @yield('content')
     </div>
     {{-- Main Content End --}}

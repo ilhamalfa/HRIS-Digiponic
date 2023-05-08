@@ -7,8 +7,7 @@
     <div class="row p-5 mt-5 justify-content-md-center">
         <div class="col-lg-1">
             <div class="dropdown">
-                <button class="btn dropdown-toggle filter-buton" type="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
+                <button class="btn dropdown-toggle filter-buton" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fa-solid fa-filter text-white"></i>
                     <i class="fa-solid fa-sort text-white"></i>
                 </button>
@@ -54,50 +53,51 @@
         <div class="career-vacancy-box">
             @foreach ($datas as $data)
                 @if ($data->tanggal > now()->toDateString())
-                <div class="vacancy-card-link-box">
-                    <a class="vacancy-card-link" data-bs-toggle="modal" data-bs-target="#apply{{ $loop->iteration }}">
-                        <div class="card vacancy-card mx-3 my-2">
-                            <div class="card-body vacancy-card-body text-white">
-                                <h6 class="vacancy-position-name">{{ $data->posisi }}</h6>
-                                <p class="vacancy-kualification">{!! substr(strip_tags($data->deskripsi), 0, 30) . '...' !!}</p>
-                                <p class="vacancy-date">
-                                    <span class="my-2 tx-secondary-color-2">Posted On
-                                        {{ date('d F Y', strtotime($data->created_at)) }}</span>
-                                    <span class="my-2 tx-secondary-color-3">Ended
-                                        {{ date('d F Y', strtotime($data->tanggal)) }}</span>
-                                </p>
-                                <p class="apply-text">APPLY</p>
+                    <div class="vacancy-card-link-box">
+                        <a class="vacancy-card-link" data-bs-toggle="modal" data-bs-target="#apply{{ $loop->iteration }}">
+                            <div class="card vacancy-card mx-3 my-2">
+                                <div class="card-body vacancy-card-body text-white">
+                                    <h6 class="vacancy-position-name">{{ $data->posisi }}</h6>
+                                    <p class="vacancy-kualification">{!! substr(strip_tags($data->deskripsi), 0, 30) . '...' !!}</p>
+                                    <p class="vacancy-date">
+                                        <span class="my-2 tx-secondary-color-2">Posted On
+                                            {{ date('d F Y', strtotime($data->created_at)) }}</span>
+                                        <span class="my-2 tx-secondary-color-3">Ended
+                                            {{ date('d F Y', strtotime($data->tanggal)) }}</span>
+                                    </p>
+                                    <p class="apply-text">APPLY</p>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                </div>
+                        </a>
+                    </div>
                 @else
-                <div class="vacancy-card-link-box">
-                    <a class="vacancy-card-link">
-                        <div class="card vacancy-card mx-3 my-2">
-                            <div class="card-body vacancy-card-body text-white">
-                                <h6 class="vacancy-position-name">{{ $data->posisi }}</h6>
-                                <p class="vacancy-kualification">{!! substr(strip_tags($data->deskripsi), 0, 30) . '...' !!}</p>
-                                <p class="vacancy-date">
-                                    <span class="my-2 tx-secondary-color-2">Posted On
-                                        {{ date('d F Y', strtotime($data->created_at)) }}</span>
-                                    <span class="my-2 tx-secondary-color-3">Ended
-                                        {{ date('d F Y', strtotime($data->tanggal)) }}</span>
-                                </p>
-                                <p class="apply-text bg-danger">Ended</p>
+                    <div class="vacancy-card-link-box">
+                        <a class="vacancy-card-link">
+                            <div class="card vacancy-card mx-3 my-2">
+                                <div class="card-body vacancy-card-body text-white">
+                                    <h6 class="vacancy-position-name">{{ $data->posisi }}</h6>
+                                    <p class="vacancy-kualification">{!! substr(strip_tags($data->deskripsi), 0, 30) . '...' !!}</p>
+                                    <p class="vacancy-date">
+                                        <span class="my-2 tx-secondary-color-2">Posted On
+                                            {{ date('d F Y', strtotime($data->created_at)) }}</span>
+                                        <span class="my-2 tx-secondary-color-3">Ended
+                                            {{ date('d F Y', strtotime($data->tanggal)) }}</span>
+                                    </p>
+                                    <p class="apply-text bg-danger">Ended</p>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                </div>
+                        </a>
+                    </div>
                 @endif
-                
+
                 {{-- Modal --}}
                 <div class="modal fade" id="apply{{ $loop->iteration }}" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-xl">
                         <div class="modal-content bg-secondary-color-1 vacancy-modal-box ">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5 tx-primary-color" id="exampleModalLabel">APPLY {{ $data->posisi }}
+                                <h1 class="modal-title fs-5 tx-primary-color" id="exampleModalLabel">APPLY
+                                    {{ $data->posisi }}
                                 </h1>
                                 <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"
                                     aria-label="Close">
@@ -116,8 +116,8 @@
                                     <p class="ms-4 mb-2">{{ date('d F Y', strtotime($data->tanggal)) }}</p>
                                 </div>
                                 <div class="vacancy-form-box">
-                                    <form class="vacancy-form" method="POST"
-                                        action={{ url('/career/apply/'. $data->id) }} enctype="multipart/form-data">
+                                    <form class="vacancy-form" method="POST" action={{ url('/career/apply/' . $data->id) }}
+                                        enctype="multipart/form-data">
                                         @csrf
                                         <p class="mb-5 d-flex">
                                             <i class="fa-solid fa-circle-info mx-2"></i>
@@ -131,8 +131,9 @@
                                         </div>
                                         <div class="born-date-box">
                                             <label for="bornDate">Date Of Birth :</label>
-                                            <input class="vacancy-input" type="date" id="bornDate" name="tanggal_lahir"
-                                                placeholder="Date Of Birth" required autocomplete="off">
+                                            <input class="vacancy-input" type="date" id="bornDate"
+                                                name="tanggal_lahir" placeholder="Date Of Birth" required
+                                                autocomplete="off">
                                         </div>
                                         <div class="email-box">
                                             <label for="email">Your Email :</label>
@@ -164,13 +165,11 @@
                 </div>
             @endforeach
         </div>
-
     </div>
-    
-    
     <div class="vision-mission-box w-50 mx-auto">
         <h6 class="vision-title">Our Vision :</h6>
-        <p class="vision">To be a leading technology company that changes the world with innovative solutions, <br> empowering people in a
+        <p class="vision">To be a leading technology company that changes the world with innovative solutions, <br>
+            empowering people in a
             meaningful way
             digital, <br> and create a sustainable future.</p>
     </div>
