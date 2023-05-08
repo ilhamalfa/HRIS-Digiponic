@@ -72,6 +72,22 @@ class User extends Authenticatable implements MustVerifyEmail
     public function resign(){
         return $this->hasMany(Resign::class);
     }
+
+    public function provinsi(){
+        return $this->belongsTo(Province::class, 'province_id');
+    }
+
+    public function kabupaten(){
+        return $this->belongsTo(Regency::class, 'regency_id');
+    }
+
+    public function kecamatan(){
+        return $this->belongsTo(District::class, 'district_id');
+    }
+
+    public function kelurahan(){
+        return $this->belongsTo(Village::class, 'village_id');
+    }
     
     public function scopeFilter($query, array $filters)
     {

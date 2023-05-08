@@ -166,7 +166,9 @@ class PegawaiController extends Controller
 
         Storage::put($imageName,$image_base64);
 
-        unlink('storage/' . $user->foto);
+        if(isset($user->foto) && fileExists($user->foto)){
+            unlink('storage/' . $user->foto);
+        }
 
         $user->update([
             'foto' => $imageName

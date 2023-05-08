@@ -149,8 +149,13 @@
                         {{-- Sidebar Profile Image & Name Start --}}
                         <div class="profile-pic">
                             <div class="count-indicator">
+                                    @if (isset(Auth::user()->foto))
                                     <img class="img-xs rounded-circle"
                                     src="{{ asset('storage/' . Auth::user()->foto) }}" alt="">
+                                    @else
+                                    <img class="img-xs rounded-circle"
+                                    src="{{ asset('storage/Pegawai/default/user.jpg') }}" alt="">
+                                    @endif
                             </div>
                             <div class="profile-name">
                                     <h5 class="mb-0 font-weight-normal">
@@ -439,8 +444,13 @@
                                         @guest
                                             <p class="mb-0 ms-2 d-none d-sm-block navbar-profile-name text-white">Login</p>
                                         @else
-                                        <img class="img-xs rounded-circle"
-                                        src="{{ asset('storage/' . Auth::user()->foto) }}" alt="">
+                                            @if (isset(Auth::user()->foto))
+                                                <img class="img-xs rounded-circle"
+                                            src="{{ asset('storage/' . Auth::user()->foto) }}" alt="">
+                                            @else
+                                                <img class="img-xs rounded-circle"
+                                            src="{{ asset('storage/Pegawai/default/user.jpg') }}" alt="">
+                                            @endif
                                         <p class="mb-0 d-none d-sm-block navbar-profile-name">
                                             {{ Auth::user()->nama }}
                                         <i class="mdi mdi-menu-down d-none d-sm-block"></i>
