@@ -9,6 +9,7 @@ use App\Models\Cuti;
 use App\Models\Pegawai;
 use App\Models\Pelamar;
 use App\Models\Perizinan;
+use App\Models\Resign;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -115,6 +116,31 @@ class AdminController extends Controller
         return back()->with('success', 'Status Perizinan Berhasil Dikonfirmasi!');
     }
 
+    // Resign
+    public function konfirmasiResign($id, $konfirmasi){
+        $data = Resign::find($id);
+
+        if($konfirmasi == 'Accept'){
+            $user = User::find($data->user_id_1);
+
+            $data->update([
+                'status_resign' => 'Accepted',
+                'user_id_2' => Auth::user()->id
+            ]);
+
+            $user->update([
+                'role' => 'Ex-Employee'
+            ]);
+        }else if($konfirmasi == 'Decline'){
+            $data->update([
+                'status_resign' => 'Declined',
+                'user_id_2' => Auth::user()->id
+            ]);
+        }
+
+        return back()->with('success', 'Status Perizinan Berhasil Dikonfirmasi!');
+    }
+
     // Lowongan
     public function daftarLowongan(){
         $datas = Lowongan::latest()->filter(request(['search']))->paginate(10);
@@ -165,6 +191,7 @@ class AdminController extends Controller
     }
 
     public function storeLowongan(Request $request){
+        // dd($request);
         $validate = $request->validate([
             'posisi' => 'required',
             'tanggal' => 'required|after:yesterday',
@@ -183,19 +210,19 @@ class AdminController extends Controller
         $data = Pelamar::find($id);
         // dd($data->lowongan->posisi);
 
-        if($status == 'Menunggu'){
+        if($status == 'Wawancara'){
             $status = 'Wawancara';
             $subject = 'Lanjut Tahap Wawancara';
             $body = 'Selamat, untuk sdr '. $data->nama .', Anda berhasil Lolos ke tahap selanjutnya. Dimohon untuk menunggu email selanjutnya yang berisikan link untuk melakukan tahap wawancara. Jika sdr ada pertanyaan, dapat menghubungi Admin atau dapat mengirim email ke HR@Techsolution.com, Terima kasih.';
-        }else if($status == 'Wawancara'){
+        }else if($status == 'Psikotest'){
             $status = 'Psikotest';
             $subject = 'Lanjut Tahap Psikotest';
             $body = 'Selamat, untuk sdr '. $data->nama .', Anda berhasil Lolos ke tahap selanjutnya. Dimohon untuk menunggu email selanjutnya yang berisikan link untuk melakukan tahap psikotest. Jika sdr ada pertanyaan, dapat menghubungi Admin atau dapat mengirim email ke HR@Techsolution.com, Terima kasih.';
-        }else if($status == 'Psikotest'){
+        }else if($status == 'Offering'){
             $status = 'Offering';
             $subject = 'Lanjut Tahap Offering';
             $body = 'Selamat, untuk sdr '. $data->nama .', Anda berhasil Lolos ke tahap selanjutnya. Dimohon untuk menunggu email selanjutnya mengenai hasil dari proses rekruitment ini. Jika sdr ada pertanyaan, dapat menghubungi Admin atau dapat mengirim email ke HR@Techsolution.com, Terima kasih.';
-        }else if($status == 'Offering'){
+        }else if($status == 'Terima'){
             $status = 'Diterima';
             $subject = 'Selamat Telah Diterima';
             $body = 'Selamat, untuk sdr '. $data->nama .', Anda berhasil Diterima pada posisi '. $data->lowongan->posisi .'. Dimohon untuk menunggu email selanjutnya yang berisikan tanggal masuk dan daftar berkas-berkas yang wajib dibawa. Jika sdr ada pertanyaan, dapat menghubungi Admin atau dapat mengirim email ke HR@Techsolution.com, Terima kasih.';
@@ -213,9 +240,9 @@ class AdminController extends Controller
 
         Mail::to($data->email)->send(new SendConfirmMail($maildata));
 
-        // $data->update([
-        //     'status' => $status
-        // ]);
+        $data->update([
+            'status' => $status
+        ]);
 
         return redirect()->back();
     }

@@ -7,6 +7,7 @@ use App\Http\Controllers\IndoRegionController;
 use App\Http\Controllers\PelamarController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\SuperAdminController;
+use Illuminate\Routing\Controller as RoutingController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -33,39 +34,20 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Landing Page
 Route::get('/rutelogin', [Controller::class, 'rutelogin'])->name('rutelogin');
 
-Route::get('struktur', [Controller::class, 'struktur'])->name('struktur');
-
 Route::get('/career', [Controller::class, 'career'])->name('career');
 
-Route::get('career/vacancy/detail/{id}', [Controller::class, 'careerVacancyDetail']);
+Route::get('/career/search', [Controller::class, 'search']);
 
-Route::get('aboutus', [Controller::class, 'aboutus'])->name('aboutus');
-
-Route::get('product', [Controller::class, 'product'])->name('product');
-
+Route::get('/career/filter', [Controller::class, 'filter']);
 
 Route::get('/login-pegawai', function () {
     return view('auth.login-pegawai');
 });
-// sandi (admin123) (pegawai123) (pelamar123)
 
 // Route Pelamar
-    Route::get('/pelamar/input-data-pelamar', [PelamarController::class, 'inputPelamar']);
-
-    Route::post('/pelamar/input-data-pelamar/store', [PelamarController::class, 'storePelamar']);
-
-    Route::get('/pelamar/lowongan/', [PelamarController::class, 'daftarLowongan']);
-
-    Route::post('/pelamar/lowongan/apply/{id}', [PelamarController::class, 'applyLowongan']);
-
-    Route::get('/pelamar/daftar-lamaran/', [PelamarController::class, 'daftarLamaran']);
-
-    Route::get('/profile/edit-data-pelamar', [PelamarController::class, 'editPelamar']);
-
-    Route::post('/profile/edit-data-pelamar/update', [PelamarController::class, 'updatePelamar']);
+Route::post('/career/apply/{id}', [PelamarController::class, 'applyLowongan']);
 
 // Super Admin
-// Route Super Admin Start
 Route::middleware(['auth', 'verified', 'user-access:SuperAdmin'])->group(function () {
     // Data User
     Route::get('/data-user/input-user', [SuperAdminController::class, 'inputUser']);
@@ -123,8 +105,6 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin'])->group(f
     Route::get('pelamar-detail/cv/{id}', [AdminController::class, 'CV']);
 });
 
-
-
 // Pegawai
 Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin,Pegawai'])->group(function () {
     // Update data User
@@ -176,7 +156,8 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin,Pegawai'])-
     Route::post('pegawai/resign/ajukan-resign/proses', [PegawaiController::class, 'prosesResign']);
 
     // SK
-    Route::get('pegawai/cuti/sk/{id}', [PegawaiController::class, 'skCuti']);
+    // Route::get('pegawai/cuti/sk/{id}', [PegawaiController::class, 'skCuti']);
+    Route::get('pegawai/cetak-sk/{sk}/{id}',[PegawaiController::class, 'cetakSK']);
 
 });
 
@@ -190,12 +171,13 @@ Route::middleware(['auth', 'verified', 'golongan:Manager/Kadep'])->group(functio
     Route::get('kadep/daftar-cuti/{id}/{konfirmasi}', [AdminController::class, 'konfirmasiCuti']);
 
     Route::get('kadep/daftar-resign', [PegawaiController::class, 'daftarResign']);
+
+    Route::get('kadep/daftar-resign/{id}/{konfirmasi}', [AdminController::class, 'konfirmasiResign']);
 });
 
-// Indoregion Start
+// Indoregion
 Route::post('/get-kabupaten', [IndoRegionController::class, 'getKabupaten']);
 
 Route::post('/get-kecamatan', [IndoRegionController::class, 'getKecamatan']);
 
 Route::post('/get-kelurahan', [IndoRegionController::class, 'getKelurahan']);
-// Indoregion End

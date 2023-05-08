@@ -1,6 +1,30 @@
 $(document).ready(function () {
-    $('.preloader').delay('1500').fadeOut()
+    setTimeout(function() {
+        $('.opening-title').css({
+            'opacity': '1',
+            'transform': 'translateX(0)',
+        })
+    }, 100)
+    setTimeout(function() {
+        $('.opening-slogan').css({
+            'opacity': '1',
+            'transform': 'translateX(0)',
+        })
+    }, 200)
+    setTimeout(function() {
+        $('.opening-description').css({
+            'opacity': '1',
+            'transform': 'translateX(0)',
+        })
+    }, 300)
+    setTimeout(function() {
+        $('.opening-scroll-box').css({
+            'opacity': '1',
+            'transform': 'translateY(0)',
+        })
+    }, 600)
 })
+
 
 let eyeLoginSlash = document.getElementById('login-icon-eye-slash')
 let eyeLogin = document.getElementById('login-icon-eye')
@@ -48,178 +72,353 @@ eyeConfirm.addEventListener('click', function () {
     inputPasswordConfirmType.type = 'password'
 })
 
-
 $(window).scroll(function () { 
     let wScroll = $(this).scrollTop()
+    console.log(wScroll)
 
     if (wScroll > 100) {
-        $('.about').addClass('fade');
-
-        $('.opening').addClass('fade');
-
-        if (wScroll > 300) {
-            $('.about .title-1').css({
-                'transform': 'translateX(-' + (wScroll - 300)  + 'px)'
-            });
-            $('.about .title-2').css({
-                'transform': 'translateX(' + (wScroll - 300) + 'px)'
-            });
-        }
-
-        if (wScroll > 1200) {
-            $('.about .background-color').css({
-                'opacity': '50%',
-                'transition': '.2s',
-            });
-        } else {
-            $('.about .background-color').css({
-                'opacity': '1',
-            });
-        }
-
-        if (wScroll > 1300) {
-            $('.about .description').css({
-                'opacity': '1',
-            });
-            $('.about .button').css({
-                'opacity': '1',
-            });
-        } else {
-            $('.about .description').css({
-                'opacity': '0',
-            });
-            $('.about .button').css({
-                'opacity': '0',
-            });
-        }
-
-        if (wScroll > $('.product-introduction').offset().top - 100) {
-            $('.product-introduction .title').css({
-                'opacity': '1',
-                'transform': 'translateX(0)',
-            });
-            $('.product-introduction .description').css({
-                'opacity': '1',
-                'transform': 'translateX(0)',
-            });
-            $('.product-introduction .project-link').css({
-                'opacity': '1',
-            });
-            setTimeout(function() {
-                $('.product-introduction .button').css({
-                    'opacity': '1',
-                });
-            }, 500);
-        } 
-            
-        if (wScroll > $('.product-introduction').offset().top - 600) {
-            $('.about .background-color').css({
-                'opacity': '80%',
-            });
-            $('.about .description').css({
-                'opacity': '0',
-            });
-            $('.about .button').css({
-                'opacity': '0',
-            });
-        }
-
-        if (wScroll > $('.product-introduction').offset().top) {
-            $('.topbar').css({
-                'background-color': 'black',
-            });
-            $('.about').css({
-                'opacity': '0',
-            });
-        } else {
-            $('.about').css({
-                'opacity': '1',
-            });
-            $('.topbar').css({
-                'background': 'none',
-            });
-        }
-
-        if (wScroll > $('.product').offset().top - 200) {
-            $('.about .description').css({
-                'z-index': '-999',
-            });
-            $('.product .description').css({
-                'opacity': '1',
-            });
-            $('.product .image').css({
-                'opacity': '1',
-                'transform': 'translateY(0)',
-            });
-            setTimeout(function() {
-                $('.product .button-buy-box').css({
-                    'opacity': '1',
-                    'transform': 'translateX(0)',
-                });
-            }, 500);
-            setTimeout(function() {
-                $('.product .button-watch-box').css({
-                    'opacity': '1',
-                    'transform': 'translateX(0)',
-                });
-            }, 500);
-        } else {
-            $('.about .description').css({
-                'z-index': '998',
-            });
-        }
-
-        if (wScroll > $('.team').offset().top - 500) {
-            $('.team .title').css({
-                'opacity': '1',
-            });
-            $('.team .span-1').css({
-                'opacity': '1',
-                'transform': 'translateX(0)',
-            });
-            $('.team .span-2').css({
-                'opacity': '1',
-                'transform': 'translateX(0)',
-            });
-            $('.team .bg-text-1').css({
-                'opacity': '20%',
-                'transform': 'translateX(0)',
-            });
-            $('.team .bg-text-2').css({
-                'opacity': '20%',
-                'transform': 'translateX(0)',
-            });
-            $('.team .bg-text-3').css({
-                'opacity': '20%',
-                'transform': 'translateX(0)',
-            });
-            $('.team .element').css({
-                'opacity': '1',
-                'transform': 'translateY(0)',
-            });
-        } 
-
-        if (wScroll > $('.career').offset().top - 500) {
-            $('.career .title').css({
-                'opacity': '1',
-                'transform': 'translateX(0)',
-            });
-            $('.career .description').css({
-                'opacity': '1',
-            });
-            setTimeout(function() {
-                $('.career .button').css({
-                    'opacity': '1',
-                });
-            }, 800);
-            $('.career .employee-image').css({
-                'opacity': '1',
-                'transform': 'translateY(0)',
-            });
-        }
-
+        $('.about').addClass('fade')
+        $('.opening').addClass('fade')
     } else {
         $('.about').removeClass('fade');
         $('.opening').removeClass('fade');
     }
-});
+        
+    if (wScroll > 400) {
+        $('.about-title-1').css({
+            'transform': 'translateX(-' + (wScroll - 400)  + 'px)'
+        })
+        $('.about-title-2').css({
+            'transform': 'translateX(' + (wScroll - 400) + 'px)'
+        })
+    }
+
+    if (wScroll > 1200) {
+        $('.about-background-color').css({
+            'opacity': '50%',
+            'transition': '.2s',
+        })
+    } else {
+        $('.about-background-color').css({
+            'opacity': '1',
+        })
+    }
+
+    if (wScroll > 1400) {
+        $('.about-description').css({
+            'opacity': '1',
+            'transform': 'translateX(0)',
+        })
+        $('.about-button').css({
+            'opacity': '1',
+            'transform': 'translateX(0)',
+        })
+    } else {
+        $('.about-description').css({
+            'opacity': '0',
+            'transform': 'translateX(-10px)',
+        })
+        $('.about-button').css({
+            'opacity': '0',
+            'transform': 'translateX(10px)',
+        })
+    }
+
+    if (wScroll > 2000) {
+        $('.product-introduction').addClass('fade')
+        $('.about-description').css({
+            'opacity': '0',
+            'transform': 'translateX(-10px)',
+        })
+        $('.about-button').css({
+            'opacity': '0',
+            'transform': 'translateX(10px)',
+        })
+        $('.about-background-color').css({
+            'opacity': '1',
+        })
+        setTimeout(function() {
+            $('.product-introduction-title').css({
+                'opacity': '1',
+                'transform': 'translateX(0)',
+            })
+            $('.product-introduction-description').css({
+                'opacity': '1',
+                'transform': 'translateX(0)',
+            })
+        }, 500)
+        setTimeout(function() {
+            $('.product-introduction-button').css({
+                'opacity': '1',
+            })
+        }, 700)
+    } else {
+        $('.product-introduction').removeClass('fade')
+        $('.product-introduction-title').css({
+            'opacity': '0',
+            'transform': 'translateX(-10px)',
+        })
+        $('.product-introduction-description').css({
+            'opacity': '0',
+            'transform': 'translateX(10px)',
+        })
+        $('.product-introduction-button').css({
+            'opacity': '0',
+        })
+    }
+
+    if (wScroll > 3000) {
+        $('.product').addClass('fade')
+        $('.product-introduction-bg-fade').css({
+            'opacity': '1',
+            'z-index': '998',
+        })
+        $('.product-introduction').css({
+            'opacity': '0',
+        })
+        setTimeout(function() {
+            $('.product-element-left').css({
+                'opacity': '1',
+            })
+            $('.product-element-right').css({
+                'opacity': '1',
+            })
+        }, 500)
+        setTimeout(function() {
+            $('.product-image').css({
+                'transform': 'translateY(0)',
+            })
+        }, 700)
+        setTimeout(function() {
+            $('.product-description').css({
+                'opacity': '1',
+            })
+            $('.product-button-buy-box').css({
+                'opacity': '1',
+                'transform': 'translateX(0)',
+            })
+            $('.product-button-watch-box').css({
+                'opacity': '1',
+                'transform': 'translateX(0)',
+            })
+        }, 1000)
+    } else {
+        $('.product').removeClass('fade')
+        $('.product-introduction-bg-fade').css({
+            'opacity': '0',
+            'z-index': '-998',
+        })
+        $('.product-introduction').css({
+            'opacity': '1',
+        })
+        $('.product-element-left').css({
+            'opacity': '0',
+        })
+        $('.product-element-right').css({
+            'opacity': '0',
+        })
+        $('.product-image').css({
+            'transform': 'translateY(80px)',
+        })
+        $('.product-description').css({
+            'opacity': '0',
+        })
+        $('.product-button-buy-box').css({
+            'opacity': '0',
+            'transform': 'translateX(-20px)',
+        })
+        $('.product-button-watch-box').css({
+            'opacity': '0',
+            'transform': 'translateX(20px)',
+        })
+    }
+
+    if (wScroll > 4000) {
+        $('.topbar .brand-logo-white').css({
+            'display': 'none',
+        })
+        $('.topbar .brand-logo-black').css({
+            'display': 'block',
+        })
+        $('.topbar .text').css({
+            'color': 'black',
+        })
+        $('.topbar .link').css({
+            'color': 'black',
+        })
+        $('.topbar .link').addClass('animate')
+        $('.team').addClass('fade')
+        $('.product-bg-fade').css({
+            'opacity': '1',
+            'z-index': '998',
+        })
+        setTimeout(function() {
+            $('.team-title').css({
+                'opacity': '1',
+            })
+        }, 500)
+        setTimeout(function() {
+            $('.team-title-box span').css({
+                'opacity': '1',
+            })
+            $('.team-span-1').css({
+                'transform': 'translateX(0)',
+            })
+            $('.team-span-2').css({
+                'transform': 'translateX(0)',
+            })
+        }, 700)
+        setTimeout(function() {
+            $('.team-bg-text-1').css({
+                'opacity': '20%',
+                'transform': 'translateX(0)',
+            })
+            $('.team-bg-text-2').css({
+                'opacity': '20%',
+                'transform': 'translateX(0)',
+            })
+            $('.team-bg-text-3').css({
+                'opacity': '20%',
+                'transform': 'translateX(0)',
+            })
+            $('.team-element').css({
+                'opacity': '1',
+                'transform': 'translateY(0)',
+            })
+        }, 1000)
+    } else {
+        $('.topbar .brand-logo-white').css({
+            'display': 'block',
+        })
+        $('.topbar .brand-logo-black').css({
+            'display': 'none',
+        })
+        $('.topbar .text').css({
+            'color': 'white',
+        })
+        $('.topbar .link').css({
+            'color': 'white',
+        })
+        $('.topbar .link').removeClass('animate')
+        $('.team').removeClass('fade')
+        $('.product-bg-fade').css({
+            'opacity': '0',
+            'z-index': '-998',
+        })
+        $('.team-title').css({
+            'opacity': '0',
+        })
+        $('.team-title-box span').css({
+            'opacity': '0',
+        })
+        $('.team-span-1').css({
+            'transform': 'translateX(20px)',
+        })
+        $('.team-span-2').css({
+            'transform': 'translateX(-20px)',
+        })
+        $('.team-bg-text-1').css({
+            'opacity': '0',
+            'transform': 'translateX(-100%)',
+        })
+        $('.team-bg-text-2').css({
+            'opacity': '0',
+            'transform': 'translateX(100%)',
+        })
+        $('.team-bg-text-3').css({
+            'opacity': '0',
+            'transform': 'translateX(-100%)',
+        })
+        $('.team-element').css({
+            'opacity': '0',
+            'transform': 'translateY(40px)',
+        })
+    }
+
+    if (wScroll > 5000) {
+        $('.topbar .brand-logo-white').css({
+            'display': 'block',
+        })
+        $('.topbar .brand-logo-black').css({
+            'display': 'none',
+        })
+        $('.topbar .text').css({
+            'color': 'white',
+        })
+        $('.topbar .link').css({
+            'color': 'white',
+        })
+        $('.topbar .link').removeClass('animate')
+        $('.career').addClass('fade')
+        $('.team-bg-fade').css({
+            'opacity': '1',
+            'z-index': '998',
+        })
+        setTimeout(function() {
+            $('.career-title').css({
+                'opacity': '1',
+                'transform': 'translateX(0)',
+            })
+            $('.career-elementbg').css({
+                'opacity': '1',
+            })
+        }, 500)
+        setTimeout(function() {
+            $('.career-description').css({
+                'opacity': '1',
+                'transform': 'translateX(0)',
+            })
+        }, 700)
+        setTimeout(function() {
+            $('.career-button').css({
+                'opacity': '1',
+            })
+            $('.career-employee-image').css({
+                'opacity': '1',
+                'transform': 'translateY(0)',
+            })
+        }, 1000)
+    } else {
+        $('.career').removeClass('fade')
+        $('.team-bg-fade').css({
+            'opacity': '0',
+            'z-index': '-998',
+        })
+        $('.career-title').css({
+            'opacity': '0',
+            'transform': 'translateX(40px)',
+        })
+        $('.career-elementbg').css({
+            'opacity': '0',
+        })
+        $('.career-description').css({
+            'opacity': '0',
+            'transform': 'translateX(10px)',
+        })
+        $('.career-button').css({
+            'opacity': '0',
+        })
+        $('.career-employee-image').css({
+            'opacity': '0',
+            'transform': 'translateY(40px)',
+        })
+    }
+
+    if (wScroll > 5700) {
+        $('.footer').addClass('fade')
+        $('.footer-left-side').css({
+            'display': 'flex',
+        })
+        $('.footer-right-side').css({
+            'display': 'flex',
+        })
+    } else {
+        $('.footer').removeClass('fade')
+        $('.footer-left-side').css({
+            'display': 'none',
+        })
+        $('.footer-right-side').css({
+            'display': 'none',
+        })
+    }
+})

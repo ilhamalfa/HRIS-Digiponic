@@ -11,6 +11,8 @@ use App\Models\Regency;
 use App\Models\Resign;
 use App\Models\User;
 use App\Models\Village;
+// use Barryvdh\DomPDF\PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -236,8 +238,14 @@ class PegawaiController extends Controller
     public function prosesCuti(Request $request){
         // dd($request);
         $date = date('d-m-Y', strtotime('+3 days'));
-        
-        // dd($request);
+
+        $datas = Cuti::where('user_id_1', Auth::user()->id)->where('status', 'Menunggu Persetujuan')->get();
+        // dd($datas);
+        $jml = 0;
+        foreach($datas as $data){
+            $jml = $jml + date_diff(date_create($data['tanggal_mulai']), date_create($data['tanggal_berakhir']))->days + 1;
+        }
+        // dd($jml);
         if(isset($request->check)){
             $validate = $request->validate([
                 'tanggal_mulai' => 'required|after_or_equal:' . $date,
@@ -253,7 +261,7 @@ class PegawaiController extends Controller
             $validate['tanggal_berakhir'] = $validate['tanggal_mulai'];
         }
 
-        $jml_cuti = date_diff(date_create($validate['tanggal_mulai']), date_create($validate['tanggal_berakhir']))->days + 1;
+        $jml_cuti = $jml + date_diff(date_create($validate['tanggal_mulai']), date_create($validate['tanggal_berakhir']))->days + 1;
         // dd($jml_cuti);
 
         if($jml_cuti <= Auth::user()->jumlah_cuti){
@@ -270,7 +278,7 @@ class PegawaiController extends Controller
 
     // Perizinan
     public function daftarIzin(){
-        $datas = Perizinan::where('user_id', Auth::user()->id)->get();
+        $datas = Perizinan::where('user_id_1', Auth::user()->id)->get();
 
         return view('pegawai.cuti-perizinan.daftar-izin', [
             'datas' => $datas,
@@ -320,8 +328,58 @@ class PegawaiController extends Controller
         return Storage::response($data->bukti);
     }
 
+    public function cetakSK($sk, $id){
+        if($sk == 'cuti'){
+            $data_sk = Cuti::find($id);
+        }else if($sk == 'izin'){
+            $data_sk = Perizinan::find($id);
+        }else if($sk == 'resign'){
+            $data_sk = Resign::find($id);
+        }
+
+        if($sk == 'cuti' || $sk == 'izin'){
+            $data = [
+                'no_surat' => $data_sk->id . '-' . $sk . '-'. $data_sk->tanggal_mulai . '-' . $data_sk->user1->nik . '-' . $data_sk->user_id_1,
+                'nama' => $data_sk->user1->nama,
+                'nik' => $data_sk->user1->nik,
+                'golongan' => $data_sk->user1->golongan,
+                'department' => $data_sk->user1->department,
+                'digital_signature' => $data_sk->user1->digital_signature,
+                'tanggal_mulai' => $data_sk->tanggal_mulai,
+                'tanggal_berakhir' => $data_sk->tanggal_berakhir,
+                'alasan' => $data_sk->alasan,
+                'penyetuju_golongan' => $data_sk->user2->golongan,
+                'penyetuju_department' => $data_sk->user2->department,
+                'penyetuju_nama' => $data_sk->user2->nama,
+                'penyetuju_nik' => $data_sk->user2->nik,
+                'penyetuju_signature' => $data_sk->user2->digital_signature,
+                'sk' => $sk,
+            ];
+        }else if($sk == 'resign'){
+            $data = [
+                'no_surat' => $data_sk->id . '-' . $sk . '-' . $data_sk->tanggal_mulai . '-' . $data_sk->user1->nik . '-' . $data_sk->user_id_1,
+                'nama' => $data_sk->user1->nama,
+                'nik' => $data_sk->user1->nik,
+                'golongan' => $data_sk->user1->golongan,
+                'department' => $data_sk->user1->department,
+                'digital_signature' => $data_sk->user1->digital_signature,
+                'tanggal' => $data_sk->tanggal_resign,
+                'penyetuju_golongan' => $data_sk->user2->golongan,
+                'penyetuju_department' => $data_sk->user2->department,
+                'penyetuju_nama' => $data_sk->user2->nama,
+                'penyetuju_nik' => $data_sk->user2->nik,
+                'penyetuju_signature' => $data_sk->user2->digital_signature,
+                'sk' => $sk,
+            ];
+        }
+
+        $pdf = PDF::loadView('pegawai.cuti-perizinan.surat.sk', $data);
+    
+            return $pdf->download('surat SK '. $sk .'-'. Auth::user()->nama . '-' . Auth::user()->nik. '.pdf');
+    }
+
     public function resign(){
-        $datas = Resign::where('user_id', Auth::user()->id)->get();
+        $datas = Resign::where('user_id_1', Auth::user()->id)->get();
 
         return view('pegawai.resign.daftar-resign', [
             'datas' => $datas
@@ -354,7 +412,7 @@ class PegawaiController extends Controller
         //     $query->where('department', Auth::user()->department);
         // })->paginate(10);
 
-        $datas = Perizinan::whereHas('user', function($query) {
+        $datas = Perizinan::whereHas('user1', function($query) {
                 $query->where('department', Auth::user()->department);
             })->filter(request(['status','search']))->paginate(10);
         
@@ -378,7 +436,7 @@ class PegawaiController extends Controller
 
     // Kadep daftarResign
     public function daftarResign(){
-        $datas = Resign::whereHas('user', function($query) {
+        $datas = Resign::whereHas('user1', function($query) {
             $query->where('department', Auth::user()->department);
         })->filter(request(['status','search']))->paginate(10);
 

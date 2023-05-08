@@ -8,7 +8,7 @@
     <title>@yield('title')</title>
 
     {{-- Header Icons Start --}}
-    <link rel="icon" href="{{ asset('logo/brand-logo-red.webp') }}">
+    <link rel="icon" href="{{ asset('logo/brand-logo-white.webp') }}">
     {{-- Header Icons End --}}
 
     {{-- Google Fonts Start --}}
@@ -38,12 +38,6 @@
 
 <body>
 
-    {{-- Preloader Start --}}
-    {{-- <div class="preloader">
-        <img class="preloader-image" src="{{ asset('preloader/landingpage.png') }}" alt="Preloader">
-    </div> --}}
-    {{-- Preloader End --}}
-
     {{--  Topbar Modal Form Start --}}
     <div class="modal fade" id="loginForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -58,8 +52,8 @@
                     <form class="auth-form" method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="auth-email-box">
-                            <input class="form-input" type="email" id="loginEmail" name="email"
-                                value="{{ old('email') }}" placeholder="Your Email" required autocomplete="off"
+                            <input class="form-input" type="number" id="loginEmail" name="nik"
+                                value="{{ old('nik') }}" placeholder="Your Nik" required autocomplete="off"
                                 autofocus>
                         </div>
                         <div class="auth-password-box">
@@ -119,10 +113,12 @@
                             <i class="fa-solid fa-eye-slash password-icon-eye-slash" id="register-icon-eye-slash"></i>
                         </div>
                         <div class="auth-password-confirm-box">
-                            <input class="form-input" type="password" id="password-confirm" name="password_confirmation"
-                                placeholder="Password Confirm" required autocomplete="off">
+                            <input class="form-input" type="password" id="password-confirm"
+                                name="password_confirmation" placeholder="Password Confirm" required
+                                autocomplete="off">
                             <i class="fa-solid fa-eye password-icon-eye" id="password-confirm-icon-eye"></i>
-                            <i class="fa-solid fa-eye-slash password-icon-eye-slash" id="password-confirm-icon-eye-slash"></i>
+                            <i class="fa-solid fa-eye-slash password-icon-eye-slash"
+                                id="password-confirm-icon-eye-slash"></i>
                         </div>
                         <div class="auth-button-box">
                             <button type="submit" class="auth-button btn btn-outline-secondary rounded-0 px-5 m-3">
@@ -149,166 +145,106 @@
     {{-- Topbar Start --}}
     @if (Request::is('/'))
         <nav class="topbar px-5">
-    @else
-        <nav class="topbar px-5 bg-primary-color">
+        @else
+            <nav class="topbar px-5 bg-primary-color">
     @endif
-        <div class="brand-box topbar-section">
-            <img class="image" src="{{ asset('logo/brand-logo-white.webp') }}" alt="Brand Logo">
-            <a class="text tx-secondary-color-1" href="{{ url('/') }}">TECH Solution</a>
-        </div>
-        <div class="menu-box topbar-section">
-            <a class="link tx-secondary-color-1" href="{{ url('/') }}">
-                <span>Home</span>
+    <div class="brand-box topbar-section">
+        <img class="image brand-logo-white" src="{{ asset('logo/brand-logo-white.webp') }}" alt="Brand Logo">
+        <img class="image brand-logo-black" src="{{ asset('logo/brand-logo-black.webp') }}" alt="Brand Logo">
+        <a class="text tx-secondary-color-1" href="{{ url('/') }}">TECH Solution</a>
+    </div>
+    <div class="menu-box topbar-section">
+        <a class="link tx-secondary-color-1" href="{{ url('/') }}">
+            <span>Home</span>
+        </a>
+        <a class="link tx-secondary-color-1" href="{{ url('/career') }}">
+            <span>Career</span>
+        </a>
+        <a class="link tx-secondary-color-1" href="{{ url('/') }}">
+            <span>About</span>
+        </a>
+        <a class="link tx-secondary-color-1" href="{{ url('/') }}">
+            <span>Product</span>
+        </a>
+        <a class="link tx-secondary-color-1" href="{{ url('/') }}">
+            <span>Team</span>
+        </a>
+    </div>
+    <div class="account-box topbar-section">
+        @guest
+            <button type="button" class="button-animation-lime button-login btn rounded-0" data-bs-toggle="modal"
+                data-bs-target="#loginForm">
+                <span>Sign In</span>
+            </button>
+        @else
+            <a class="tx-secondary-color-1 log-out" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                <i class="fa-solid fa-right-from-bracket text-danger me-2"></i>
+                <span class="text-danger">Log Out</span>
             </a>
-            <a class="link tx-secondary-color-1" href="{{ url('/career') }}">
-                <span>Career</span>
-            </a>
-            <a class="link tx-secondary-color-1" href="{{ url('/') }}">
-                <span>About</span>
-            </a>
-            <a class="link tx-secondary-color-1" href="{{ url('/') }}">
-                <span>Product</span>
-            </a>
-            <a class="link tx-secondary-color-1" href="{{ url('/') }}">
-                <span>Team</span>
-            </a>
-        </div>
-        <div class="account-box topbar-section">
-            @guest
-                <button type="button" class="button-animation-lime button-login btn rounded-0" data-bs-toggle="modal"
-                    data-bs-target="#loginForm">
-                    <span>Sign In</span>
-                </button>
-            @else
-                <div class="dropdown">
-                    <button class="btn dropdown-toggle tx-secondary-color-1" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        @if (Auth::user()->role != 'Pelamar' && isset(Auth::user()->pegawai))
-                            <img class="img rounded-circle" src="{{ asset('storage/' . Auth::user()->pegawai->foto) }}"
-                                alt="Profile Image">
-                        @elseif (Auth::user()->role == 'Pelamar' && isset(Auth::user()->pelamar))
-                            <img class="img rounded-circle" src="{{ asset('storage/' . Auth::user()->pelamar->foto) }}"
-                                alt="Profile Image">
-                        @else
-                            <img class="img rounded-circle " src="{{ asset('template/assets/images/faces/face18.jpg') }}"
-                                alt="Profile Image">
-                        @endif
-                        @if (isset(Auth::user()->pegawai))
-                            <span>{{ Auth::user()->pegawai->nama }}</span>
-                        @elseif (isset(Auth::user()->pelamar) && Auth::user()->role == 'Pelamar')
-                            <span>{{ Auth::user()->pelamar->nama }}</span>
-                        @else
-                            <span>{{ Auth::user()->email }}</span>
-                        @endif
-                    </button>
-                    <ul class="dropdown-menu bg-optional-color-2">
-                        @if (Auth::user()->role == 'Pelamar')
-                            <li>
-                                <a class="dropdown-item tx-secondary-color-1"
-                                    href="{{ url('/pelamar/daftar-lamaran/') }}">
-                                    <i class="fa-solid fa-file-pen text-white me-2"></i>
-                                    <span>Applied Vacancy</span>
-                                </a>
-                            </li>
-                        @endif
-                        <li>
-                            <a class="dropdown-item tx-secondary-color-1 setting" href="{{ url('/') }}">
-                                <img class="gif me-2" src="{{ asset('layout/landingpage/topbar/settings.gif') }}"
-                                    alt="...">
-                                <span>Settings</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item tx-secondary-color-1 log-out" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
-                                <i class="fa-solid fa-right-from-bracket text-danger me-2"></i>
-                                <span class="text-danger">Log Out</span>
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-            @endguest
-        </div>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+        @endguest
+    </div>
     </nav>
     {{-- Topbar End --}}
 
     {{-- Main Content Start --}}
-    <div class="main bg-primary-color">
+    <div class="main">
         @yield('content')
     </div>
     {{-- Main Content End --}}
 
     {{-- Footer Start --}}
-    <footer class="footer-bg container-fluid">
-        @if (Request::is('/'))
-            <div class="footer-top">
-                <div class="row text-center justify-content-center">
-                    <div class="p-2">
-                        <div class="logo">
-                            <img class="footer-brand-logo" src="{{ asset('logo/brand-logo-white.webp') }}"
-                                alt="Brand Logo" id="footer-brand">
-                        </div>
-                        <div class="footer-web-description-box">
-                            <p class="mb-4 footer-web-description">Lorem ipsum dolor sit amet consectetur adipisicing
-                                elit. Quia, quam
-                                exercitationem neque adipisci, sint deserunt reprehenderit illum, aut doloremque aliquid
-                                corporis repellat ducimus at quisquam molestiae commodi tempore assumenda atque.Lorem
-                                ipsum dolor sit amet consectetur adipisicing elit. Quia, quam
-                                exercitationem neque adipisci, sint deserunt reprehenderit illum, aut doloremque aliquid
-                                corporis repellat ducimus at quisquam molestiae commodi tempore assumenda atque.
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, quam
-                                exercitationem neque adipisci, sint deserunt reprehenderit illum, aut doloremque aliquid
-                                corporis repellat ducimus at quisquam molestiae commodi tempore assumenda atque.</p>
-                            <p class="mb-4 footer-web-description">Lorem ipsum dolor sit amet consectetur adipisicing
-                                elit. Quia, quam
-                                exercitationem neque adipisci, sint deserunt reprehenderit illum, aut doloremque aliquid
-                                corporis repellat ducimus at quisquam molestiae commodi tempore assumenda atque.Lorem
-                                ipsum dolor sit amet consectetur adipisicing elit. Quia, quam
-                                exercitationem neque adipisci, sint deserunt reprehenderit illum, aut doloremque aliquid
-                                corporis repellat ducimus at quisquam molestiae commodi tempore assumenda atque.</p>
-                            <p class="mb-4 footer-web-description">Lorem ipsum dolor sit amet consectetur adipisicing
-                                elit. Quia, quam
-                                exercitationem neque adipisci, sint deserunt reprehenderit illum, aut doloremque aliquid
-                                corporis repellat ducimus at quisquam molestiae commodi tempore assumenda atque.</p>
-                        </div>
-                    </div>
+    @if (Request::is('/'))
+        <footer class="footer">
+            <div class="footer-left-side">
+                <div class="footer-logo-box">
+                    <img class="footer-brand-logo" src="{{ asset('main/footer/brand-logo.webp') }}"
+                        alt="Footer Logo">
                 </div>
-                <div class="footer-social-media-box m-5">
-                    <div>
-                        <a class="footer-social-media" href="#">
-                            <i class="fa-brands fa-twitter"></i>
-                        </a>
-                    </div>
-                    <div>
-                        <a class="footer-social-media" href="#">
-                            <i class="fa-brands fa-instagram"></i>
-                        </a>
-                    </div>
-                    <div>
-                        <a class="footer-social-media" href="#">
-                            <i class="fa-brands fa-facebook"></i>
-                        </a>
-                    </div>
-                    <div>
-                        <a class="footer-social-media" href="#">
-                            <i class="fa-brands fa-linkedin"></i>
-                        </a>
-                    </div>
+                <div class="footer-tagline-box">
+                    <p class="footer-tagline">Modern Problem <br> Need Modern Solution</p>
+                </div>
+                <div class="footer-social-media-box">
+                    <a class="footer-social-media" href="{{ url('/') }}">
+                        <i class="fa-brands fa-twitter twitter"></i>
+                    </a>
+                    <a class="footer-social-media" href="{{ url('/') }}">
+                        <i class="fa-brands fa-instagram instagram"></i>
+                    </a>
+                    <a class="footer-social-media" href="{{ url('/') }}">
+                        <i class="fa-brands fa-facebook-f facebook"></i>
+                    </a>
+                    <a class="footer-social-media" href="{{ url('/') }}">
+                        <i class="fa-brands fa-linkedin-in linkedin"></i>
+                    </a>
                 </div>
             </div>
-        @endif
-        <div class="end-footer py-4">
-            <div class="row text-center">
-                <div class="col">
-                    &copy; Copyright 2023 Tech Solution Indonesia | Solid Solid Solid | Allright Reserved
+            <div class="footer-right-side">
+                <div class="footer-map">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.833149015558!2d112.6390140743083!3d-7.912491878754486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd62b0ceafe747d%3A0xe99b9f79753df0b2!2sPT%20Digiponic%20Maju%20Jaya!5e0!3m2!1sid!2sid!4v1683252672527!5m2!1sid!2sid"
+                        width="500" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <div class="footer-contact-box">
+                    <h6 class="footer-contact tx-secondary-color-1 text-end my-2">Contact</h6>
+                    <p class="footer-phone tx-secondary-color-1 text-end my-2 me-2">Phone +62 888-8888-8888</p>
+                    <p class="footer-email tx-secondary-color-1 text-end my-2 me-2">Email techsolution@gmail.com</p>
+                    <p class="footer-address tx-secondary-color-1 text-end my-2 me-2">Jl. Perusahaan Raya no. 27
+                        Bodosari, <br> Tanjungtirto, Bodosari, Kabupaten,
+                        <br> Kec. Singosari, Kabupaten Malang, <br> Jawa Timur 65153
+                    </p>
                 </div>
             </div>
-        </div>
-    </footer>
+        </footer>
+    @endif
+    <div class="footer-mini">
+        &copy; Copyright 2023 Tech Solution Indonesia | Solid Solid Solid | Allright Reserved
+    </div>
     {{-- Footer End --}}
 
     {{-- JQuery Start --}}

@@ -9,6 +9,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\DB;
+use Termwind\Components\Dd;
 
 class Controller extends BaseController
 {
@@ -16,15 +17,6 @@ class Controller extends BaseController
 
     public function rutelogin()
     {
-        // dd($request);
-        
-        // if ($request->has('inputemployee')) {
-        //     $person = 1;
-        // } elseif ($request->has('inputcandidate')) {
-        //     $person = 2;
-        // } else {
-        //     return redirect('errors.404');
-        // }
         return view('auth.login');
     }
 
@@ -35,15 +27,38 @@ class Controller extends BaseController
 
     public function career()
     {
-        // $datas = DB::select('SELECT created_at FROM lowongans');
-        $datas = Lowongan::latest()->filter(request(['search']))->get();
+        $datas = Lowongan::filter(request(['search', 'closed', 'orderBy']))->where('tanggal', '>', now()->toDateString())->paginate(5);
+        return view('career.career', compact('datas'));
+    }              
+
+    public function search()
+    {
+        if (isset($_GET['search'])) {
+            if ($_GET['search'] == '') {
+                $datas = Lowongan::paginate(5);
+            } else {
+                $datas = Lowongan::where('posisi', 'LIKE', '%' . $_GET['search'] . '%')->paginate(5);
+            }
+        } else {
+            $datas = Lowongan::paginate(5);
+        }
         return view('career.career', compact('datas'));
     }
 
-    public function careerVacancyDetail($id)
+    public function filter()
     {
-        $datas = Lowongan::find($id);
-        return view('career.career-detail', compact('datas'));
+        if (isset($_GET['filter'])) {
+            if ($_GET['filter'] == 'lastest') {
+                $datas = Lowongan::orderBy("created_at", "desc")->paginate(5);
+            } elseif ($_GET['filter'] == 'deadline') {
+                $datas = Lowongan::orderBy("tanggal", "asc")->paginate(5);
+            } else {
+                $datas = Lowongan::paginate(5);
+            }
+        } else {
+            $datas = Lowongan::paginate(5);
+        }
+        return view('career.career', compact('datas'));
     }
 
     public function aboutus()
