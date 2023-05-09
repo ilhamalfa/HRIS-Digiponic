@@ -216,10 +216,10 @@
                         <span class="menu-title">Dashboard</span>
                     </a>
                 </li>
-                @guest
-                    
-                @else
                     @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'SuperAdmin')
+                        <li class="nav-item nav-category">
+                            <span class="nav-link">Admin Menu</span>
+                        </li>
                         <li class="nav-item menu-items">
                             <a class="nav-link" href="{{ url('/data-user') }}">
                                 <span class="menu-icon">
@@ -252,7 +252,11 @@
                                 <span class="menu-title">lowongan</span>
                             </a>
                         </li>
-                        @elseif (Auth::user()->golongan == 'Manager/Kadep' && Auth::user()->role != 'SuperAdmin')
+                        @endif
+                        @if (Auth::user()->golongan == 'Manager/Kadep')
+                        <li class="nav-item nav-category">
+                            <span class="nav-link">Manager Navigation</span>
+                        </li>
                         <li class="nav-item menu-items">
                             <a class="nav-link" href="{{ url('/employees-data') }}">
                                 <span class="menu-icon">
@@ -286,44 +290,41 @@
                             </a>
                         </li>
                     @endif
-                    @if (Auth::user()->role != 'Pelamar')
-                        <li class="nav-item nav-category">
-                            <span class="nav-link">Employee Navigation</span>
-                        </li>
-                        <li class="nav-item menu-items">
-                            <a class="nav-link" href="{{ url('#') }}">
-                                <span class="menu-icon">
-                                    <i class="mdi mdi-file-multiple"></i>
-                                </span>
-                                <span class="menu-title">Absensi</span>
-                            </a>
-                        </li>
-                        <li class="nav-item menu-items">
-                            <a class="nav-link" href="{{ url('pegawai/cuti') }}">
-                                <span class="menu-icon">
-                                    <i class="mdi mdi-file-multiple"></i>
-                                </span>
-                                <span class="menu-title">cuti</span>
-                            </a>
-                        </li>
-                        <li class="nav-item menu-items">
-                            <a class="nav-link" href="{{ url('pegawai/izin') }}">
-                                <span class="menu-icon">
-                                    <i class="mdi mdi-file-multiple"></i>
-                                </span>
-                                <span class="menu-title">Izin</span>
-                            </a>
-                        </li>
-                        <li class="nav-item menu-items">
-                            <a class="nav-link" href="{{ url('pegawai/resign') }}">
-                                <span class="menu-icon">
-                                    <i class="mdi mdi-file-multiple"></i>
-                                </span>
-                                <span class="menu-title">Resign</span>
-                            </a>
-                        </li>
-                    @endif
-                @endguest
+                    <li class="nav-item nav-category">
+                        <span class="nav-link">Employee Navigation</span>
+                    </li>
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" href="{{ url('#') }}">
+                            <span class="menu-icon">
+                                <i class="mdi mdi-file-multiple"></i>
+                            </span>
+                            <span class="menu-title">Absensi</span>
+                        </a>
+                    </li>
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" href="{{ url('pegawai/cuti') }}">
+                            <span class="menu-icon">
+                                <i class="mdi mdi-file-multiple"></i>
+                            </span>
+                            <span class="menu-title">cuti</span>
+                        </a>
+                    </li>
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" href="{{ url('pegawai/izin') }}">
+                            <span class="menu-icon">
+                                <i class="mdi mdi-file-multiple"></i>
+                            </span>
+                            <span class="menu-title">Izin</span>
+                        </a>
+                    </li>
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" href="{{ url('pegawai/resign') }}">
+                            <span class="menu-icon">
+                                <i class="mdi mdi-file-multiple"></i>
+                            </span>
+                            <span class="menu-title">Resign</span>
+                        </a>
+                    </li>
                 {{-- Sidebar Dashboard End --}}
 
             </ul>
