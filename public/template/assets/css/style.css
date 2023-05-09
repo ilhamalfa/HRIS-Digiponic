@@ -1,68 +1,88 @@
 :root {
-  --background-color : #000000;
-  --primary-color : #191C24;
+  --primary-color : #000;
   --secondary-color-1 : #F9F9F9;
-  --secondary-color-2 : #FF4655;
+  --secondary-color-2 : #0edfb9;
+  --secondary-color-3 : red;
   --optional-color-1 : #76808A;
-  --optional-color-2 : #22242E;
+  --optional-color-2 : #191c24;
 }
 
-.background-color {
-  background-color: var(--background-color);
-}
-
-.primary-color {
+.bg-primary-color {
   background-color: var(--primary-color);
 }
 
-.secondary-color-1 {
+.bg-secondary-color-1 {
   background-color: var(--secondary-color-1);
 }
 
-.secondary-color-2 {
+.bg-secondary-color-2 {
   background-color: var(--secondary-color-2);
 }
 
-.optional-color-1 {
+.bg-secondary-color-3 {
+  background-color: var(--secondary-color-3);
+}
+
+.bg-optional-color-1 {
   background-color: var(--optional-color-1);
 }
 
-.optional-color-2 {
+.bg-optional-color-2 {
   background-color: var(--optional-color-2);
 }
 
-.background-color-text {
-  color: var(--background-color);
-}
-
-.primary-color-text {
+.tx-primary-color {
   color: var(--primary-color);
 }
 
-.secondary-color-1-text {
+.tx-secondary-color-1 {
   color: var(--secondary-color-1);
 }
 
-.secondary-color-2-text {
+.tx-secondary-color-2 {
   color: var(--secondary-color-2);
 }
 
-.optional-color-1-text {
+.tx-secondary-color-3 {
+  color: var(--secondary-color-3);
+}
+
+.tx-optional-color-1 {
   color: var(--optional-color-1);
 }
 
-.optional-color-2-text {
+.tx-optional-color-2 {
   color: var(--optional-color-2);
 }
 
-/* input.form-input#form-input:focus {
-  border: 1px solid #F9F9F9;
-  color: #F9F9F9;
-} */
+.card-header {
+  color: var(--secondary-color-1);
+  font-size: 2em;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
 
-input.form-input:focus {
-  border: 1px solid #F9F9F9;
-  color: #F9F9F9;
+.img-preview {
+  width: 60%;
+}
+
+.password-icon-eye {
+  cursor: pointer;
+  color: var(--secondary-color-1);
+  position: absolute;
+  top: 40%;
+  bottom: 40%;
+  right: 5%;
+  display: none;
+}
+
+.password-icon-eye-slash {
+  cursor: pointer;
+  color: var(--secondary-color-1);
+  position: absolute;
+  top: 40%;
+  bottom: 40%;
+  right: 5%;
 }
 
 /*-------------------------------------------------------------------
@@ -7543,10 +7563,11 @@ input.form-input:focus {
   --bs-black-rgb: 0, 0, 0;
   --bs-body-color-rgb: 255, 255, 255;
   --bs-body-bg-rgb: 255, 255, 255;
+  --bs-body-montserrat:  'Montserrat', sans-serif;
   --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
-  --bs-body-font-family: var(--bs-font-sans-serif);
+  --bs-body-font-family: var(--bs-body-montserrat);
   --bs-body-font-size: 1rem;
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.5;

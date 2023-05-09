@@ -36,12 +36,27 @@ class PegawaiController extends Controller
                 'provinces' => $provinces
             ]);
         }else{
-            return redirect('home');
+            return redirect('dashboard');
         }
     }
 
     public function editUser(){
-            return view('pegawai.data-pegawai.update-profile');
+            $data = Auth::user();
+
+            $provinces = Province::all();
+            $regency = Regency::find($data->regency_id);
+            $district = District::find($data->district_id);
+            $village = Village::find($data->village_id);
+    
+            // dd($districts);
+    
+            return view('pegawai.data-pegawai.update-profile', [
+                'data' => $data,
+                'provinces' => $provinces,
+                'regency' => $regency,
+                'district' => $district,
+                'village' => $village
+            ]);
     }
 
     public function updateUser(Request $request){
@@ -135,8 +150,9 @@ class PegawaiController extends Controller
         $encoded_image = explode(",", $data_uri)[1];
         $decoded_image = base64_decode($encoded_image);
         $nama_file = "Pegawai/signature/". Auth::user()->nama . '-' . now()->timestamp . ".png";
-
+        
         if(FileExists('storage/' . $user->digital_signature)){
+            dd($user->digital_signature);
             // dd('Exist');
             unlink('storage/' . $user->digital_signature);
         }
@@ -151,9 +167,9 @@ class PegawaiController extends Controller
         return redirect()->back();
     }
 
-    public function userPhoto(){
-        return view('pegawai.data-pegawai.update-foto-pegawai');
-    }
+    // public function userPhoto(){
+    //     return view('pegawai.data-pegawai.update-foto-pegawai');
+    // }
 
     public function updatePhoto(Request $request){
         $user = User::find(Auth::user()->id);

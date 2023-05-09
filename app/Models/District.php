@@ -56,12 +56,4 @@ class District extends Model
     {
         return $this->hasMany(Village::class);
     }
-
-    public function pegawai(){
-        return $this->hasMany(Pegawai::class);
-    }
-
-    public function pelamar(){
-        return $this->hasMany(Pelamar::class);
-    }
 }

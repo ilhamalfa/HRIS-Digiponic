@@ -24,17 +24,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('landingpage.landingpage');
-    // return view('layouts.template');
 });
+
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index']);
 
 // Landing Page
 Route::get('/rutelogin', [Controller::class, 'rutelogin'])->name('rutelogin');
 
-Route::get('/career', [Controller::class, 'career'])->name('career');
+Route::get('/career', [Controller::class, 'career']);
 
 Route::get('/career/search', [Controller::class, 'search']);
 
@@ -118,9 +118,9 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin,Pegawai'])-
     Route::post('/profile/edit-data-pegawai/update', [PegawaiController::class, 'updatePegawai']);
 
     // Update Foto Pegawai
-    Route::get('/profile/photo-profile', [PegawaiController::class, 'userPhoto']);
+    // Route::get('/profile/photo-profile', [PegawaiController::class, 'userPhoto']);
 
-    Route::post('/profile/photo-profile/update',  [PegawaiController::class, 'updatePhoto']);
+    // Route::post('/profile/photo-profile/update',  [PegawaiController::class, 'updatePhoto']);
 
     // Update Signature Pegawai
     Route::get('/profile/signature', [PegawaiController::class, 'signature']);

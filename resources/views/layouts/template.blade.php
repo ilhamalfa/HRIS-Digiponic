@@ -9,18 +9,14 @@
     <title>@yield('title')</title>
 
     {{-- Header Logo Start --}}
-    <link rel="icon" href="{{ asset('logo/brand-logo-red.webp') }}">
+    <link rel="icon" href="{{ asset('logo/brand-logo-white.webp') }}">
     {{-- Header Logo End --}}
 
     {{-- Google Fonts Start --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,700;1,300&display=swap"
-        rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;0,600;0,700;0,800;1,100&display=swap"
         rel="stylesheet">
     {{-- Google Fonts End --}}
 
@@ -36,10 +32,6 @@
     {{-- Layout CSS Start --}}
     <link rel="stylesheet" href="{{ asset('template/assets/css/style.css') }}">
     {{-- Layout CSS End --}}
-
-    {{-- Animations CSS Start --}}
-    <link rel="stylesheet" href="{{ asset('template/assets/css/animations/style.css') }}">
-    {{-- Animations CSS End --}}
 
     {{-- Font Awesome Start --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
@@ -174,16 +166,6 @@
                         {{-- Sidebar Profile 3 Dots Vertical Menu Start --}}
                         <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list"
                             aria-labelledby="profile-dropdown">
-                            <a href="{{ url('/profile/photo-profile') }}" class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <div class="preview-icon bg-dark rounded-circle">
-                                        <i class="mdi mdi-account-edit text-warning"></i>
-                                    </div>
-                                </div>
-                                <div class="preview-item-content">
-                                    <p class="preview-subject ellipsis mb-1 text-small">Change User's Photo</p>
-                                </div>
-                            </a>
                             <a href="{{ url('/Account/account-setting') }}" class="dropdown-item preview-item">
                                 <div class="preview-thumbnail">
                                     <div class="preview-icon bg-dark rounded-circle">
@@ -195,16 +177,6 @@
                                 </div>
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a href="{{ url('/profile/edit-data-pegawai') }}" class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <div class="preview-icon bg-dark rounded-circle">
-                                        <i class="mdi mdi-clipboard-account  text-info"></i>
-                                    </div>
-                                </div>
-                                <div class="preview-item-content">
-                                    <p class="preview-subject ellipsis mb-1 text-small">Change User Data</p>
-                                </div>
-                            </a> 
                             <a href="{{ url('/profile/signature') }}" class="dropdown-item preview-item">
                                 <div class="preview-thumbnail">
                                     <div class="preview-icon bg-dark rounded-circle">
@@ -507,30 +479,6 @@
                     @yield('content')
                 </div>
                 {{-- Main Content End --}}
-
-                <!-- partial:partials/_footer.html -->
-                <footer class="footer">
-                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                        <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">
-                            Copyright © Tech Solution 2023
-                        </span>
-                        <div
-                            class="footer-social-media float-none float-sm-right d-block mt-1 mt-sm-0 text-center text-white">
-                            <a class="mx-1 text-decoration-none" href="#">
-                                <i class="fa-brands fa-twitter"></i>
-                            </a>
-                            <a class="mx-1 text-decoration-none" href="#">
-                                <i class="fa-brands fa-instagram"></i>
-                            </a>
-                            <a class="mx-1 text-decoration-none" href="#">
-                                <i class="fa-brands fa-facebook"></i>
-                            </a>
-                            <a class="mx-1 text-decoration-none" href="#">
-                                <i class="fa-brands fa-linkedin"></i>
-                            </a>
-                        </div>
-                </footer>
-                <!-- partial -->
             </div>
             <!-- main-panel ends -->
         </div>

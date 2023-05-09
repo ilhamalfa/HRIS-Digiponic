@@ -1,3 +1,35 @@
+let newPasswordEye = document.getElementById('new-password-icon-eye')
+let newPasswordEyeSlash = document.getElementById('new-password-icon-eye-slash')
+let inputNewPassword = document.getElementById('new-password')
+
+let confirmPasswordEye = document.getElementById('confirm-password-icon-eye')
+let confirmPasswordEyeSlash = document.getElementById('confirm-password-icon-eye-slash')
+let inputConfirmPassword = document.getElementById('confirm-password')
+
+newPasswordEyeSlash.addEventListener('click', function () {
+  newPasswordEye.style.display = 'block';
+  newPasswordEyeSlash.style.display = 'none';
+  inputNewPassword.type = 'text'
+})
+
+newPasswordEye.addEventListener('click', function () {
+  newPasswordEye.style.display = 'none';
+  newPasswordEyeSlash.style.display = 'block';
+  inputNewPassword.type = 'password'
+})
+
+confirmPasswordEyeSlash.addEventListener('click', function () {
+  confirmPasswordEye.style.display = 'block';
+  confirmPasswordEyeSlash.style.display = 'none';
+  inputConfirmPassword.type = 'text'
+})
+
+confirmPasswordEye.addEventListener('click', function () {
+  confirmPasswordEye.style.display = 'none';
+  confirmPasswordEyeSlash.style.display = 'block';
+  inputConfirmPassword.type = 'password'
+})
+
 (function($) {
   'use strict';
   $.fn.andSelf = function() {
