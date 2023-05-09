@@ -141,8 +141,13 @@
                         {{-- Sidebar Profile Image & Name Start --}}
                         <div class="profile-pic">
                             <div class="count-indicator">
+                                    @if (isset(Auth::user()->foto))
                                     <img class="img-xs rounded-circle"
                                     src="{{ asset('storage/' . Auth::user()->foto) }}" alt="">
+                                    @else
+                                    <img class="img-xs rounded-circle"
+                                    src="{{ asset('storage/Pegawai/default/user.jpg') }}" alt="">
+                                    @endif
                             </div>
                             <div class="profile-name">
                                     <h5 class="mb-0 font-weight-normal">
@@ -245,6 +250,39 @@
                                     <i class="mdi mdi-file-multiple"></i>
                                 </span>
                                 <span class="menu-title">lowongan</span>
+                            </a>
+                        </li>
+                        @elseif (Auth::user()->golongan == 'Manager/Kadep' && Auth::user()->role != 'SuperAdmin')
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('/employees-data') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-account-multiple-outline"></i>
+                                </span>
+                                <span class="menu-title">Users Datas</span>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('kadep/daftar-cuti') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-note-multiple"></i>
+                                </span>
+                                <span class="menu-title">Daftar Cuti</span>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('kadep/daftar-perizinan') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-receipt"></i>
+                                </span>
+                                <span class="menu-title">Days Off</span>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('kadep/daftar-resign') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-receipt"></i>
+                                </span>
+                                <span class="menu-title">Resign</span>
                             </a>
                         </li>
                     @endif
@@ -411,8 +449,13 @@
                                         @guest
                                             <p class="mb-0 ms-2 d-none d-sm-block navbar-profile-name text-white">Login</p>
                                         @else
-                                        <img class="img-xs rounded-circle"
-                                        src="{{ asset('storage/' . Auth::user()->foto) }}" alt="">
+                                            @if (isset(Auth::user()->foto))
+                                                <img class="img-xs rounded-circle"
+                                            src="{{ asset('storage/' . Auth::user()->foto) }}" alt="">
+                                            @else
+                                                <img class="img-xs rounded-circle"
+                                            src="{{ asset('storage/Pegawai/default/user.jpg') }}" alt="">
+                                            @endif
                                         <p class="mb-0 d-none d-sm-block navbar-profile-name">
                                             {{ Auth::user()->nama }}
                                         <i class="mdi mdi-menu-down d-none d-sm-block"></i>

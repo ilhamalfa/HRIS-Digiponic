@@ -52,6 +52,10 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin'])->group(functio
     // Data User
     Route::get('/data-user/input-user', [SuperAdminController::class, 'inputUser']);
 
+    Route::get('/data-user/edit-user/{id}', [SuperAdminController::class, 'editUser']);
+
+    Route::post('/data-user/edit-user/update/{id}', [SuperAdminController::class, 'updateUser']);
+
     Route::post('/data-user/store-user', [SuperAdminController::class, 'storeUser']);
 
     Route::get('/data-user/delete-user/{id}', [SuperAdminController::class, 'deleteUser']);
@@ -60,15 +64,12 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin'])->group(functio
     Route::get('/resign/daftar-resign', [SuperAdminController::class, 'resign']);
 
     Route::get('/resign/daftar-resign/{id}/{konfirmasi}', [SuperAdminController::class, 'resignProses']);
-
-    // Data User
-    Route::get('/data-user', [AdminController::class, 'dataUser']);
     });    
 
 // Admin
 Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin'])->group(function () {
     // Data User
-    Route::get('/data-user', [AdminController::class, 'dataUser']);
+    Route::get('/users-data', [AdminController::class, 'dataUser']);
 
     // Data Pegawai
     Route::get('/data-pegawai', [AdminController::class, 'dataPegawai']);
@@ -103,6 +104,9 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin'])->group(f
     Route::post('data-lowongan/pelamar-detail/terima/{id}', [AdminController::class, 'terima']);
 
     Route::get('pelamar-detail/cv/{id}', [AdminController::class, 'CV']);
+
+    // Data User
+    Route::get('/data-user', [AdminController::class, 'dataUser']);
 });
 
 // Pegawai
@@ -173,6 +177,9 @@ Route::middleware(['auth', 'verified', 'golongan:Manager/Kadep'])->group(functio
     Route::get('kadep/daftar-resign', [PegawaiController::class, 'daftarResign']);
 
     Route::get('kadep/daftar-resign/{id}/{konfirmasi}', [AdminController::class, 'konfirmasiResign']);
+
+    // Data User
+    Route::get('/employees-data', [PegawaiController::class, 'dataPegawai']);
 });
 
 // Indoregion

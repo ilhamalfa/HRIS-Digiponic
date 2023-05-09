@@ -26,19 +26,20 @@
                             @foreach ($datas as $data)
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
-                                <td>{{ $data->user->pegawai->nama }}</td>
+                                <td>{{ $data->user1->nama }}</td>
                                 <td>{{ $data->tanggal_mulai }}</td>
                                 <td>{{ $data->tanggal_berakhir }}</td>
                                 <td>{{ date_diff(date_create($data->tanggal_mulai), date_create($data->tanggal_berakhir))->days + 1 . " Hari" }}</td>
-                                <td>{{ $data->status_cuti}}</td>
+                                <td>{{ $data->status}}</td>
                                 <td>
-                                    @if ($data->status_cuti == "Menunggu Persetujuan")
-                                        <a href="{{ url('admin/cuti/' . $data->id .'/terima') }}" class="btn btn-success">Terima</a>
-                                        <a href="{{ url('admin/cuti/' . $data->id .'/tolak') }}" class="btn btn-danger">Tolak</a>
-                                    @elseif ($data->status_cuti == "Diterima")
-                                        <h6 class="text-success">(Diterima)</h6>
-                                    @elseif ($data->status_cuti == "Ditolak")
-                                        <h6 class="text-danger">(Ditolak)</h6>
+                                    @if ($data->status == 'Accepted')
+                                        @if (isset($data->user1->digital_signature))
+                                            <a href="{{url('pegawai/cetak-sk/cuti/' . $data->id)}}" class="btn btn-primary">SK Cuti</a>
+                                        @else
+                                            <button disabled class="btn btn-danger">SIgnature Not Found</button>
+                                        @endif
+                                    @elseif($data->status == 'Declined')
+                                        <button disabled class="btn btn-primary">SK Cuti</button>
                                     @endif
                                 </td>
                             </tr>

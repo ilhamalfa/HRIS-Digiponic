@@ -25,10 +25,12 @@ use function PHPUnit\Framework\isEmpty;
 
 class PegawaiController extends Controller
 {
-    // Tambah Data Pegawai
-    public function inputPegawai(){
-        $data = Pegawai::where('user_id', Auth::user()->id)->first();
+    public function dataPegawai(){
+        $datas = User::where('department', Auth::user()->department)->filter(request(['search']))->paginate(10);
 
+        return view('super-admin.pegawai.daftar-data-user', [
+            'datas' => $datas
+        ]);
         if(!isset($data)){
             $provinces = Province::all();
 
@@ -150,9 +152,8 @@ class PegawaiController extends Controller
         $encoded_image = explode(",", $data_uri)[1];
         $decoded_image = base64_decode($encoded_image);
         $nama_file = "Pegawai/signature/". Auth::user()->nama . '-' . now()->timestamp . ".png";
-        
-        if(FileExists('storage/' . $user->digital_signature)){
-            dd($user->digital_signature);
+
+        if(isset($user->digital_signature) && FileExists('storage/' . $user->digital_signature)){
             // dd('Exist');
             unlink('storage/' . $user->digital_signature);
         }
@@ -182,7 +183,9 @@ class PegawaiController extends Controller
 
         Storage::put($imageName,$image_base64);
 
-        unlink('storage/' . $user->foto);
+        if(isset($user->foto) && fileExists($user->foto)){
+            unlink('storage/' . $user->foto);
+        }
 
         $user->update([
             'foto' => $imageName
@@ -391,7 +394,7 @@ class PegawaiController extends Controller
 
         $pdf = PDF::loadView('pegawai.cuti-perizinan.surat.sk', $data);
     
-            return $pdf->download('surat SK '. $sk .'-'. Auth::user()->nama . '-' . Auth::user()->nik. '.pdf');
+            return $pdf->download('surat SK '. $sk .'-'. $data_sk->user1->nama . '-' . Auth::user()->nik. '.pdf');
     }
 
     public function resign(){

@@ -4,12 +4,10 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Doctrine\Inflector\Rules\Turkish\Rules;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 
 class ApiController extends Controller
 {
@@ -44,7 +42,7 @@ class ApiController extends Controller
             'message' => 'Berhasil login.',
             'data' => [
                 'user' => $user,
-                'token' => $token
+                'token' => $token,
             ]
         ]);
     }
@@ -56,35 +54,4 @@ class ApiController extends Controller
             'message' => 'Successfully logged out'
         ]);
     }
-
-    // public function Register(Request $request)
-    // {
-    //     $validator = Validator::make($request->all(), [
-    //         'email' => 'required|unique:users',
-    //         'nik' => 'required|numeric|digits_between:16,16|unique:users',
-    //         'password' => 'required|confirmed|min:8',
-    //         'passwordConfirmation' => 'required|min:8|same:password'
-    //     ], [
-    //         'nik.digits_between' => 'The nik field must be exactly 16 digits.'
-    //     ]);
-
-    //     if ($validator->fails()) {
-    //         return response()->json(['errors' => $validator->errors()], 422);
-    //     }
-
-    //     $user = new User;
-    //     $user->email = $request->email;
-    //     $user->nik = $request->nik;
-    //     $user->password = Hash::make($request->password);
-    //     $user->role = 'Pegawai';
-    //     $user->jumlah_cuti = 0;
-    //     $user->save();
-
-    //     $token = $user->createToken('token')->accessToken;
-
-    //     return response()->json([
-    //         'token' => $token,
-    //         'message' => 'Registration successful'
-    //     ], 201);
-    // }
 }
