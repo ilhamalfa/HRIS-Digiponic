@@ -69,7 +69,7 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin'])->group(functio
 // Admin
 Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin'])->group(function () {
     // Data User
-    Route::get('/data-user', [AdminController::class, 'dataUser']);
+    Route::get('/users-data', [AdminController::class, 'dataUser']);
 
     // Data Pegawai
     Route::get('/data-pegawai', [AdminController::class, 'dataPegawai']);
@@ -179,7 +179,7 @@ Route::middleware(['auth', 'verified', 'golongan:Manager/Kadep'])->group(functio
     Route::get('kadep/daftar-resign/{id}/{konfirmasi}', [AdminController::class, 'konfirmasiResign']);
 
     // Data User
-    Route::get('/data-user', [AdminController::class, 'dataUser']);
+    Route::get('/employees-data', [PegawaiController::class, 'dataPegawai']);
 });
 
 // Indoregion

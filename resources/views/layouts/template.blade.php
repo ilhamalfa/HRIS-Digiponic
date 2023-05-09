@@ -280,6 +280,39 @@
                                 <span class="menu-title">lowongan</span>
                             </a>
                         </li>
+                        @elseif (Auth::user()->golongan == 'Manager/Kadep' && Auth::user()->role != 'SuperAdmin')
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('/employees-data') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-account-multiple-outline"></i>
+                                </span>
+                                <span class="menu-title">Users Datas</span>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('kadep/daftar-cuti') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-note-multiple"></i>
+                                </span>
+                                <span class="menu-title">Daftar Cuti</span>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('kadep/daftar-perizinan') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-receipt"></i>
+                                </span>
+                                <span class="menu-title">Days Off</span>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('kadep/daftar-resign') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-receipt"></i>
+                                </span>
+                                <span class="menu-title">Resign</span>
+                            </a>
+                        </li>
                     @endif
                     @if (Auth::user()->role != 'Pelamar')
                         <li class="nav-item nav-category">
