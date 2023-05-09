@@ -244,6 +244,16 @@
                                 <span class="menu-title">Days Off</span>
                             </a>
                         </li>
+                        @if (Auth::user()->role == 'SuperAdmin')
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('/resign/daftar-resign') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-receipt"></i>
+                                </span>
+                                <span class="menu-title">Resign</span>
+                            </a>
+                        </li>
+                        @endif
                         <li class="nav-item menu-items">
                             <a class="nav-link" href="{{ url('data-lowongan/') }}">
                                 <span class="menu-icon">

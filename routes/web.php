@@ -62,8 +62,6 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin'])->group(functio
 
     // Resign
     Route::get('/resign/daftar-resign', [SuperAdminController::class, 'resign']);
-
-    Route::get('/resign/daftar-resign/{id}/{konfirmasi}', [SuperAdminController::class, 'resignProses']);
     });    
 
 // Admin

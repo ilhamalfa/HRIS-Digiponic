@@ -23,7 +23,7 @@ class Resign extends Model
     {
         $query->when($filters['status'] ?? false, function ($query, $status) {
             return $query->where(function ($query) use ($status) {
-                $query->where('status', $status);
+                $query->where('status_resign', $status);
             });
         });
 

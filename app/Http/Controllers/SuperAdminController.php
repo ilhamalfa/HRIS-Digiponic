@@ -136,33 +136,10 @@ class SuperAdminController extends Controller
     }
 
     public function resign(){
-        $datas = Resign::all();
+        $datas = Resign::filter(request(['status','search']))->paginate(10);
 
         return view('super-admin.resign.daftar-resign', [
             'datas' => $datas
         ]);
-    }
-
-    public function resignProses($id, $konfirmasi){
-        $data = Resign::find($id);
-        $user = User::find($data->user_id);
-
-        // dd($jml_data);
-
-        if($konfirmasi == 'terima'){
-            $data->update([
-                'status_resign' => 'Diterima'
-            ]);
-
-            $user->update([
-                'role' => 'Resign'
-            ]);
-        }else{
-            $data->update([
-                'status_resign' => 'Ditolak'
-            ]);
-        }
-
-        return back()->with('success', 'Status Resign Berhasil Dikonfirmasi!');
     }
 }
