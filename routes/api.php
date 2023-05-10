@@ -20,6 +20,11 @@ Route::post('register',[ApiController::class,'Register']);
 Route::post('login',[ApiController::class,'Login']);
 
 Route::middleware('auth:sanctum')->group(function(){
+    Route::get('profile',[ApiController::class,'profile']);
+    Route::post('profile',[ApiController::class,'editprofile']);
+    Route::post('editpassword',[ApiController::class,'editpassword']);
+    Route::post('editfoto',[ApiController::class,'updatefoto']);
+    Route::get('editfoto',[ApiController::class,'deletefoto']);
     Route::get('logout',[ApiController::class,'Logout']);
 });
 
