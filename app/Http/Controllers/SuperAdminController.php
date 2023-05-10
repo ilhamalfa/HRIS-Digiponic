@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\District;
 use App\Models\Pegawai as Pegawai;
 use App\Models\Province;
+use App\Models\Regency;
 use App\Models\Resign;
 use App\Models\User;
+use App\Models\Village;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -41,7 +44,6 @@ class SuperAdminController extends Controller
             'district_id' =>'required',
             'village_id' => 'required',
             'alamat' => 'required',
-            'foto' => 'required|image',
             'password' => 'required|min:8|confirmed'
         ]);
 
@@ -57,9 +59,9 @@ class SuperAdminController extends Controller
 
         $validate['password'] = Hash::make($request->password);
 
-        $extension_foto = $request->file('foto')->extension();
-        $nama_foto = $request->nama . '-' . now()->timestamp. '.' . $extension_foto;
-        $validate['foto'] = $request->file('foto')->storeAs('Pegawai/foto', $nama_foto);
+        // $extension_foto = $request->file('foto')->extension();
+        // $nama_foto = $request->nama . '-' . now()->timestamp. '.' . $extension_foto;
+        // $validate['foto'] = $request->file('foto')->storeAs('Pegawai/foto', $nama_foto);
         
         User::create($validate);
 
@@ -85,109 +87,59 @@ class SuperAdminController extends Controller
         return redirect()->back();
     }
 
-    public function editPegawai($id){
+    public function editUser($id){
         $data = User::find($id);
         $provinces = Province::all();
+        $regency = Regency::find($data->regency_id);
+        $district = District::find($data->district_id);
+        $village = Village::find($data->village_id);
 
         return view('super-admin.pegawai.edit-data-pegawai', [
             'data' => $data,
-            'provinces' => $provinces
+            'provinces' => $provinces,
+            'regency' => $regency,
+            'district' => $district,
+            'village' => $village
         ]);
     }
 
-    public function updatePegawai($id, Request $request){
-        $data = Pegawai::where('user_id',$id)->first();
+    public function updateUser($id, Request $request){
+        $data = User::find($id);
+
+        // dd($data);
 
         // dd($request);
+        $validate = $request->validate([
+            'nama' => 'required',
+            'tanggal_lahir' => 'required|before:17 years ago',
+            'jenis_kelamin' => 'required',
+            'nomor_hp' => 'required',
+            'status_pernikahan' => 'required',
+            'department' => 'required',
+            'golongan' => 'required',
+            'province_id' => 'required',
+            'regency_id' => 'required',
+            'district_id' =>'required',
+            'village_id' => 'required',
+            'alamat' => 'required',
+        ]);
 
-        if($request->has('foto')){
-            $validate = $request->validate([
-                'nama' => 'required',
-                'tanggal_lahir' => 'required|before:17 years ago',
-                'jenis_kelamin' => 'required',
-                'nomor_hp' => 'required',
-                'status_pernikahan' => 'required',
-                'department' => 'required',
-                'golongan' => 'required',
-                'province_id' => 'required',
-                'regency_id' => 'required',
-                'district_id' =>'required',
-                'village_id' => 'required',
-                'alamat' => 'required',
-                'foto' => 'required|image',
-            ]);
+        $validate['umur'] = Carbon::parse($request->tanggal_lahir)->age;
 
-            $validate['umur'] = Carbon::parse($request->tanggal_lahir)->age;
-
-            if ($request->has('jumlah_anak')) {
-                $validate['jumlah_anak'] = $request->jumlah_anak;
-            }
-
-            if(fileExists('storage/'. $data->foto)){
-                unlink('storage/'. $data->foto);
-            }
-
-            $extension_foto = $request->file('foto')->extension();
-
-            $nama_foto = $request->nama . '-' . now()->timestamp. '.' . $extension_foto;
-
-            $validate['foto'] = $request->file('foto')->storeAs('Pegawai/foto', $nama_foto);
-        }else{
-            $validate = $request->validate([
-                'nama' => 'required',
-                'tanggal_lahir' => 'required|before:17 years ago',
-                'jenis_kelamin' => 'required',
-                'nomor_hp' => 'required',
-                'status_pernikahan' => 'required',
-                'department' => 'required',
-                'golongan' => 'required',
-                'province_id' => 'required',
-                'regency_id' => 'required',
-                'district_id' =>'required',
-                'village_id' => 'required',
-                'alamat' => 'required',
-            ]);
-
-            $validate['umur'] = Carbon::parse($request->tanggal_lahir)->age;
-
-            if ($request->has('jumlah_anak')) {
-                $validate['jumlah_anak'] = $request->jumlah_anak;
-            }
+        if ($request->has('jumlah_anak')) {
+            $validate['jumlah_anak'] = $request->jumlah_anak;
         }
 
         $data->update($validate);
 
-        return redirect('/data-pegawai');
+        return back();
     }
 
     public function resign(){
-        $datas = Resign::all();
+        $datas = Resign::filter(request(['status','search']))->paginate(10);
 
         return view('super-admin.resign.daftar-resign', [
             'datas' => $datas
         ]);
-    }
-
-    public function resignProses($id, $konfirmasi){
-        $data = Resign::find($id);
-        $user = User::find($data->user_id);
-
-        // dd($jml_data);
-
-        if($konfirmasi == 'terima'){
-            $data->update([
-                'status_resign' => 'Diterima'
-            ]);
-
-            $user->update([
-                'role' => 'Resign'
-            ]);
-        }else{
-            $data->update([
-                'status_resign' => 'Ditolak'
-            ]);
-        }
-
-        return back()->with('success', 'Status Resign Berhasil Dikonfirmasi!');
     }
 }

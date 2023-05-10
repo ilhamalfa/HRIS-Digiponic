@@ -183,12 +183,10 @@
 
                         <div class="row mb-3">
                             <label for="kabupaten" class="col-md-4 col-form-label text-md-end">{{ __('Kabupaten/Kota') }}</label>
-
                             <div class="col-md-6">
                                 <select id="kabupaten" class="form-select" aria-label="Default select example" @error('regency_id') is-invalid @enderror" name="regency_id" value="{{ old('regency_id') }}">
                                     <option value="{{ $regency->id }}">{{ $regency->name }}</option>
                                 </select>
-
                                 @error('regency_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

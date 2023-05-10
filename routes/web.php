@@ -24,17 +24,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('landingpage.landingpage');
-    // return view('layouts.template');
 });
+
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index']);
 
 // Landing Page
 Route::get('/rutelogin', [Controller::class, 'rutelogin'])->name('rutelogin');
 
-Route::get('/career', [Controller::class, 'career'])->name('career');
+Route::get('/career', [Controller::class, 'career']);
 
 Route::get('/career/search', [Controller::class, 'search']);
 
@@ -52,23 +52,22 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin'])->group(functio
     // Data User
     Route::get('/data-user/input-user', [SuperAdminController::class, 'inputUser']);
 
+    Route::get('/data-user/edit-user/{id}', [SuperAdminController::class, 'editUser']);
+
+    Route::post('/data-user/edit-user/update/{id}', [SuperAdminController::class, 'updateUser']);
+
     Route::post('/data-user/store-user', [SuperAdminController::class, 'storeUser']);
 
     Route::get('/data-user/delete-user/{id}', [SuperAdminController::class, 'deleteUser']);
 
     // Resign
     Route::get('/resign/daftar-resign', [SuperAdminController::class, 'resign']);
-
-    Route::get('/resign/daftar-resign/{id}/{konfirmasi}', [SuperAdminController::class, 'resignProses']);
-
-    // Data User
-    Route::get('/data-user', [AdminController::class, 'dataUser']);
     });    
 
 // Admin
 Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin'])->group(function () {
     // Data User
-    Route::get('/data-user', [AdminController::class, 'dataUser']);
+    Route::get('/users-data', [AdminController::class, 'dataUser']);
 
     // Data Pegawai
     Route::get('/data-pegawai', [AdminController::class, 'dataPegawai']);
@@ -103,6 +102,9 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin'])->group(f
     Route::post('data-lowongan/pelamar-detail/terima/{id}', [AdminController::class, 'terima']);
 
     Route::get('pelamar-detail/cv/{id}', [AdminController::class, 'CV']);
+
+    // Data User
+    Route::get('/data-user', [AdminController::class, 'dataUser']);
 });
 
 // Pegawai
@@ -118,9 +120,9 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin,Pegawai'])-
     Route::post('/profile/edit-data-pegawai/update', [PegawaiController::class, 'updatePegawai']);
 
     // Update Foto Pegawai
-    Route::get('/profile/photo-profile', [PegawaiController::class, 'userPhoto']);
+    // Route::get('/profile/photo-profile', [PegawaiController::class, 'userPhoto']);
 
-    Route::post('/profile/photo-profile/update',  [PegawaiController::class, 'updatePhoto']);
+    // Route::post('/profile/photo-profile/update',  [PegawaiController::class, 'updatePhoto']);
 
     // Update Signature Pegawai
     Route::get('/profile/signature', [PegawaiController::class, 'signature']);
@@ -173,6 +175,9 @@ Route::middleware(['auth', 'verified', 'golongan:Manager/Kadep'])->group(functio
     Route::get('kadep/daftar-resign', [PegawaiController::class, 'daftarResign']);
 
     Route::get('kadep/daftar-resign/{id}/{konfirmasi}', [AdminController::class, 'konfirmasiResign']);
+
+    // Data User
+    Route::get('/employees-data', [PegawaiController::class, 'dataPegawai']);
 });
 
 // Indoregion

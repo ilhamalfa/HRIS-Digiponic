@@ -48,7 +48,7 @@ class AdminController extends Controller
 
     // Cuti
     public function daftarCuti(){
-        $datas = Cuti::paginate(10);
+        $datas = Cuti::filter(request(['status','search']))->paginate(10);
 
         // dd($datas);
 
@@ -83,7 +83,7 @@ class AdminController extends Controller
 
     // Perizinan
     public function daftarIzin(){
-        $datas = Perizinan::paginate(10);
+        $datas = Perizinan::filter(request(['status','search']))->paginate(10);
 
         // dd($datas);
 

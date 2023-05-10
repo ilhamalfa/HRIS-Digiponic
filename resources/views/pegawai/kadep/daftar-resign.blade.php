@@ -31,19 +31,19 @@
                                 </button>
                                 <ul class="dropdown-menu text-end">
                                     <li>
-                                        <a class="dropdown-item text-white" href="{{ url('/kadep/daftar-cuti?status=Menunggu Persetujuan') }}">
+                                        <a class="dropdown-item text-white" href="{{ url('/kadep/daftar-resign?status=Menunggu Persetujuan') }}">
                                             <span>Waiting For Approval</span>
                                             <i class="fa-regular fa-clock ml-3"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item text-white" href="{{ url('/kadep/daftar-cuti?status=Accepted') }}">
+                                        <a class="dropdown-item text-white" href="{{ url('/kadep/daftar-resign?status=Accepted') }}">
                                             <span>Accepted</span>
                                             <i class="fa-solid fa-check"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item text-white" href="{{ url('/kadep/daftar-cuti?status=Declined') }}">
+                                        <a class="dropdown-item text-white" href="{{ url('/kadep/daftar-resign?status=Declined') }}">
                                             <span>Declined</span>
                                             <i class="fa-solid fa-x"></i>
                                         </a>
@@ -58,6 +58,7 @@
                                 <th scope="col">#</th>
                                 <th scope="col">NIK</th>
                                 <th scope="col">Nama</th>
+                                <th scope="col">Tanggal Resign</th>
                                 <th scope="col">Status Resign</th>
                                 <th scope="col">Action</th>
                             </tr>

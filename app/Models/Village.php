@@ -46,11 +46,7 @@ class Village extends Model
         return $this->belongsTo(District::class);
     }
 
-    public function pegawai(){
-        return $this->hasMany(Pegawai::class);
-    }
-
-    public function pelamar(){
-        return $this->hasMany(Pelamar::class);
+    public function user(){
+        return $this->hasMany(User::class);
     }
 }

@@ -9,18 +9,14 @@
     <title>@yield('title')</title>
 
     {{-- Header Logo Start --}}
-    <link rel="icon" href="{{ asset('logo/brand-logo-red.webp') }}">
+    <link rel="icon" href="{{ asset('logo/brand-logo-white.webp') }}">
     {{-- Header Logo End --}}
 
     {{-- Google Fonts Start --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,700;1,300&display=swap"
-        rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;0,600;0,700;0,800;1,100&display=swap"
         rel="stylesheet">
     {{-- Google Fonts End --}}
 
@@ -36,10 +32,6 @@
     {{-- Layout CSS Start --}}
     <link rel="stylesheet" href="{{ asset('template/assets/css/style.css') }}">
     {{-- Layout CSS End --}}
-
-    {{-- Animations CSS Start --}}
-    <link rel="stylesheet" href="{{ asset('template/assets/css/animations/style.css') }}">
-    {{-- Animations CSS End --}}
 
     {{-- Font Awesome Start --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
@@ -149,8 +141,13 @@
                         {{-- Sidebar Profile Image & Name Start --}}
                         <div class="profile-pic">
                             <div class="count-indicator">
+                                    @if (isset(Auth::user()->foto))
                                     <img class="img-xs rounded-circle"
                                     src="{{ asset('storage/' . Auth::user()->foto) }}" alt="">
+                                    @else
+                                    <img class="img-xs rounded-circle"
+                                    src="{{ asset('storage/Pegawai/default/user.jpg') }}" alt="">
+                                    @endif
                             </div>
                             <div class="profile-name">
                                     <h5 class="mb-0 font-weight-normal">
@@ -174,16 +171,6 @@
                         {{-- Sidebar Profile 3 Dots Vertical Menu Start --}}
                         <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list"
                             aria-labelledby="profile-dropdown">
-                            <a href="{{ url('/profile/photo-profile') }}" class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <div class="preview-icon bg-dark rounded-circle">
-                                        <i class="mdi mdi-account-edit text-warning"></i>
-                                    </div>
-                                </div>
-                                <div class="preview-item-content">
-                                    <p class="preview-subject ellipsis mb-1 text-small">Change User's Photo</p>
-                                </div>
-                            </a>
                             <a href="{{ url('/Account/account-setting') }}" class="dropdown-item preview-item">
                                 <div class="preview-thumbnail">
                                     <div class="preview-icon bg-dark rounded-circle">
@@ -195,16 +182,6 @@
                                 </div>
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a href="{{ url('/profile/edit-data-pegawai') }}" class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <div class="preview-icon bg-dark rounded-circle">
-                                        <i class="mdi mdi-clipboard-account  text-info"></i>
-                                    </div>
-                                </div>
-                                <div class="preview-item-content">
-                                    <p class="preview-subject ellipsis mb-1 text-small">Change User Data</p>
-                                </div>
-                            </a> 
                             <a href="{{ url('/profile/signature') }}" class="dropdown-item preview-item">
                                 <div class="preview-thumbnail">
                                     <div class="preview-icon bg-dark rounded-circle">
@@ -239,10 +216,10 @@
                         <span class="menu-title">Dashboard</span>
                     </a>
                 </li>
-                @guest
-                    
-                @else
                     @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'SuperAdmin')
+                        <li class="nav-item nav-category">
+                            <span class="nav-link">Admin Menu</span>
+                        </li>
                         <li class="nav-item menu-items">
                             <a class="nav-link" href="{{ url('/data-user') }}">
                                 <span class="menu-icon">
@@ -267,6 +244,16 @@
                                 <span class="menu-title">Days Off</span>
                             </a>
                         </li>
+                        @if (Auth::user()->role == 'SuperAdmin')
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="{{ url('/resign/daftar-resign') }}">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-receipt"></i>
+                                </span>
+                                <span class="menu-title">Resign</span>
+                            </a>
+                        </li>
+                        @endif
                         <li class="nav-item menu-items">
                             <a class="nav-link" href="{{ url('data-lowongan/') }}">
                                 <span class="menu-icon">
@@ -275,45 +262,79 @@
                                 <span class="menu-title">lowongan</span>
                             </a>
                         </li>
-                    @endif
-                    @if (Auth::user()->role != 'Pelamar')
+                        @endif
+                        @if (Auth::user()->golongan == 'Manager/Kadep')
                         <li class="nav-item nav-category">
-                            <span class="nav-link">Employee Navigation</span>
+                            <span class="nav-link">Manager Navigation</span>
                         </li>
                         <li class="nav-item menu-items">
-                            <a class="nav-link" href="{{ url('#') }}">
+                            <a class="nav-link" href="{{ url('/employees-data') }}">
                                 <span class="menu-icon">
-                                    <i class="mdi mdi-file-multiple"></i>
+                                    <i class="mdi mdi-account-multiple-outline"></i>
                                 </span>
-                                <span class="menu-title">Absensi</span>
+                                <span class="menu-title">Users Datas</span>
                             </a>
                         </li>
                         <li class="nav-item menu-items">
-                            <a class="nav-link" href="{{ url('pegawai/cuti') }}">
+                            <a class="nav-link" href="{{ url('kadep/daftar-cuti') }}">
                                 <span class="menu-icon">
-                                    <i class="mdi mdi-file-multiple"></i>
+                                    <i class="mdi mdi-note-multiple"></i>
                                 </span>
-                                <span class="menu-title">cuti</span>
+                                <span class="menu-title">Daftar Cuti</span>
                             </a>
                         </li>
                         <li class="nav-item menu-items">
-                            <a class="nav-link" href="{{ url('pegawai/izin') }}">
+                            <a class="nav-link" href="{{ url('kadep/daftar-perizinan') }}">
                                 <span class="menu-icon">
-                                    <i class="mdi mdi-file-multiple"></i>
+                                    <i class="mdi mdi-receipt"></i>
                                 </span>
-                                <span class="menu-title">Izin</span>
+                                <span class="menu-title">Days Off</span>
                             </a>
                         </li>
                         <li class="nav-item menu-items">
-                            <a class="nav-link" href="{{ url('pegawai/resign') }}">
+                            <a class="nav-link" href="{{ url('kadep/daftar-resign') }}">
                                 <span class="menu-icon">
-                                    <i class="mdi mdi-file-multiple"></i>
+                                    <i class="mdi mdi-receipt"></i>
                                 </span>
                                 <span class="menu-title">Resign</span>
                             </a>
                         </li>
                     @endif
-                @endguest
+                    <li class="nav-item nav-category">
+                        <span class="nav-link">Employee Navigation</span>
+                    </li>
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" href="{{ url('#') }}">
+                            <span class="menu-icon">
+                                <i class="mdi mdi-file-multiple"></i>
+                            </span>
+                            <span class="menu-title">Absensi</span>
+                        </a>
+                    </li>
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" href="{{ url('pegawai/cuti') }}">
+                            <span class="menu-icon">
+                                <i class="mdi mdi-file-multiple"></i>
+                            </span>
+                            <span class="menu-title">cuti</span>
+                        </a>
+                    </li>
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" href="{{ url('pegawai/izin') }}">
+                            <span class="menu-icon">
+                                <i class="mdi mdi-file-multiple"></i>
+                            </span>
+                            <span class="menu-title">Izin</span>
+                        </a>
+                    </li>
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" href="{{ url('pegawai/resign') }}">
+                            <span class="menu-icon">
+                                <i class="mdi mdi-file-multiple"></i>
+                            </span>
+                            <span class="menu-title">Resign</span>
+                        </a>
+                    </li>
                 {{-- Sidebar Dashboard End --}}
 
             </ul>
@@ -439,8 +460,13 @@
                                         @guest
                                             <p class="mb-0 ms-2 d-none d-sm-block navbar-profile-name text-white">Login</p>
                                         @else
-                                        <img class="img-xs rounded-circle"
-                                        src="{{ asset('storage/' . Auth::user()->foto) }}" alt="">
+                                            @if (isset(Auth::user()->foto))
+                                                <img class="img-xs rounded-circle"
+                                            src="{{ asset('storage/' . Auth::user()->foto) }}" alt="">
+                                            @else
+                                                <img class="img-xs rounded-circle"
+                                            src="{{ asset('storage/Pegawai/default/user.jpg') }}" alt="">
+                                            @endif
                                         <p class="mb-0 d-none d-sm-block navbar-profile-name">
                                             {{ Auth::user()->nama }}
                                         <i class="mdi mdi-menu-down d-none d-sm-block"></i>
@@ -507,30 +533,6 @@
                     @yield('content')
                 </div>
                 {{-- Main Content End --}}
-
-                <!-- partial:partials/_footer.html -->
-                <footer class="footer">
-                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                        <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">
-                            Copyright © Tech Solution 2023
-                        </span>
-                        <div
-                            class="footer-social-media float-none float-sm-right d-block mt-1 mt-sm-0 text-center text-white">
-                            <a class="mx-1 text-decoration-none" href="#">
-                                <i class="fa-brands fa-twitter"></i>
-                            </a>
-                            <a class="mx-1 text-decoration-none" href="#">
-                                <i class="fa-brands fa-instagram"></i>
-                            </a>
-                            <a class="mx-1 text-decoration-none" href="#">
-                                <i class="fa-brands fa-facebook"></i>
-                            </a>
-                            <a class="mx-1 text-decoration-none" href="#">
-                                <i class="fa-brands fa-linkedin"></i>
-                            </a>
-                        </div>
-                </footer>
-                <!-- partial -->
             </div>
             <!-- main-panel ends -->
         </div>
