@@ -153,7 +153,7 @@ class PegawaiController extends Controller
         $decoded_image = base64_decode($encoded_image);
         $nama_file = "Pegawai/signature/". Auth::user()->nama . '-' . now()->timestamp . ".png";
 
-        if(isset($user->digital_signature) && FileExists('storage/' . $user->digital_signature)){
+        if(isset($user->digital_signature) && is_file('storage/' . $user->digital_signature)){
             // dd('Exist');
             unlink('storage/' . $user->digital_signature);
         }
@@ -183,7 +183,7 @@ class PegawaiController extends Controller
 
         Storage::put($imageName,$image_base64);
 
-        if(isset($user->foto) && fileExists($user->foto)){
+        if(isset($user->foto) && is_file('storage/' . $user->foto)){
             unlink('storage/' . $user->foto);
         }
 
