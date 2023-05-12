@@ -52,7 +52,7 @@
 
         <div class="career-vacancy-box">
             @foreach ($datas as $data)
-                @if ($data->tanggal > now()->toDateString())
+                @if ($data->tanggal >= now()->toDateString())
                     <div class="vacancy-card-link-box">
                         <a class="vacancy-card-link" data-bs-toggle="modal" data-bs-target="#apply{{ $loop->iteration }}">
                             <div class="card vacancy-card mx-3 my-2">

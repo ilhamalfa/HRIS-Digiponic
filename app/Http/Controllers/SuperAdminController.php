@@ -47,7 +47,12 @@ class SuperAdminController extends Controller
             'password' => 'required|min:8|confirmed'
         ]);
 
-        $validate['role'] = 'Pegawai';
+        if($request->department == 'Human Resource'){
+            $validate['role'] = 'Admin';
+        }else{
+            $validate['role'] = 'Pegawai';
+        }
+        
         $validate['jumlah_cuti'] = 14;
         $validate['umur'] = Carbon::parse($request->tanggal_lahir)->age;
 

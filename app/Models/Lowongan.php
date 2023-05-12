@@ -23,14 +23,8 @@ class Lowongan extends Model
             });
         });
 
-        $query->when($filters['closed'] ?? false, function ($query, $closed) {
-            if($closed == true){
-                return $query->where('tanggal', '<', now()->toDateString());;
-            }
-        });
-
         $query->when($filters['orderBy'] ?? false, function ($query, $orderBy) {
-            return $query->orderBy('tanggal', $orderBy)->where('tanggal', '>', now()->toDateString());
+            return $query->orderBy('tanggal', $orderBy)->where('tanggal', '>=', now()->toDateString());
         });
     }
 }
