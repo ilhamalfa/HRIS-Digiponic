@@ -14,8 +14,13 @@
                         <div class="row">
                             <div class="col">
                                 <h6>Image Preview</h6>
+                                @if (isset(Auth::user()->foto))
                                 <img class="img-preview d-block" src="{{ asset('storage/' . Auth::user()->foto) }}"
-                                    alt="">
+                                alt="">
+                                @else
+                                <img class="img-preview d-block" src="{{ asset('storage/Pegawai/default/user.jpg') }}"
+                                alt="">
+                                @endif
                             </div>
                             <div class="col">
                                 <h6 class="card-title">Update Your Photo</h6>

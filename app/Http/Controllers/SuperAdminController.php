@@ -47,7 +47,12 @@ class SuperAdminController extends Controller
             'password' => 'required|min:8|confirmed'
         ]);
 
-        $validate['role'] = 'Pegawai';
+        if($request->department == 'Human Resource'){
+            $validate['role'] = 'Admin';
+        }else{
+            $validate['role'] = 'Pegawai';
+        }
+        
         $validate['jumlah_cuti'] = 14;
         $validate['umur'] = Carbon::parse($request->tanggal_lahir)->age;
 
@@ -136,33 +141,10 @@ class SuperAdminController extends Controller
     }
 
     public function resign(){
-        $datas = Resign::all();
+        $datas = Resign::filter(request(['status','search']))->paginate(10);
 
         return view('super-admin.resign.daftar-resign', [
             'datas' => $datas
         ]);
-    }
-
-    public function resignProses($id, $konfirmasi){
-        $data = Resign::find($id);
-        $user = User::find($data->user_id);
-
-        // dd($jml_data);
-
-        if($konfirmasi == 'terima'){
-            $data->update([
-                'status_resign' => 'Diterima'
-            ]);
-
-            $user->update([
-                'role' => 'Resign'
-            ]);
-        }else{
-            $data->update([
-                'status_resign' => 'Ditolak'
-            ]);
-        }
-
-        return back()->with('success', 'Status Resign Berhasil Dikonfirmasi!');
     }
 }

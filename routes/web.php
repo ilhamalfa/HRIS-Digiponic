@@ -59,8 +59,6 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin'])->group(functio
 
     // Resign
     Route::get('/resign/daftar-resign', [SuperAdminController::class, 'resign']);
-
-    Route::get('/resign/daftar-resign/{id}/{konfirmasi}', [SuperAdminController::class, 'resignProses']);
     });    
 
 // Admin
@@ -121,7 +119,7 @@ Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin,Pegawai'])-
     // Update Foto Pegawai
     // Route::get('/profile/photo-profile', [PegawaiController::class, 'userPhoto']);
 
-    // Route::post('/profile/photo-profile/update',  [PegawaiController::class, 'updatePhoto']);
+    Route::post('/profile/photo-profile/update',  [PegawaiController::class, 'updatePhoto']);
 
     // Update Signature Pegawai
     Route::get('/profile/signature', [PegawaiController::class, 'signature']);

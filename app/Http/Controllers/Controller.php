@@ -17,7 +17,7 @@ class Controller extends BaseController
 
     public function career()
     {
-        $datas = Lowongan::filter(request(['search', 'closed', 'orderBy']))->where('tanggal', '>', now()->toDateString())->paginate(5);
+        $datas = Lowongan::filter(request(['search', 'orderBy']))->where('tanggal', '>=', now()->toDateString())->paginate(5);
         return view('career.career', compact('datas'));
     }
 }

@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'user-access' => \App\Http\Middleware\UserAccess::class,
         'golongan' => \App\Http\Middleware\Golongan::class,
+        'auth.api' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
     ];
 }
