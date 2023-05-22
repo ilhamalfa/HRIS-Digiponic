@@ -38,7 +38,7 @@
 
 <body>
 
-    {{--  Topbar Modal Form Start --}}
+    {{--  Topbar Login Form Start --}}
     <div class="modal fade" id="loginForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content bg-secondary-color-1">
@@ -74,141 +74,96 @@
                                 SIGN IN
                             </button>
                         </div>
-                        <div class="auth-switch-box">
-                            <p class="auth-switch-title">Don't Have Account?</p>
-                            <div class="auth-switch">
-                                <button type="button" class="button-animation-black auth-switch-button"
-                                    data-bs-toggle="modal" data-bs-target="#registerForm">
-                                    <i class="fa-solid fa-file-lines m-2 icon"></i>
-                                    <span>Sign Up</span>
-                                </button>
-                            </div>
-                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="registerForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content bg-secondary-color-1">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5 tx-primary-color" id="exampleModalLabel">Sign Up</h1>
-                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close">
-                        <i class="fa-solid fa-xmark m-auto"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form class="auth-form" method="POST" action="{{ route('login') }}">
-                        @csrf
-                        <div class="auth-email-box">
-                            <input class="form-input" type="email" id="login" name="email"
-                                value="{{ old('email') }}" placeholder="Your Email" required autocomplete="off"
-                                autofocus>
-                        </div>
-                        <div class="auth-password-box">
-                            <input class="form-input" type="password" id="registerPassword" name="password"
-                                placeholder="Password" required autocomplete="off">
-                            <i class="fa-solid fa-eye password-icon-eye" id="register-icon-eye"></i>
-                            <i class="fa-solid fa-eye-slash password-icon-eye-slash" id="register-icon-eye-slash"></i>
-                        </div>
-                        <div class="auth-password-confirm-box">
-                            <input class="form-input" type="password" id="password-confirm"
-                                name="password_confirmation" placeholder="Password Confirm" required
-                                autocomplete="off">
-                            <i class="fa-solid fa-eye password-icon-eye" id="password-confirm-icon-eye"></i>
-                            <i class="fa-solid fa-eye-slash password-icon-eye-slash"
-                                id="password-confirm-icon-eye-slash"></i>
-                        </div>
-                        <div class="auth-button-box">
-                            <button type="submit" class="auth-button btn btn-outline-secondary rounded-0 px-5 m-3">
-                                SIGN UP
-                            </button>
-                        </div>
-                        <div class="auth-switch-box">
-                            <p class="auth-switch-title">Already Have Account?</p>
-                            <div class="auth-switch">
-                                <button type="button" class="button-animation-black auth-switch-button"
-                                    data-bs-toggle="modal" data-bs-target="#loginForm">
-                                    <i class="fa-solid fa-file-lines m-2 icon"></i>
-                                    <span>Sign In</span>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- Topbar Modal Form End --}}
+    {{-- Topbar Login Form End --}}
 
     {{-- Topbar Start --}}
     @if (Request::is('/'))
-        <nav class="topbar px-5">
+        <nav class="topbar px-1 d-flex justify-content-center align-items-center">
         @else
-            <nav class="topbar px-5 bg-primary-color">
+            <nav class="topbar px-1 d-flex justify-content-center align-items-center bg-primary-color">
     @endif
-    <div class="brand-box topbar-section">
-        <img class="image brand-logo-white" src="{{ asset('logo/brand-logo-white.webp') }}" alt="Brand Logo">
-        <img class="image brand-logo-black" src="{{ asset('logo/brand-logo-black.webp') }}" alt="Brand Logo">
-        <a class="text tx-secondary-color-1" href="{{ url('/') }}">TECH Solution</a>
+    <div class="topbar-logo-box topbar-section d-flex justify-content-center align-items-center">
+        <img class="topbar-logo topbar-logo-white" src="{{ asset('logo/brand-logo-white.webp') }}" alt="Brand Logo">
+        <img class="topbar-logo topbar-logo-black" src="{{ asset('logo/brand-logo-black.webp') }}" alt="Brand Logo">
+        <a class="topbar-logo-text ms-2" href="{{ url('/') }}">TECH Solution</a>
     </div>
-    <div class="menu-box topbar-section">
-        <a class="link tx-secondary-color-1" href="{{ url('/') }}">
+    <div class="topbar-menu-box topbar-section">
+        <a class="topbar-menu tx-secondary-color-1" href="{{ url('/') }}">
             <span>Home</span>
         </a>
-        <a class="link tx-secondary-color-1" href="{{ url('/career') }}">
+        <a class="topbar-menu tx-secondary-color-1" href="{{ url('/career') }}">
             <span>Career</span>
         </a>
-        <a class="link tx-secondary-color-1" href="{{ url('/') }}">
+        <a class="topbar-menu tx-secondary-color-1" href="{{ url('/') }}">
             <span>About</span>
         </a>
-        <a class="link tx-secondary-color-1" href="{{ url('/') }}">
+        <a class="topbar-menu tx-secondary-color-1" href="{{ url('/') }}">
             <span>Product</span>
         </a>
-        <a class="link tx-secondary-color-1" href="{{ url('/') }}">
+        <a class="topbar-menu tx-secondary-color-1" href="{{ url('/') }}">
             <span>Team</span>
         </a>
     </div>
-    <div class="account-box topbar-section">
-        @guest
-            <button type="button" class="button-animation-lime button-login btn rounded-0" data-bs-toggle="modal"
-                data-bs-target="#loginForm">
-                <span>Sign In</span>
-            </button>
-        @else
-            <a class="tx-secondary-color-1 log-out" href="{{ route('logout') }}"
-                onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">
-                <i class="fa-solid fa-right-from-bracket text-danger me-2"></i>
-                <span class="text-danger">Log Out</span>
+    <div class="topbar-account-box topbar-section">
+        <button type="button" class="button-animation-lime topbar-button-login btn rounded-0" data-bs-toggle="modal"
+            data-bs-target="#loginForm">
+            <span>Sign In</span>
+        </button>
+    </div>
+    <div class="topbar-hamburger-menu-box topbar-section justify-content-end align-items-center px-3">
+        <button type="button" class="button-animation-lime topbar-button-login btn rounded-0 mx-2"
+            data-bs-toggle="modal" data-bs-target="#loginForm">
+            <span>Sign In</span>
+        </button>
+        <div class="topbar-hamburger-menu-button-box">
+            <i class="fa-solid fa-bars fa-2x topbar-hamburger-menu-button tx-secondary-color-1"
+                id="hamburgerMenuButton"></i>
+        </div>
+        <div class="topbar-hamburger-menu-mobile bg-primary-color d-flex justify-content-center align-items-end py-3"
+            id="hamburgerListMenu">
+            <a class="topbar-menu tx-secondary-color-1" href="{{ url('/') }}">
+                <span>Home</span>
             </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                @csrf
-            </form>
-        @endguest
+            <a class="topbar-menu tx-secondary-color-1" href="{{ url('/career') }}">
+                <span>Career</span>
+            </a>
+            <a class="topbar-menu tx-secondary-color-1" href="{{ url('/') }}">
+                <span>About</span>
+            </a>
+            <a class="topbar-menu tx-secondary-color-1" href="{{ url('/') }}">
+                <span>Product</span>
+            </a>
+            <a class="topbar-menu tx-secondary-color-1" href="{{ url('/') }}">
+                <span>Team</span>
+            </a>
+        </div>
     </div>
     </nav>
     {{-- Topbar End --}}
 
     {{-- Main Content Start --}}
-    <div class="main">
+    <div class="main bg-primary-color">
         @yield('content')
     </div>
     {{-- Main Content End --}}
 
     {{-- Footer Start --}}
     @if (Request::is('/'))
-        <footer class="footer">
+        <footer class="footer bg-primary-color">
             <div class="footer-left-side">
-                <div class="footer-logo-box">
+                <div class="footer-logo-box footer-left-side-section">
                     <img class="footer-brand-logo" src="{{ asset('main/footer/brand-logo.webp') }}"
                         alt="Footer Logo">
                 </div>
                 <div class="footer-tagline-box">
-                    <p class="footer-tagline">Modern Problem <br> Need Modern Solution</p>
+                    <p class="footer-tagline tx-secondary-color-1">Modern Problem <br> Need Modern Solution</p>
                 </div>
-                <div class="footer-social-media-box">
+                <div class="footer-social-media-box footer-left-side-section">
                     <a class="footer-social-media" href="{{ url('/') }}">
                         <i class="fa-brands fa-twitter twitter"></i>
                     </a>
@@ -227,8 +182,8 @@
                 <div class="footer-map">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.833149015558!2d112.6390140743083!3d-7.912491878754486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd62b0ceafe747d%3A0xe99b9f79753df0b2!2sPT%20Digiponic%20Maju%20Jaya!5e0!3m2!1sid!2sid!4v1683252672527!5m2!1sid!2sid"
-                        width="500" height="300" style="border:0;" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade" class="map"></iframe>
                 </div>
                 <div class="footer-contact-box">
                     <h6 class="footer-contact tx-secondary-color-1 text-end my-2">Contact</h6>
@@ -242,7 +197,7 @@
             </div>
         </footer>
     @endif
-    <div class="footer-mini">
+    <div class="footer-mini bg-primary-color">
         &copy; Copyright 2023 Tech Solution Indonesia | Solid Solid Solid | Allright Reserved
     </div>
     {{-- Footer End --}}
@@ -252,7 +207,7 @@
     {{-- JQuery End --}}
 
     {{-- JS Start --}}
-    <script src="{{ asset('layout/landingpage/js/script.js') }}"></script>
+    <script src="{{ asset('layout/landingpage/js/script.js') }}"></script>  
     {{-- JS End --}}
 
     {{-- JS CDN Start --}}

@@ -10,7 +10,7 @@
                 <div class="card-header mt-3">{{ __('Data User') }}</div>
 
                 <div class="card-body">
-                    @if (Auth::user()->role == 'Super Admin')
+                    @if (Auth::user()->role == 'SuperAdmin')
                     <a href="{{ url('/data-user/input-user') }}" class="btn btn-primary mb-3">Add User</a>
                     @endif
                     <div class="row mb-3 mx-1">

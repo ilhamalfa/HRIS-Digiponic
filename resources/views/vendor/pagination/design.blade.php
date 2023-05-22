@@ -1,5 +1,31 @@
 @if ($paginator->hasPages())
     <nav class="d-flex justify-items-center justify-content-between">
+        <div class="d-flex justify-content-between flex-fill d-sm-none">
+            <ul class="pagination">
+                {{-- Previous Page Link --}}
+                @if ($paginator->onFirstPage())
+                    <li class="page-item disabled" aria-disabled="true">
+                        <span class="page-link" style="color: black; transition: .5s;">@lang('pagination.previous')</span>
+                    </li>
+                @else
+                    <li class="page-item">
+                        <a class="page-link" href="{{ $paginator->previousPageUrl() }}"
+                            rel="prev" style="color: black; transition: .5s;">@lang('pagination.previous')</a>
+                    </li>
+                @endif
+
+                {{-- Next Page Link --}}
+                @if ($paginator->hasMorePages())
+                    <li class="page-item">
+                        <a class="page-link" href="{{ $paginator->nextPageUrl() }}" rel="next" style="color: black; transition: .5s;">@lang('pagination.next')</a>
+                    </li>
+                @else
+                    <li class="page-item disabled" aria-disabled="true">
+                        <span class="page-link" style="color: black; transition: .5s;">@lang('pagination.next')</span>
+                    </li>
+                @endif
+            </ul>
+        </div>
         <div class="d-none flex-sm-fill d-sm-flex align-items-sm-center justify-content-sm-between">
             <div>
                 <ul class="pagination">
@@ -9,8 +35,8 @@
                             <span class="page-link text-black" aria-hidden="true">&lsaquo;</span>
                         </li>
                     @else
-                        <li class="page-item">
-                            <a class="page-link text-black" href="{{ $paginator->previousPageUrl() }}" rel="prev"
+                        <li class="page-item bg-black">
+                            <a class="page-link text-black bg-white" href="{{ $paginator->previousPageUrl() }}" rel="prev"
                                 aria-label="@lang('pagination.previous')">&lsaquo;</a>
                         </li>
                     @endif
@@ -32,7 +58,7 @@
                                             style="background-color: #0edfb9; transition: .5s;">{{ $page }}</span>
                                     </li>
                                 @else
-                                    <li class="page-item"><a class="page-link text-black"
+                                    <li class="page-item"><a class="page-link text-black bg-white"
                                             href="{{ $url }}">{{ $page }}</a></li>
                                 @endif
                             @endforeach
@@ -42,7 +68,7 @@
                     {{-- Next Page Link --}}
                     @if ($paginator->hasMorePages())
                         <li class="page-item">
-                            <a class="page-link text-black" href="{{ $paginator->nextPageUrl() }}" rel="next"
+                            <a class="page-link text-black bg-white" href="{{ $paginator->nextPageUrl() }}" rel="next"
                                 aria-label="@lang('pagination.next')">&rsaquo;</a>
                         </li>
                     @else

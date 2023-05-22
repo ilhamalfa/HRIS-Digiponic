@@ -42,7 +42,6 @@ class DatabaseSeeder extends Seeder
             'regency_id' => 3516,
             'district_id' => 3516050,
             'village_id' => 3516050011,
-            'foto' => 'Pegawai/foto/Liam Niskala 22-1681115861.jpg',
             'digital_signature' => 'Test'
         ]);
     }
