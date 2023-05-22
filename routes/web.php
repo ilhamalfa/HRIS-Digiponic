@@ -26,14 +26,11 @@ Route::get('/', function () {
     return view('landingpage.landingpage');
 });
 
-
 Auth::routes(['verify' => true]);
 
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index']);
 
 // Landing Page
-Route::get('/rutelogin', [Controller::class, 'rutelogin'])->name('rutelogin');
-
 Route::get('/career', [Controller::class, 'career']);
 
 Route::get('/career/search', [Controller::class, 'search']);
@@ -44,7 +41,7 @@ Route::get('/login-pegawai', function () {
     return view('auth.login-pegawai');
 });
 
-// Route Pelamar
+// Pelamar
 Route::post('/career/apply/{id}', [PelamarController::class, 'applyLowongan']);
 
 // Super Admin
