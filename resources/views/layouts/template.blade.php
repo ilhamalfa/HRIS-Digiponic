@@ -29,10 +29,6 @@
     <link rel="stylesheet" href="{{ asset('template/assets/vendors/owl-carousel-2/owl.theme.default.min.css') }}">
     {{-- Plugin CSS End --}}
 
-    {{-- Layout CSS Start --}}
-    <link rel="stylesheet" href="{{ asset('template/assets/css/style.css') }}">
-    {{-- Layout CSS End --}}
-
     {{-- Font Awesome Start --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
         integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
@@ -46,12 +42,17 @@
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
     <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
 
+    {{-- Layout CSS Start --}}
+    <link rel="stylesheet" href="{{ asset('template/assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/assets/css/layout/style.css') }}">
+    {{-- Layout CSS End --}}
+
     <style>
-        trix-toolbar [data-trix-button-group="file-tools"]{
+        trix-toolbar [data-trix-button-group="file-tools"] {
             display: none;
         }
 
-        trix-toolbar [data-trix-button-group]{
+        trix-toolbar [data-trix-button-group] {
             background-color: whitesmoke;
         }
     </style>
@@ -61,45 +62,47 @@
             display: block;
             max-width: 100%;
         }
+
         .preview {
             overflow: hidden;
-            width: 160px; 
+            width: 160px;
             height: 160px;
             margin: 10px;
             border: 1px solid red;
         }
-        .modal-lg{
+
+        .modal-lg {
             max-width: 1000px !important;
         }
 
         .signature-pad {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width:400px;
-                height:200px;
-            }
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 400px;
+            height: 200px;
+        }
     </style>
 
     <style>
         .wrapper {
-        position: relative;
-        width: 400px;
-        height: 200px;
-        -moz-user-select: none;
-        -webkit-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
+            position: relative;
+            width: 400px;
+            height: 200px;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
 
-    .signature-pad {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width:400px;
-        height:200px;
-        background-color: white;
-    }
+        .signature-pad {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 400px;
+            height: 200px;
+            background-color: white;
+        }
     </style>
 
 </head>
@@ -108,56 +111,47 @@
     <div class="container-scroller">
 
         {{-- Sidebar Start --}}
-        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <nav class="sidebar sidebar-offcanvas bg-black" id="sidebar">
 
             {{-- Sidebar Brand Logo Start --}}
-            <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-                <a class="sidebar-brand brand-logo text-decoration-none" href="{{ url('/about') }}">
-                    <span class="secondary-color-1-text">TECHSolution</span>
+            <div class="bg-black sidebar-brand-wrapper d-lg-flex align-items-center justify-content-center fixed-top">
+                <a class="sidebar-brand brand-logo text-decoration-none" href="{{ url('/') }}">
+                    <span class="text-white fw-bold fs-5">TECHSolution</span>
                 </a>
-                <a class="sidebar-brand brand-logo-mini" href="index.html">
+                <a class="sidebar-brand brand-logo-mini" href="{{ url('/') }}">
                     <img src="{{ asset('logo/brand-logo-white.webp') }}" alt="Brand Logo" />
                 </a>
             </div>
             {{-- Sidebar Brand Logo End --}}
 
             {{-- Sidebar Navigation Start --}}
-            <ul class="nav">
+            <ul class="nav bg-black">
 
                 {{-- Sidebar Profile Box Start --}}
-                <li class="nav-item profile">
-                    @guest
-                        <div class="profile-des">
-                            <a class="nav-link" href="{{ route('login') }}">
-                                <span class="menu-icon">
-                                    <i class="fa-solid fa-right-to-bracket"></i>
-                                </span>
-                                <span class="menu-title">Login</span>
-                            </a>
-                        </div>
-                    @else
+                <li class="bg-black nav-item profile">
                     <div class="profile-desc">
 
                         {{-- Sidebar Profile Image & Name Start --}}
                         <div class="profile-pic">
                             <div class="count-indicator">
-                                    @if (isset(Auth::user()->foto))
+                                @if (isset(Auth::user()->foto))
                                     <img class="img-xs rounded-circle"
-                                    src="{{ asset('storage/' . Auth::user()->foto) }}" alt="">
-                                    @else
+                                        src="{{ asset('storage/' . Auth::user()->foto) }}" alt="Profile Picture">
+                                @else
                                     <img class="img-xs rounded-circle"
-                                    src="{{ asset('storage/Pegawai/default/user.jpg') }}" alt="">
-                                    @endif
+                                        src="{{ asset('storage/Pegawai/default/profile-user.png') }}"
+                                        alt="Profile Picture">
+                                @endif
                             </div>
                             <div class="profile-name">
-                                    <h5 class="mb-0 font-weight-normal">
-                                        {{ Auth::user()->nama }}
-                                    </h5>
-                                    <span>
-                                        {{ Auth::user()->department }}
-                                        <br>
-                                        {{ Auth::user()->golongan }}
-                                    </span>
+                                <h5 class="mb-0 font-weight-normal">
+                                    {{ Auth::user()->nama }}
+                                </h5>
+                                <span class="text-white">
+                                    {{ Auth::user()->department }}
+                                    <br>
+                                    {{ Auth::user()->golongan }}
+                                </span>
                             </div>
                         </div>
                         {{-- Sidebar Profile Image & Name End --}}
@@ -169,172 +163,168 @@
                         {{-- Sidebar Profile 3 Dots Vertical End --}}
 
                         {{-- Sidebar Profile 3 Dots Vertical Menu Start --}}
-                        <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list"
-                            aria-labelledby="profile-dropdown">
-                            <a href="{{ url('/Account/account-setting') }}" class="dropdown-item preview-item">
+                        <div class="bg-white dropdown-menu dropdown-menu-right sidebar-dropdown preview-list trans"
+                            aria-labelledby="profile-dropdown" id="dropdown">
+                            <a href="{{ url('/Account/account-setting') }}"
+                                class="dropdown-item bg-white rounded preview-item">
                                 <div class="preview-thumbnail">
-                                    <div class="preview-icon bg-dark rounded-circle">
-                                        <i class="mdi mdi-settings text-primary"></i>
+                                    <div class="preview-icon rounded-circle">
+                                        <i class="mdi mdi-settings text-black"></i>
                                     </div>
                                 </div>
                                 <div class="preview-item-content">
-                                    <p class="preview-subject ellipsis mb-1 text-small">Account settings</p>
+                                    <p class="text-black preview-subject ellipsis mb-1 text-small fw-bold">Account
+                                        settings</p>
                                 </div>
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a href="{{ url('/profile/signature') }}" class="dropdown-item preview-item">
+                            <a href="{{ url('/profile/signature') }}"
+                                class="dropdown-item bg-white rounded preview-item">
                                 <div class="preview-thumbnail">
-                                    <div class="preview-icon bg-dark rounded-circle">
-                                        <i class="mdi mdi-check-circle-outline text-danger"></i>
+                                    <div class="preview-icon rounded-circle">
+                                        <i class="mdi mdi-check-circle-outline text-black"></i>
                                     </div>
                                 </div>
                                 <div class="preview-item-content">
-                                    <p class="preview-subject ellipsis mb-1 text-small">Digital Signature</p>
+                                    <p class="text-black preview-subject ellipsis mb-1 text-small fw-bold">Digital
+                                        Signature</p>
                                 </div>
-                            </a>   
+                            </a>
                         </div>
                         {{-- Sidebar Profile 3 Dots Vertical Menu End --}}
 
                     </div>
-                    @endguest
-
                 </li>
                 {{-- Sidebar Profile Box End --}}
-
-                {{-- Sidebar Title Navigation Start --}}
-                <li class="nav-item nav-category">
-                    <span class="nav-link">Navigation</span>
-                </li>
-                {{-- Sidebar Title Navigation End --}}
 
                 {{-- Sidebar Dashboard Start --}}
                 <li class="nav-item menu-items">
                     <a class="nav-link" href="">
                         <span class="menu-icon">
-                            <i class="mdi mdi-speedometer"></i>
+                            <i class="mdi mdi-speedometer text-white"></i>
                         </span>
-                        <span class="menu-title">Dashboard</span>
+                        <span class="menu-title text-white">Dashboard</span>
                     </a>
                 </li>
-                    @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'SuperAdmin')
-                        <li class="nav-item nav-category">
-                            <span class="nav-link">Admin Menu</span>
-                        </li>
-                        <li class="nav-item menu-items">
-                            <a class="nav-link" href="{{ url('/data-user') }}">
-                                <span class="menu-icon">
-                                    <i class="mdi mdi-account-multiple-outline"></i>
-                                </span>
-                                <span class="menu-title">Users Datas</span>
-                            </a>
-                        </li>
-                        <li class="nav-item menu-items">
-                            <a class="nav-link" href="{{ url('admin/daftar-cuti') }}">
-                                <span class="menu-icon">
-                                    <i class="mdi mdi-note-multiple"></i>
-                                </span>
-                                <span class="menu-title">Daftar Cuti</span>
-                            </a>
-                        </li>
-                        <li class="nav-item menu-items">
-                            <a class="nav-link" href="{{ url('admin/izin') }}">
-                                <span class="menu-icon">
-                                    <i class="mdi mdi-receipt"></i>
-                                </span>
-                                <span class="menu-title">Days Off</span>
-                            </a>
-                        </li>
-                        @if (Auth::user()->role == 'SuperAdmin')
+                @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'SuperAdmin')
+                    <li class="nav-item nav-category">
+                        <span class="nav-link text-white">Admin Menu</span>
+                    </li>
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" href="{{ url('/data-user') }}">
+                            <span class="menu-icon">
+                                <i class="mdi mdi-account-multiple-outline text-white"></i>
+                            </span>
+                            <span class="menu-title text-white">Users Datas</span>
+                        </a>
+                    </li>
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" href="{{ url('admin/daftar-cuti') }}">
+                            <span class="menu-icon">
+                                <i class="mdi mdi-note-multiple text-white"></i>
+                            </span>
+                            <span class="menu-title text-white">Daftar Cuti</span>
+                        </a>
+                    </li>
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" href="{{ url('admin/izin') }}">
+                            <span class="menu-icon">
+                                <i class="mdi mdi-receipt text-white"></i>
+                            </span>
+                            <span class="menu-title text-white">Days Off</span>
+                        </a>
+                    </li>
+                    @if (Auth::user()->role == 'SuperAdmin')
                         <li class="nav-item menu-items">
                             <a class="nav-link" href="{{ url('/resign/daftar-resign') }}">
                                 <span class="menu-icon">
-                                    <i class="mdi mdi-receipt"></i>
+                                    <i class="mdi mdi-receipt text-white"></i>
                                 </span>
-                                <span class="menu-title">Resign</span>
-                            </a>
-                        </li>
-                        @endif
-                        <li class="nav-item menu-items">
-                            <a class="nav-link" href="{{ url('data-lowongan/') }}">
-                                <span class="menu-icon">
-                                    <i class="mdi mdi-file-multiple"></i>
-                                </span>
-                                <span class="menu-title">lowongan</span>
-                            </a>
-                        </li>
-                        @endif
-                        @if (Auth::user()->golongan == 'Manager/Kadep')
-                        <li class="nav-item nav-category">
-                            <span class="nav-link">Manager Navigation</span>
-                        </li>
-                        <li class="nav-item menu-items">
-                            <a class="nav-link" href="{{ url('/employees-data') }}">
-                                <span class="menu-icon">
-                                    <i class="mdi mdi-account-multiple-outline"></i>
-                                </span>
-                                <span class="menu-title">Users Datas</span>
-                            </a>
-                        </li>
-                        <li class="nav-item menu-items">
-                            <a class="nav-link" href="{{ url('kadep/daftar-cuti') }}">
-                                <span class="menu-icon">
-                                    <i class="mdi mdi-note-multiple"></i>
-                                </span>
-                                <span class="menu-title">Daftar Cuti</span>
-                            </a>
-                        </li>
-                        <li class="nav-item menu-items">
-                            <a class="nav-link" href="{{ url('kadep/daftar-perizinan') }}">
-                                <span class="menu-icon">
-                                    <i class="mdi mdi-receipt"></i>
-                                </span>
-                                <span class="menu-title">Days Off</span>
-                            </a>
-                        </li>
-                        <li class="nav-item menu-items">
-                            <a class="nav-link" href="{{ url('kadep/daftar-resign') }}">
-                                <span class="menu-icon">
-                                    <i class="mdi mdi-receipt"></i>
-                                </span>
-                                <span class="menu-title">Resign</span>
+                                <span class="menu-title text-white">Resign</span>
                             </a>
                         </li>
                     @endif
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" href="{{ url('data-lowongan/') }}">
+                            <span class="menu-icon">
+                                <i class="mdi mdi-file-multiple text-white"></i>
+                            </span>
+                            <span class="menu-title text-white ">lowongan</span>
+                        </a>
+                    </li>
+                @endif
+                @if (Auth::user()->golongan == 'Manager/Kadep')
                     <li class="nav-item nav-category">
-                        <span class="nav-link">Employee Navigation</span>
+                        <span class="nav-link text-white">Manager Navigation</span>
                     </li>
                     <li class="nav-item menu-items">
-                        <a class="nav-link" href="{{ url('#') }}">
+                        <a class="nav-link" href="{{ url('/employees-data') }}">
                             <span class="menu-icon">
-                                <i class="mdi mdi-file-multiple"></i>
+                                <i class="mdi mdi-account-multiple-outline text-white"></i>
                             </span>
-                            <span class="menu-title">Absensi</span>
+                            <span class="menu-title text-white">Users Datas</span>
                         </a>
                     </li>
                     <li class="nav-item menu-items">
-                        <a class="nav-link" href="{{ url('pegawai/cuti') }}">
+                        <a class="nav-link" href="{{ url('kadep/daftar-cuti') }}">
                             <span class="menu-icon">
-                                <i class="mdi mdi-file-multiple"></i>
+                                <i class="mdi mdi-note-multiple text-white"></i>
                             </span>
-                            <span class="menu-title">cuti</span>
+                            <span class="menu-title text-white">Daftar Cuti</span>
                         </a>
                     </li>
                     <li class="nav-item menu-items">
-                        <a class="nav-link" href="{{ url('pegawai/izin') }}">
+                        <a class="nav-link" href="{{ url('kadep/daftar-perizinan') }}">
                             <span class="menu-icon">
-                                <i class="mdi mdi-file-multiple"></i>
+                                <i class="mdi mdi-receipt text-white"></i>
                             </span>
-                            <span class="menu-title">Izin</span>
+                            <span class="menu-title text-white">Days Off</span>
                         </a>
                     </li>
                     <li class="nav-item menu-items">
-                        <a class="nav-link" href="{{ url('pegawai/resign') }}">
+                        <a class="nav-link" href="{{ url('kadep/daftar-resign') }}">
                             <span class="menu-icon">
-                                <i class="mdi mdi-file-multiple"></i>
+                                <i class="mdi mdi-receipt text-white"></i>
                             </span>
-                            <span class="menu-title">Resign</span>
+                            <span class="menu-title text-white">Resign</span>
                         </a>
                     </li>
+                @endif
+                <li class="nav-item nav-category">
+                    <span class="nav-link text-white">Employee Navigation</span>
+                </li>
+                <li class="nav-item menu-items">
+                    <a class="nav-link" href="{{ url('#') }}">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-file-multiple text-white"></i>
+                        </span>
+                        <span class="menu-title text-white">Absensi</span>
+                    </a>
+                </li>
+                <li class="nav-item menu-items">
+                    <a class="nav-link" href="{{ url('pegawai/cuti') }}">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-file-multiple text-white"></i>
+                        </span>
+                        <span class="menu-title text-white">cuti</span>
+                    </a>
+                </li>
+                <li class="nav-item menu-items">
+                    <a class="nav-link" href="{{ url('pegawai/izin') }}">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-file-multiple text-white"></i>
+                        </span>
+                        <span class="menu-title text-white">Izin</span>
+                    </a>
+                </li>
+                <li class="nav-item menu-items">
+                    <a class="nav-link" href="{{ url('pegawai/resign') }}">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-file-multiple text-white"></i>
+                        </span>
+                        <span class="menu-title text-white">Resign</span>
+                    </a>
+                </li>
                 {{-- Sidebar Dashboard End --}}
 
             </ul>
@@ -346,18 +336,18 @@
         <div class="container-fluid page-body-wrapper">
 
             {{-- Topbar Start --}}
-            <nav class="navbar p-0 fixed-top d-flex flex-row">
+            <nav class="navbar p-0 fixed-top d-flex flex-row justify-content-between">
 
                 {{-- Topbar Brand Logo Responsive Media Start --}}
-                <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
-                    <a class="navbar-brand brand-logo-mini" href="index.html">
-                        <img src="{{ asset('template/assets/images/logo-mini.svg') }}" alt="logo" />
+                <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center bg-black">
+                    <a class="navbar-brand brand-logo-mini" href="">
+                        <img src="{{ asset('logo/brand-logo-white.webp') }}" alt="Brand Logo" />
                     </a>
                 </div>
                 {{-- Topbar Brand Logo Responsive Media End --}}
 
                 {{-- Topbar Menu Start --}}
-                <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+                <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch bg-black">
 
                     {{-- Topbar Hamburger Menu Start --}}
                     <button class="navbar-toggler navbar-toggler align-self-center" type="button"
@@ -376,23 +366,23 @@
                                 <i class="mdi mdi-email"></i>
                                 <span class="count bg-success"></span>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list bg-white border-secondary"
                                 aria-labelledby="messageDropdown">
-                                <h6 class="p-3 mb-0">Messages</h6>
-                                <div class="dropdown-divider"></div>
-                                <p class="p-3 mb-0 text-center">3 new messages</p>
+                                <h6 class="p-3 mb-0 text-black">Messages</h6>
+                                <div class="dropdown-divider bg-secondary"></div>
+                                <p class="p-3 mb-0 text-center text-black">3 new messages</p>
                                 <a class="dropdown-item preview-item">
                                     <div class="preview-thumbnail">
                                         <img src="{{ asset('template/assets/images/faces/face4.jpg') }}"
                                             alt="image" class="rounded-circle profile-pic">
                                     </div>
                                     <div class="preview-item-content">
-                                        <p class="preview-subject ellipsis mb-1">Mark send you a message</p>
-                                        <p class="text-muted mb-0"> 1 Minutes ago </p>
+                                        <p class="preview-subject ellipsis mb-1 text-black">Mark send you a message</p>
+                                        <p class="text-muted mb-0 text-black"> 1 Minutes ago </p>
                                     </div>
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-center text-decoration-none p-3 mb-0" href="#">See
+                                <a class="dropdown-item text-center text-decoration-none p-3 mb-0 text-black" href="#">See
                                     all messages</a>
                             </div>
                         </li>
@@ -405,14 +395,14 @@
                                 <i class="mdi mdi-bell"></i>
                                 <span class="count bg-danger"></span>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list bg-white border-secondary"
                                 aria-labelledby="notificationDropdown">
-                                <h6 class="p-3 mb-0">Notifications</h6>
+                                <h6 class="p-3 mb-0 text-black">Notifications</h6>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item preview-item">
+                                <a class="dropdown-item preview-item text-black">
                                     <div class="preview-thumbnail">
                                         <div class="preview-icon bg-dark rounded-circle">
-                                            <i class="mdi mdi-calendar text-success"></i>
+                                            <i class="mdi mdi-calendar text-white"></i>
                                         </div>
                                     </div>
                                     <div class="preview-item-content">
@@ -422,10 +412,10 @@
                                     </div>
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item preview-item">
+                                <a class="dropdown-item preview-item text-black">
                                     <div class="preview-thumbnail">
                                         <div class="preview-icon bg-dark rounded-circle">
-                                            <i class="mdi mdi-settings text-danger"></i>
+                                            <i class="mdi mdi-settings text-white"></i>
                                         </div>
                                     </div>
                                     <div class="preview-item-content">
@@ -434,10 +424,10 @@
                                     </div>
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item preview-item">
+                                <a class="dropdown-item preview-item text-black">
                                     <div class="preview-thumbnail">
                                         <div class="preview-icon bg-dark rounded-circle">
-                                            <i class="mdi mdi-link-variant text-warning"></i>
+                                            <i class="mdi mdi-link-variant text-white"></i>
                                         </div>
                                     </div>
                                     <div class="preview-item-content">
@@ -446,7 +436,7 @@
                                     </div>
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-center text-decoration-none p-3 mb-0" href="#">See
+                                <a class="dropdown-item text-center text-decoration-none p-3 mb-0 text-black" href="#">See
                                     all notifications</a>
                             </div>
                         </li>
@@ -456,32 +446,32 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
                                 <div class="navbar-profile">
-                                        {{-- @foreach ($user as $user) --}}
-                                        @guest
-                                            <p class="mb-0 ms-2 d-none d-sm-block navbar-profile-name text-white">Login</p>
+                                    {{-- @foreach ($user as $user) --}}
+                                    @guest
+                                        <p class="mb-0 ms-2 d-none d-sm-block navbar-profile-name text-white">Login</p>
+                                    @else
+                                        @if (isset(Auth::user()->foto))
+                                            <img class="img-xs rounded-circle"
+                                                src="{{ asset('storage/' . Auth::user()->foto) }}" alt="">
                                         @else
-                                            @if (isset(Auth::user()->foto))
-                                                <img class="img-xs rounded-circle"
-                                            src="{{ asset('storage/' . Auth::user()->foto) }}" alt="">
-                                            @else
-                                                <img class="img-xs rounded-circle"
-                                            src="{{ asset('storage/Pegawai/default/user.jpg') }}" alt="">
-                                            @endif
+                                            <img class="img-xs rounded-circle"
+                                                src="{{ asset('storage/Pegawai/default/user.jpg') }}" alt="">
+                                        @endif
                                         <p class="mb-0 d-none d-sm-block navbar-profile-name">
                                             {{ Auth::user()->nama }}
-                                        <i class="mdi mdi-menu-down d-none d-sm-block"></i>
-                                    {{-- @endforeach --}}
+                                            <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                                            {{-- @endforeach --}}
                                         @endguest
                                 </div>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list bg-white border-secondary"
                                 aria-labelledby="profileDropdown">
-                                <h6 class="p-3 mb-0">Profile</h6>
+                                <h6 class="p-3 mb-0 text-black">Profile</h6>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item preview-item">
+                                <a class="dropdown-item preview-item text-black">
                                     <div class="preview-thumbnail">
                                         <div class="preview-icon bg-dark rounded-circle">
-                                            <i class="mdi mdi-settings text-success"></i>
+                                            <i class="mdi mdi-settings text-success text-white"></i>
                                         </div>
                                     </div>
                                     <div class="preview-item-content">
@@ -489,10 +479,11 @@
                                     </div>
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item preview-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <a class="dropdown-item preview-item text-black"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     <div class="preview-thumbnail">
                                         <div class="preview-icon bg-dark rounded-circle">
-                                            <i class="mdi mdi-logout text-danger"></i>
+                                            <i class="mdi mdi-logout text-white"></i>
                                         </div>
                                     </div>
                                     <div class="preview-item-content">
@@ -500,11 +491,12 @@
                                     </div>
                                 </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    class="d-none">
                                     @csrf
                                 </form>
                                 <div class="dropdown-divider"></div>
-                                <p class="p-3 mb-0 text-center">Advanced settings</p>
+                                <p class="p-3 mb-0 text-center text-black">Advanced settings</p>
                             </div>
                         </li>
                         {{-- Topbar Menu Right Side Advandce Settings End --}}
@@ -513,7 +505,7 @@
                     {{-- Topbar Menu Right Side End --}}
 
                     {{-- Topbar Hamburger Menu Responsive Media Start --}}
-                    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center ms-auto" type="button"
                         data-toggle="offcanvas">
                         <span class="mdi mdi-format-line-spacing"></span>
                     </button>
@@ -533,6 +525,7 @@
                     @yield('content')
                 </div>
                 {{-- Main Content End --}}
+
             </div>
             <!-- main-panel ends -->
         </div>
@@ -566,46 +559,46 @@
     {{-- Digital Signature --}}
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>
     <script>
         var $modal = $('#modal');
         var image = document.getElementById('image');
         var cropper;
-        
-        $("body").on("change", ".image", function(e){
+
+        $("body").on("change", ".image", function(e) {
             var files = e.target.files;
-            var done = function (url) {
-            image.src = url;
-            $modal.modal('show');
+            var done = function(url) {
+                image.src = url;
+                $modal.modal('show');
             };
             var reader;
             var file;
             var url;
             if (files && files.length > 0) {
-            file = files[0];
-            if (URL) {
-                done(URL.createObjectURL(file));
-            } else if (FileReader) {
-                reader = new FileReader();
-                reader.onload = function (e) {
-                done(reader.result);
-                };
-                reader.readAsDataURL(file);
-            }
+                file = files[0];
+                if (URL) {
+                    done(URL.createObjectURL(file));
+                } else if (FileReader) {
+                    reader = new FileReader();
+                    reader.onload = function(e) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
             }
         });
-        $modal.on('shown.bs.modal', function () {
+        $modal.on('shown.bs.modal', function() {
             cropper = new Cropper(image, {
-            aspectRatio: 1,
-            viewMode: 3,
-            preview: '.preview'
+                aspectRatio: 1,
+                viewMode: 3,
+                preview: '.preview'
             });
-        }).on('hidden.bs.modal', function () {
-        cropper.destroy();
-        cropper = null;
+        }).on('hidden.bs.modal', function() {
+            cropper.destroy();
+            cropper = null;
         });
-        $("#crop").click(function(){
+        $("#crop").click(function() {
             canvas = cropper.getCroppedCanvas({
                 width: 160,
                 height: 160,
@@ -613,15 +606,18 @@
             canvas.toBlob(function(blob) {
                 url = URL.createObjectURL(blob);
                 var reader = new FileReader();
-                reader.readAsDataURL(blob); 
+                reader.readAsDataURL(blob);
                 reader.onloadend = function() {
-                    var base64data = reader.result; 
+                    var base64data = reader.result;
                     $.ajax({
                         type: "POST",
                         dataType: "json",
                         url: "crop-image-upload",
-                        data: {'_token': $('meta[name="_token"]').attr('content'), 'image': base64data},
-                        success: function(data){
+                        data: {
+                            '_token': $('meta[name="_token"]').attr('content'),
+                            'image': base64data
+                        },
+                        success: function(data) {
                             console.log(data);
                             $modal.modal('hide');
                             alert("Crop image successfully uploaded");
@@ -635,28 +631,28 @@
     <script>
         // Signature Pad
         var signaturePad = new SignaturePad(document.getElementById('signature-pad'), {
-        backgroundColor: 'rgba(255, 255, 255, 0)',
-        penColor: 'rgb(0, 0, 0)'
+            backgroundColor: 'rgba(255, 255, 255, 0)',
+            penColor: 'rgb(0, 0, 0)'
         });
         var saveButton = document.getElementById('save');
         var cancelButton = document.getElementById('clear');
 
-        $('#save').click(function (e) { 
+        $('#save').click(function(e) {
             document.getElementById("signature").value = signaturePad.toDataURL();
 
             document.getElementById("myForm").submit();
         });
 
 
-        cancelButton.addEventListener('click', function (event) {
-        signaturePad.clear();
+        cancelButton.addEventListener('click', function(event) {
+            signaturePad.clear();
         });
 
         // End Signature Pad
     </script>
 
     <script>
-        document.addEventListener('trix-file-accept', function(e){
+        document.addEventListener('trix-file-accept', function(e) {
             e.preventDefault
         })
     </script>
