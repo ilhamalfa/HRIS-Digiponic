@@ -28,7 +28,7 @@ class ApiController extends Controller
         }
 
         $user = User::where('nik', $request->input('nik'))->first();
-        if (!$user || !Hash::check($request->input('password'), $user->password, [])) {
+        if (!$user || !Hash::check($request->input('password'), $user->password)) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'NIK atau password salah.',
@@ -38,13 +38,11 @@ class ApiController extends Controller
 
         // Token
         $token = $user->createToken('token')->plainTextToken;
+        $user->token = $token;
         $response = [
             'status' => 'success',
             'message' => 'Berhasil login.',
-            'data' => [
-                'user' => $user,
-                'Authorization' => 'Bearer ' . $token
-            ]
+            'data' => $user
         ];
         return $response = response()->json($response, 200);
     }
@@ -86,7 +84,7 @@ class ApiController extends Controller
         }
         $pass = $request->input('password');
         $newpass = $request->input('newpass');
-        $confirmpass = $request->input('confirmpassword');
+        $confirmpass = $request->input('confirmpass');
         $user = User::find(Auth::user()->id);
         if (!Hash::check($pass, $user->password)) {
             return response()->json([

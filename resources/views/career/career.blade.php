@@ -4,8 +4,8 @@
 
 @section('content')
     {{-- Search --}}
-    <div class="row p-5 mt-5 justify-content-md-center">
-        <div class="col-lg-1">
+    <div class="search-box">
+        <div class="search-section-1">
             <div class="dropdown">
                 <button class="btn dropdown-toggle filter-buton" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fa-solid fa-filter text-white"></i>
@@ -29,8 +29,8 @@
                 </ul>
             </div>
         </div>
-        <div class="col-lg-6">
-            <form class="nav-link d-none d-lg-flex search" action="" method="get">
+        <div class="search-section-2">
+            <form class="nav-link d-flex search" action="" method="get">
                 <input type="text" class="search-input" id="search-input" placeholder="Search Job" name="search"
                     autofocus>
                 <button type="submit" class="search-button">
@@ -38,7 +38,7 @@
                 </button>
             </form>
         </div>
-        <div class="col-lg-1">
+        <div class="search-section-3">
             @isset($datas)
                 {{ $datas->links('vendor.pagination.design') }}
             @endisset
@@ -47,10 +47,9 @@
     {{-- Search End --}}
 
     {{-- Vacancy Start --}}
-    <div class="row">
+    <div class="vacancy-box">
         <h1 class="vacancy-title">AVAILABLE JOBS</h1>
-
-        <div class="career-vacancy-box">
+        <div class="vacancy">
             @foreach ($datas as $data)
                 @if ($data->tanggal >= now()->toDateString())
                     <div class="vacancy-card-link-box">
@@ -90,7 +89,7 @@
                     </div>
                 @endif
 
-                {{-- Modal --}}
+                {{-- Detail Vacancy Start --}}
                 <div class="modal fade" id="apply{{ $loop->iteration }}" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-xl">
@@ -116,8 +115,8 @@
                                     <p class="ms-4 mb-2">{{ date('d F Y', strtotime($data->tanggal)) }}</p>
                                 </div>
                                 <div class="vacancy-form-box">
-                                    <form class="vacancy-form" method="POST" action={{ url('/career/apply/' . $data->id) }}
-                                        enctype="multipart/form-data">
+                                    <form class="vacancy-form" method="POST"
+                                        action={{ url('/career/apply/' . $data->id) }} enctype="multipart/form-data">
                                         @csrf
                                         <p class="mb-5 d-flex">
                                             <i class="fa-solid fa-circle-info mx-2"></i>
@@ -163,16 +162,26 @@
                         </div>
                     </div>
                 </div>
+                {{-- Detail Vacancy End --}}
             @endforeach
         </div>
+        <div class="mobile-pagination">
+            @isset($datas)
+                {{ $datas->links('vendor.pagination.design') }}
+            @endisset
+        </div>
     </div>
-    <div class="vision-mission-box w-50 mx-auto">
+    {{-- Vacancy End --}}
+
+
+    {{-- Vision Start --}}
+    <div class="vision-mission-box">
         <h6 class="vision-title">Our Vision :</h6>
         <p class="vision">To be a leading technology company that changes the world with innovative solutions, <br>
             empowering people in a
             meaningful way
             digital, <br> and create a sustainable future.</p>
     </div>
-    {{-- Vacancy End --}}
+    {{-- Vision End --}}
 
 @endsection
