@@ -51,10 +51,7 @@ class ApiController extends Controller
     {
         $user = $request->user();
         return response()->json([
-            'data' => [
-                'message' => 'success diambil',
-                'user' => $user
-            ]
+            'user' => $user
         ]);
     }
 
