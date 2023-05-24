@@ -49,16 +49,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function pegawai(){
-        return $this->hasOne(Pegawai::class);
-    }
-
-    public function pelamar(){
-        return $this->hasOne(Pelamar::class);
-    }
-
-    public function lamaran(){
-        return $this->hasMany(Lamaran::class);
+    public function presensi(){
+        return $this->hasMany(Presensi::class);
     }
 
     public function cuti(){
