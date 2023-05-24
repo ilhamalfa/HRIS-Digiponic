@@ -9,6 +9,7 @@ use App\Models\Cuti;
 use App\Models\Pegawai;
 use App\Models\Pelamar;
 use App\Models\Perizinan;
+use App\Models\Province;
 use App\Models\Resign;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -40,9 +41,11 @@ class AdminController extends Controller
 
     public function dataUser(){
         $datas = User::filter(request(['search']))->paginate(10);
+        $provinces = Province::all();
 
         return view('super-admin.pegawai.daftar-data-user', [
-            'datas' => $datas
+            'datas' => $datas,
+            'provinces' => $provinces
         ]);
     }
 

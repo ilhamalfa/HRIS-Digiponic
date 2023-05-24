@@ -6,6 +6,7 @@ use App\Models\Cuti;
 use App\Models\District;
 use App\Models\Pegawai;
 use App\Models\Perizinan;
+use App\Models\Presensi;
 use App\Models\Province;
 use App\Models\Regency;
 use App\Models\Resign;
@@ -473,4 +474,13 @@ class PegawaiController extends Controller
             'data' => $data,
         ]);
     }
+
+        // Presensi
+        public function presensi($id){
+            $datas = Presensi::where('pegawai_id', Auth::user()->id)->get();
+
+            return view('pegawai.absensi.absensi', [
+                'datas' => $datas
+            ]);
+        }
 }

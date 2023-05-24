@@ -40,19 +40,19 @@
 }
 
 .tx-secondary-color-2 {
-  color: var(--secondary-color-2);
+  color: var(--secondary-color-2)
 }
 
 .tx-secondary-color-3 {
-  color: var(--secondary-color-3);
+  color: var(--secondary-color-3)
 }
 
 .tx-optional-color-1 {
-  color: var(--optional-color-1);
+  color: var(--optional-color-1)
 }
 
 .tx-optional-color-2 {
-  color: var(--optional-color-2);
+  color: var(--optional-color-2)
 }
 
 .card-header {
@@ -83,6 +83,33 @@
   top: 40%;
   bottom: 40%;
   right: 5%;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.search-input{
+    color: var(--primary-color);
+    background: none;
+    border: none;
+    border-bottom: 2px solid var(--primary-color);
+    margin: 1em 0;
+    padding: .6em 1em;
+    outline: none;
+    box-sizing: border-box;
+    width: 100%;
+    transition: .5s ease;
+}
+
+.search-input::placeholder {
+    color: var(--primary-color);
+    font-weight: bold;
+    transition: .5s;
+}
+
+.search-input:focus::placeholder {
+    color: var(--primary-color);
 }
 
 /*-------------------------------------------------------------------
