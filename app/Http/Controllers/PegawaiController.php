@@ -32,15 +32,6 @@ class PegawaiController extends Controller
         return view('super-admin.pegawai.daftar-data-user', [
             'datas' => $datas
         ]);
-        if(!isset($data)){
-            $provinces = Province::all();
-
-            return view('pegawai.data-pegawai.input-data-pegawai', [
-                'provinces' => $provinces
-            ]);
-        }else{
-            return redirect('dashboard');
-        }
     }
 
     public function editUser(){
@@ -395,7 +386,7 @@ class PegawaiController extends Controller
 
         $pdf = PDF::loadView('pegawai.cuti-perizinan.surat.sk', $data);
     
-            return $pdf->download('surat SK '. $sk .'-'. $data_sk->user1->nama . '-' . Auth::user()->nik. '.pdf');
+        return $pdf->download('surat SK '. $sk .'-'. $data_sk->user1->nama . '-' . Auth::user()->nik. '.pdf');
     }
 
     public function resign(){

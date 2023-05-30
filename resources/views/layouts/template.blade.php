@@ -73,7 +73,7 @@
                                         src="{{ asset('storage/' . Auth::user()->foto) }}" alt="Profile Picture">
                                 @else
                                     <img class="img-xs rounded-circle"
-                                        src="{{ asset('storage/Pegawai/default/profile-user.png') }}"
+                                        src="{{ asset('storage/Pegawai/default/user.jpg') }}"
                                         alt="Profile Picture">
                                 @endif
                             </div>
@@ -360,7 +360,7 @@
                                                 src="{{ asset('storage/' . Auth::user()->foto) }}" alt="Profile Picture">
                                         @else
                                             <img class="img-xs rounded-circle"
-                                                src="{{ asset('storage/Pegawai/default/profile-user.png') }}"
+                                                src="{{ asset('storage/Pegawai/default/user.jpg') }}"
                                                 alt="Profile Picture">
                                         @endif
                                         <p class="mb-0 d-none d-sm-block navbar-profile-name">

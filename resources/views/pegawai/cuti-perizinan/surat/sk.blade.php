@@ -43,7 +43,7 @@
                     <td></td>
                     <td></td>
                 </tr>
-                <tr>
+                {{-- <tr>
                     <td>
                         <img src="{{ public_path('storage/' . $penyetuju_signature) }}" alt="" style="width: 200px;">
                     </td>
@@ -51,7 +51,7 @@
                     <td>
                         <img src="{{ public_path('storage/' . $digital_signature) }}" alt="" style="width: 200px;">
                     </td>
-                </tr>
+                </tr> --}}
                 <tr>
                     <td><p>{{ $penyetuju_nama }}</p></td>
                     <td></td>
