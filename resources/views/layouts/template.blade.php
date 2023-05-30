@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -20,15 +19,6 @@
         rel="stylesheet">
     {{-- Google Fonts End --}}
 
-    {{-- Plugin CSS Start --}}
-    <link rel="stylesheet" href="{{ asset('template/assets/vendors/mdi/css/materialdesignicons.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('template/assets/vendors/css/vendor.bundle.base.css') }}">
-    <link rel="stylesheet" href="{{ asset('template/assets/vendors/jvectormap/jquery-jvectormap.css') }}">
-    <link rel="stylesheet" href="{{ asset('template/assets/vendors/flag-icon-css/css/flag-icon.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('template/assets/vendors/owl-carousel-2/owl.carousel.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('template/assets/vendors/owl-carousel-2/owl.theme.default.min.css') }}">
-    {{-- Plugin CSS End --}}
-
     {{-- Font Awesome Start --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
         integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
@@ -42,72 +32,16 @@
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
     <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
 
-    {{-- Layout CSS Start --}}
+    {{-- CSS Start --}}
     <link rel="stylesheet" href="{{ asset('template/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('template/assets/css/layout/style.css') }}">
-    {{-- Layout CSS End --}}
-
-    <style>
-        trix-toolbar [data-trix-button-group="file-tools"] {
-            display: none;
-        }
-
-        trix-toolbar [data-trix-button-group] {
-            background-color: whitesmoke;
-        }
-    </style>
-
-    <style type="text/css">
-        img {
-            display: block;
-            max-width: 100%;
-        }
-
-        .preview {
-            overflow: hidden;
-            width: 160px;
-            height: 160px;
-            margin: 10px;
-            border: 1px solid red;
-        }
-
-        .modal-lg {
-            max-width: 1000px !important;
-        }
-
-        .signature-pad {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 400px;
-            height: 200px;
-        }
-    </style>
-
-    <style>
-        .wrapper {
-            position: relative;
-            width: 400px;
-            height: 200px;
-            -moz-user-select: none;
-            -webkit-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        .signature-pad {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 400px;
-            height: 200px;
-            background-color: white;
-        }
-    </style>
+    {{-- CSS End --}}
 
 </head>
 
 <body>
+
+    {{-- Container Scroller Start --}}
     <div class="container-scroller">
 
         {{-- Sidebar Start --}}
@@ -115,10 +49,10 @@
 
             {{-- Sidebar Brand Logo Start --}}
             <div class="bg-black sidebar-brand-wrapper d-lg-flex align-items-center justify-content-center fixed-top">
-                <a class="sidebar-brand brand-logo text-decoration-none" href="{{ url('/') }}">
+                <a class="sidebar-brand brand-logo text-decoration-none" href="{{ url('/dashboard') }}">
                     <span class="text-white fw-bold fs-5">TECHSolution</span>
                 </a>
-                <a class="sidebar-brand brand-logo-mini" href="{{ url('/') }}">
+                <a class="sidebar-brand brand-logo-mini" href="{{ url('/dashboard') }}">
                     <img src="{{ asset('logo/brand-logo-white.webp') }}" alt="Brand Logo" />
                 </a>
             </div>
@@ -157,41 +91,10 @@
                         {{-- Sidebar Profile Image & Name End --}}
 
                         {{-- Sidebar Profile 3 Dots Vertical Start --}}
-                        <a href="#" id="profile-dropdown" data-bs-toggle="dropdown">
-                            <i class="mdi mdi-dots-vertical"></i>
-                        </a>
+                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#threeDotsMenu">
+                            <i class="fa-solid fa-ellipsis-vertical text-white"></i>
+                        </button>
                         {{-- Sidebar Profile 3 Dots Vertical End --}}
-
-                        {{-- Sidebar Profile 3 Dots Vertical Menu Start --}}
-                        <div class="bg-white dropdown-menu dropdown-menu-right sidebar-dropdown preview-list trans"
-                            aria-labelledby="profile-dropdown" id="dropdown">
-                            <a href="{{ url('/Account/account-setting') }}"
-                                class="dropdown-item bg-white rounded preview-item">
-                                <div class="preview-thumbnail">
-                                    <div class="preview-icon rounded-circle">
-                                        <i class="mdi mdi-settings text-black"></i>
-                                    </div>
-                                </div>
-                                <div class="preview-item-content">
-                                    <p class="text-black preview-subject ellipsis mb-1 text-small fw-bold">Account
-                                        settings</p>
-                                </div>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="{{ url('/profile/signature') }}"
-                                class="dropdown-item bg-white rounded preview-item">
-                                <div class="preview-thumbnail">
-                                    <div class="preview-icon rounded-circle">
-                                        <i class="mdi mdi-check-circle-outline text-black"></i>
-                                    </div>
-                                </div>
-                                <div class="preview-item-content">
-                                    <p class="text-black preview-subject ellipsis mb-1 text-small fw-bold">Digital
-                                        Signature</p>
-                                </div>
-                            </a>
-                        </div>
-                        {{-- Sidebar Profile 3 Dots Vertical Menu End --}}
 
                     </div>
                 </li>
@@ -199,9 +102,9 @@
 
                 {{-- Sidebar Dashboard Start --}}
                 <li class="nav-item menu-items">
-                    <a class="nav-link" href="">
+                    <a class="nav-link" href="{{ url('/dashboard') }}">
                         <span class="menu-icon">
-                            <i class="mdi mdi-speedometer text-white"></i>
+                            <i class="fa-solid fa-table-columns text-white"></i>
                         </span>
                         <span class="menu-title text-white">Dashboard</span>
                     </a>
@@ -213,114 +116,114 @@
                     <li class="nav-item menu-items">
                         <a class="nav-link" href="{{ url('/data-user') }}">
                             <span class="menu-icon">
-                                <i class="mdi mdi-account-multiple-outline text-white"></i>
+                                <i class="fa-solid fa-users text-white"></i>
                             </span>
-                            <span class="menu-title text-white">Users Datas</span>
+                            <span class="menu-title text-white">User Data</span>
                         </a>
                     </li>
                     <li class="nav-item menu-items">
                         <a class="nav-link" href="{{ url('admin/daftar-cuti') }}">
                             <span class="menu-icon">
-                                <i class="mdi mdi-note-multiple text-white"></i>
+                                <i class="fa-solid fa-table-list text-white"></i>
                             </span>
-                            <span class="menu-title text-white">Daftar Cuti</span>
+                            <span class="menu-title text-white">Leave List</span>
                         </a>
                     </li>
                     <li class="nav-item menu-items">
                         <a class="nav-link" href="{{ url('admin/izin') }}">
                             <span class="menu-icon">
-                                <i class="mdi mdi-receipt text-white"></i>
+                                <i class="fa-solid fa-table-list text-white"></i>
                             </span>
-                            <span class="menu-title text-white">Days Off</span>
+                            <span class="menu-title text-white">Days Off List</span>
                         </a>
                     </li>
                     @if (Auth::user()->role == 'SuperAdmin')
                         <li class="nav-item menu-items">
                             <a class="nav-link" href="{{ url('/resign/daftar-resign') }}">
                                 <span class="menu-icon">
-                                    <i class="mdi mdi-receipt text-white"></i>
+                                    <i class="fa-solid fa-table-list text-white"></i>
                                 </span>
-                                <span class="menu-title text-white">Resign</span>
+                                <span class="menu-title text-white">Resign List</span>
                             </a>
                         </li>
                     @endif
                     <li class="nav-item menu-items">
                         <a class="nav-link" href="{{ url('data-lowongan/') }}">
                             <span class="menu-icon">
-                                <i class="mdi mdi-file-multiple text-white"></i>
+                                <i class="fa-solid fa-suitcase text-white"></i>
                             </span>
-                            <span class="menu-title text-white ">lowongan</span>
+                            <span class="menu-title text-white ">Vacancy List</span>
                         </a>
                     </li>
                 @endif
                 @if (Auth::user()->golongan == 'Manager/Kadep')
                     <li class="nav-item nav-category">
-                        <span class="nav-link text-white">Manager Navigation</span>
+                        <span class="nav-link text-white">Manager Menu</span>
                     </li>
                     <li class="nav-item menu-items">
                         <a class="nav-link" href="{{ url('/employees-data') }}">
                             <span class="menu-icon">
-                                <i class="mdi mdi-account-multiple-outline text-white"></i>
+                                <i class="fa-solid fa-users text-white"></i>
                             </span>
-                            <span class="menu-title text-white">Users Datas</span>
+                            <span class="menu-title text-white">User Data</span>
                         </a>
                     </li>
                     <li class="nav-item menu-items">
                         <a class="nav-link" href="{{ url('kadep/daftar-cuti') }}">
                             <span class="menu-icon">
-                                <i class="mdi mdi-note-multiple text-white"></i>
+                                <i class="fa-solid fa-table-list text-white"></i>
                             </span>
-                            <span class="menu-title text-white">Daftar Cuti</span>
+                            <span class="menu-title text-white">Leave List</span>
                         </a>
                     </li>
                     <li class="nav-item menu-items">
                         <a class="nav-link" href="{{ url('kadep/daftar-perizinan') }}">
                             <span class="menu-icon">
-                                <i class="mdi mdi-receipt text-white"></i>
+                                <i class="fa-solid fa-table-list text-white"></i>
                             </span>
-                            <span class="menu-title text-white">Days Off</span>
+                            <span class="menu-title text-white">Days Off List</span>
                         </a>
                     </li>
                     <li class="nav-item menu-items">
                         <a class="nav-link" href="{{ url('kadep/daftar-resign') }}">
                             <span class="menu-icon">
-                                <i class="mdi mdi-receipt text-white"></i>
+                                <i class="fa-solid fa-table-list text-white"></i>
                             </span>
-                            <span class="menu-title text-white">Resign</span>
+                            <span class="menu-title text-white">Resign List</span>
                         </a>
                     </li>
                 @endif
                 <li class="nav-item nav-category">
-                    <span class="nav-link text-white">Employee Navigation</span>
+                    <span class="nav-link text-white">Employee Menu</span>
                 </li>
                 <li class="nav-item menu-items">
                     <a class="nav-link" href="{{ url('#') }}">
                         <span class="menu-icon">
-                            <i class="mdi mdi-file-multiple text-white"></i>
+                            <i class="fa-solid fa-calendar-days text-white"></i>
                         </span>
-                        <span class="menu-title text-white">Absensi</span>
+                        <span class="menu-title text-white">Absence</span>
                     </a>
                 </li>
                 <li class="nav-item menu-items">
                     <a class="nav-link" href="{{ url('pegawai/cuti') }}">
                         <span class="menu-icon">
-                            <i class="mdi mdi-file-multiple text-white"></i>
+                            <i class="fa-solid fa-file-signature text-white"></i>
                         </span>
-                        <span class="menu-title text-white">cuti</span>
+                        <span class="menu-title text-white">Leave</span>
                     </a>
                 </li>
                 <li class="nav-item menu-items">
                     <a class="nav-link" href="{{ url('pegawai/izin') }}">
                         <span class="menu-icon">
-                            <i class="mdi mdi-file-multiple text-white"></i>
+                            <i class="fa-solid fa-file-signature text-white"></i>
                         </span>
-                        <span class="menu-title text-white">Izin</span>
+                        <span class="menu-title text-white">Days Off</span>
                     </a>
                 </li>
                 <li class="nav-item menu-items">
                     <a class="nav-link" href="{{ url('pegawai/resign') }}">
                         <span class="menu-icon">
-                            <i class="mdi mdi-file-multiple text-white"></i>
+                            <i class="fa-solid fa-file-signature text-white"></i>
                         </span>
                         <span class="menu-title text-white">Resign</span>
                     </a>
@@ -333,6 +236,7 @@
         </nav>
         {{-- Sidebar End --}}
 
+        {{-- Body Wrapper Start --}}
         <div class="container-fluid page-body-wrapper">
 
             {{-- Topbar Start --}}
@@ -340,7 +244,7 @@
 
                 {{-- Topbar Brand Logo Responsive Media Start --}}
                 <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center bg-black">
-                    <a class="navbar-brand brand-logo-mini" href="">
+                    <a class="navbar-brand brand-logo-mini" href="{{ '/dashboard' }}">
                         <img src="{{ asset('logo/brand-logo-white.webp') }}" alt="Brand Logo" />
                     </a>
                 </div>
@@ -352,7 +256,7 @@
                     {{-- Topbar Hamburger Menu Start --}}
                     <button class="navbar-toggler navbar-toggler align-self-center" type="button"
                         data-toggle="minimize">
-                        <span class="mdi mdi-menu"></span>
+                        <i class="fa-solid fa-bars text-white"></i>
                     </button>
                     {{-- Topbar Hamburger Menu End --}}
 
@@ -363,7 +267,7 @@
                         <li class="nav-item dropdown border-left">
                             <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="mdi mdi-email"></i>
+                                <i class="fa-solid fa-envelope text-white"></i>
                                 <span class="count bg-success"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list bg-white border-secondary"
@@ -382,7 +286,8 @@
                                     </div>
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-center text-decoration-none p-3 mb-0 text-black" href="#">See
+                                <a class="dropdown-item text-center text-decoration-none p-3 mb-0 text-black"
+                                    href="#">See
                                     all messages</a>
                             </div>
                         </li>
@@ -392,7 +297,7 @@
                         <li class="nav-item dropdown border-left">
                             <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown"
                                 href="#" data-bs-toggle="dropdown">
-                                <i class="mdi mdi-bell"></i>
+                                <i class="fa-solid fa-bell text-white"></i>
                                 <span class="count bg-danger"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list bg-white border-secondary"
@@ -436,7 +341,8 @@
                                     </div>
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-center text-decoration-none p-3 mb-0 text-black" href="#">See
+                                <a class="dropdown-item text-center text-decoration-none p-3 mb-0 text-black"
+                                    href="#">See
                                     all notifications</a>
                             </div>
                         </li>
@@ -446,32 +352,31 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
                                 <div class="navbar-profile">
-                                    {{-- @foreach ($user as $user) --}}
                                     @guest
                                         <p class="mb-0 ms-2 d-none d-sm-block navbar-profile-name text-white">Login</p>
                                     @else
                                         @if (isset(Auth::user()->foto))
                                             <img class="img-xs rounded-circle"
-                                                src="{{ asset('storage/' . Auth::user()->foto) }}" alt="">
+                                                src="{{ asset('storage/' . Auth::user()->foto) }}" alt="Profile Picture">
                                         @else
                                             <img class="img-xs rounded-circle"
-                                                src="{{ asset('storage/Pegawai/default/user.jpg') }}" alt="">
+                                                src="{{ asset('storage/Pegawai/default/profile-user.png') }}"
+                                                alt="Profile Picture">
                                         @endif
                                         <p class="mb-0 d-none d-sm-block navbar-profile-name">
                                             {{ Auth::user()->nama }}
-                                            <i class="mdi mdi-menu-down d-none d-sm-block"></i>
-                                            {{-- @endforeach --}}
+                                            <i class="fa-solid fa-caret-down text-white"></i>
                                         @endguest
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list bg-white border-secondary"
                                 aria-labelledby="profileDropdown">
-                                <h6 class="p-3 mb-0 text-black">Profile</h6>
+                                <h6 class="p-3 mb-0 text-black fw-bold">Profile</h6>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item preview-item text-black">
+                                <a class="dropdown-item preview-item text-black bg-white">
                                     <div class="preview-thumbnail">
-                                        <div class="preview-icon bg-dark rounded-circle">
-                                            <i class="mdi mdi-settings text-success text-white"></i>
+                                        <div class="preview-icon bg-success rounded-circle">
+                                            <i class="fa-solid fa-gear text-white"></i>
                                         </div>
                                     </div>
                                     <div class="preview-item-content">
@@ -479,18 +384,17 @@
                                     </div>
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item preview-item text-black"
+                                <a class="dropdown-item preview-item text-black bg-white"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     <div class="preview-thumbnail">
-                                        <div class="preview-icon bg-dark rounded-circle">
-                                            <i class="mdi mdi-logout text-white"></i>
+                                        <div class="preview-icon bg-danger rounded-circle">
+                                            <i class="fa-solid fa-right-from-bracket text-white"></i>
                                         </div>
                                     </div>
                                     <div class="preview-item-content">
                                         <p class="preview-subject mb-1">Log out</p>
                                     </div>
                                 </a>
-
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                     class="d-none">
                                     @csrf
@@ -505,9 +409,9 @@
                     {{-- Topbar Menu Right Side End --}}
 
                     {{-- Topbar Hamburger Menu Responsive Media Start --}}
-                    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center ms-auto" type="button"
-                        data-toggle="offcanvas">
-                        <span class="mdi mdi-format-line-spacing"></span>
+                    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center ms-auto"
+                        type="button" data-toggle="offcanvas">
+                        <i class="fa-solid fa-bars text-white"></i>
                     </button>
                     {{-- Topbar Hamburger Menu Responsive Media End --}}
 
@@ -517,7 +421,7 @@
             </nav>
             {{-- Topbar End --}}
 
-            {{-- Main Content Start --}}
+            {{-- Main Panel Start --}}
             <div class="main-panel">
 
                 {{-- Main Content Start --}}
@@ -527,11 +431,39 @@
                 {{-- Main Content End --}}
 
             </div>
-            <!-- main-panel ends -->
+            {{-- Main Panel End --}}
+
         </div>
-        <!-- page-body-wrapper ends -->
+        {{-- Body Wrapper End --}}
+
     </div>
-    <!-- container-scroller -->
+    {{-- Container Scroller End --}}
+
+    <div class="modal fade" id="threeDotsMenu" tabindex="1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content bg-white">
+                <div class="modal-header">
+                    <h1 class="text-black fs-3 ms-3 fw-bold" id="exampleModalLabel">User Menu
+                    </h1>
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <i class="fa-solid fa-xmark m-auto"></i>
+                    </button>
+                </div>
+                <div class="modal-body d-flex flex-column">
+                    <a href="{{ url('/Account/account-setting') }}" class="btn btn-primary my-1">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>Profile Settings</span>
+                    </a>
+                    <a href="{{ url('/profile/signature') }}" class="btn btn-primary my-1">
+                        <i class="fa-solid fa-file-signature"></i>
+                        <span>Digital Signature</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     {{-- Plugins JS Start --}}
     <script src="{{ asset('template/assets/vendors/js/vendor.bundle.base.js') }}"></script>
@@ -552,13 +484,13 @@
     <script src="{{ asset('template/assets/js/dashboard.js') }}"></script>
     {{-- JS End --}}
 
+    {{-- Ajax --}}
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script src="{{ asset('js/alamat.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
 
     {{-- Digital Signature --}}
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>
     <script>
@@ -627,7 +559,6 @@
             });
         })
     </script>
-
     <script>
         // Signature Pad
         var signaturePad = new SignaturePad(document.getElementById('signature-pad'), {
@@ -650,13 +581,11 @@
 
         // End Signature Pad
     </script>
-
     <script>
         document.addEventListener('trix-file-accept', function(e) {
             e.preventDefault
         })
     </script>
-
 </body>
 
 </html>

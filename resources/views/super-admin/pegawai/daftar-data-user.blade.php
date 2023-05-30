@@ -4,50 +4,60 @@
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center align-items-center">
             <div class="col-md-12">
                 <div class="card bg-white">
-                    <div class="card-header mt-3 text-black bg-white">{{ __('Data User') }}</div>
-
+                    <div class="card-header">
+                        <h6 class="text-black fw-bold fs-3">User Data</h6>
+                    </div>
                     <div class="card-body overflow-scroll">
                         @if (Auth::user()->role == 'SuperAdmin')
-                            <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal"
-                                data-bs-target="#addUser">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUser">
                                 <i class="fa-solid fa-file-circle-plus"></i>
                                 <span>Add User</span>
                             </button>
                         @endif
-                        <div class="row mb-3 mx-1">
-                            <form class="nav-link d-none d-lg-flex search align-items-center"
-                                action="{{ url('/data-user') }}">
-                                <div class="col-6">
-                                    <input type="text" class="form-control search-input" id="search-input"
-                                        placeholder="Enter NIK or Name" name="search" autofocus>
-                                </div>
-                                <div class="col-2 mx-1">
-                                    <button class="btn search-button mt-1 w-75"><i
-                                            class="fa-solid fa-magnifying-glass"></i>Search</button>
-                                </div>
-                            </form>
-                        </div>
+                        <form class="d-flex justify-content-center align-items-center" action="{{ url('/data-user') }}">
+                            <div class="form-section pagination-top-box">
+                                @isset($datas)
+                                    {{ $datas->links('vendor.pagination.design') }}
+                                @endisset
+                                <span class="text-black">Pagination</span>
+                            </div>
+                            <div class="form-section search-top-box">
+                                <input type="text" class="form-control search-input" id="search-input"
+                                    placeholder="Enter NIK or Name" name="search" autofocus>
+                            </div>
+                            <div class="form-section d-flex search-button-top-box">
+                                <button class="btn search-button">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <span class="search-button-text">Search</span>
+                                </button>
+                            </div>
+                        </form>
+                        @if (Session::has('success'))
+                            <div class="alert alert-success" id="session-alert" role="alert">
+                                {{ Session::get('message') }}
+                            </div>
+                        @endif
                         <table class="table mb-4 text-black">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="text-black">#</th>
-                                    <th scope="col" class="text-black">NIK</th>
-                                    <th scope="col" class="text-black">Nama</th>
-                                    <th scope="col" class="text-black">Email</th>
-                                    <th scope="col" class="text-black">Department</th>
-                                    <th scope="col" class="text-black">Golongan</th>
+                                    <th scope="col" class="text-black fw-bold">#</th>
+                                    <th scope="col" class="text-black fw-bold">NIK</th>
+                                    <th scope="col" class="text-black fw-bold">Nama</th>
+                                    <th scope="col" class="text-black fw-bold">Email</th>
+                                    <th scope="col" class="text-black fw-bold">Department</th>
+                                    <th scope="col" class="text-black fw-bold">Golongan</th>
                                     @if (Auth::user()->role != 'Admin')
-                                        <th scope="col" class="text-black">Action</th>
+                                        <th scope="col" class="text-black fw-bold">Action</th>
                                     @endif
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($datas as $data)
+                                @foreach ($datas as $index => $data)
                                     <tr>
-                                        <th scope="row">{{ $loop->iteration }}</th>
+                                        <th scope="row">{{ $index + $datas->firstItem() }}</th>
                                         <td>{{ $data->nik }}</td>
                                         <td>{{ $data->nama }}</td>
                                         <td>{{ $data->email }}</td>
@@ -55,16 +65,22 @@
                                         <td>{{ $data->golongan }}</td>
                                         <td>
                                             <button type="button" class="btn btn-primary text-decoration-none"
-                                                data-bs-toggle="modal" data-bs-target="#detail-user{{ $data->id }}">
+                                                data-bs-toggle="modal" data-bs-target="#detailUser{{ $data->id }}">
                                                 <span>Detail</span>
+                                                <i class="fa-solid fa-scroll"></i>
                                             </button>
-                                            {{-- <a href="{{ url('/data-user/detail-user/' . $data->id) }}" class="btn btn-primary" disabled>Detail</a> --}}
-                                            @if (Auth::user()->role == 'Super Admin')
-                                                <a href="{{ url('/data-user/edit-user/' . $data->id) }}"
-                                                    class="btn btn-warning" disabled>Edit</a>
+                                            @if (Auth::user()->role == 'SuperAdmin')
+                                                <a class="btn btn-warning text-decoration-none"
+                                                    href="{{ url('/data-user/edit-user/' . $data->id) }}">
+                                                    <span>Edit</span>
+                                                    <i class="fa-solid fa-file-pen"></i>
+                                                </a>
                                                 @if ($data->id != Auth::user()->id)
                                                     <a href="{{ url('/data-user/delete-user/' . $data->id) }}"
-                                                        class="btn btn-danger" disabled>Delete</a>
+                                                        class="btn btn-danger" disabled>
+                                                        <span>Delete</span>
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </a>
                                                 @endif
                                             @endif
                                         </td>
@@ -72,7 +88,7 @@
 
                                     {{-- Modal Start --}}
                                     {{-- Modal Details Start --}}
-                                    <div class="modal fade" id="detail-user{{ $data->id }}" tabindex="-1"
+                                    <div class="modal fade" id="detailUser{{ $data->id }}" tabindex="-1"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content bg-white text-black border-0">
@@ -136,182 +152,118 @@
                                                             class="form-modal d-flex flex-wrap justify-content-center align-items-center w-100">
                                                             <div
                                                                 class="form-left d-flex flex-column justify-content-start align-items-center">
+
                                                                 {{-- NIK --}}
                                                                 <div class="mb-3 w-75">
-                                                                    <label for="nik"
-                                                                        class="d-none">{{ __('NIK') }}</label>
-
-                                                                    <input id="nik" type="number"
-                                                                        class="form-input @error('nik') is-invalid @enderror"
-                                                                        name="nik" value="{{ old('nik') }}"
-                                                                        placeholder="NIK" required autocomplete="nik">
-
-                                                                    @error('nik')
-                                                                        <span class="invalid-feedback" role="alert">
-                                                                            <strong>{{ $message }}</strong>
-                                                                        </span>
-                                                                    @enderror
+                                                                    <input type="number" class="form-input"
+                                                                        name="nik" id="add-nik"
+                                                                        value="{{ old('nik') }}" placeholder="NIK"
+                                                                        autocomplete="off" required>
                                                                 </div>
 
                                                                 {{-- Nama --}}
                                                                 <div class="mb-3 w-75">
-                                                                    <label for="nama"
-                                                                        class="d-none">{{ __('Nama') }}</label>
-
-                                                                    <input id="nama" type="text"
-                                                                        class="form-input @error('nama') is-invalid @enderror"
-                                                                        name="nama" value="{{ old('nama') }}"
-                                                                        placeholder="Name">
-
-                                                                    @error('nama')
-                                                                        <span class="invalid-feedback" role="alert">
-                                                                            <strong>{{ $message }}</strong>
-                                                                        </span>
-                                                                    @enderror
+                                                                    <input type="text" class="form-input"
+                                                                        name="nama" id="add-nama"
+                                                                        value="{{ old('nama') }}" placeholder="Name"
+                                                                        autocomplete="off" required>
                                                                 </div>
 
                                                                 {{-- Email --}}
                                                                 <div class="mb-3 w-75">
-                                                                    <label for="email"
-                                                                        class="d-none">{{ __('Email Address') }}</label>
-
-                                                                    <input id="email" type="email"
-                                                                        class="form-input @error('email') is-invalid @enderror"
-                                                                        name="email" value="{{ old('email') }}"
-                                                                        required autocomplete="email" placeholder="Email">
-
-                                                                    @error('email')
-                                                                        <span class="invalid-feedback" role="alert">
-                                                                            <strong>{{ $message }}</strong>
-                                                                        </span>
-                                                                    @enderror
+                                                                    <input type="email" class="form-input"
+                                                                        name="email" id="add-email"
+                                                                        value="{{ old('email') }}" placeholder="Email"
+                                                                        autocomplete="email" required>
                                                                 </div>
 
                                                                 {{-- Tanggal Lahir --}}
                                                                 <div class="mb-3 w-75">
-                                                                    <label for="tanggal_lahir"
-                                                                        class="d-none">{{ __('Tanggal lahir') }}</label>
-
-                                                                    <input id="tanggal_lahir" type="date"
-                                                                        class="form-input text-black @error('tanggal_lahir') is-invalid @enderror"
-                                                                        name="tanggal_lahir"
+                                                                    <label for="add-tanggal-lahir"
+                                                                        class="text-black">{{ __('Born Date') }}</label>
+                                                                    <input type="date" class="form-input text-black"
+                                                                        name="tanggal_lahir" id="add-tanggal-lahir"
                                                                         value="{{ old('tanggal_lahir') }}"
-                                                                        placeholder="Born Date">
-
-                                                                    @error('tanggal_lahir')
-                                                                        <span class="invalid-feedback" role="alert">
-                                                                            <strong>{{ $message }}</strong>
-                                                                        </span>
-                                                                    @enderror
+                                                                        placeholder="Born Date" required>
                                                                 </div>
 
                                                                 {{-- Jenis Kelamin --}}
                                                                 <div class="mb-3 w-75">
-                                                                    <label for="jenis_kelamin"
-                                                                        class="text-black">{{ __('Jenis kelamin') }}</label>
-
+                                                                    <label for="add-jenis-kelamin"
+                                                                        class="text-black">{{ __('Select Gender') }}</label>
                                                                     <div class="d-flex flex-column">
                                                                         <div class="form-check m-2">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="jenis_kelamin" id="jenis_kelamin"
+                                                                            <input type="radio" class="form-check-input"
+                                                                                name="jenis_kelamin" id="add-male"
                                                                                 value="Laki-laki">
-                                                                            <label class="form-check-label"
-                                                                                for="flexRadioDefault1">
-                                                                                Laki-laki
+                                                                            <label for="add-male"
+                                                                                class="form-check-label">
+                                                                                Male
                                                                             </label>
                                                                         </div>
                                                                         <div class="form-check m-2">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="jenis_kelamin" id="jenis_kelamin"
+                                                                            <input type="radio" class="form-check-input"
+                                                                                name="jenis_kelamin" id="add-female"
                                                                                 value="Perempuan">
-                                                                            <label class="form-check-label"
-                                                                                for="flexRadioDefault1">
-                                                                                Perempuan
+                                                                            <label for="add-female"
+                                                                                class="form-check-label">
+                                                                                Female
                                                                             </label>
                                                                         </div>
-                                                                        @error('jenis_kelamin')
-                                                                            <span class="invalid-feedback" role="alert">
-                                                                                <strong>{{ $message }}</strong>
-                                                                            </span>
-                                                                        @enderror
                                                                     </div>
                                                                 </div>
 
                                                                 {{-- Nomor HP --}}
                                                                 <div class="mb-3 w-75">
-                                                                    <label for="nomor_hp"
-                                                                        class="d-none">{{ __('Nomor HP') }}</label>
-
-                                                                    <input id="nomor_hp" type="number"
-                                                                        class="form-input @error('nomor_hp') is-invalid @enderror"
-                                                                        name="nomor_hp" value="{{ old('nomor_hp') }}"
-                                                                        placeholder="Phone Number">
-
-                                                                    @error('nomor_hp')
-                                                                        <span class="invalid-feedback" role="alert">
-                                                                            <strong>{{ $message }}</strong>
-                                                                        </span>
-                                                                    @enderror
+                                                                    <input type="number" class="form-input"
+                                                                        name="nomor_hp" id="add-nomor-hp"
+                                                                        value="{{ old('nomor_hp') }}"
+                                                                        placeholder="Phone Number" autocomplete="off"
+                                                                        required>
                                                                 </div>
 
                                                                 {{-- Status Pernikahan --}}
                                                                 <div class="mb-3 w-75">
-                                                                    <label for="status_pernikahan"
-                                                                        class="text-black">{{ __('Status Pernikahan') }}</label>
-
+                                                                    <label for="status-pernikahan"
+                                                                        class="text-black">{{ __('Status') }}</label>
                                                                     <div class="d-flex flex-column">
                                                                         <div class="form-check m-2">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="status_pernikahan" id="Lajang"
+                                                                            <input type="radio" class="form-check-input"
+                                                                                name="status_pernikahan" id="add-lajang"
                                                                                 value="Lajang">
-                                                                            <label class="form-check-label"
-                                                                                for="flexRadioDefault1">
-                                                                                Lajang
+                                                                            <label for="add-lajang"
+                                                                                class="form-check-label">
+                                                                                Bachelor
                                                                             </label>
                                                                         </div>
                                                                         <div class="form-check m-2">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="status_pernikahan" id="Menikah"
+                                                                            <input type="radio" class="form-check-input"
+                                                                                name="status_pernikahan" id="add-menikah"
                                                                                 value="Menikah">
-                                                                            <label class="form-check-label"
-                                                                                for="flexRadioDefault1">
-                                                                                Menikah
+                                                                            <label for="add-menikah"
+                                                                                class="form-check-label">
+                                                                                Married
                                                                             </label>
                                                                         </div>
                                                                         <div class="form-check m-2">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="status_pernikahan" id="Cerai"
+                                                                            <input type="radio" class="form-check-input"
+                                                                                name="status_pernikahan" id="add-cerai"
                                                                                 value="Cerai">
-                                                                            <label class="form-check-label"
-                                                                                for="flexRadioDefault1">
-                                                                                Cerai
+                                                                            <label for="add-cerai"
+                                                                                class="form-check-label">
+                                                                                Divorce
                                                                             </label>
                                                                         </div>
-                                                                        @error('status_pernikahan')
-                                                                            <span class="invalid-feedback" role="alert">
-                                                                                <strong>{{ $message }}</strong>
-                                                                            </span>
-                                                                        @enderror
                                                                     </div>
                                                                 </div>
 
                                                                 {{-- Jumlah Anak --}}
                                                                 <div class="mb-3 w-75">
-                                                                    <label for="jumlah_anak"
-                                                                        class="d-none">{{ __('Jumlah Anak') }}</label>
-
-                                                                    <input id="jumlah_anak" type="number"
-                                                                        class="form-input @error('jumlah_anak') is-invalid @enderror"
-                                                                        name="jumlah_anak"
+                                                                    <input type="number" class="form-input"
+                                                                        name="jumlah_anak" id="add-jumlah-anak"
                                                                         value="{{ old('jumlah_anak') }}"
                                                                         disabled="disabled"
                                                                         placeholder="Number Of Children">
-
-                                                                    @error('jumlah_anak')
-                                                                        <span class="invalid-feedback" role="alert">
-                                                                            <strong>{{ $message }}</strong>
-                                                                        </span>
-                                                                    @enderror
                                                                 </div>
                                                             </div>
                                                             <div
@@ -319,15 +271,10 @@
 
                                                                 {{-- Department --}}
                                                                 <div class="mb-3 w-75">
-                                                                    <label for="department"
-                                                                        class="d-none">{{ __('Department') }}</label>
-
-                                                                    <select id="department" class="form-input"
-                                                                        aria-label="Default select example"
-                                                                        @error('department') is-invalid @enderror"
-                                                                        name="department"
+                                                                    <select class="form-input" name="department"
+                                                                        id="add-department"
                                                                         value="{{ old('department') }}">
-                                                                        <option>- Pilih Department -</option>
+                                                                        <option>- Select Department -</option>
                                                                         <option value="Human Resource">Human Resource
                                                                         </option>
                                                                         <option value="Sales Marketing">Sales Marketing
@@ -337,168 +284,86 @@
                                                                         </option>
                                                                         <option value="Production">Production</option>
                                                                     </select>
-
-                                                                    @error('department')
-                                                                        <span class="invalid-feedback" role="alert">
-                                                                            <strong>{{ $message }}</strong>
-                                                                        </span>
-                                                                    @enderror
                                                                 </div>
 
                                                                 {{-- Golongan --}}
                                                                 <div class="mb-3 w-75">
-                                                                    <label for="golongan"
-                                                                        class="d-none">{{ __('Golongan') }}</label>
-
-                                                                    <select id="golongan" class="form-input"
-                                                                        aria-label="Default select example"
-                                                                        @error('golongan') is-invalid @enderror"
-                                                                        name="golongan" value="{{ old('golongan') }}">
-                                                                        <option>- Pilih Golongan -</option>
+                                                                    <select class="form-input" name="golongan"
+                                                                        id="add-golongan" value="{{ old('golongan') }}">
+                                                                        <option>- Select Class -</option>
                                                                         <option value="Manager/Kadep">Manager/Kadep
                                                                         </option>
                                                                         <option value="Supervisor">Supervisor</option>
                                                                         <option value="Staff">Staff</option>
                                                                         <option value="Operator">Operator</option>
                                                                     </select>
-
-                                                                    @error('golongan')
-                                                                        <span class="invalid-feedback" role="alert">
-                                                                            <strong>{{ $message }}</strong>
-                                                                        </span>
-                                                                    @enderror
                                                                 </div>
 
                                                                 {{-- Provinsi --}}
                                                                 <div class="mb-3 w-75">
-                                                                    <label for="provinsi"
-                                                                        class="d-none">{{ __('Provinsi') }}</label>
-
-                                                                    <select id="provinsi" class="form-input"
-                                                                        aria-label="Default select example"
-                                                                        @error('province_id') is-invalid @enderror"
-                                                                        name="province_id"
-                                                                        value="{{ old('province_id') }}">
-                                                                        <option>- Pilih Provinsi -</option>
+                                                                    <select class="form-input" name="province_id"
+                                                                        id="provinsi" value="{{ old('province_id') }}">
+                                                                        <option>- Select Province -</option>
                                                                         @foreach ($provinces as $province)
                                                                             <option value="{{ $province->id }}">
                                                                                 {{ $province->name }}</option>
                                                                         @endforeach
                                                                     </select>
-
-                                                                    @error('province_id')
-                                                                        <span class="invalid-feedback" role="alert">
-                                                                            <strong>{{ $message }}</strong>
-                                                                        </span>
-                                                                    @enderror
                                                                 </div>
 
                                                                 {{-- Kota/Kabupaten --}}
                                                                 <div class="mb-3 w-75">
-                                                                    <label for="kabupaten"
-                                                                        class="d-none">{{ __('Kabupaten/Kota') }}</label>
-
-                                                                    <select id="kabupaten" class="form-input"
-                                                                        aria-label="Default select example"
-                                                                        @error('regency_id') is-invalid @enderror"
-                                                                        name="regency_id"
-                                                                        value="{{ old('regency_id') }}">
-                                                                        <option>- Pilih Kabupaten/Kota -</option>
+                                                                    <select class="form-input" name="regency_id"
+                                                                        id="kabupaten" value="{{ old('regency_id') }}">
+                                                                        <option>- Select Regency/City -</option>
                                                                     </select>
-
-                                                                    @error('regency_id')
-                                                                        <span class="invalid-feedback" role="alert">
-                                                                            <strong>{{ $message }}</strong>
-                                                                        </span>
-                                                                    @enderror
                                                                 </div>
 
                                                                 {{-- Kecamatan --}}
                                                                 <div class="mb-3 w-75">
-                                                                    <label for="kecamatan"
-                                                                        class="d-none">{{ __('Kecamatan') }}</label>
-
-                                                                    <select id="kecamatan" class="form-input"
-                                                                        aria-label="Default select example"
-                                                                        @error('district_id') is-invalid @enderror"
-                                                                        name="district_id"
-                                                                        value="{{ old('district_id') }}">
-                                                                        <option>- Pilih Kecamatan -</option>
+                                                                    <select class="form-input" name="district_id"
+                                                                        id="kecamatan" value="{{ old('district_id') }}">
+                                                                        <option>- Pilih District -</option>
                                                                     </select>
-
-                                                                    @error('district_id')
-                                                                        <span class="invalid-feedback" role="alert">
-                                                                            <strong>{{ $message }}</strong>
-                                                                        </span>
-                                                                    @enderror
                                                                 </div>
 
                                                                 {{-- Kelurahan --}}
                                                                 <div class="mb-3 w-75">
-                                                                    <label for="kelurahan"
-                                                                        class="d-none">{{ __('Kelurahan') }}</label>
-
-                                                                    <select id="kelurahan" class="form-input"
-                                                                        aria-label="Default select example"
-                                                                        @error('village_id') is-invalid @enderror"
-                                                                        name="village_id"
-                                                                        value="{{ old('village_id') }}">
-                                                                        <option>- Pilih Kelurahan -</option>
+                                                                    <select class="form-input" name="village_id"
+                                                                        id="kelurahan" value="{{ old('village_id') }}">
+                                                                        <option>- Select Village -</option>
                                                                     </select>
-
-                                                                    @error('village_id')
-                                                                        <span class="invalid-feedback" role="alert">
-                                                                            <strong>{{ $message }}</strong>
-                                                                        </span>
-                                                                    @enderror
                                                                 </div>
 
                                                                 {{-- Alamat --}}
                                                                 <div class="mb-3 w-75">
-                                                                    <label for="alamat"
-                                                                        class="d-none">{{ __('Detail alamat') }}</label>
-
-                                                                    <input id="alamat" type="text"
-                                                                        class="form-input @error('alamat') is-invalid @enderror"
-                                                                        name="alamat" value="{{ old('alamat') }}"
+                                                                    <input type="text" class="form-input"
+                                                                        name="alamat" id="add-alamat"
+                                                                        value="{{ old('alamat') }}"
                                                                         placeholder="Address">
-
-                                                                    @error('alamat')
-                                                                        <span class="invalid-feedback" role="alert">
-                                                                            <strong>{{ $message }}</strong>
-                                                                        </span>
-                                                                    @enderror
                                                                 </div>
-
 
                                                                 {{-- Password --}}
-                                                                <div class="mb-3 w-75">
-                                                                    <label for="password"
-                                                                        class="d-none">{{ __('Password') }}</label>
-
-                                                                    <input id="password" type="password"
-                                                                        class="form-input @error('password') is-invalid @enderror"
-                                                                        name="password" required
-                                                                        autocomplete="new-password"
-                                                                        placeholder="Password">
-
-                                                                    @error('password')
-                                                                        <span class="invalid-feedback" role="alert">
-                                                                            <strong>{{ $message }}</strong>
-                                                                        </span>
-                                                                    @enderror
+                                                                <div class="mb-3 w-75 position-relative">
+                                                                    <input type="password" class="form-input"
+                                                                        name="password" id="new-password"
+                                                                        placeholder="Password" autocomplete="new-password"
+                                                                        required>
+                                                                    <i class="fa-solid fa-eye password-icon-eye text-black"
+                                                                        id="new-password-icon-eye"></i>
+                                                                    <i class="fa-solid fa-eye-slash password-icon-eye-slash text-black"
+                                                                        id="new-password-icon-eye-slash"></i>
                                                                 </div>
-
-                                                                <div class="mb-3 w-75">
-                                                                    <label for="password-confirm"
-                                                                        class="d-none">{{ __('Confirm Password') }}</label>
-
-                                                                    <input id="password-confirm" type="password"
-                                                                        class="form-input" name="password_confirmation"
-                                                                        required autocomplete="new-password"
-                                                                        placeholder="Confirm Password">
+                                                                <div class="mb-3 w-75 position-relative">
+                                                                    <input type="password" class="form-input"
+                                                                        name="password_confirmation" id="confirm-password"
+                                                                        placeholder="Confirm Password"
+                                                                        autocomplete="new-password" required>
+                                                                    <i class="fa-solid fa-eye password-icon-eye text-black"
+                                                                        id="confirm-password-icon-eye"></i>
+                                                                    <i class="fa-solid fa-eye-slash password-icon-eye-slash text-black"
+                                                                        id="confirm-password-icon-eye-slash"></i>
                                                                 </div>
-
                                                                 <div class="w100 align-self-center">
                                                                     <button type="submit" class="btn btn-primary">
                                                                         {{ __('Register') }}
@@ -516,7 +381,12 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $datas->links() }}
+                        <div class="pagination-bottom-box">
+                            @isset($datas)
+                                {{ $datas->links('vendor.pagination.design') }}
+                            @endisset
+                            <span class="text-black">Pagination</span>
+                        </div>
                     </div>
                 </div>
             </div>

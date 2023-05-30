@@ -12,12 +12,14 @@ use App\Models\Village;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 use function PHPUnit\Framework\fileExists;
 
 class SuperAdminController extends Controller
 {
-    public function inputUser(){
+    public function inputUser()
+    {
         $provinces = Province::all();
 
         return view('super-admin.pegawai.input-user-pegawai', [
@@ -25,10 +27,9 @@ class SuperAdminController extends Controller
         ]);
     }
 
-    public function storeUser(Request $request){
+    public function storeUser(Request $request)
+    {
 
-        // dd($request);
-        
         $validate = $request->validate([
             'nik' => 'required|unique:users|min:10|max:10',
             'nama' => 'required',
@@ -41,50 +42,50 @@ class SuperAdminController extends Controller
             'golongan' => 'required',
             'province_id' => 'required',
             'regency_id' => 'required',
-            'district_id' =>'required',
+            'district_id' => 'required',
             'village_id' => 'required',
             'alamat' => 'required',
             'password' => 'required|min:8|confirmed'
         ]);
 
-        if($request->department == 'Human Resource'){
-            $validate['role'] = 'Admin';
-        }else{
-            $validate['role'] = 'Pegawai';
-        }
-        
         $validate['jumlah_cuti'] = 14;
         $validate['umur'] = Carbon::parse($request->tanggal_lahir)->age;
 
-        if($request->has('jumlah_anak')){
+        if ($request->has('jumlah_anak')) {
             $validate['jumlah_anak'] = $request->jumlah_anak;
-        }else{
+        } else {
             $validate['jumlah_anak'] = 0;
+        }
+
+        if ($request->department == 'Human Resource') {
+            $validate['role'] = 'Admin';
+        } else {
+            $validate['role'] = 'Pegawai';
         }
 
         $validate['password'] = Hash::make($request->password);
 
-        // $extension_foto = $request->file('foto')->extension();
-        // $nama_foto = $request->nama . '-' . now()->timestamp. '.' . $extension_foto;
-        // $validate['foto'] = $request->file('foto')->storeAs('Pegawai/foto', $nama_foto);
-        
         User::create($validate);
 
         $data = User::where('email', $validate['email'])->first();
         $data->sendEmailVerificationNotification();
 
-        return redirect()->back();
+        Session::flash('success');
+        Session::flash('message', 'Add new user success!');
+
+        return redirect('/data-user');
     }
 
-    public function deleteUser($id){
+    public function deleteUser($id)
+    {
         $data = User::find($id);
 
-        if(fileExists('storage/'. $data->foto)){
-            unlink('storage/'. $data->foto);
+        if (fileExists('storage/' . $data->foto)) {
+            unlink('storage/' . $data->foto);
         }
 
-        if(fileExists('storage/'. $data->digital_signature)){
-            unlink('storage/'. $data->digital_signature);
+        if (fileExists('storage/' . $data->digital_signature)) {
+            unlink('storage/' . $data->digital_signature);
         }
 
         $data->delete();
@@ -92,7 +93,8 @@ class SuperAdminController extends Controller
         return redirect()->back();
     }
 
-    public function editUser($id){
+    public function editUser($id)
+    {
         $data = User::find($id);
         $provinces = Province::all();
         $regency = Regency::find($data->regency_id);
@@ -108,7 +110,8 @@ class SuperAdminController extends Controller
         ]);
     }
 
-    public function updateUser($id, Request $request){
+    public function updateUser($id, Request $request)
+    {
         $data = User::find($id);
 
         // dd($data);
@@ -124,7 +127,7 @@ class SuperAdminController extends Controller
             'golongan' => 'required',
             'province_id' => 'required',
             'regency_id' => 'required',
-            'district_id' =>'required',
+            'district_id' => 'required',
             'village_id' => 'required',
             'alamat' => 'required',
         ]);
@@ -140,8 +143,9 @@ class SuperAdminController extends Controller
         return back();
     }
 
-    public function resign(){
-        $datas = Resign::filter(request(['status','search']))->paginate(10);
+    public function resign()
+    {
+        $datas = Resign::filter(request(['status', 'search']))->paginate(10);
 
         return view('super-admin.resign.daftar-resign', [
             'datas' => $datas

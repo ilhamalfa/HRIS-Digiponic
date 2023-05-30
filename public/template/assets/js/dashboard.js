@@ -1,3 +1,7 @@
+setTimeout(function(){
+  document.getElementById('session-alert').style.display = 'none';
+}, 3000);
+
 let newPasswordEye = document.getElementById('new-password-icon-eye')
 let newPasswordEyeSlash = document.getElementById('new-password-icon-eye-slash')
 let inputNewPassword = document.getElementById('new-password')

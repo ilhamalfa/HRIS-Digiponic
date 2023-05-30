@@ -6,12 +6,15 @@ use App\Mail\SendConfirmMail;
 use App\Models\Lamaran;
 use App\Models\Lowongan;
 use App\Models\Cuti;
+use App\Models\District;
 use App\Models\Pegawai;
 use App\Models\Pelamar;
 use App\Models\Perizinan;
 use App\Models\Province;
+use App\Models\Regency;
 use App\Models\Resign;
 use App\Models\User;
+use App\Models\Village;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Auth;
@@ -45,7 +48,7 @@ class AdminController extends Controller
 
         return view('super-admin.pegawai.daftar-data-user', [
             'datas' => $datas,
-            'provinces' => $provinces
+            'provinces' => $provinces,
         ]);
     }
 
