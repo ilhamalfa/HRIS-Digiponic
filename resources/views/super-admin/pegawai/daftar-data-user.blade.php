@@ -11,12 +11,6 @@
                         <h6 class="text-black fw-bold fs-3">User Data</h6>
                     </div>
                     <div class="card-body overflow-scroll">
-                        @if (Auth::user()->role == 'SuperAdmin')
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUser">
-                                <i class="fa-solid fa-file-circle-plus"></i>
-                                <span>Add User</span>
-                            </button>
-                        @endif
                         <form class="d-flex justify-content-center align-items-center" action="{{ url('/data-user') }}">
                             <div class="form-section pagination-top-box">
                                 @isset($datas)

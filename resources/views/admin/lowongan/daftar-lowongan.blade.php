@@ -15,6 +15,80 @@
                             <i class="fa-solid fa-file-circle-plus"></i>
                             <span>Add</span>
                         </button>
+
+                        {{-- Modal Vacancy Form Start --}}
+                        <div class="modal fade" id="addVacancy" tabindex="-1"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-centered">
+                                <div class="modal-content bg-white border-0">
+                                    <div class="modal-header">
+                                        <h1 class="text-black fw-bold fs-3" id="exampleModalLabel">Add Vacancy
+                                        </h1>
+                                        <button type="button" class="btn btn-outline-danger"
+                                            data-bs-dismiss="modal" aria-label="Close">
+                                            <i class="fa-solid fa-xmark m-auto"></i>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="forms-sample" method="POST"
+                                            action="{{ url('data-lowongan/store-lowongan') }}">
+                                            @csrf
+                                            <div class="form-group">
+                                                <label for="Position"><span class="text-black">Position</span></label>
+                                                <input id="Position" type="text"
+                                                    class="form-input @error('posisi') is-invalid @enderror form-input"
+                                                    name="posisi" value="{{ old('posisi') }}"
+                                                    placeholder="Input Position" required autocomplete="posisi">
+                                                @error('posisi')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="Deadline Date"><span class="text-black">Deadline Date</span></label>
+                                                <input id="Deadline Date" type="date"
+                                                    class="form-input @error('tanggal') is-invalid @enderror form-input"
+                                                    name="tanggal" value="{{ old('tanggal') }}"
+                                                    placeholder="Deadline Date" required
+                                                    autocomplete="tanggal">
+                                                @error('tanggal')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="Qualification"><span class="text-black">Qualification</span></label>
+                                                <input id="Qualification" type="hidden" name="kualifikasi">
+                                                <trix-editor input="Qualification"
+                                                    class=" @error('kualifikasi') is-invalid @enderror form-input"
+                                                    placeholder="Input Job Qualification" required
+                                                    autocomplete="new-kualifikasi"></trix-editor>
+                                                @error('kualifikasi')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="Description"><span class="text-black">Description</span></label>
+                                                <input id="Description" type="hidden" name="deskripsi">
+                                                <trix-editor input="Description"
+                                                    class=" @error('deskripsi') is-invalid @enderror form-input"
+                                                    placeholder="Input Job Description" required
+                                                    autocomplete="new-deskripsi"></trix-editor>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">
+                                                <span>Add</span>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {{-- Modal Vacancy Form End --}}
+
                         <form class="d-flex justify-content-center align-items-center" action="{{ url('/data-user') }}">
                             <div class="form-section pagination-top-box">
                                 @isset($datas)

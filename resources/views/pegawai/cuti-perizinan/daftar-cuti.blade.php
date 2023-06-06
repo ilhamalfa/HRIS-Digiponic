@@ -37,7 +37,7 @@
                                         <td>{{ $data->status }}</td>
                                         <td>
                                             @if ($data->status == 'Accepted')
-                                                @if (isset($data->user1->digital_signature))
+                                                @if (isset($data->user1->digital_signature) && isset($data->user2->digital_signature))
                                                     <a href="{{ url('pegawai/cetak-sk/cuti/' . $data->id) }}"
                                                         class="btn btn-primary">Cetak SK Cuti</a>
                                                 @else
