@@ -22,7 +22,6 @@
                                 @isset($datas)
                                     {{ $datas->links('vendor.pagination.design') }}
                                 @endisset
-                                <span class="text-black">Pagination</span>
                             </div>
                             <div class="form-section search-top-box">
                                 <input type="text" class="form-control search-input" id="search-input"
@@ -45,10 +44,10 @@
                                 <tr>
                                     <th scope="col" class="text-black fw-bold">#</th>
                                     <th scope="col" class="text-black fw-bold">NIK</th>
-                                    <th scope="col" class="text-black fw-bold">Nama</th>
+                                    <th scope="col" class="text-black fw-bold">Name</th>
                                     <th scope="col" class="text-black fw-bold">Email</th>
                                     <th scope="col" class="text-black fw-bold">Department</th>
-                                    <th scope="col" class="text-black fw-bold">Golongan</th>
+                                    <th scope="col" class="text-black fw-bold">Class</th>
                                     @if (Auth::user()->role != 'Admin')
                                         <th scope="col" class="text-black fw-bold">Action</th>
                                     @endif
@@ -157,7 +156,7 @@
                                                                 <div class="mb-3 w-75">
                                                                     <input type="number" class="form-input"
                                                                         name="nik" id="add-nik"
-                                                                        value="{{ old('nik') }}" placeholder="NIK"
+                                                                        value="{{ old('nik') }}" placeholder="NIK , Min: 16 Digits"
                                                                         autocomplete="off" required>
                                                                 </div>
 
@@ -385,7 +384,6 @@
                             @isset($datas)
                                 {{ $datas->links('vendor.pagination.design') }}
                             @endisset
-                            <span class="text-black">Pagination</span>
                         </div>
                     </div>
                 </div>

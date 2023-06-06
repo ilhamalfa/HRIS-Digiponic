@@ -11,12 +11,11 @@
                         <h6 class="text-black fw-bold fs-3">Employee Leave List</h6>
                     </div>
                     <div class="card-body overflow-scroll">
-                        <form class="d-flex justify-content-center align-items-center" action="{{ url('/data-user') }}">
+                        <form class="d-flex justify-content-center align-items-center" action="">
                             <div class="form-section pagination-top-box">
                                 @isset($datas)
                                     {{ $datas->links('vendor.pagination.design') }}
                                 @endisset
-                                <span class="text-black">Pagination</span>
                             </div>
                             <div class="form-section search-top-box">
                                 <input type="text" class="form-control search-input" id="search-input"
@@ -62,11 +61,11 @@
                             <thead>
                                 <tr>
                                     <th scope="col" class="text-black fw-bold">#</th>
-                                    <th scope="col" class="text-black fw-bold">Nama Pegawai</th>
-                                    <th scope="col" class="text-black fw-bold">Tanggal Cuti</th>
-                                    <th scope="col" class="text-black fw-bold">Tanggal Berakhir</th>
-                                    <th scope="col" class="text-black fw-bold">Jumlah Hari</th>
-                                    <th scope="col" class="text-black fw-bold">Status Cuti</th>
+                                    <th scope="col" class="text-black fw-bold">Employee Name</th>
+                                    <th scope="col" class="text-black fw-bold">Leave Date</th>
+                                    <th scope="col" class="text-black fw-bold">Leave Date Ends</th>
+                                    <th scope="col" class="text-black fw-bold">Total Days</th>
+                                    <th scope="col" class="text-black fw-bold">Status</th>
                                     <th scope="col" class="text-black fw-bold">Action</th>
                                 </tr>
                             </thead>
@@ -109,7 +108,6 @@
                             @isset($datas)
                                 {{ $datas->links('vendor.pagination.design') }}
                             @endisset
-                            <span class="text-black">Pagination</span>
                         </div>
                     </div>
                 </div>

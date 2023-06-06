@@ -46,20 +46,19 @@ Route::post('/career/apply/{id}', [PelamarController::class, 'applyLowongan']);
 
 // Super Admin
 Route::middleware(['auth', 'verified', 'user-access:SuperAdmin'])->group(function () {
-    // Data User
-    Route::get('/data-user/input-user', [SuperAdminController::class, 'inputUser']);
+    
+    Route::post('/data-user/store-user', [SuperAdminController::class, 'storeUser']);
 
     Route::get('/data-user/edit-user/{id}', [SuperAdminController::class, 'editUser']);
 
     Route::post('/data-user/edit-user/update/{id}', [SuperAdminController::class, 'updateUser']);
 
-    Route::post('/data-user/store-user', [SuperAdminController::class, 'storeUser']);
-
     Route::get('/data-user/delete-user/{id}', [SuperAdminController::class, 'deleteUser']);
 
     // Resign
     Route::get('/resign/daftar-resign', [SuperAdminController::class, 'resign']);
-    });    
+
+});    
 
 // Admin
 Route::middleware(['auth', 'verified', 'user-access:SuperAdmin,Admin'])->group(function () {

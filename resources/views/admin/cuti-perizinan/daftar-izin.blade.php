@@ -16,7 +16,6 @@
                                 @isset($datas)
                                     {{ $datas->links('vendor.pagination.design') }}
                                 @endisset
-                                <span class="text-black">Pagination</span>
                             </div>
                             <div class="form-section search-top-box">
                                 <input type="text" class="form-control search-input" id="search-input"
@@ -62,13 +61,13 @@
                             <thead>
                                 <tr>
                                     <th scope="col" class="text-black fw-bold">#</th>
-                                    <th scope="col" class="text-black fw-bold">Nama Pegawai</th>
-                                    <th scope="col" class="text-black fw-bold">Tanggal izin</th>
-                                    <th scope="col" class="text-black fw-bold">Tanggal Berakhir</th>
-                                    <th scope="col" class="text-black fw-bold">Jumlah Hari</th>
-                                    <th scope="col" class="text-black fw-bold">Alasan Izin</th>
-                                    <th scope="col" class="text-black fw-bold">Bukti Perizinan</th>
-                                    <th scope="col" class="text-black fw-bold">Status izin</th>
+                                    <th scope="col" class="text-black fw-bold">Employee Name Pegawai</th>
+                                    <th scope="col" class="text-black fw-bold">Permit Date</th>
+                                    <th scope="col" class="text-black fw-bold">Permit Date Ends</th>
+                                    <th scope="col" class="text-black fw-bold">Total Days</th>
+                                    <th scope="col" class="text-black fw-bold">Reason</th>
+                                    <th scope="col" class="text-black fw-bold">Proof of Licensing</th>
+                                    <th scope="col" class="text-black fw-bold">Status</th>
                                     <th scope="col" class="text-black fw-bold">Action</th>
                                 </tr>
                             </thead>

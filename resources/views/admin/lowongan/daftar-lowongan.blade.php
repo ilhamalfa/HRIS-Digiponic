@@ -11,7 +11,7 @@
                         <h6 class="text-black fw-bold fs-3">Vacancy List</h6>
                     </div>
                     <div class="card-body overflow-scroll">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addVacancy">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Vacancy">
                             <i class="fa-solid fa-file-circle-plus"></i>
                             <span>Add</span>
                         </button>
@@ -20,7 +20,6 @@
                                 @isset($datas)
                                     {{ $datas->links('vendor.pagination.design') }}
                                 @endisset
-                                <span class="text-black">Pagination</span>
                             </div>
                             <div class="form-section search-top-box">
                                 <input type="text" class="form-control search-input" id="search-input"
@@ -68,9 +67,9 @@
                         <table class="table mb-4 text-black">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="text-black fw-bold"> # </th>
-                                    <th scope="col" class="text-black fw-bold"> Position </th>
-                                    <th scope="col" class="text-black fw-bold"> Deadline Date </th>
+                                    <th scope="col" class="text-black fw-bold">#</th>
+                                    <th scope="col" class="text-black fw-bold">Position</th>
+                                    <th scope="col" class="text-black fw-bold">Deadline Date</th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
@@ -119,7 +118,7 @@
                                     </tr>
 
                                     {{-- Modal Vacancy Form Start --}}
-                                    <div class="modal fade" id="addVacancy" tabindex="-1"
+                                    <div class="modal fade" id="Vacancy" tabindex="-1"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-lg modal-dialog-centered">
                                             <div class="modal-content bg-white border-0">
@@ -136,11 +135,13 @@
                                                         action="{{ url('data-lowongan/store-lowongan') }}">
                                                         @csrf
                                                         <div class="form-group">
-                                                            <label for="Position"><span class="text-black">Position</span></label>
+                                                            <label for="Position"><span
+                                                                    class="text-black">Position</span></label>
                                                             <input id="Position" type="text"
                                                                 class="form-input @error('posisi') is-invalid @enderror form-input"
                                                                 name="posisi" value="{{ old('posisi') }}"
-                                                                placeholder="Input Position" required autocomplete="posisi">
+                                                                placeholder="Input Position" required
+                                                                autocomplete="posisi">
                                                             @error('posisi')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
@@ -148,7 +149,8 @@
                                                             @enderror
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="Deadline Date"><span class="text-black">Deadline Date</span></label>
+                                                            <label for="Deadline Date"><span class="text-black">Deadline
+                                                                    Date</span></label>
                                                             <input id="Deadline Date" type="date"
                                                                 class="form-input @error('tanggal') is-invalid @enderror form-input"
                                                                 name="tanggal" value="{{ old('tanggal') }}"
@@ -161,7 +163,8 @@
                                                             @enderror
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="Qualification"><span class="text-black">Qualification</span></label>
+                                                            <label for="Qualification"><span
+                                                                    class="text-black">Qualification</span></label>
                                                             <input id="Qualification" type="hidden" name="kualifikasi">
                                                             <trix-editor input="Qualification"
                                                                 class=" @error('kualifikasi') is-invalid @enderror form-input"
@@ -174,7 +177,8 @@
                                                             @enderror
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="Description"><span class="text-black">Description</span></label>
+                                                            <label for="Description"><span
+                                                                    class="text-black">Description</span></label>
                                                             <input id="Description" type="hidden" name="deskripsi">
                                                             <trix-editor input="Description"
                                                                 class=" @error('deskripsi') is-invalid @enderror form-input"
@@ -197,14 +201,16 @@
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content bg-white">
                                                 <div class="modal-header">
-                                                    <h1 class="modal-title fw-bold fs-3 text-black" id="exampleModalLabel">Details</h1>
+                                                    <h1 class="modal-title fw-bold fs-3 text-black"
+                                                        id="exampleModalLabel">Details</h1>
                                                     <button type="button" class="btn btn-outline-danger"
                                                         data-bs-dismiss="modal" aria-label="Close">
                                                         <i class="fa-solid fa-xmark m-auto"></i>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body text-black">
-                                                    <p class="fw-bold">Position : <span class="fw-normal">{{ $data->posisi }}</span></p>
+                                                    <p class="fw-bold">Position : <span
+                                                            class="fw-normal">{{ $data->posisi }}</span></p>
                                                     <p class="fw-bold">Qualification :</p>
                                                     <p class="mx-2 fw-normal">{!! $data->kualifikasi !!}</p>
                                                     <p class="fw-bold">Description :</p>
@@ -233,7 +239,6 @@
                             @isset($datas)
                                 {{ $datas->links('vendor.pagination.design') }}
                             @endisset
-                            <span class="text-black">Pagination</span>
                         </div>
                         <h6 class="my-4 ms-2 text-black">
                             <i class="fa-solid fa-circle-info text-info"></i>

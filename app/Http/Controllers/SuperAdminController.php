@@ -31,7 +31,7 @@ class SuperAdminController extends Controller
     {
 
         $validate = $request->validate([
-            'nik' => 'required|unique:users|min:10|max:10',
+            'nik' => 'required|unique:users|min:16|max:16',
             'nama' => 'required',
             'email' => 'required|unique:users|email',
             'tanggal_lahir' => 'required|before:17 years ago',
@@ -140,7 +140,10 @@ class SuperAdminController extends Controller
 
         $data->update($validate);
 
-        return back();
+        Session::flash('success');
+        Session::flash('message', 'Edit user success!');
+
+        return redirect('/data-user');
     }
 
     public function resign()

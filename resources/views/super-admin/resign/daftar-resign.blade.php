@@ -16,7 +16,6 @@
                             @isset($datas)
                                 {{ $datas->links('vendor.pagination.design') }}
                             @endisset
-                            <span class="text-black">Pagination</span>
                         </div>
                         <div class="form-section search-top-box">
                             <input type="text" class="form-control search-input" id="search-input"
@@ -63,9 +62,9 @@
                             <tr>
                                 <th scope="col" class="text-black fw-bold">#</th>
                                 <th scope="col" class="text-black fw-bold">NIK</th>
-                                <th scope="col" class="text-black fw-bold">Nama</th>
-                                <th scope="col" class="text-black fw-bold">Tanggal Resign</th>
-                                <th scope="col" class="text-black fw-bold">Status Resign</th>
+                                <th scope="col" class="text-black fw-bold">Employee Name</th>
+                                <th scope="col" class="text-black fw-bold">Resign Date</th>
+                                <th scope="col" class="text-black fw-bold">Status</th>
                                 <th scope="col" class="text-black fw-bold">Action</th>
                             </tr>
                         </thead>
@@ -99,7 +98,6 @@
                         @isset($datas)
                             {{ $datas->links('vendor.pagination.design') }}
                         @endisset
-                        <span class="text-black">Pagination</span>
                     </div>
                 </div>
             </div>

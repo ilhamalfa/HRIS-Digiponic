@@ -11,9 +11,20 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
-.bg-secondary-color-2 {
-    background-color: var(--secondary-color-2);
+/* Eye Password Peek Start */
+.password-icon-eye {
+    display: none;
+    position: absolute;
+    top: 40%;
+    right: 5%;
 }
+
+.password-icon-eye-slash {
+    position: absolute;
+    top: 40%;
+    right: 5%;
+}
+/* Eye Password Peek End */
 
 /* Pagination Top Start */
 .pagination-top-box {

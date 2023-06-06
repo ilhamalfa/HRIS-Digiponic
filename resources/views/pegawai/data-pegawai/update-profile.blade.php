@@ -6,26 +6,28 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12 mb-2">
-                <div class="card">
-                    <div class="card-header mt-3">
-                        {{ __('Change Profile Picture') }}<i class="fa-solid fa-image ms-2"></i>
+                <div class="card bg-white">
+                    <div class="card-header">
+                        <h6 class="text-black fw-bold fs-3">
+                            {{ __('Change Profile Picture') }}<i class="fa-solid fa-image ms-2"></i>
+                        </h6>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <h6>Image Preview</h6>
+                                <h6 class="text-black fw-bold fs-5">Image Preview</h6>
                                 @if (isset(Auth::user()->foto))
-                                <img class="img-preview d-block" src="{{ asset('storage/' . Auth::user()->foto) }}"
-                                alt="">
+                                    <img class="img-preview d-block" src="{{ asset('storage/' . Auth::user()->foto) }}"
+                                        alt="Profile Picture">
                                 @else
-                                <img class="img-preview d-block" src="{{ asset('storage/Pegawai/default/user.jpg') }}"
-                                alt="">
+                                    <img class="img-preview d-block" src="{{ asset('storage/Pegawai/default/profile-user-black.png') }}"
+                                        alt="Profile Picture" width="200">
                                 @endif
                             </div>
                             <div class="col">
-                                <h6 class="card-title">Update Your Photo</h6>
-                                <input type="file" name="image" class="image">
-                                <div class="note mt-3">
+                                <h6 class="card-title text-black">Update Your Photo</h6>
+                                <input type="file" name="image" class="image form-input">
+                                <div class="note mt-3 text-black">
                                     <p><i class="fa-solid fa-circle-info me-2 text-info"></i>Note :</p>
                                     <p class="d-flex">
                                         <span>1.</span>
@@ -77,7 +79,7 @@
                 </div>
             </div>
             <div class="col-12 grid-margin mb-2">
-                <div class="card">
+                <div class="card bg-white">
                     <div class="card-header mt-3">
                         {{ __('Change Your Password') }}<i class="fa-solid fa-lock ms-2"></i>
                     </div>
@@ -160,7 +162,7 @@
                 </div>
             </div>
             <div class="col-12 grid-margin">
-                <div class="card">
+                <div class="card bg-white">
                     <div class="card-header mt-3">
                         {{ __('Change Personal Data') }}<i class="fa-solid fa-user ms-2"></i>
                     </div>
@@ -175,8 +177,8 @@
                                         <label class="col-sm-3 col-form-label" for="name">Name</label>
                                         <div class="col-sm-9">
                                             <input id="name" type="text"
-                                                class="form-control text-white @error('nama') is-invalid @enderror" name="nama"
-                                                value="{{ $data->nama }}">
+                                                class="form-control text-white @error('nama') is-invalid @enderror"
+                                                name="nama" value="{{ $data->nama }}">
                                             @error('nama')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -361,8 +363,8 @@
                                         <label class="col-sm-3 col-form-label" for="alamat">Detail Address</label>
                                         <div class="col-sm-9">
                                             <input id="alamat" type="text"
-                                                class="form-control text-white @error('alamat') is-invalid @enderror" name="alamat"
-                                                value="{{ $data->alamat }}">
+                                                class="form-control text-white @error('alamat') is-invalid @enderror"
+                                                name="alamat" value="{{ $data->alamat }}">
                                             @error('alamat')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
