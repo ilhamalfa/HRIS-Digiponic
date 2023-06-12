@@ -28,9 +28,11 @@ class PegawaiController extends Controller
 {
     public function dataPegawai(){
         $datas = User::where('department', Auth::user()->department)->filter(request(['search']))->paginate(10);
+        $provinces = Province::all();
 
         return view('super-admin.pegawai.daftar-data-user', [
-            'datas' => $datas
+            'datas' => $datas,
+            'provinces' => $provinces,
         ]);
     }
 
@@ -41,8 +43,6 @@ class PegawaiController extends Controller
             $regency = Regency::find($data->regency_id);
             $district = District::find($data->district_id);
             $village = Village::find($data->village_id);
-    
-            // dd($districts);
     
             return view('pegawai.data-pegawai.update-profile', [
                 'data' => $data,
@@ -64,7 +64,13 @@ class PegawaiController extends Controller
 
             $validate['password'] = Hash::make($request->password);
 
-            $data->update($validate);
+            $alert = $data->update($validate);
+
+            if ($alert) {
+                return redirect()->back()->with('success', 'Password updated!');
+            } else {
+                return redirect()->back()->with('error', 'Password not updated!');
+            }            
         }else{
             $validate = $request->validate([
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -74,12 +80,16 @@ class PegawaiController extends Controller
             $validate['password'] = Hash::make($request->password);
             $validate['email_verified_at'] = NULL;
 
-            $data->update($validate);
+            $alert = $data->update($validate);
 
             $data->sendEmailVerificationNotification();
-        }
 
-        return redirect()->back();
+            if ($alert) {
+                return redirect()->back()->with('success', 'Check your email!');
+            } else {
+                return redirect()->back()->with('error', 'Password not updated!');
+            }    
+        }
     }
 
     public function editPegawai(){
@@ -103,7 +113,6 @@ class PegawaiController extends Controller
 
     public function updatePegawai(Request $request){
         $data = User::find(Auth::user()->id);
-        // dd($request);
 
         $validate = $request->validate([
             'nama' => 'required',
@@ -126,11 +135,12 @@ class PegawaiController extends Controller
             $validate['jumlah_anak'] = 0;
         }
 
-        // dd($validate);
-
-        $data->update($validate);
-
-        return redirect()->back();
+        $alert = $data->update($validate);
+        if($alert) {
+            return redirect()->back()->with('success', 'Data has been updated!');
+        } else {
+            return redirect()->back()->with('error', 'Data not updated!');
+        }
     }
 
     public function signature(){
@@ -165,6 +175,7 @@ class PegawaiController extends Controller
     // }
 
     public function updatePhoto(Request $request){
+        dd($request);
         $user = User::find(Auth::user()->id);
 
         $image_parts = explode(";base64,", $request->image);
@@ -281,9 +292,9 @@ class PegawaiController extends Controller
 
             Cuti::create($validate);
 
-            return redirect('pegawai/cuti')->with('success', 'Proses Cuti sedang diproses, Mohon tunggu konfirmasi');
+            return redirect()->back()->with('success', 'The leave process is being processed, please wait for confirmation!');
         }else{
-            return back()->with('failed', 'Proses Cuti Tidak Bisa Dilanjutkan, Jumlah cuti anda tidak mencukupi');
+            return back()->with('error', 'The leave process cannot be continued, your leave amount is insufficient');
         }
     }
 
@@ -303,7 +314,6 @@ class PegawaiController extends Controller
     }
 
     public function prosesIzin(Request $request){
-        // dd($request); 
         if(isset($request->check)){
             $validate = $request->validate([
                 'tanggal_mulai' => 'required|after: today',
@@ -330,7 +340,7 @@ class PegawaiController extends Controller
 
         Perizinan::create($validate);
 
-        return redirect('pegawai/izin')->with('success', 'Proses Izin sedang diproses, Mohon tunggu konfirmasi');
+        return redirect()->back()->with('success', 'Proses Izin sedang diproses, Mohon tunggu konfirmasi');
     }
 
     public function buktiIzin($id){
@@ -402,8 +412,8 @@ class PegawaiController extends Controller
     }
 
     public function prosesResign(Request $request){
-        // dd($request);
         $date = date('d-m-Y', strtotime('+30 days'));
+        // dd($date);
 
         $validate = $request->validate([
             'tanggal_resign' => 'required|after:' . $date
@@ -412,9 +422,14 @@ class PegawaiController extends Controller
         $validate['status_resign'] = 'Menunggu Persetujuan';
         $validate['user_id_1'] = Auth::user()->id;
 
-        Resign::create($validate);
+        $alert = Resign::create($validate);
 
-        return redirect('pegawai/resign');
+        if($alert) {
+            return redirect()->back()->with('success', 'Please wait for approval, Thank You....');
+        } else {
+            // return redirect()->back()->with('error', 'You have to work for at least one month, and you can fill out the resignation form!');
+            return redirect()->back()->with('error', 'Test');
+        }
     }
 
     // Kadep Daftar Izin

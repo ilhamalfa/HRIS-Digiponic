@@ -19,17 +19,28 @@
                             <thead>
                                 <tr>
                                     <th scope="col" class="text-black fw-bold">#</th>
-                                    <th scope="col" class="text-black fw-bold">Tanggal Resign</th>
-                                    <th scope="col" class="text-black fw-bold">Status Resign</th>
+                                    <th scope="col" class="text-black fw-bold">Resign Date</th>
+                                    <th scope="col" class="text-black fw-bold">Status</th>
                                     <th scope="col" class="text-black fw-bold">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="text-black">
                                 @foreach ($datas as $data)
                                     <tr>
                                         <th scope="row">{{ $loop->iteration }}</th>
-                                        <td>{{ $data->tanggal_resign }}</td>
-                                        <td>{{ $data->status_resign }}</td>
+                                        <td>{{ date('d-M-Y', strtotime($data->tanggal_resign)) }}</td>
+                                        <td>
+                                            @if ($data->status_resign == 'Accepted')
+                                                <span class="text-success">{{ $data->status_resign }}<i
+                                                        class="fa-solid fa-circle-check"></i></span>
+                                            @elseif($data->status_resign == 'Declined')
+                                                <span class="text-danger">{{ $data->status_resign }}<i
+                                                        class="fa-solid fa-circle-xmark"></i></span>
+                                            @else
+                                                <span class="text-info">{{ $data->status_resign }}<i
+                                                        class="fa-solid fa-circle-info"></i></span>
+                                            @endif
+                                        </td>
                                         <td>
                                             @if ($data->status_resign == 'Accepted')
                                                 @if (isset($data->user1->digital_signature))
@@ -53,7 +64,8 @@
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content bg-white border-0">
                                     <div class="modal-header">
-                                        <h1 class="modal-title text-black fs-3 fw-bold" id="exampleModalLabel">Form Resign</h1>
+                                        <h1 class="modal-title text-black fs-3 fw-bold" id="exampleModalLabel">Form Resign
+                                        </h1>
                                         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"
                                             aria-label="Close">
                                             <i class="fa-solid fa-xmark m-auto"></i>
@@ -63,7 +75,7 @@
                                         <form action="{{ url('pegawai/resign/ajukan-resign/proses') }}" method="POST">
                                             @csrf
                                             <div class="form-group">
-                                                <label for="mulai" class="text-black">Resign Date</label>
+                                                <label for="mulai" class="text-black fw-bold">Resign Date</label>
                                                 <input id="tanggal" type="date"
                                                     class="form-input @error('tanggal_resign') is-invalid @enderror"
                                                     name="tanggal_resign" value="{{ old('tanggal_resign') }}" required

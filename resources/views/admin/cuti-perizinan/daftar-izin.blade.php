@@ -11,7 +11,7 @@
                         <h6 class="text-black fw-bold fs-3">List Of Employee Permits</h6>
                     </div>
                     <div class="card-body overflow-scroll">
-                        <form class="d-flex justify-content-center align-items-center" action="{{ url('/data-user') }}">
+                        <form class="d-flex justify-content-center align-items-center" action="">
                             <div class="form-section pagination-top-box">
                                 @isset($datas)
                                     {{ $datas->links('vendor.pagination.design') }}
@@ -35,21 +35,21 @@
                                 <ul class="dropdown-menu text-end">
                                     <li>
                                         <a class="dropdown-item text-white"
-                                            href="{{ url('admin/daftar-cuti?status=Menunggu Persetujuan') }}">
+                                            href="{{ url('admin/izin?status=Menunggu Persetujuan') }}">
                                             <span>Waiting For Approval</span>
                                             <i class="fa-regular fa-clock"></i>
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item text-white"
-                                            href="{{ url('admin/daftar-cuti?status=Accepted') }}">
+                                            href="{{ url('admin/izin?status=Accepted') }}">
                                             <span>Accepted</span>
                                             <i class="fa-solid fa-check"></i>
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item text-white"
-                                            href="{{ url('admin/daftar-cuti?status=Declined') }}">
+                                            href="{{ url('admin/izin?status=Declined') }}">
                                             <span>Declined</span>
                                             <i class="fa-solid fa-x"></i>
                                         </a>
@@ -61,7 +61,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col" class="text-black fw-bold">#</th>
-                                    <th scope="col" class="text-black fw-bold">Employee Name Pegawai</th>
+                                    <th scope="col" class="text-black fw-bold">Employee Name</th>
                                     <th scope="col" class="text-black fw-bold">Permit Date</th>
                                     <th scope="col" class="text-black fw-bold">Permit Date Ends</th>
                                     <th scope="col" class="text-black fw-bold">Total Days</th>

@@ -16,19 +16,9 @@ use Illuminate\Support\Facades\Session;
 
 use function PHPUnit\Framework\fileExists;
 
-class SuperAdminController extends Controller
-{
-    public function inputUser()
-    {
-        $provinces = Province::all();
+class SuperAdminController extends Controller {
 
-        return view('super-admin.pegawai.input-user-pegawai', [
-            'provinces' => $provinces
-        ]);
-    }
-
-    public function storeUser(Request $request)
-    {
+    public function storeUser(Request $request) {
 
         $validate = $request->validate([
             'nik' => 'required|unique:users|min:16|max:16',
@@ -65,19 +55,19 @@ class SuperAdminController extends Controller
 
         $validate['password'] = Hash::make($request->password);
 
-        User::create($validate);
+        $alert = User::create($validate);
 
         $data = User::where('email', $validate['email'])->first();
         $data->sendEmailVerificationNotification();
 
-        Session::flash('success');
-        Session::flash('message', 'Add new user success!');
-
-        return redirect('/data-user');
+        if ($alert) {
+            return redirect()->back()->with('success', 'New user was added! & Check the email!');
+        } else {
+            return redirect()->back()->with('success', 'User not added');
+        }
     }
 
-    public function deleteUser($id)
-    {
+    public function deleteUser($id) {
         $data = User::find($id);
 
         if (fileExists('storage/' . $data->foto)) {
@@ -93,8 +83,7 @@ class SuperAdminController extends Controller
         return redirect()->back();
     }
 
-    public function editUser($id)
-    {
+    public function editUser($id) {
         $data = User::find($id);
         $provinces = Province::all();
         $regency = Regency::find($data->regency_id);
@@ -110,13 +99,9 @@ class SuperAdminController extends Controller
         ]);
     }
 
-    public function updateUser($id, Request $request)
-    {
+    public function updateUser($id, Request $request) {
         $data = User::find($id);
 
-        // dd($data);
-
-        // dd($request);
         $validate = $request->validate([
             'nama' => 'required',
             'tanggal_lahir' => 'required|before:17 years ago',
@@ -138,16 +123,17 @@ class SuperAdminController extends Controller
             $validate['jumlah_anak'] = $request->jumlah_anak;
         }
 
-        $data->update($validate);
+        $alert = $data->update($validate);
 
-        Session::flash('success');
-        Session::flash('message', 'Edit user success!');
-
-        return redirect('/data-user');
+        if ($alert) {
+            return redirect()->back()->with('success', 'Data has been updated!');
+        } else {
+            return redirect()->back()->with('error', 'Data not updated!');
+        }
+        
     }
 
-    public function resign()
-    {
+    public function resign() {
         $datas = Resign::filter(request(['status', 'search']))->paginate(10);
 
         return view('super-admin.resign.daftar-resign', [

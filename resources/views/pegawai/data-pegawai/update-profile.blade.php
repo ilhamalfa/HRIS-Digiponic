@@ -4,13 +4,11 @@
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center align-items-center">
             <div class="col-md-12 mb-2">
                 <div class="card bg-white">
                     <div class="card-header">
-                        <h6 class="text-black fw-bold fs-3">
-                            {{ __('Change Profile Picture') }}<i class="fa-solid fa-image ms-2"></i>
-                        </h6>
+                        <h6 class="text-black fw-bold fs-3">Change Profile Picture</h6>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -20,12 +18,13 @@
                                     <img class="img-preview d-block" src="{{ asset('storage/' . Auth::user()->foto) }}"
                                         alt="Profile Picture">
                                 @else
-                                    <img class="img-preview d-block" src="{{ asset('storage/Pegawai/default/profile-user-black.png') }}"
+                                    <img class="img-preview d-block"
+                                        src="{{ asset('storage/Pegawai/default/profile-user-black.png') }}"
                                         alt="Profile Picture" width="200">
                                 @endif
                             </div>
                             <div class="col">
-                                <h6 class="card-title text-black">Update Your Photo</h6>
+                                <h6 class="card-title text-black fw-bold">Update Your Photo</h6>
                                 <input type="file" name="image" class="image form-input">
                                 <div class="note mt-3 text-black">
                                     <p><i class="fa-solid fa-circle-info me-2 text-info"></i>Note :</p>
@@ -47,16 +46,17 @@
                     </div>
                     <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
                         aria-hidden="true">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="modalLabel">Crop Your Image</h5>
+                        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                            <div class="modal-content bg-white border-0">
+                                <div class="modal-header border-0">
+                                    <h1 class="text-black fw-bold fs-3" id="exampleModalLabel">Crop Your Image
+                                    </h1>
                                     <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"
                                         aria-label="Close">
                                         <i class="fa-solid fa-xmark m-auto"></i>
                                     </button>
                                 </div>
-                                <div class="modal-body">
+                                <div class="modal-body border-0">
                                     <div class="img-container">
                                         <div class="row">
                                             <div class="col-md-8">
@@ -69,8 +69,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <div class="modal-footer border-0">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
                                     <button type="button" class="btn btn-primary" id="crop">Crop</button>
                                 </div>
                             </div>
@@ -80,8 +80,8 @@
             </div>
             <div class="col-12 grid-margin mb-2">
                 <div class="card bg-white">
-                    <div class="card-header mt-3">
-                        {{ __('Change Your Password') }}<i class="fa-solid fa-lock ms-2"></i>
+                    <div class="card-header">
+                        <h6 class="text-black fw-bold fs-3">Change Password</h6>
                     </div>
                     <div class="card-body">
                         <form class="form-sample" action="{{ url('/Account/account-setting/update') }}" method="POST">
@@ -93,7 +93,7 @@
                                             <label class="col-sm-3 col-form-label" for="email">Your Email</label>
                                             <div class="col-sm-9">
                                                 <input type="text"
-                                                    class="form-control text-white @error('email') is-invalid @enderror"
+                                                    class="form-input @error('email') is-invalid @enderror"
                                                     name="email" value="{{ Auth::user()->email }}" required
                                                     autocomplete="email" id="email" />
                                                 @error('email')
@@ -104,27 +104,27 @@
                                             </div>
                                         </div>
                                         <div class="mb-3">
-                                            <label class="col-sm-3 col-form-label" for="new-password">New Password</label>
+                                            <label class="col-sm-3 col-form-label text-black fw-bold" for="new-password">New Password</label>
                                             <div class="col-sm-9 position-relative">
                                                 <input type="password"
-                                                    class="form-control text-light @error('password') is-invalid @enderror"
+                                                    class="form-input @error('password') is-invalid @enderror"
                                                     name="password" required autocomplete="new-password"
                                                     id="new-password" />
-                                                <i class="fa-solid fa-eye password-icon-eye" id="new-password-icon-eye"></i>
-                                                <i class="fa-solid fa-eye-slash password-icon-eye-slash"
+                                                <i class="fa-solid fa-eye password-icon-eye text-black" id="new-password-icon-eye"></i>
+                                                <i class="fa-solid fa-eye-slash password-icon-eye-slash text-black"
                                                     id="new-password-icon-eye-slash"></i>
                                             </div>
                                         </div>
                                         <div class="mb-3">
-                                            <label class="col-sm-3 col-form-label" for="confirm-password">Confirm
+                                            <label class="col-sm-3 col-form-label text-black fw-bold" for="confirm-password">Confirm
                                                 Password</label>
                                             <div class="col-sm-9 position-relative">
-                                                <input type="password" class="form-control text-light"
+                                                <input type="password" class="form-input"
                                                     name="password_confirmation" required autocomplete="new-password"
                                                     id="confirm-password" />
-                                                <i class="fa-solid fa-eye password-icon-eye"
+                                                <i class="fa-solid fa-eye password-icon-eye text-black"
                                                     id="confirm-password-icon-eye"></i>
-                                                <i class="fa-solid fa-eye-slash password-icon-eye-slash"
+                                                <i class="fa-solid fa-eye-slash password-icon-eye-slash text-black"
                                                     id="confirm-password-icon-eye-slash"></i>
                                             </div>
                                         </div>
@@ -135,7 +135,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <div class="note mt-3">
+                                        <div class="note mt-3 text-black">
                                             <p><i class="fa-solid fa-circle-info me-2 text-info"></i>Note :</p>
                                             <p class="d-flex">
                                                 <span>1.</span>
@@ -163,21 +163,21 @@
             </div>
             <div class="col-12 grid-margin">
                 <div class="card bg-white">
-                    <div class="card-header mt-3">
-                        {{ __('Change Personal Data') }}<i class="fa-solid fa-user ms-2"></i>
+                    <div class="card-header">
+                        <h6 class="text-black fw-bold fs-3">Change Personal Data</h6>
                     </div>
                     <div class="card-body">
                         <form class="form-sample" method="POST" action="{{ url('/profile/edit-data-pegawai/update') }}"
                             enctype="multipart/form-data">
                             @csrf
-                            <p class="card-description"> Personal info </p>
+                            <p class="card-description text-black fw-bold"> Personal info </p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label" for="name">Name</label>
+                                        <label class="col-sm-3 col-form-label text-black fw-bold" for="name">Name</label>
                                         <div class="col-sm-9">
                                             <input id="name" type="text"
-                                                class="form-control text-white @error('nama') is-invalid @enderror"
+                                                class="form-input @error('nama') is-invalid @enderror"
                                                 name="nama" value="{{ $data->nama }}">
                                             @error('nama')
                                                 <span class="invalid-feedback" role="alert">
@@ -189,10 +189,10 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label" for="born_date">Date Of Birth</label>
+                                        <label class="col-sm-3 col-form-label text-black fw-bold" for="born_date">Date Of Birth</label>
                                         <div class="col-sm-9">
                                             <input id="born_date" type="date"
-                                                class="form-control text-white @error('tanggal_lahir') is-invalid @enderror"
+                                                class="form-input @error('tanggal_lahir') is-invalid @enderror"
                                                 name="tanggal_lahir" value="{{ $data->tanggal_lahir }}">
                                             @error('tanggal_lahir')
                                                 <span class="invalid-feedback" role="alert">
@@ -206,7 +206,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label">Gender</label>
+                                        <label class="col-sm-3 col-form-label text-black fw-bold">Gender</label>
                                         <div class="col-sm-9 d-flex">
                                             <div class="form-check me-3">
                                                 <input class="form-check-input" type="radio" name="jenis_kelamin"
@@ -232,7 +232,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label" for="status">Status</label>
+                                        <label class="col-sm-3 col-form-label text-black fw-bold" for="status">Status</label>
                                         <div class="col-sm-9 d-flex">
                                             <div class="form-check me-3">
                                                 <input class="form-check-input" type="radio" name="status_pernikahan"
@@ -267,10 +267,10 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label" for="phone_number">Phone Number</label>
+                                        <label class="col-sm-3 col-form-label text-black fw-bold" for="phone_number">Phone Number</label>
                                         <div class="col-sm-9">
                                             <input id="phone_number" type="number"
-                                                class="form-control text-white @error('nomor_hp') is-invalid @enderror"
+                                                class="form-input @error('nomor_hp') is-invalid @enderror"
                                                 name="nomor_hp" value="{{ $data->nomor_hp }}">
                                             @error('nomor_hp')
                                                 <span class="invalid-feedback" role="alert">
@@ -282,10 +282,10 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label">Number Of Children</label>
+                                        <label class="col-sm-3 col-form-label text-black fw-bold">Number Of Children</label>
                                         <div class="col-sm-9">
                                             <input id="jumlah_anak" type="number"
-                                                class="form-control text-success @error('jumlah_anak') is-invalid @enderror"
+                                                class="form-input @error('jumlah_anak') is-invalid @enderror"
                                                 name="jumlah_anak" value="{{ $data->jumlah_anak }}" disabled="disabled">
                                             @error('jumlah_anak')
                                                 <span class="invalid-feedback" role="alert">
@@ -296,11 +296,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <p class="card-description"> Address </p>
+                            <p class="card-description text-black fw-bold"> Address </p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label" for="provinsi">Province</label>
+                                        <label class="col-sm-3 col-form-label text-black fw-bold" for="provinsi">Province</label>
                                         <div class="col-sm-9">
                                             <select id="provinsi" class="form-select"
                                                 aria-label="Default select example"
@@ -322,7 +322,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label" for="kelurahan">Village</label>
+                                        <label class="col-sm-3 col-form-label text-black fw-bold" for="kelurahan">Village</label>
                                         <div class="col-sm-9">
                                             <select id="kelurahan" class="form-select"
                                                 aria-label="Default select example"
@@ -342,7 +342,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label" for="kabupaten">Regency</label>
+                                        <label class="col-sm-3 col-form-label text-black fw-bold" for="kabupaten">Regency</label>
                                         <div class="col-sm-9">
                                             <select id="kabupaten" class="form-select"
                                                 aria-label="Default select example"
@@ -360,10 +360,10 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label" for="alamat">Detail Address</label>
+                                        <label class="col-sm-3 col-form-label text-black fw-bold" for="alamat">Detail Address</label>
                                         <div class="col-sm-9">
                                             <input id="alamat" type="text"
-                                                class="form-control text-white @error('alamat') is-invalid @enderror"
+                                                class="form-input @error('alamat') is-invalid @enderror"
                                                 name="alamat" value="{{ $data->alamat }}">
                                             @error('alamat')
                                                 <span class="invalid-feedback" role="alert">
@@ -377,7 +377,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label" for="kecamatan">Subdistrict</label>
+                                        <label class="col-sm-3 col-form-label text-black fw-bold" for="kecamatan">Subdistrict</label>
                                         <div class="col-sm-9">
                                             <select id="kecamatan" class="form-select"
                                                 aria-label="Default select example"
@@ -403,75 +403,4 @@
             </div>
         </div>
     </div>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
-    <script>
-        var $modal = $('#modal');
-        var image = document.getElementById('image');
-        var cropper;
-
-        $("body").on("change", ".image", function(e) {
-            var files = e.target.files;
-            var done = function(url) {
-                image.src = url;
-                $modal.modal('show');
-            };
-            var reader;
-            var file;
-            var url;
-            if (files && files.length > 0) {
-                file = files[0];
-                if (URL) {
-                    done(URL.createObjectURL(file));
-                } else if (FileReader) {
-                    reader = new FileReader();
-                    reader.onload = function(e) {
-                        done(reader.result);
-                    };
-                    reader.readAsDataURL(file);
-                }
-            }
-        });
-        $modal.on('shown.bs.modal', function() {
-            cropper = new Cropper(image, {
-                aspectRatio: 1,
-                viewMode: 3,
-                preview: '.preview'
-            });
-        }).on('hidden.bs.modal', function() {
-            cropper.destroy();
-            cropper = null;
-        });
-        $("#crop").click(function() {
-            canvas = cropper.getCroppedCanvas({
-                width: 160,
-                height: 160,
-            });
-            canvas.toBlob(function(blob) {
-                url = URL.createObjectURL(blob);
-                var reader = new FileReader();
-                reader.readAsDataURL(blob);
-                reader.onloadend = function() {
-                    var base64data = reader.result;
-
-                    $.ajax({
-                        type: "POST",
-                        dataType: "json",
-                        url: "/profile/photo-profile/update",
-                        data: {
-                            '_token': $('meta[name="_token"]').attr('content'),
-                            'image': base64data
-                        },
-                        success: function(data) {
-                            console.log(data);
-                            $modal.modal('hide');
-                            alert("Crop image successfully uploaded");
-                            location.reload();
-                        }
-                    });
-                }
-            });
-        })
-    </script>
 @endsection

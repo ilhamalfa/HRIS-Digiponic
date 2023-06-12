@@ -19,12 +19,12 @@
                             <thead>
                                 <tr>
                                     <th scope="col" class="text-black fw-bold">#</th>
-                                    <th scope="col" class="text-black fw-bold">Tanggal izin</th>
-                                    <th scope="col" class="text-black fw-bold">Tanggal Berakhir</th>
-                                    <th scope="col" class="text-black fw-bold">Jumlah Hari</th>
-                                    <th scope="col" class="text-black fw-bold">Alasan Izin</th>
-                                    <th scope="col" class="text-black fw-bold">Bukti Perizinan</th>
-                                    <th scope="col" class="text-black fw-bold">Status izin</th>
+                                    <th scope="col" class="text-black fw-bold">Permission Date</th>
+                                    <th scope="col" class="text-black fw-bold">End Date</th>
+                                    <th scope="col" class="text-black fw-bold">Total Days</th>
+                                    <th scope="col" class="text-black fw-bold">Reason</th>
+                                    <th scope="col" class="text-black fw-bold">License Proof</th>
+                                    <th scope="col" class="text-black fw-bold">Status</th>
                                     <th scope="col" class="text-black fw-bold">Action</th>
                                 </tr>
                             </thead>
@@ -61,9 +61,9 @@
                         <div class="modal fade" id="addPermission" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content bg-white">
+                                <div class="modal-content bg-white border-0">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-3 fw-bold text-black" id="exampleModalLabel">Form Perizinan</h1>
+                                        <h1 class="modal-title fs-3 fw-bold text-black" id="exampleModalLabel">Permission Form</h1>
                                         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"
                                             aria-label="Close">
                                             <i class="fa-solid fa-xmark m-auto"></i>
@@ -106,7 +106,7 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label for="alasan" class="text-black">Alasan</label>
+                                                <label for="alasan" class="text-black">Reason</label>
                                                 <input id="alasan" type="text"
                                                     class="form-input @error('alasan') is-invalid @enderror"
                                                     name="alasan" required autocomplete="alasan"
@@ -118,7 +118,7 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label for="bukti" class="text-black">Bukti Perizinan</label>
+                                                <label for="bukti" class="text-black">Proof of Licensing (PDF Only)</label>
                                                 <input id="bukti" type="file"
                                                     class="form-input @error('bukti') is-invalid @enderror"
                                                     name="bukti" required autocomplete="bukti">

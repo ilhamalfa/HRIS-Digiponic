@@ -1,5 +1,9 @@
 setTimeout(function(){
-  document.getElementById('session-alert').style.display = 'none';
+  document.getElementById('alert-success').style.display = 'none';
+}, 3000);
+
+setTimeout(function(){
+  document.getElementById('alert-error').style.display = 'none';
 }, 3000);
 
 let newPasswordEye = document.getElementById('new-password-icon-eye')

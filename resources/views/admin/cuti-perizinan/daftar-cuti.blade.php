@@ -7,11 +7,11 @@
         <div class="row justify-content-center align-items-center">
             <div class="col-md-12">
                 <div class="card bg-white">
-                    <div class="card-header">
+                    <div class="card-header">   
                         <h6 class="text-black fw-bold fs-3">Employee Leave List</h6>
                     </div>
                     <div class="card-body overflow-scroll">
-                        <form class="d-flex justify-content-center align-items-center" action="">
+                        <form class="d-flex justify-content-center align-items-center" action="{{ url('/admin/daftar-cuti') }}">
                             <div class="form-section pagination-top-box">
                                 @isset($datas)
                                     {{ $datas->links('vendor.pagination.design') }}

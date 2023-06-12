@@ -24,8 +24,7 @@ use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
-    public function dataPegawai(){
-        // $datas = User::has('pegawai')->where('role', '!=', 'Pelamar')->paginate(10);
+    public function dataPegawai() {
         $datas = User::has('pegawai')->where('role', '!=', 'Pelamar')->filter(request(['search']))->paginate(10);
 
         return view('super-admin.pegawai.daftar-data-pegawai', [
@@ -33,16 +32,15 @@ class AdminController extends Controller
         ]);
     }
 
-    public function detailPegawai($id){
+    public function detailPegawai($id) {
         $data = User::find($id);
 
-        // dd($data);
         return view('super-admin.pegawai.detail-pegawai', [
             'data' => $data
         ]);
     }
 
-    public function dataUser(){
+    public function dataUser() {
         $datas = User::filter(request(['search']))->paginate(10);
         $provinces = Province::all();
 
@@ -52,18 +50,15 @@ class AdminController extends Controller
         ]);
     }
 
-    // Cuti
-    public function daftarCuti(){
+    public function daftarCuti() {
         $datas = Cuti::filter(request(['status','search']))->paginate(10);
-
-        // dd($datas);
-
+        
         return view('admin.cuti-perizinan.daftar-cuti', [
             'datas' => $datas,
         ]);
     }
 
-    public function konfirmasiCuti($id, $konfirmasi){
+    public function konfirmasiCuti($id, $konfirmasi) {
         $data = Cuti::find($id);
         $user = User::find($data->user_id_1);
         $jml_cuti = date_diff(date_create($data->tanggal_mulai), date_create($data->tanggal_berakhir))->days + 1;
@@ -87,24 +82,21 @@ class AdminController extends Controller
         return back()->with('success', 'Status Cuti Berhasil Dikonfirmasi!');
     }
 
-    // Perizinan
-    public function daftarIzin(){
+    public function daftarIzin() {
         $datas = Perizinan::filter(request(['status','search']))->paginate(10);
-
-        // dd($datas);
 
         return view('admin.cuti-perizinan.daftar-izin', [
             'datas' => $datas,
         ]);
     }
 
-    public function buktiIzin($id){
+    public function buktiIzin($id) {
         $data = Perizinan::find($id);
         
         return Storage::response($data->bukti_perizinan);
     }
 
-    public function konfirmasiIzin($id, $konfirmasi){
+    public function konfirmasiIzin($id, $konfirmasi) {
         $data = Perizinan::find($id);
 
         if($konfirmasi == 'Accept'){
@@ -122,8 +114,7 @@ class AdminController extends Controller
         return back()->with('success', 'Status Perizinan Berhasil Dikonfirmasi!');
     }
 
-    // Resign
-    public function konfirmasiResign($id, $konfirmasi){
+    public function konfirmasiResign($id, $konfirmasi) {
         $data = Resign::find($id);
 
         if($konfirmasi == 'Accept'){
@@ -147,8 +138,7 @@ class AdminController extends Controller
         return back()->with('success', 'Status Perizinan Berhasil Dikonfirmasi!');
     }
 
-    // Lowongan
-    public function daftarLowongan(){
+    public function daftarLowongan() {
         $datas = Lowongan::latest()->filter(request(['search']))->paginate(10);
         
         return view('admin.lowongan.daftar-lowongan', [
@@ -156,33 +146,29 @@ class AdminController extends Controller
         ]);
     }
 
-    public function tambahLowongan(){
+    public function tambahLowongan() {
         return view('admin.lowongan.input-lowongan');
     }
 
-    public function hapusLowongan($id){
+    public function hapusLowongan($id) {
         $data = Lowongan::findOrFail($id);
         $data->delete();
         return redirect()->back();
     }
 
-    public function detailLowongan($id){
+    public function detailLowongan($id) {
         $data = Lowongan::find($id);
         $datas = Pelamar::where('lowongan_id', $id)->latest()->filter(request(['search', 'status']))->paginate(10);;
 
-        // dd($datas);
-        
         return view('admin.lowongan.daftar-pelamar', [
             'data' => $data,
             'datas' => $datas
         ]);
     }
 
-    public function detailPelamar($id){
+    public function detailPelamar($id) {
         $data = Lamaran::find($id);
 
-        // dd($data);
-        
         return view('admin.lowongan.detail-pelamar', [
             'data' => $data,
         ]);
@@ -196,8 +182,7 @@ class AdminController extends Controller
         return Storage::response($cv);
     }
 
-    public function storeLowongan(Request $request){
-        // dd($request);
+    public function storeLowongan(Request $request) {
         $validate = $request->validate([
             'posisi' => 'required',
             'tanggal' => 'required|after:yesterday',
@@ -205,16 +190,17 @@ class AdminController extends Controller
             'deskripsi' => 'required'
         ]);
 
-        // dd($validate);
-        Lowongan::create($validate);
+        $alert = Lowongan::create($validate);
 
-        return redirect('data-lowongan');
+        if ($alert) {
+            return redirect('data-lowongan')->with('success', 'New vacancy was added!');
+        } else {
+            return redirect('data-lowongan')->with('error', 'Vacancy not added!');
+        }
     }
 
-    public function ubahStatus($id, $status){
-        // dd([$id, $status]);
+    public function ubahStatus($id, $status) {
         $data = Pelamar::find($id);
-        // dd($data->lowongan->posisi);
 
         if($status == 'Wawancara'){
             $status = 'Wawancara';
@@ -253,7 +239,7 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-    public function terima($id, Request $request){
+    public function terima($id, Request $request) {
         $data = Lamaran::find($id);
         $user = User::find($data->user_id_1);
 
@@ -263,11 +249,7 @@ class AdminController extends Controller
             'golongan' => 'required'
         ]);
 
-        // $s = $data->user->pelamar->foto;
-        
         $foto = substr($data->user->pelamar->foto, strpos($data->user->pelamar->foto, "/") + 1);   
-
-        // dd($foto);
 
         Storage::copy($data->user->pelamar->foto, 'Pegawai/' . $foto);
 

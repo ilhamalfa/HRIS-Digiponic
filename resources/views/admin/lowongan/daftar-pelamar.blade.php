@@ -12,7 +12,7 @@
                 <h6 class="text-black fw-bold fs-3">{{ __('Candidate List, ' . $data->posisi) }}</h6>
             </div>
             <div class="card-body overflow-scroll">
-                <form class="d-flex justify-content-center align-items-center" action="{{ url('/data-user') }}">
+                <form class="d-flex justify-content-center align-items-center" action="">
                     <div class="form-section pagination-top-box">
                         @isset($datas)
                             {{ $datas->links('vendor.pagination.design') }}
@@ -35,42 +35,42 @@
                         </button>
                         <ul class="dropdown-menu text-start">
                             <li>
-                                <a class="dropdown-item"
+                                <a class="dropdown-item text-white"
                                     href="{{ url('data-lowongan/daftar-pelamar/' . $data->id . '?status=Menunggu') }}">
                                     <span>Waiting</span>
                                     <i class="fa-regular fa-clock"></i>
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item"
+                                <a class="dropdown-item text-white"
                                     href="{{ url('data-lowongan/daftar-pelamar/' . $data->id . '?status=Wawancara') }}"">
                                     <span>Interview</span>
                                     <i class="fa-solid fa-comments"></i>
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item"
+                                <a class="dropdown-item text-white"
                                     href="{{ url('data-lowongan/daftar-pelamar/' . $data->id . '?status=Psikotest') }}"">
                                     <span>Psychotest</span>
                                     <i class="fa-solid fa-clipboard"></i>
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item"
+                                <a class="dropdown-item text-white"
                                     href="{{ url('data-lowongan/daftar-pelamar/' . $data->id . '?status=Offering') }}"">
                                     <span>Offering</span>
                                     <i class="fa-solid fa-handshake"></i>
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item"
+                                <a class="dropdown-item text-white"
                                     href="{{ url('data-lowongan/daftar-pelamar/' . $data->id . '?status=Diterima') }}"">
                                     <span>Accepted</span>
                                     <i class="fa-solid fa-user-tie"></i>
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item"
+                                <a class="dropdown-item text-white"
                                     href="{{ url('data-lowongan/daftar-pelamar/' . $data->id . '?status=Ditolak') }}"">
                                     <span>Rejected</span>
                                     <i class="fa-solid fa-user-xmark"></i>
@@ -79,7 +79,7 @@
                         </ul>
                     </div>
                 </form>
-                <table class="table text-center text-white">
+                <table class="table text-center">
                     <thead>
                         <tr>
                             <th scope="col" class="text-black fw-bold">#</th>

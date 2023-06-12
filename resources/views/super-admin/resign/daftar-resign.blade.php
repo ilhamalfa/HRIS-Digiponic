@@ -11,7 +11,7 @@
                     <h6 class="text-black fw-bold fs-3">Resign List</h6>
                 </div>
                 <div class="card-body overflow-scroll">
-                    <form class="d-flex justify-content-center align-items-center" action="{{ url('/data-user') }}">
+                    <form class="d-flex justify-content-center align-items-center" action="">
                         <div class="form-section pagination-top-box">
                             @isset($datas)
                                 {{ $datas->links('vendor.pagination.design') }}
@@ -35,21 +35,21 @@
                             <ul class="dropdown-menu text-end">
                                 <li>
                                     <a class="dropdown-item text-white"
-                                        href="{{ url('admin/daftar-cuti?status=Menunggu Persetujuan') }}">
+                                        href="{{ url('resign/daftar-resign?status=Menunggu Persetujuan') }}">
                                         <span>Waiting For Approval</span>
                                         <i class="fa-regular fa-clock"></i>
                                     </a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item text-white"
-                                        href="{{ url('admin/daftar-cuti?status=Accepted') }}">
+                                        href="{{ url('resign/daftar-resign?status=Accepted') }}">
                                         <span>Accepted</span>
                                         <i class="fa-solid fa-check"></i>
                                     </a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item text-white"
-                                        href="{{ url('admin/daftar-cuti?status=Declined') }}">
+                                        href="{{ url('resign/daftar-resign?status=Declined') }}">
                                         <span>Declined</span>
                                         <i class="fa-solid fa-x"></i>
                                     </a>

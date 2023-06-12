@@ -73,7 +73,7 @@
                                         src="{{ asset('storage/' . Auth::user()->foto) }}" alt="Profile Picture">
                                 @else
                                     <img class="img-xs rounded-circle"
-                                        src="{{ asset('storage/Pegawai/default/user.jpg') }}"
+                                        src="{{ asset('storage/Pegawai/default/profile-user.png') }}"
                                         alt="Profile Picture">
                                 @endif
                             </div>
@@ -270,12 +270,12 @@
                                 <i class="fa-solid fa-envelope text-white"></i>
                                 <span class="count bg-success"></span>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list bg-white border-secondary"
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list bg-white border-0"
                                 aria-labelledby="messageDropdown">
-                                <h6 class="p-3 mb-0 text-black">Messages</h6>
+                                <h6 class="p-3 mb-0 text-black fw-bold">Messages</h6>
                                 <div class="dropdown-divider bg-secondary"></div>
-                                <p class="p-3 mb-0 text-center text-black">3 new messages</p>
-                                <a class="dropdown-item preview-item">
+                                <p class="p-3 mb-0 text-center text-success">3 new messages</p>
+                                <a class="dropdown-item preview-item bg-white">
                                     <div class="preview-thumbnail">
                                         <img src="{{ asset('template/assets/images/faces/face4.jpg') }}"
                                             alt="image" class="rounded-circle profile-pic">
@@ -285,8 +285,7 @@
                                         <p class="text-muted mb-0 text-black"> 1 Minutes ago </p>
                                     </div>
                                 </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-center text-decoration-none p-3 mb-0 text-black"
+                                <a class="dropdown-item text-center text-decoration-none p-3 mb-0 text-black bg-white"
                                     href="#">See
                                     all messages</a>
                             </div>
@@ -300,14 +299,14 @@
                                 <i class="fa-solid fa-bell text-white"></i>
                                 <span class="count bg-danger"></span>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list bg-white border-secondary"
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list bg-white border-0"
                                 aria-labelledby="notificationDropdown">
-                                <h6 class="p-3 mb-0 text-black">Notifications</h6>
+                                <h6 class="p-3 mb-0 text-black fw-bold">Notifications</h6>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item preview-item text-black">
+                                <a class="dropdown-item preview-item text-black bg-white">
                                     <div class="preview-thumbnail">
                                         <div class="preview-icon bg-dark rounded-circle">
-                                            <i class="mdi mdi-calendar text-white"></i>
+                                            <i class="fa-solid fa-calendar-days text-white"></i>
                                         </div>
                                     </div>
                                     <div class="preview-item-content">
@@ -316,11 +315,10 @@
                                             today </p>
                                     </div>
                                 </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item preview-item text-black">
+                                <a class="dropdown-item preview-item text-black bg-white">
                                     <div class="preview-thumbnail">
                                         <div class="preview-icon bg-dark rounded-circle">
-                                            <i class="mdi mdi-settings text-white"></i>
+                                            <i class="fa-solid fa-gear text-white"></i>
                                         </div>
                                     </div>
                                     <div class="preview-item-content">
@@ -328,11 +326,10 @@
                                         <p class="text-muted ellipsis mb-0"> Update dashboard </p>
                                     </div>
                                 </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item preview-item text-black">
+                                <a class="dropdown-item preview-item text-black bg-white">
                                     <div class="preview-thumbnail">
                                         <div class="preview-icon bg-dark rounded-circle">
-                                            <i class="mdi mdi-link-variant text-white"></i>
+                                            <i class="fa-solid fa-bars text-white"></i>
                                         </div>
                                     </div>
                                     <div class="preview-item-content">
@@ -340,8 +337,7 @@
                                         <p class="text-muted ellipsis mb-0"> New admin wow! </p>
                                     </div>
                                 </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-center text-decoration-none p-3 mb-0 text-black"
+                                <a class="dropdown-item text-center text-decoration-none p-3 mb-0 text-black bg-white"
                                     href="#">See
                                     all notifications</a>
                             </div>
@@ -360,7 +356,7 @@
                                                 src="{{ asset('storage/' . Auth::user()->foto) }}" alt="Profile Picture">
                                         @else
                                             <img class="img-xs rounded-circle"
-                                                src="{{ asset('storage/Pegawai/default/user.jpg') }}"
+                                                src="{{ asset('storage/Pegawai/default/profile-user.png') }}"
                                                 alt="Profile Picture">
                                         @endif
                                         <p class="mb-0 d-none d-sm-block navbar-profile-name">
@@ -383,7 +379,6 @@
                                         <p class="preview-subject mb-1">Settings</p>
                                     </div>
                                 </a>
-                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item preview-item text-black bg-white"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     <div class="preview-thumbnail">
@@ -399,7 +394,6 @@
                                     class="d-none">
                                     @csrf
                                 </form>
-                                <div class="dropdown-divider"></div>
                                 <p class="p-3 mb-0 text-center text-black">Advanced settings</p>
                             </div>
                         </li>
@@ -426,6 +420,16 @@
 
                 {{-- Main Content Start --}}
                 <div class="content-wrapper">
+                    @if (Session('success'))
+                        <div class="alert alert-success" role="alert" id="alert-success">
+                            {{ Session('success') }}
+                        </div>
+                    @endif
+                    @if (Session('error'))
+                        <div class="alert alert-danger" role="alert" id="alert-error">
+                            {{ Session('error') }}
+                        </div>
+                    @endif
                     @yield('content')
                 </div>
                 {{-- Main Content End --}}
@@ -439,12 +443,13 @@
     </div>
     {{-- Container Scroller End --}}
 
+    {{-- Three Dots Menu Start --}}
     <div class="modal fade" id="threeDotsMenu" tabindex="1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content bg-white">
+        <div class="modal-dialog border-0">
+            <div class="modal-content bg-white border-0">
                 <div class="modal-header">
-                    <h1 class="text-black fs-3 ms-3 fw-bold" id="exampleModalLabel">User Menu
+                    <h1 class="text-black fw-bold fs-3" id="exampleModalLabel">Menu
                     </h1>
                     <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"
                         aria-label="Close">
@@ -464,20 +469,21 @@
             </div>
         </div>
     </div>
+    {{-- Three Dots Menu End --}}
 
     {{-- Plugins JS Start --}}
     <script src="{{ asset('template/assets/vendors/js/vendor.bundle.base.js') }}"></script>
-    <script src="{{ asset('template/assets/vendors/chart.js/Chart.min.js') }}"></script>
-    <script src="{{ asset('template/assets/vendors/progressbar.js/progressbar.min.js') }}"></script>
+    {{-- <script src="{{ asset('template/assets/vendors/chart.js/Chart.min.js') }}"></script> --}}
+    {{-- <script src="{{ asset('template/assets/vendors/progressbar.js/progressbar.min.js') }}"></script> --}}
     <script src="{{ asset('template/assets/vendors/jvectormap/jquery-jvectormap.min.js') }}"></script>
     <script src="{{ asset('template/assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
-    <script src="{{ asset('template/assets/vendors/owl-carousel-2/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('template/assets/js/jquery.cookie.js') }}" type="text/javascript"></script>
+    {{-- <script src="{{ asset('template/assets/vendors/owl-carousel-2/owl.carousel.min.js') }}"></script> --}}
+    {{-- <script src="{{ asset('template/assets/js/jquery.cookie.js') }}" type="text/javascript"></script> --}}
     <script src="{{ asset('template/assets/js/off-canvas.js') }}"></script>
-    <script src="{{ asset('template/assets/js/hoverable-collapse.js') }}"></script>
+    {{-- <script src="{{ asset('template/assets/js/hoverable-collapse.js') }}"></script> --}}
     <script src="{{ asset('template/assets/js/misc.js') }}"></script>
-    <script src="{{ asset('template/assets/js/settings.js') }}"></script>
-    <script src="{{ asset('template/assets/js/todolist.js') }}"></script>
+    {{-- <script src="{{ asset('template/assets/js/settings.js') }}"></script> --}}
+    {{-- <script src="{{ asset('template/assets/js/todolist.js') }}"></script> --}}
     {{-- Plugins JS End --}}
 
     {{-- JS Start --}}
@@ -485,14 +491,14 @@
     {{-- JS End --}}
 
     {{-- Ajax --}}
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    {{-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> --}}
     <script src="{{ asset('js/alamat.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
 
-    {{-- Digital Signature --}}
-    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+    {{-- Photo Profile --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>
+    {{-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script> --}}
     <script>
         var $modal = $('#modal');
         var image = document.getElementById('image');
@@ -520,6 +526,7 @@
                 }
             }
         });
+
         $modal.on('shown.bs.modal', function() {
             cropper = new Cropper(image, {
                 aspectRatio: 1,
@@ -530,7 +537,9 @@
             cropper.destroy();
             cropper = null;
         });
+
         $("#crop").click(function() {
+            console.log('TESTTombol');
             canvas = cropper.getCroppedCanvas({
                 width: 160,
                 height: 160,
@@ -541,10 +550,11 @@
                 reader.readAsDataURL(blob);
                 reader.onloadend = function() {
                     var base64data = reader.result;
+
                     $.ajax({
                         type: "POST",
                         dataType: "json",
-                        url: "crop-image-upload",
+                        url: "/profile/photo-profile/update",
                         data: {
                             '_token': $('meta[name="_token"]').attr('content'),
                             'image': base64data
@@ -553,12 +563,18 @@
                             console.log(data);
                             $modal.modal('hide');
                             alert("Crop image successfully uploaded");
+                            location.reload();
                         }
                     });
                 }
             });
         })
     </script>
+
+    {{-- Digital Signature --}}
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css" /> --}}
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script> --}}
     <script>
         // Signature Pad
         var signaturePad = new SignaturePad(document.getElementById('signature-pad'), {
@@ -581,6 +597,8 @@
 
         // End Signature Pad
     </script>
+
+    {{-- Trix --}}
     <script>
         document.addEventListener('trix-file-accept', function(e) {
             e.preventDefault

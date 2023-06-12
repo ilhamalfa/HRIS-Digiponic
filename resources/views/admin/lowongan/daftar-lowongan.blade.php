@@ -11,21 +11,21 @@
                         <h6 class="text-black fw-bold fs-3">Vacancy List</h6>
                     </div>
                     <div class="card-body overflow-scroll">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Vacancy">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addVacancy">
                             <i class="fa-solid fa-file-circle-plus"></i>
                             <span>Add</span>
                         </button>
 
                         {{-- Modal Vacancy Form Start --}}
-                        <div class="modal fade" id="addVacancy" tabindex="-1"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="addVacancy" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
                             <div class="modal-dialog modal-lg modal-dialog-centered">
                                 <div class="modal-content bg-white border-0">
                                     <div class="modal-header">
                                         <h1 class="text-black fw-bold fs-3" id="exampleModalLabel">Add Vacancy
                                         </h1>
-                                        <button type="button" class="btn btn-outline-danger"
-                                            data-bs-dismiss="modal" aria-label="Close">
+                                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"
+                                            aria-label="Close">
                                             <i class="fa-solid fa-xmark m-auto"></i>
                                         </button>
                                     </div>
@@ -37,8 +37,8 @@
                                                 <label for="Position"><span class="text-black">Position</span></label>
                                                 <input id="Position" type="text"
                                                     class="form-input @error('posisi') is-invalid @enderror form-input"
-                                                    name="posisi" value="{{ old('posisi') }}"
-                                                    placeholder="Input Position" required autocomplete="posisi">
+                                                    name="posisi" value="{{ old('posisi') }}" placeholder="Input Position"
+                                                    required autocomplete="posisi">
                                                 @error('posisi')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -46,12 +46,12 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label for="Deadline Date"><span class="text-black">Deadline Date</span></label>
+                                                <label for="Deadline Date"><span class="text-black">Deadline
+                                                        Date</span></label>
                                                 <input id="Deadline Date" type="date"
                                                     class="form-input @error('tanggal') is-invalid @enderror form-input"
-                                                    name="tanggal" value="{{ old('tanggal') }}"
-                                                    placeholder="Deadline Date" required
-                                                    autocomplete="tanggal">
+                                                    name="tanggal" value="{{ old('tanggal') }}" placeholder="Deadline Date"
+                                                    required autocomplete="tanggal">
                                                 @error('tanggal')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -59,7 +59,8 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label for="Qualification"><span class="text-black">Qualification</span></label>
+                                                <label for="Qualification"><span
+                                                        class="text-black">Qualification</span></label>
                                                 <input id="Qualification" type="hidden" name="kualifikasi">
                                                 <trix-editor input="Qualification"
                                                     class=" @error('kualifikasi') is-invalid @enderror form-input"
@@ -87,9 +88,9 @@
                                 </div>
                             </div>
                         </div>
-                    {{-- Modal Vacancy Form End --}}
+                        {{-- Modal Vacancy Form End --}}
 
-                        <form class="d-flex justify-content-center align-items-center" action="{{ url('/data-user') }}">
+                        <form class="d-flex justify-content-center align-items-center" action="">
                             <div class="form-section pagination-top-box">
                                 @isset($datas)
                                     {{ $datas->links('vendor.pagination.design') }}
@@ -97,7 +98,7 @@
                             </div>
                             <div class="form-section search-top-box">
                                 <input type="text" class="form-control search-input" id="search-input"
-                                    placeholder="Enter NIK or Name" name="search" autofocus>
+                                    placeholder="Enter Position" name="search" autofocus>
                             </div>
                             <div class="form-section d-flex search-button-top-box">
                                 <button class="btn search-button">
@@ -112,25 +113,25 @@
                                 </button>
                                 <ul class="dropdown-menu text-end">
                                     <li>
-                                        <a class="dropdown-item text-white" href="#">
+                                        <a class="dropdown-item text-white" href="{{ url('data-lowongan?orderBy=Ascending') }}">
                                             <span>Asc</span>
                                             <i class="fa-solid fa-arrow-down-a-z"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item text-white" href="#">
+                                        <a class="dropdown-item text-white" href="{{ url('data-lowongan?orderBy=Descending') }}">
                                             <span>Desc</span>
                                             <i class="fa-solid fa-arrow-down-z-a"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item text-white" href="#">
+                                        <a class="dropdown-item text-white" href="{{ url('data-lowongan?orderBy=Deadline') }}">
                                             <span>Deadline</span>
                                             <i class="fa-regular fa-clock"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item text-white" href="#">
+                                        <a class="dropdown-item text-white" href="{{ url('data-lowongan?orderBy=Aplicants') }}">
                                             <span>Aplicants = 0</span>
                                             <i class="fa-solid fa-user-tie"></i>
                                         </a>
@@ -184,90 +185,13 @@
                                         </td>
                                         <td>
                                             <button type="button" class="btn btn-link text-decoration-none text-white"
-                                                data-bs-toggle="modal" data-bs-target="#detailVacancy{{ $data->id }}">
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#detailVacancy{{ $data->id }}">
                                                 <i class="fa-solid fa-sort-down text-warning"></i>
                                                 <span class="text-black">Details</span>
                                             </button>
                                         </td>
                                     </tr>
-
-                                    {{-- Modal Vacancy Form Start --}}
-                                    <div class="modal fade" id="Vacancy" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-lg modal-dialog-centered">
-                                            <div class="modal-content bg-white border-0">
-                                                <div class="modal-header">
-                                                    <h1 class="text-black fw-bold fs-3" id="exampleModalLabel">Add Vacancy
-                                                    </h1>
-                                                    <button type="button" class="btn btn-outline-danger"
-                                                        data-bs-dismiss="modal" aria-label="Close">
-                                                        <i class="fa-solid fa-xmark m-auto"></i>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form class="forms-sample" method="POST"
-                                                        action="{{ url('data-lowongan/store-lowongan') }}">
-                                                        @csrf
-                                                        <div class="form-group">
-                                                            <label for="Position"><span
-                                                                    class="text-black">Position</span></label>
-                                                            <input id="Position" type="text"
-                                                                class="form-input @error('posisi') is-invalid @enderror form-input"
-                                                                name="posisi" value="{{ old('posisi') }}"
-                                                                placeholder="Input Position" required
-                                                                autocomplete="posisi">
-                                                            @error('posisi')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="Deadline Date"><span class="text-black">Deadline
-                                                                    Date</span></label>
-                                                            <input id="Deadline Date" type="date"
-                                                                class="form-input @error('tanggal') is-invalid @enderror form-input"
-                                                                name="tanggal" value="{{ old('tanggal') }}"
-                                                                placeholder="Deadline Date" required
-                                                                autocomplete="tanggal">
-                                                            @error('tanggal')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="Qualification"><span
-                                                                    class="text-black">Qualification</span></label>
-                                                            <input id="Qualification" type="hidden" name="kualifikasi">
-                                                            <trix-editor input="Qualification"
-                                                                class=" @error('kualifikasi') is-invalid @enderror form-input"
-                                                                placeholder="Input Job Qualification" required
-                                                                autocomplete="new-kualifikasi"></trix-editor>
-                                                            @error('kualifikasi')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="Description"><span
-                                                                    class="text-black">Description</span></label>
-                                                            <input id="Description" type="hidden" name="deskripsi">
-                                                            <trix-editor input="Description"
-                                                                class=" @error('deskripsi') is-invalid @enderror form-input"
-                                                                placeholder="Input Job Description" required
-                                                                autocomplete="new-deskripsi"></trix-editor>
-                                                        </div>
-                                                        <button type="submit" class="btn btn-primary">
-                                                            <span>Add</span>
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {{-- Modal Vacancy Form End --}}
 
                                     {{-- Modal Details Start --}}
                                     <div class="modal fade" id="detailVacancy{{ $data->id }}" tabindex="-1"

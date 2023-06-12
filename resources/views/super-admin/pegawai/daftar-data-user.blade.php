@@ -11,7 +11,7 @@
                         <h6 class="text-black fw-bold fs-3">User Data</h6>
                     </div>
                     <div class="card-body overflow-scroll">
-                        <form class="d-flex justify-content-center align-items-center" action="{{ url('/data-user') }}">
+                        <form class="d-flex justify-content-center align-items-center" action="">
                             <div class="form-section pagination-top-box">
                                 @isset($datas)
                                     {{ $datas->links('vendor.pagination.design') }}
@@ -28,11 +28,11 @@
                                 </button>
                             </div>
                         </form>
-                        @if (Session::has('success'))
-                            <div class="alert alert-success" id="session-alert" role="alert">
-                                {{ Session::get('message') }}
-                            </div>
-                        @endif
+                        <button type="button" class="btn btn-primary text-decoration-none mb-2" data-bs-toggle="modal"
+                            data-bs-target="#addUser">
+                            <span>Add</span>
+                            <i class="fa-solid fa-file-circle-plus"></i>
+                        </button>
                         <table class="table mb-4 text-black">
                             <thead>
                                 <tr>
@@ -40,6 +40,7 @@
                                     <th scope="col" class="text-black fw-bold">NIK</th>
                                     <th scope="col" class="text-black fw-bold">Name</th>
                                     <th scope="col" class="text-black fw-bold">Email</th>
+                                    <th scope="col" class="text-black fw-bold">Email Verified</th>
                                     <th scope="col" class="text-black fw-bold">Department</th>
                                     <th scope="col" class="text-black fw-bold">Class</th>
                                     @if (Auth::user()->role != 'Admin')
@@ -54,6 +55,13 @@
                                         <td>{{ $data->nik }}</td>
                                         <td>{{ $data->nama }}</td>
                                         <td>{{ $data->email }}</td>
+                                        <td>
+                                            @if (isset($data->email_verified_at))
+                                                <span class="text-success">Verified<i class="fa-solid fa-circle-check"></i></span>
+                                            @else
+                                                <span class="text-danger">Not Verified<i class="fa-solid fa-circle-xmark"></i></span>
+                                            @endif
+                                        </td>
                                         <td>{{ $data->department }}</td>
                                         <td>{{ $data->golongan }}</td>
                                         <td>
@@ -128,7 +136,7 @@
                                     <div class="modal fade" id="addUser" tabindex="-1"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-lg modal-dialog-centered">
-                                            <div class="modal-content bg-white">
+                                            <div class="modal-content bg-white border-0">
                                                 <div class="modal-header">
                                                     <h1 class="text-black fs-3 ms-3 fw-bold" id="exampleModalLabel">Add User
                                                     </h1>
@@ -150,7 +158,8 @@
                                                                 <div class="mb-3 w-75">
                                                                     <input type="number" class="form-input"
                                                                         name="nik" id="add-nik"
-                                                                        value="{{ old('nik') }}" placeholder="NIK , Min: 16 Digits"
+                                                                        value="{{ old('nik') }}"
+                                                                        placeholder="NIK , Min: 16 Digits"
                                                                         autocomplete="off" required>
                                                                 </div>
 
@@ -255,7 +264,6 @@
                                                                     <input type="number" class="form-input"
                                                                         name="jumlah_anak" id="add-jumlah-anak"
                                                                         value="{{ old('jumlah_anak') }}"
-                                                                        disabled="disabled"
                                                                         placeholder="Number Of Children">
                                                                 </div>
                                                             </div>
@@ -384,4 +392,17 @@
             </div>
         </div>
     </div>
+    <script>
+        var radioButtons = document.querySelectorAll('input[name="status_pernikahan"]');
+    
+        radioButtons.forEach(function (radioButton) {
+            radioButton.addEventListener('change', function () {
+                if (radioButton.value === 'Menikah' || radioButton.value === 'Cerai') {
+                    document.getElementById('add-jumlah-anak').removeAttribute('disabled');
+                } else {
+                    document.getElementById('add-jumlah-anak').setAttribute('disabled', 'disabled');
+                }
+            });
+        });
+    </script>
 @endsection

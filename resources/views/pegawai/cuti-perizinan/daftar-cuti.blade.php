@@ -19,10 +19,10 @@
                             <thead>
                                 <tr>
                                     <th scope="col" class="text-black fw-bold">#</th>
-                                    <th scope="col" class="text-black fw-bold">Tanggal Cuti</th>
-                                    <th scope="col" class="text-black fw-bold">Tanggal Berakhir</th>
-                                    <th scope="col" class="text-black fw-bold">Jumlah Hari</th>
-                                    <th scope="col" class="text-black fw-bold">Status Cuti</th>
+                                    <th scope="col" class="text-black fw-bold">Leave Date</th>
+                                    <th scope="col" class="text-black fw-bold">End Date</th>
+                                    <th scope="col" class="text-black fw-bold">Total Days</th>
+                                    <th scope="col" class="text-black fw-bold">Status</th>
                                     <th scope="col" class="text-black fw-bold">Action</th>
                                 </tr>
                             </thead>
@@ -100,7 +100,7 @@
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="alasan" class="text-black">Alasan</label>
+                                                    <label for="alasan" class="text-black">Reason</label>
                                                     <input id="alasan" type="text"
                                                         class="form-input @error('alasan') is-invalid @enderror"
                                                         name="alasan" required autocomplete="alasan"

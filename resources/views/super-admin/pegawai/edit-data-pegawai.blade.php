@@ -8,7 +8,7 @@
             <div class="col-md-12">
                 <div class="card bg-white">
                     <div class="card-header d-flex align-items-center">
-                        <a href="{{ url('/data-user') }}">
+                        <a id="previous-page-link" href="#">
                             <i class="fa-solid fa-left-long fa-2x me-3 text-black"></i>
                         </a>
                         <h6 class="text-black fw-bold fs-3">User Edit</h6>
@@ -34,7 +34,7 @@
                                             id="add-tanggal-lahir" value="{{ $data->tanggal_lahir }}"
                                             placeholder="Born Date" required>
                                     </div>
-                                    
+
                                     {{-- Jenis Kelamin --}}
                                     <div class="mb-3 w-75">
                                         <label for="add-jenis-kelamin" class="text-black">{{ __('Select Gender') }}</label>
@@ -71,24 +71,25 @@
                                         <div class="d-flex flex-column">
                                             <div class="form-check m-2">
                                                 <input type="radio" class="form-check-input" name="status_pernikahan"
-                                                    id="add-lajang" value="Lajang" @checked($data->status_pernikahan == 'Lajang')>
+                                                    id="add-lajang" value="Lajang"
+                                                    @if ($data->status_pernikahan == 'Lajang') checked @endif>
                                                 <label for="add-lajang" class="form-check-label">
                                                     Bachelor
                                                 </label>
                                             </div>
                                             <div class="form-check m-2">
                                                 <input type="radio" class="form-check-input" name="status_pernikahan"
-                                                    id="add-menikah" value="Menikah">
-                                                <label for="add-menikah" class="form-check-label"
-                                                    @checked($data->status_pernikahan == 'Menikah')>
+                                                    id="add-menikah" value="Menikah"
+                                                    @if ($data->status_pernikahan == 'Menikah') checked @endif>
+                                                <label for="add-menikah" class="form-check-label">
                                                     Married
                                                 </label>
                                             </div>
                                             <div class="form-check m-2">
                                                 <input type="radio" class="form-check-input" name="status_pernikahan"
-                                                    id="add-cerai" value="Cerai">
-                                                <label for="add-cerai" class="form-check-label"
-                                                    @checked($data->status_pernikahan == 'Cerai')>
+                                                    id="add-cerai" value="Cerai"
+                                                    @if ($data->status_pernikahan == 'Cerai') checked @endif>
+                                                <label for="add-cerai" class="form-check-label">
                                                     Divorce
                                                 </label>
                                             </div>
@@ -99,7 +100,8 @@
                                     <div class="mb-3 w-75">
                                         <label for="jumlah-anak" class="form-label text-black">Number of children</label>
                                         <input type="number" class="form-input" name="jumlah_anak" id="jumlah-anak"
-                                            value="{{ $data->jumlah_anak }}" disabled="disabled"
+                                            value="{{ $data->jumlah_anak }}"
+                                            @if ($data->status_pernikahan == 'Lajang') disabled="disabled" @endif
                                             placeholder="Number Of Children">
                                     </div>
                                 </div>
@@ -195,4 +197,11 @@
             </div>
         </div>
     </div>
+    <script>
+        // Ambil URL referer atau URL halaman sebelumnya
+        var previousPageURL = document.referrer;
+    
+        // Atur URL sebagai nilai href pada elemen <a>
+        document.getElementById('previous-page-link').setAttribute('href', previousPageURL);
+    </script>
 @endsection
