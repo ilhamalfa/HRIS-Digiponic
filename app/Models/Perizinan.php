@@ -28,7 +28,7 @@ class Perizinan extends Model
         });
 
         $query->when($filters['search'] ?? false, function ($query, $search) {
-            return $query->whereHas('user', function($query) use ($search){
+            return $query->whereHas('user1', function($query) use ($search){
                 $query->where('nik', 'like', '%' . $search . '%')
                 ->orwhere('nama', 'like', '%' . $search . '%');
             });

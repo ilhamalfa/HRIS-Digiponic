@@ -57,14 +57,15 @@
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content bg-white border-0">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-3 fw-bold text-black" id="exampleModalLabel">Form Cuti</h1>
+                                            <h1 class="modal-title fs-3 fw-bold text-black" id="exampleModalLabel">Leave Form</h1>
                                             <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"
                                                 aria-label="Close">
                                                 <i class="fa-solid fa-xmark m-auto"></i>
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <h6 class="mb-3 text-black">Sisa Cuti : {{ Auth::user()->jumlah_cuti }} Hari</h6>
+                                            <h6 class="mb-3 text-black">Remaining Leave Days : {{ Auth::user()->jumlah_cuti }} Days</h6>
+                                            <p class="text-black">You can take leave, 3 days after today</p>
                                             <form action="{{ url('pegawai/cuti/ajukan-cuti/proses') }}" method="POST">
                                                 @csrf
                                                 <div class="form-group">
