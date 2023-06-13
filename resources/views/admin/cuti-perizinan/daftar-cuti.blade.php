@@ -11,7 +11,7 @@
                         <h6 class="text-black fw-bold fs-3">Employee Leave List</h6>
                     </div>
                     <div class="card-body overflow-scroll">
-                        <form class="d-flex justify-content-center align-items-center" action="{{ url('/admin/daftar-cuti') }}">
+                        <form class="d-flex justify-content-center align-items-center" action="">
                             <div class="form-section pagination-top-box">
                                 @isset($datas)
                                     {{ $datas->links('vendor.pagination.design') }}
@@ -19,7 +19,7 @@
                             </div>
                             <div class="form-section search-top-box">
                                 <input type="text" class="form-control search-input" id="search-input"
-                                    placeholder="Enter NIK or Name" name="search" autofocus>
+                                    placeholder="Enter Name" name="search" autofocus>
                             </div>
                             <div class="form-section d-flex search-button-top-box">
                                 <button class="btn search-button">

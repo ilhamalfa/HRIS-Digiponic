@@ -207,7 +207,7 @@
     {{-- JQuery End --}}
 
     {{-- JS Start --}}
-    <script src="{{ asset('layout/landingpage/js/script.js') }}"></script>  
+    <script src="{{ asset('layout/landingpage/js/script.js') }}"></script>
     {{-- JS End --}}
 
     {{-- JS CDN Start --}}

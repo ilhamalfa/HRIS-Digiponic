@@ -93,7 +93,7 @@ class AdminController extends Controller
     public function buktiIzin($id) {
         $data = Perizinan::find($id);
         
-        return Storage::response($data->bukti_perizinan);
+        return Storage::response($data->bukti);
     }
 
     public function konfirmasiIzin($id, $konfirmasi) {
