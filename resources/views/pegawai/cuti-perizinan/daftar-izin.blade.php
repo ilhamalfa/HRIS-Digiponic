@@ -8,7 +8,7 @@
             <div class="col-md-12">
                 <div class="card bg-white">
                     <div class="card-header">
-                        <h6 class="text-black fw-bold fs-3">Permission List</h6>
+                        <h6 class="text-black fw-bold fs-3">Days Of List</h6>
                     </div>
                     <div class="card-body overflow-scroll">
                         <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#addPermission">
@@ -63,7 +63,7 @@
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content bg-white border-0">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-3 fw-bold text-black" id="exampleModalLabel">Permission Form</h1>
+                                        <h1 class="modal-title fs-3 fw-bold text-black" id="exampleModalLabel">Days Of Form</h1>
                                         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"
                                             aria-label="Close">
                                             <i class="fa-solid fa-xmark m-auto"></i>

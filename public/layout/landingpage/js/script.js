@@ -460,3 +460,4 @@ eyeConfirm.addEventListener('click', function () {
     eyeSlashConfirm.style.display = 'block'
     inputPasswordConfirmType.type = 'password'
 })
+

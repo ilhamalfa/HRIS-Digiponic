@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 use function PHPUnit\Framework\fileExists;
 
@@ -70,15 +71,24 @@ class SuperAdminController extends Controller {
     public function deleteUser($id) {
         $data = User::find($id);
 
-        if (fileExists('storage/' . $data->foto)) {
-            unlink('storage/' . $data->foto);
+        if(Storage::fileExists('Pegawai/foto'.$data->foto)) {
+            Storage::delete('Pegawai/foto'.$data->foto);
         }
 
-        if (fileExists('storage/' . $data->digital_signature)) {
-            unlink('storage/' . $data->digital_signature);
+        if(Storage::fileExists('Pegawai/signature'.$data->digital_signature)) {
+            Storage::delete('Pegawai/signature'.$data->digital_signature);
         }
 
-        $data->delete();
+        // if (fileExists('storage/' . $data->foto)) {
+        //     unlink('storage/' . $data->foto);
+        // }
+
+        // if (fileExists('storage/' . $data->digital_signature)) {
+        //     unlink('storage/' . $data->digital_signature);
+        // }
+
+        // $data->delete();
+        $data->forceDelete();
 
         return redirect()->back();
     }

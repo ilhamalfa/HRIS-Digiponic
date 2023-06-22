@@ -8,7 +8,7 @@
             <div class="col-md-12">
                 <div class="card bg-white">
                     <div class="card-header">
-                        <h6 class="text-black fw-bold fs-3">List Of Employee Permits</h6>
+                        <h6 class="text-black fw-bold fs-3">Employee Days Of List</h6>
                     </div>
                     <div class="card-body overflow-scroll">
                         <form class="d-flex justify-content-center align-items-center" action="">
@@ -19,7 +19,7 @@
                             </div>
                             <div class="form-section search-top-box">
                                 <input type="text" class="form-control search-input" id="search-input"
-                                    placeholder="Enter NIK or Name" name="search" autofocus>
+                                    placeholder="Enter NIK Or Name" name="search" autofocus>
                             </div>
                             <div class="form-section d-flex search-button-top-box">
                                 <button class="btn search-button">
@@ -62,8 +62,9 @@
                                 <tr>
                                     <th scope="col" class="text-black fw-bold">#</th>
                                     <th scope="col" class="text-black fw-bold">Employee Name</th>
-                                    <th scope="col" class="text-black fw-bold">Permit Date</th>
-                                    <th scope="col" class="text-black fw-bold">Permit Date Ends</th>
+                                    <th scope="col" class="text-black fw-bold">NIK</th>
+                                    <th scope="col" class="text-black fw-bold">Start Date</th>
+                                    <th scope="col" class="text-black fw-bold">End Date</th>
                                     <th scope="col" class="text-black fw-bold">Total Days</th>
                                     <th scope="col" class="text-black fw-bold">Reason</th>
                                     <th scope="col" class="text-black fw-bold">Proof of Licensing</th>
@@ -76,6 +77,7 @@
                                     <tr>
                                         <th scope="row">{{ $index + $datas->firstItem() }}</th>
                                         <td>{{ $data->user1->nama }}</td>
+                                        <td>{{ $data->user1->nik }}</td>
                                         <td>{{ $data->tanggal_mulai }}</td>
                                         <td>{{ $data->tanggal_berakhir }}</td>
                                         <td>{{ date_diff(date_create($data->tanggal_mulai), date_create($data->tanggal_berakhir))->days + 1 . ' Hari' }}

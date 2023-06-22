@@ -8,7 +8,7 @@
         <div class="col-md-12">
             <div class="card bg-white">
                 <div class="card-header">
-                    <h6 class="text-black fw-bold fs-3">Resign List</h6>
+                    <h6 class="text-black fw-bold fs-3">Employee Resign List</h6>
                 </div>
                 <div class="card-body overflow-scroll">
                     <form class="d-flex justify-content-center align-items-center" action="">
@@ -61,8 +61,8 @@
                         <thead>
                             <tr>
                                 <th scope="col" class="text-black fw-bold">#</th>
-                                <th scope="col" class="text-black fw-bold">NIK</th>
                                 <th scope="col" class="text-black fw-bold">Employee Name</th>
+                                <th scope="col" class="text-black fw-bold">NIK</th>
                                 <th scope="col" class="text-black fw-bold">Resign Date</th>
                                 <th scope="col" class="text-black fw-bold">Status</th>
                                 <th scope="col" class="text-black fw-bold">Action</th>
@@ -72,8 +72,8 @@
                             @foreach ($datas as $index => $data)
                             <tr>
                                 <th scope="row">{{ $index + $datas->firstItem() }}</th>
-                                <td>{{ $data->user1->nik }}</td>
                                 <td>{{ $data->user1->nama }}</td>
+                                <td>{{ $data->user1->nik }}</td>
                                 <td>{{ $data->tanggal_resign }}</td>
                                 <td>{{ $data->status_resign }}</td>
                                 <td>

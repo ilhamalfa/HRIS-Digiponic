@@ -64,7 +64,7 @@
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content bg-white border-0">
                                     <div class="modal-header">
-                                        <h1 class="modal-title text-black fs-3 fw-bold" id="exampleModalLabel">Form Resign
+                                        <h1 class="modal-title text-black fs-3 fw-bold" id="exampleModalLabel">Resign Form
                                         </h1>
                                         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"
                                             aria-label="Close">
@@ -72,6 +72,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
+                                        <p class="text-black">You can resign, 1 month after you first became an employee</p>
                                         <form action="{{ url('pegawai/resign/ajukan-resign/proses') }}" method="POST">
                                             @csrf
                                             <div class="form-group">

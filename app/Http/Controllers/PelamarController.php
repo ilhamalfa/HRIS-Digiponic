@@ -175,9 +175,8 @@ class PelamarController extends Controller
         $extension_cv = $request->file('cv_file')->extension();
         $nama_cv = $id . '-' .$lowongan->posisi .'_'. $request->nama .'-'. now()->timestamp. '.' . $extension_cv;
         $validate['cv_file'] = $request->file('cv_file')->storeAs('Pelamar/cv', $nama_cv);
-        // dd($validate);
 
-        Pelamar::create($validate);
+        $alert = Pelamar::create($validate);
 
         $maildata = [
             'subject' => "Success! You have applied for " . $lowongan->posisi,
@@ -187,7 +186,11 @@ class PelamarController extends Controller
 
         Mail::to($validate['email'])->send(new SendConfirmMail($maildata));
 
-        return redirect('career');
+        if($alert) {
+            return redirect('career')->with('success', 'Vacancy apllied, please check your email!');
+        } else {
+            return redirect('career')->with('error', 'Vacancy not apllied, please try again later..');
+        }
     }
 
     public function daftarLamaran(){

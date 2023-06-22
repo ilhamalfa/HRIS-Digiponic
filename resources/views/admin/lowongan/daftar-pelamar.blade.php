@@ -20,7 +20,7 @@
                     </div>
                     <div class="form-section search-top-box">
                         <input type="text" class="form-control search-input" id="search-input"
-                            placeholder="Enter NIK or Name" name="search" autofocus>
+                            placeholder="Enter Name" name="search" autofocus>
                     </div>
                     <div class="form-section d-flex search-button-top-box">
                         <button class="btn search-button">
@@ -91,7 +91,7 @@
                             <th scope="col" class="text-black fw-bold">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="text-black">
                         @foreach ($datas as $data)
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>

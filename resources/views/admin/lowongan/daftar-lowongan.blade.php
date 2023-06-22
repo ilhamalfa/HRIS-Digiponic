@@ -113,27 +113,21 @@
                                 </button>
                                 <ul class="dropdown-menu text-end">
                                     <li>
-                                        <a class="dropdown-item text-white" href="{{ url('data-lowongan?orderBy=Ascending') }}">
+                                        <a class="dropdown-item text-white" href="{{ url('data-lowongan?orderBy=asc') }}">
                                             <span>Asc</span>
                                             <i class="fa-solid fa-arrow-down-a-z"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item text-white" href="{{ url('data-lowongan?orderBy=Descending') }}">
+                                        <a class="dropdown-item text-white" href="{{ url('data-lowongan?orderBy=desc') }}">
                                             <span>Desc</span>
                                             <i class="fa-solid fa-arrow-down-z-a"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item text-white" href="{{ url('data-lowongan?orderBy=Deadline') }}">
+                                        <a class="dropdown-item text-white" href="{{ url('data-lowongan?orderBy=deadline') }}">
                                             <span>Deadline</span>
                                             <i class="fa-regular fa-clock"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item text-white" href="{{ url('data-lowongan?orderBy=Aplicants') }}">
-                                            <span>Aplicants = 0</span>
-                                            <i class="fa-solid fa-user-tie"></i>
                                         </a>
                                     </li>
                                 </ul>
@@ -252,7 +246,7 @@
                                 </p>
                                 <p class="ms-3 text-black">
                                     <i class="fa-sharp fa-solid fa-square text-danger"></i>
-                                    <span>= Deadline Date</span>
+                                    <span>> Deadline Date</span>
                                 </p>
                             </div>
                             <div class="apllicants-box">

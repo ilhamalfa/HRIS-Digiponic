@@ -93,7 +93,7 @@ class AdminController extends Controller
     public function buktiIzin($id) {
         $data = Perizinan::find($id);
         
-        return Storage::response($data->bukti_perizinan);
+        return Storage::response($data->bukti);
     }
 
     public function konfirmasiIzin($id, $konfirmasi) {
@@ -139,8 +139,9 @@ class AdminController extends Controller
     }
 
     public function daftarLowongan() {
-        $datas = Lowongan::latest()->filter(request(['search']))->paginate(10);
-        
+        // $datas = Lowongan::latest()->filter(request(['search']))->paginate(10);
+        $datas = Lowongan::filter(request(['orderBy','search']))->paginate(10);
+
         return view('admin.lowongan.daftar-lowongan', [
             'datas' => $datas
         ]);

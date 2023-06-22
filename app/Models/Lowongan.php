@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,8 +24,14 @@ class Lowongan extends Model
             });
         });
 
-        $query->when($filters['orderBy'] ?? false, function ($query, $orderBy) {
-            return $query->orderBy('tanggal', $orderBy)->where('tanggal', '>=', now()->toDateString());
+        $query->when($_GET['orderBy'] ?? false, function ($query, $orderBy) {
+            if ($orderBy == 'asc') {
+                $query->orderBy('id', $orderBy);
+            } elseif ($orderBy == 'desc') {
+                $query->orderBy('id', $orderBy);
+            } elseif ($orderBy == 'deadline') {
+                $query->whereDate('tanggal', '<', Carbon::now())->orderBy('tanggal', 'asc');
+            }
         });
     }
 }

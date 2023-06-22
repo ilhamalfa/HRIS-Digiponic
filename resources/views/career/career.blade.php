@@ -3,6 +3,7 @@
 @section('title', 'Career')
 
 @section('content')
+
     {{-- Search --}}
     <div class="search-box">
         <div class="search-section-1">
@@ -45,6 +46,19 @@
         </div>
     </div>
     {{-- Search End --}}
+
+    <div class="d-flex justify-content-center align-items-center mb-5">
+        @if (Session::has('success'))
+            <div class="alert alert-success" role="alert" id="alert-success">
+                {{ Session::get('success') }}
+            </div>
+        @endif
+        @if (Session::has('error'))
+            <div class="alert alert-danger" role="alert" id="alert-error">
+                {{ Session::get('error') }}
+            </div>
+        @endif
+    </div>
 
     {{-- Vacancy Start --}}
     <div class="vacancy-box">
@@ -184,4 +198,13 @@
     </div>
     {{-- Vision End --}}
 
+    <script>
+        setTimeout(function() {
+            document.getElementById('alert-success').style.display = 'none'
+        }, 3000);
+
+        setTimeout(function() {
+            document.getElementById('alert-error').style.display = 'none'
+        }, 3000);
+    </script>
 @endsection
